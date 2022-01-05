@@ -12,6 +12,7 @@
 #include "../Resource/ResourceServer.h"
 #include "../Mode/ModeServer.h"
 #include "../Sound/SoundManager.h"
+#include "../Mode/ModeFade.h"
 
 namespace {
 
@@ -67,7 +68,9 @@ bool GameBase::Initialize() {
 	//! サウンドマネージャーの生成
 	_soundManage = std::make_unique<SoundManager>(*this);
 
-	
+	_modeServer = std::make_unique<ModeServer>("FadeIn", std::make_shared<ModeFadeIn>(*this));
+	//_modeServer->Register("FadeOut", std::make_shared<ModeFadeOut>(*this));
+
 	return true;
 }
 void GameBase::Terminate() {
@@ -82,7 +85,6 @@ void GameBase::Process() {
 }
 
 void GameBase::Render() {
-
 	ClearDrawScreen();      //!< 画面をクリアする
 	_modeServer->Render();
 	ScreenFlip();           //!< 裏画面を表示する
@@ -98,7 +100,6 @@ void GameBase::Input() {
 		_gameState = GameState::End;
 }
 #endif // DEBUG
-	
 	_modeServer->Input(*_inputManage);
 }
 

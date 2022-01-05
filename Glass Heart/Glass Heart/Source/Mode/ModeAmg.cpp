@@ -18,7 +18,7 @@ ModeAmg::ModeAmg(GameMain& game) : ModeBase{ game } {
 void ModeAmg::Init() {
 	//! 使用する画像のテーブル
 	const AppFrame::ResourceServer::GraphMap useGraph{
-	{"AMGBg",          {"Amg.png",          1, 1, 1920, 1080}}
+	{"AMGBg",          {"AMG.jpg",          1, 1, 1920, 1080}}
 	};
 
 	//!< リソースサーバーを取得

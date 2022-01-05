@@ -16,11 +16,11 @@ using namespace AppFrame;
 
 // コンストラクタ
 ModeServer::ModeServer(std::string_view key, std::shared_ptr<ModeBase> mode) {
-	Register("FadeIn", std::make_shared<ModeFadeIn>(mode->GetGame()));
+	//Register("FadeIn", std::make_shared<ModeFadeIn>(mode->GetGame()));
 	Register("FadeOut", std::make_shared<ModeFadeOut>(mode->GetGame()));
 
 	PushBack(key);
-	PushBack("FadeIn");
+	PushBack("FadeOut");
 }
 //モードの登録
 void ModeServer::Register(std::string_view key, std::shared_ptr<ModeBase> mode) {

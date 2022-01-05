@@ -11,7 +11,6 @@
 #pragma comment (lib,"AppFrame.lib")
 
 #include <DxLib.h>
-
 #include "Application/GameBase.h"
 #include "Input/InputManager.h"
 #include "Resource/ResourceServer.h"

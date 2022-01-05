@@ -8,7 +8,7 @@
  *********************************************************************/
 #pragma once
 
-#include <AppFrame.h>
+#include "AppFrame.h"
 
 namespace GlassHeart {
 	
@@ -24,32 +24,34 @@ namespace GlassHeart {
 	class GameMain : public AppFrame::GameBase {
 		using base = AppFrame::GameBase;
 	public:
+		GameMain();
+		virtual ~GameMain() override;
 		/**
 		 * @brief  初期化処理
 		 *
 		 * @return 初期化成功の可否
 		 */
-		bool Initialize() override;
+		virtual bool Initialize() override;
 		/**
 		 *  @brief 解放処理
 		 */
-		void Terminate() override;
+		virtual void Terminate() override;
 		/**
 		 * @brief 入力処理
 		 */
-		void Input() override;
+		virtual void Input() override;
 		/**
 		 * @brief 更新処理
 		 */
-		void Process() override;
+		virtual void Process() override;
 		/**
 		 * @brief 描画処理
 		 */
-		void Render() override;
+		virtual void Render() override;
 		/**
 		 * @brief メインループ
 		 */
-		void Run() override;
+		virtual void Run() override;
 
 		Object::ObjectServer& GetObjectServer() const { return *_objServer; }
 
