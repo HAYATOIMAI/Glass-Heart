@@ -12,7 +12,7 @@
 using namespace GlassHeart::Mode;
 
 //!< コンストラクタ
-ModeTeamLogo::ModeTeamLogo(GameMain& game) : ModeBase{ game }
+ModeTeamLogo::ModeTeamLogo(GameMain& game) : ModeMain{ game }
 {
 }
 void ModeTeamLogo::Init() {
@@ -36,21 +36,19 @@ void ModeTeamLogo::Init() {
 }
 //!< 入り口処理
 void ModeTeamLogo::Enter() {
-	_alpha = 0;
 }
 //!< 入力処理
 void ModeTeamLogo::Input(AppFrame::InputManager& input) {
 	if (input.GetJoyPad().GetXinputButtonB()) {
 		GetModeServer().GoToMode("Title");
-		_alpha = 255;
 	}
 }
 //!< 更新処理
 void ModeTeamLogo::Process() {
-	_alpha = (_alpha + 8) % 255;
+	//_alpha = (_alpha + 8) % 255;
 }
 //!< 描画処理
 void ModeTeamLogo::Render() {
 	DrawGraph(0, 0, _titleBgHandle, FALSE);
-	SetDrawBlendMode(DX_BLENDMODE_ALPHA, _alpha);
+	//SetDrawBlendMode(DX_BLENDMODE_ALPHA, _alpha);
 }

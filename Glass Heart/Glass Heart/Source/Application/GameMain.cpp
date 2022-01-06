@@ -16,6 +16,8 @@
 
 using namespace GlassHeart;
 
+GameMain _gameMain;
+
 GameMain::GameMain() {
 }
 
@@ -23,8 +25,8 @@ GameMain::~GameMain() {
 }
 
 //!< 初期化処理
-bool GameMain::Initialize() {
-	if (!base::Initialize()) { return false; }
+bool GameMain::Initialize(HINSTANCE hInstance) {
+	if (!base::Initialize( hInstance)) { return false; }
 
 	//!< リソースサーバーの取得
 	auto& res = GetResourceServer();
@@ -69,8 +71,7 @@ bool GameMain::Initialize() {
 	_objFactory = std::make_unique<GlassHeart::Object::ObjectFactory>(*this);
 
 	//!< モードサーバーを生成し、AMGモードを登録
-	//_modeServer = std::make_unique<AppFrame::ModeServer>("Amg", std::make_shared<GlassHeart::Mode::ModeAmg>(*this));
-	_modeServer->Register("Amg", std::make_shared<GlassHeart::Mode::ModeAmg>(*this));
+	_modeServer = std::make_unique<AppFrame::ModeServer>("Amg", std::make_shared<GlassHeart::Mode::ModeAmg>(*this));
 	// チームロゴモードを登録
 	_modeServer->Register("TeamLogo", std::make_shared<GlassHeart::Mode::ModeTeamLogo>(*this));
 	// タイトルモードを登録

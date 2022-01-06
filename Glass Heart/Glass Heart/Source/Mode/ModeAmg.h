@@ -9,6 +9,7 @@
 #pragma once
 
 #include <AppFrame.h>
+#include "ModeMain.h"
 
 namespace GlassHeart {
 
@@ -19,7 +20,7 @@ namespace GlassHeart {
          * @class ModeAmg
          * @brief AMG画面クラスの宣言
          */
-        class ModeAmg : public AppFrame::ModeBase {
+        class ModeAmg : public ModeMain {
         public:
             /**
              * @brief コンストラクタ
@@ -61,7 +62,6 @@ namespace GlassHeart {
 
         private:
             int _titleBgHandle{ -1 };   //!< 背景画像 
-            int _alpha{ 0 };   //!< アルファ値
         };
     }
 }

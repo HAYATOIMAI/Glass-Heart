@@ -7,7 +7,7 @@
  * @date   December 2021
  *********************************************************************/
 #pragma once
-
+#include "ModeMain.h"
 #include <AppFrame.h>
 
 namespace GlassHeart {
@@ -19,7 +19,7 @@ namespace GlassHeart {
          * @class ModeTeamLogo
          * @brief チームロゴ画面クラス
          */
-        class ModeTeamLogo : public AppFrame::ModeBase {
+        class ModeTeamLogo : public ModeMain {
         public:
             /**
              * @brief コンストラクタ
@@ -60,7 +60,6 @@ namespace GlassHeart {
             void Render() override;
         private:
             int _titleBgHandle{ -1 };   //!< 背景画像    
-            int _alpha{ 0 };  //!< アルファ値
         };
     }
 }

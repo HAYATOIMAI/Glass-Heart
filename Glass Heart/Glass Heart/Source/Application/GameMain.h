@@ -31,7 +31,7 @@ namespace GlassHeart {
 		 *
 		 * @return ‰Šú‰»¬Œ÷‚Ì‰Â”Û
 		 */
-		virtual bool Initialize() override;
+		virtual bool Initialize(HINSTANCE hInstance) override;
 		/**
 		 *  @brief ‰ğ•úˆ—
 		 */

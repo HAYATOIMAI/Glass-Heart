@@ -39,32 +39,32 @@ namespace GlassHeart {
              * @brief 初期化処理
              *
              */
-            virtual void Init() override {};
+             void Init() override {};
             /**
              * @brief 入り口処理
              *
              */
-            virtual void Enter() override {};
+             void Enter() override {};
             /**
              * @brief 入力処理
              * 
              * @param[in] input インプットマネージャークラスへの参照
              */
-            virtual void Input(AppFrame::InputManager& input) override {};
+            void Input(AppFrame::InputManager& input) override {};
             /**
              * @brief 更新処理
              * 
              */
-            virtual void Process()override {};
+             void Process()override {};
             /**
              * @brief　描画処理
              * 
              */
-            virtual void Render() override {};
+            void Render() override {};
             /**
              * @brief 終了処理
              */
-            virtual void Exit() override {};
+            void Exit() override {};
 
             GameMain& GetGameMain() const { return _gameMain; }
 

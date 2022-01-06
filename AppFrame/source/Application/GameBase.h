@@ -8,6 +8,7 @@
  *********************************************************************/
 #pragma once
 #include <memory>
+#include <DxLib.h>
 
 namespace AppFrame {
     /** 二重インクルード防止 */
@@ -45,7 +46,7 @@ namespace AppFrame {
          *
          * @return 初期化成功の可否
          */
-        virtual bool Initialize();
+        virtual bool Initialize(HINSTANCE hInstance);
         /**
          * @brief  解放処理
          *
@@ -78,7 +79,10 @@ namespace AppFrame {
 
         SoundManager& GetSoundManager()	const { return *_soundManage; }
 
+        inline static GameBase* GameInstance() { return _gameInstance; }
+
     protected:
+        static GameBase* _gameInstance;
         GameState _gameState{ GameState::Active };  //!< ゲームの状態
         std::unique_ptr<ModeServer> _modeServer;  //!< モードサーバーのユニークポインタ
         std::unique_ptr<ResourceServer> _resServer;  //!< リソースサーバーのユニークポインタ

@@ -7,7 +7,7 @@
  * @date   December 2021
  *********************************************************************/
 #pragma once
-
+#include "ModeMain.h"
 #include <AppFrame.h>
 
 namespace GlassHeart {
@@ -19,7 +19,7 @@ namespace GlassHeart {
          * @class 
          * @brief 
          */
-        class ModeTitle :  public AppFrame::ModeBase {
+        class ModeTitle :  public ModeMain {
         public:
             /**
              * @brief コンストラクタ
@@ -62,7 +62,6 @@ namespace GlassHeart {
             int _gameTitleHandle{ -1 };  //!< ゲームタイトル画像
             int _leftClickToStart{ -1 };  //!< Left click to Start画像
             int _titleBgHandle{ -1 };  //!< 背景画像
-            int _alpha{ 0 };  //!< アルファ値
         };
     }
 
