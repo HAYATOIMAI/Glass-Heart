@@ -1,10 +1,10 @@
 
 /*****************************************************************//**
- * \file   AppFrame.h
- * \brief  ライブラリファイルの指定
+ * @file   AppFrame.h
+ * @brief  ライブラリファイルの指定
  * 
- * \author Hayato Imai
- * \date   December 2021
+ * @author Hayato Imai
+ * @date   December 2021
  *********************************************************************/
 #pragma once
 

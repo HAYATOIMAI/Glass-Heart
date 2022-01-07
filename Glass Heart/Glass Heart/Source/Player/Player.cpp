@@ -1,7 +1,7 @@
 
 /*****************************************************************//**
  * @file   Player.cpp
- * @brief
+ * @brief  ƒvƒŒƒCƒ„[‚Ìˆ—
  *
  * @author Hayato Imai
  * @date   December 2021
@@ -13,6 +13,7 @@
 #include "../Model/ModelAnimeManager.h"
 #include "../State/StateManager.h"
 #include "../Application/GameMain.h"
+#include <numbers>
 #include <AppFrame.h>
 
 using namespace GlassHeart::Player;

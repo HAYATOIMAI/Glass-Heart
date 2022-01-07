@@ -59,8 +59,6 @@ namespace AppFrame {
 		//! 描画先画面を裏にする
 		SetDrawScreen(DX_SCREEN_BACK);
 
-		
-
 		//! Ｚバッファを有効にする
 		SetUseZBuffer3D(TRUE);
 

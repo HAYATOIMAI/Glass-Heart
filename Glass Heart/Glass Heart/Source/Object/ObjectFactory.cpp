@@ -15,8 +15,10 @@
 #include "../Player/Player.h"
 #include "../Camera/CameraManager.h"
 #include "../Model/ModelAnimeManager.h"
-#include"../State/StateIdle.h"
+#include "../State/StateIdle.h"
+#include "../State/StateRun.h"
 #include "../State/StateBase.h"
+#include "../Stage/Stage.h"
 #include <AppFrame.h>
 
 using namespace GlassHeart::Object;
@@ -91,6 +93,7 @@ std::unique_ptr<ObjectBase> PlayerCreate::Create(GameMain& game) {
 
     // ó‘Ô‚ğ“o˜^
     auto state = std::make_unique<State::StateManager>("Idle", std::make_shared<State::StateIdle>(*player));
+    state->Register("Run", std::make_shared<State::StateRun>(*player));
     player->SetStateManage(std::move(state));
 
     return player;
@@ -103,5 +106,6 @@ std::unique_ptr<ObjectBase> EnemyCreate::Create(GameMain& game)
 
 std::unique_ptr<ObjectBase> StageCreate::Create(GameMain& game)
 {
-    return std::unique_ptr<ObjectBase>();
+    auto stage = std::make_unique<Stage::Stage>(game);
+    return stage;
 }

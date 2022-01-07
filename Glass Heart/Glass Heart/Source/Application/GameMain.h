@@ -25,33 +25,33 @@ namespace GlassHeart {
 		using base = AppFrame::GameBase;
 	public:
 		GameMain();
-		virtual ~GameMain() override;
+		 ~GameMain() override;
 		/**
 		 * @brief  初期化処理
 		 *
 		 * @return 初期化成功の可否
 		 */
-		virtual bool Initialize(HINSTANCE hInstance) override;
+		 bool Initialize(HINSTANCE hInstance) override;
 		/**
 		 *  @brief 解放処理
 		 */
-		virtual void Terminate() override;
+		 void Terminate() override;
 		/**
 		 * @brief 入力処理
 		 */
-		virtual void Input() override;
+		void Input() override;
 		/**
 		 * @brief 更新処理
 		 */
-		virtual void Process() override;
+		void Process() override;
 		/**
 		 * @brief 描画処理
 		 */
-		virtual void Render() override;
+		 void Render() override;
 		/**
 		 * @brief メインループ
 		 */
-		virtual void Run() override;
+		 void Run() override;
 
 		Object::ObjectServer& GetObjectServer() const { return *_objServer; }
 

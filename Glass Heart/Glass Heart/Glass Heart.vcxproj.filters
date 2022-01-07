@@ -123,6 +123,9 @@
     <ClInclude Include="Source\Collision\CollisionManager.h">
       <Filter>ヘッダー ファイル\Collision</Filter>
     </ClInclude>
+    <ClInclude Include="Source\State\StateRun.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Camera\CameraManager.cpp">
@@ -178,6 +181,9 @@
     </ClCompile>
     <ClCompile Include="Source\State\StateManager.cpp">
       <Filter>ソース ファイル\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\State\StateRun.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

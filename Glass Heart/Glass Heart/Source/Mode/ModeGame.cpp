@@ -57,7 +57,7 @@ void ModeGame::Input(AppFrame::InputManager& input) {
 	if (input.GetJoyPad().GetXinputStart()) {
 		GetModeServer().GoToMode("Title");
 	}
-	GetModeServer().Input(input);
+	GetObjectServer().Input(input);
 }
 //!< XVˆ—
 void ModeGame::Process() {

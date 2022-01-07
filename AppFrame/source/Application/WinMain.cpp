@@ -15,6 +15,9 @@ int CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 
     // GameBaseクラスのインスタンスを初期化する
     auto gamebase = AppFrame::GameBase::GameInstance();
+
+    if (!gamebase) { return 0; }
+
     auto succeess = gamebase->Initialize(hInstance);
 
     if (succeess) {

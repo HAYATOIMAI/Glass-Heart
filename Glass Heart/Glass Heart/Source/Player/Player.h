@@ -7,8 +7,12 @@
  * @date   December 2021
  *********************************************************************/
 #pragma once
+
 #include "../Object/ObjectBase.h"
 
+namespace AppFrame {
+	class InputManager;
+}
 
 namespace GlassHeart {
 
@@ -24,7 +28,7 @@ namespace GlassHeart {
 		 * @class Player
 		 * @brief プレイヤー
 		 */
-		class Player : public  GlassHeart::Object::ObjectBase {
+		class Player : public  Object::ObjectBase {
 		public:
 			/**
 			 * @brief コンストラクタ
@@ -40,7 +44,7 @@ namespace GlassHeart {
 			/**
 			 * @brief 入力処理
 			 * 
-			 * @param input
+			 * @param[in] input  インプットマネージャークラスの参照
 			 */
 			virtual void Input(AppFrame::InputManager& input) override;
 			/**
@@ -65,17 +69,17 @@ namespace GlassHeart {
 
 			float GetForwardSpeed() { return _forwardSpeed; }
 			void SetForwardSpeed(float forwardspeed) { _forwardSpeed = forwardspeed; }
+			/**
+		     * @brief 移動処理
+		     *
+		     * @param[in] forward
+		     */
+			virtual void Move(const VECTOR& forward);
 
 		protected:
 			float _forwardSpeed{ 0.0f };  //!< 
 			float _angularSpeed{ 0.0f };  //!< 
 			VECTOR _backDelta{ 0, 0, 0 };  //!<
-			/**
-			 * @brief 移動処理
-			 * 
-			 * @param[in] forward
-			 */
-			virtual void Move(const VECTOR& forward);
 			/**
 			 * @brief 敵との接触判定
 			 * @details 使用予定無し
