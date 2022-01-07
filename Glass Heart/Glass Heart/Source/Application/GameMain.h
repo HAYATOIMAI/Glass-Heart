@@ -2,7 +2,7 @@
 /*****************************************************************//**
  * @file   GameMain.h
  * @brief  このプロジェクトのメイン処理
- * 
+ *
  * @author Hayato Imai
  * @date   December 2021
  *********************************************************************/
@@ -11,7 +11,7 @@
 #include "AppFrame.h"
 
 namespace GlassHeart {
-	
+
 	namespace Object {
 		/** 二重インクルード防止 */
 		class ObjectServer;
@@ -25,17 +25,17 @@ namespace GlassHeart {
 		using base = AppFrame::GameBase;
 	public:
 		GameMain();
-		 ~GameMain() override;
+		~GameMain() override;
 		/**
 		 * @brief  初期化処理
 		 *
 		 * @return 初期化成功の可否
 		 */
-		 bool Initialize(HINSTANCE hInstance) override;
+		bool Initialize(HINSTANCE hInstance) override;
 		/**
 		 *  @brief 解放処理
 		 */
-		 void Terminate() override;
+		void Terminate() override;
 		/**
 		 * @brief 入力処理
 		 */
@@ -47,15 +47,15 @@ namespace GlassHeart {
 		/**
 		 * @brief 描画処理
 		 */
-		 void Render() override;
+		void Render() override;
 		/**
 		 * @brief メインループ
 		 */
-		 void Run() override;
+		void Run() override;
 
-		Object::ObjectServer& GetObjectServer() const { return *_objServer; }
+		inline Object::ObjectServer& GetObjectServer() const { return *_objServer; }
 
-		Object::ObjectFactory& GetObjectFactory() const { return *_objFactory; }
+		inline Object::ObjectFactory& GetObjectFactory() const { return *_objFactory; }
 
 	private:
 		std::unique_ptr<GlassHeart::Object::ObjectServer> _objServer;  //!< オブジェクトサーバーのユニークポインタ

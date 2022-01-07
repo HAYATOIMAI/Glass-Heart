@@ -26,6 +26,7 @@ namespace AppFrame {
 	GameBase* GameBase::_gameInstance = nullptr;
 
 	GameBase::GameBase() {
+		//静的メンバに自分のクラス情報を入れる
 		_gameInstance = this;
 	}
 

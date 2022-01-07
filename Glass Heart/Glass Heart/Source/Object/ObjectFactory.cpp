@@ -1,10 +1,10 @@
 
 /*****************************************************************//**
  * @file   ObjectFactory.cpp
- * @brief  
+ * @brief  オブジェクトファクトリークラスの処理
  * 
  * @author Hayato Imai
- * @date   January 2022
+ * @date   December 2021
  *********************************************************************/
 #include "ObjectFactory.h"
 #include "../Object/ObjectServer.h"

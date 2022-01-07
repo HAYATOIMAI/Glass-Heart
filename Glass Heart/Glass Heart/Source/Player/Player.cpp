@@ -13,7 +13,6 @@
 #include "../Model/ModelAnimeManager.h"
 #include "../State/StateManager.h"
 #include "../Application/GameMain.h"
-#include <numbers>
 #include <AppFrame.h>
 
 using namespace GlassHeart::Player;

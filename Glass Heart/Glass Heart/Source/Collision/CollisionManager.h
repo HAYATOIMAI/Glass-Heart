@@ -1,7 +1,7 @@
 
 /*****************************************************************//**
  * @file   CollisionManager.h
- * @brief  
+ * @brief  コリジョンマネージャークラスの宣言
  * 
  * @author Hayato Imai
  * @date   December 2021

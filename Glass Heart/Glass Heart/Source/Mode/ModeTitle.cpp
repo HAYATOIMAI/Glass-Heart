@@ -1,7 +1,7 @@
 
 /*****************************************************************//**
  * @file   ModeTitle.cpp
- * @brief
+ * @brief  タイトル画面クラスの処理
  *
  * @author Hayato Imai
  * @date   December 2021

@@ -124,7 +124,7 @@
       <Filter>ヘッダー ファイル\Collision</Filter>
     </ClInclude>
     <ClInclude Include="Source\State\StateRun.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -183,7 +183,7 @@
       <Filter>ソース ファイル\State</Filter>
     </ClCompile>
     <ClCompile Include="Source\State\StateRun.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\State</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

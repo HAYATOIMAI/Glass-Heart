@@ -73,16 +73,16 @@ namespace AppFrame {
          */
         virtual void Run();
 
-        ModeServer& GetModeServer() const { return *_modeServer; }
+        inline ModeServer& GetModeServer() const { return *_modeServer; }
 
-        ResourceServer& GetResourceServer()	const { return *_resServer; }
+        inline ResourceServer& GetResourceServer()	const { return *_resServer; }
 
-        SoundManager& GetSoundManager()	const { return *_soundManage; }
+        inline SoundManager& GetSoundManager()	const { return *_soundManage; }
 
         inline static GameBase* GameInstance() { return _gameInstance; }
 
     protected:
-        static GameBase* _gameInstance;
+        static GameBase* _gameInstance;  //!< ゲームベースクラスのインスタンス
         GameState _gameState{ GameState::Active };  //!< ゲームの状態
         std::unique_ptr<ModeServer> _modeServer;  //!< モードサーバーのユニークポインタ
         std::unique_ptr<ResourceServer> _resServer;  //!< リソースサーバーのユニークポインタ

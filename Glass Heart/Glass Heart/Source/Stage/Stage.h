@@ -1,3 +1,11 @@
+
+/*****************************************************************//**
+ * @file   Stage.h
+ * @brief  ステージクラスの宣言
+ * 
+ * @author Hayato Imai
+ * @date   January 2022
+ *********************************************************************/
 #pragma once
 #include "../Object/ObjectBase.h"
 #include <memory>

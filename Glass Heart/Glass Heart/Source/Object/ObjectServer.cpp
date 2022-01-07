@@ -1,10 +1,10 @@
 
 /*****************************************************************//**
  * @file   ObjectServer.cpp
- * @brief  
+ * @brief  オブジェクトサーバーの処理
  * 
  * @author Hayato Imai
- * @date   January 2022
+ * @date   December 2021
  *********************************************************************/
 #include "ObjectServer.h"
 #include "ObjectBase.h"

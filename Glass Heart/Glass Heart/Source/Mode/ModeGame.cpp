@@ -1,7 +1,7 @@
 
 /*****************************************************************//**
  * @file   ModeGame.cpp
- * @brief  
+ * @brief  ƒQ[ƒ€“àƒNƒ‰ƒX‚Ìˆ—
  * 
  * @author Hayato Imai
  * @date   December 2021

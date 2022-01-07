@@ -1,7 +1,7 @@
 
 /*****************************************************************//**
  * @file   CollisionManager.cpp
- * @brief
+ * @brief  コリジョンマネージャークラスの処理
  *
  * @author Hayato Imai
  * @date   December 2021
