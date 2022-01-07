@@ -26,6 +26,7 @@ namespace AppFrame {
 	GameBase* GameBase::_gameInstance = nullptr;
 
 	GameBase::GameBase() {
+		//静的メンバに自分のクラス情報を入れる
 		_gameInstance = this;
 	}
 
@@ -58,8 +59,6 @@ namespace AppFrame {
 
 		//! 描画先画面を裏にする
 		SetDrawScreen(DX_SCREEN_BACK);
-
-		
 
 		//! Ｚバッファを有効にする
 		SetUseZBuffer3D(TRUE);

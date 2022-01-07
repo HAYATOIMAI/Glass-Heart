@@ -1,7 +1,7 @@
 
 /*****************************************************************//**
  * @file   CameraManager.cpp
- * @brief
+ * @brief  カメラマネージャークラスの処理
  *
  * @author Hayato Imai
  * @date   December 2021

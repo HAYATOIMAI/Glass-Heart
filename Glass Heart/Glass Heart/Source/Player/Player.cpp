@@ -1,7 +1,7 @@
 
 /*****************************************************************//**
  * @file   Player.cpp
- * @brief
+ * @brief  ƒvƒŒƒCƒ„[‚Ìˆ—
  *
  * @author Hayato Imai
  * @date   December 2021

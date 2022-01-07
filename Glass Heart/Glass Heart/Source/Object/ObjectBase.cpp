@@ -1,3 +1,11 @@
+
+/*****************************************************************//**
+ * @file   ObjectBase.cpp
+ * @brief  オブジェクトの基底クラスの処理
+ * 
+ * @author Hayato Imai
+ * @date   December 2021
+ *********************************************************************/
 #include "ObjectBase.h"
 #include "ObjectServer.h"
 #include "ObjectFactory.h"

@@ -1,7 +1,7 @@
 
 /*****************************************************************//**
  * @file   StateBase.cpp
- * @brief  
+ * @brief  ó‘Ô‚ÌŠî’êƒNƒ‰ƒX
  * 
  * @author Hayato Imai
  * @date   December 2021

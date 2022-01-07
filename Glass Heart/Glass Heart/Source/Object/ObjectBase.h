@@ -1,10 +1,10 @@
 
 /*****************************************************************//**
  * @file   ObjectBase.h
- * @brief  
+ * @brief  オブジェクトの基底クラス
  * 
  * @author Hayato Imai
- * @date   January 2022
+ * @date   December 2021
  *********************************************************************/
 #pragma once
 
@@ -76,6 +76,8 @@ namespace GlassHeart {
             virtual	void Init() {};
             /**
              * @brief 入力処理
+             * 
+             * @param[in] input インプットマネージャークラスの参照
              */
             virtual	void Input(AppFrame::InputManager& input) {};
             /**

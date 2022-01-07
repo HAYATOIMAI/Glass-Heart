@@ -8,8 +8,9 @@
  *********************************************************************/
 #include "InputManager.h"
 
-using namespace AppFrame;
+namespace AppFrame {
+	void InputManager::Process() {
+		_inputjoy.Process();
+	}
+ }
 
-void InputManager::Process() {
-	_inputjoy.Process();
-}

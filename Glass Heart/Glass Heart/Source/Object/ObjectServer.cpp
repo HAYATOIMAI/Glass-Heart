@@ -1,10 +1,10 @@
 
 /*****************************************************************//**
  * @file   ObjectServer.cpp
- * @brief  
+ * @brief  オブジェクトサーバーの処理
  * 
  * @author Hayato Imai
- * @date   January 2022
+ * @date   December 2021
  *********************************************************************/
 #include "ObjectServer.h"
 #include "ObjectBase.h"
@@ -12,10 +12,8 @@
 using namespace GlassHeart::Object;
 
 // !オブジェクトの追加
-void ObjectServer::Add(std::unique_ptr<ObjectBase> obj)
-{
-	if (_updating)
-	{
+void ObjectServer::Add(std::unique_ptr<ObjectBase> obj) {
+	if (_updating) {
 		// 更新中は_pendingObjectsに追加する
 		_pendingObjects.emplace_back(std::move(obj));
 	}
@@ -24,8 +22,7 @@ void ObjectServer::Add(std::unique_ptr<ObjectBase> obj)
 	}
 }
 //! 入力処理
-void ObjectServer::Input(AppFrame::InputManager& input)
-{
+void ObjectServer::Input(AppFrame::InputManager& input) {
 	_updating = true;
 	for (auto&& obj : _objects) {
 		if (obj->IsActive()) {
@@ -36,8 +33,7 @@ void ObjectServer::Input(AppFrame::InputManager& input)
 	_updating = false;
 }
 //! 更新処理
-void ObjectServer::Process()
-{
+void ObjectServer::Process() {
 	for (auto&& obj : _objects) {
 		if (obj->IsActive()) {
 			//! オブジェクトを更新する

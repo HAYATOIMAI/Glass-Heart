@@ -32,7 +32,10 @@ namespace GlassHeart {
             virtual void Update() {};
             virtual void Draw() {};
         };
-
+        /**
+         * @class StateManager
+         * @brief オブジェクトの状態を管理する
+         */
         class StateManager {
         public:
             /// コンストラクタ

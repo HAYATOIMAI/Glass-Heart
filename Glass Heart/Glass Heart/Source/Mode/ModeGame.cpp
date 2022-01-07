@@ -1,7 +1,7 @@
 
 /*****************************************************************//**
  * @file   ModeGame.cpp
- * @brief  
+ * @brief  ゲーム内クラスの処理
  * 
  * @author Hayato Imai
  * @date   December 2021
@@ -57,7 +57,7 @@ void ModeGame::Input(AppFrame::InputManager& input) {
 	if (input.GetJoyPad().GetXinputStart()) {
 		GetModeServer().GoToMode("Title");
 	}
-	GetModeServer().Input(input);
+	GetObjectServer().Input(input);
 }
 //!< 更新処理
 void ModeGame::Process() {

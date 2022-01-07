@@ -9,22 +9,24 @@
 #include "ModeBase.h"
 #include "../Application/GameBase.h"
 
-using namespace AppFrame;
+namespace AppFrame {
 
-ModeBase::ModeBase(GameBase& game) : _game{ game } {
+	ModeBase::ModeBase(GameBase& game) : _game{ game } {
+	}
+
+	ModeBase::~ModeBase() {
+	}
+
+	ResourceServer& ModeBase::GetResourceServer() {
+		return _game.GetResourceServer();
+	}
+
+	SoundManager& ModeBase::GetSoundManager() {
+		return _game.GetSoundManager();
+	}
+
+	ModeServer& ModeBase::GetModeServer() {
+		return _game.GetModeServer();
+	}
 }
 
-ModeBase::~ModeBase(){
-}
-
-ResourceServer& ModeBase::GetResourceServer() {
-	return _game.GetResourceServer();
-}
-
-SoundManager& ModeBase::GetSoundManager() {
-	return _game.GetSoundManager();
-}
-
-ModeServer& ModeBase::GetModeServer() {
-	return _game.GetModeServer();
-}

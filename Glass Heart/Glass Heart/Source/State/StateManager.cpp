@@ -1,7 +1,7 @@
 
 /*****************************************************************//**
  * @file   StateManager.cpp
- * @brief
+ * @brief  ステートマネージャークラスの処理
  *
  * @author Hayato Imai
  * @date   December 2021
@@ -11,22 +11,19 @@
 
 using namespace GlassHeart::State;
 
-StateManager::StateManager(std::string_view key, std::shared_ptr<StateBaseRoot> state)
-{
+StateManager::StateManager(std::string_view key, std::shared_ptr<StateBaseRoot> state) {
 	Register(key, state);
 	PushBack(key);
 }
 
-void StateManager::Register(std::string_view key, std::shared_ptr<StateBaseRoot> state)
-{
+void StateManager::Register(std::string_view key, std::shared_ptr<StateBaseRoot> state) {
 	if (_registry.contains(key.data())) {
 		_registry.erase(key.data());
 	}
 	_registry.emplace(key, state);
 }
 
-void StateManager::PushBack(std::string_view key)
-{
+void StateManager::PushBack(std::string_view key) {
 	if (!_registry.contains(key.data())) {
 		return;   // キーが未登録
 	}
@@ -35,8 +32,7 @@ void StateManager::PushBack(std::string_view key)
 	_states.push_back(pushScene);
 }
 
-void StateManager::PopBack()
-{
+void StateManager::PopBack() {
 	if (_states.empty()) {
 		return;
 	}
@@ -48,30 +44,26 @@ void StateManager::PopBack()
 	_states.back()->Enter();
 }
 
-void StateManager::GoToState(std::string_view key)
-{
+void StateManager::GoToState(std::string_view key) {
 	PopBack();
 	PushBack(key.data());
 }
 
-void StateManager::Input(AppFrame::InputManager& input)
-{
+void StateManager::Input(AppFrame::InputManager& input) {
 	if (_states.empty()) {
 		return;
 	}
 	_states.back()->Input(input);
 }
 
-void StateManager::Update()
-{
+void StateManager::Update() {
 	if (_states.empty()) {
 		return;
 	}
 	_states.back()->Update();
 }
 
-void StateManager::Draw() const
-{
+void StateManager::Draw() const {
 	if (_states.empty()) {
 		return;
 	}

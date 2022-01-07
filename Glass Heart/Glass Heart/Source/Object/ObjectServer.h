@@ -4,7 +4,7 @@
  * @brief  オブジェクトサーバーの宣言
  * 
  * @author Hayato Imai
- * @date   January 2022
+ * @date   December 2021
  *********************************************************************/
 #pragma once
 
