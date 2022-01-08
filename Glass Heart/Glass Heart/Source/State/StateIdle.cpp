@@ -26,6 +26,9 @@ void StateIdle::Input(AppFrame::InputManager& input) {
 	if (input.GetJoyPad().GetXinputUp()) {
 		_owner.GetStateManage().PushBack("Run");
 	}
+	if (input.GetJoyPad().GetXinputButtonA()) {
+		_owner.GetStateManage().PushBack("Jump");
+	}
 }
 
 void StateIdle::Update() {

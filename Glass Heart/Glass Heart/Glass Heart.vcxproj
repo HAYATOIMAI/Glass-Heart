@@ -176,6 +176,7 @@
     <ClInclude Include="Source\Stage\Stage.h" />
     <ClInclude Include="Source\State\StateBase.h" />
     <ClInclude Include="Source\State\StateIdle.h" />
+    <ClInclude Include="Source\State\StateJump.h" />
     <ClInclude Include="Source\State\StateManager.h" />
     <ClInclude Include="Source\State\StateRun.h" />
   </ItemGroup>
@@ -197,6 +198,7 @@
     <ClCompile Include="Source\Stage\Stage.cpp" />
     <ClCompile Include="Source\State\StateBase.cpp" />
     <ClCompile Include="Source\State\StateIdle.cpp" />
+    <ClCompile Include="Source\State\StateJump.cpp" />
     <ClCompile Include="Source\State\StateManager.cpp" />
     <ClCompile Include="Source\State\StateRun.cpp" />
   </ItemGroup>
