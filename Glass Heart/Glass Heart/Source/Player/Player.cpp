@@ -14,6 +14,7 @@
 #include "../State/StateManager.h"
 #include "../Application/GameMain.h"
 #include <AppFrame.h>
+#include <sstream>
 
 using namespace GlassHeart::Player;
 

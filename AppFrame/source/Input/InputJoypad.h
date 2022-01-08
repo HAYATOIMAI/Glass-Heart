@@ -59,12 +59,12 @@ namespace AppFrame {
         // 右スティックの縦軸値
         bool GetXinputThumbRY() { return _xinput.ThumbRY; }
     private:
-        int _InputInfo = 0;  //! 入力情報
-        int _TrgInfo = 0;  //! トリガー入力情報
-        XINPUT_STATE _xinput{ 0 };  //! XInput用入力情報
-        XINPUT_STATE _triggerKey{ 0 };  //! XInput用トリガー入力情報
-        DINPUT_JOYSTATE _DInput{ 0 };  //! DirectInput用入力情報
-        DINPUT_JOYSTATE _DTrigger{ 0 };  //! DirectInput用トリガー入力情報
+        int _InputInfo = 0;  //!< 入力情報
+        int _TrgInfo = 0;  //!< トリガー入力情報
+        XINPUT_STATE _xinput{ 0 };  //!< XInput用入力情報
+        XINPUT_STATE _triggerKey{ 0 };  //!< XInput用トリガー入力情報
+        DINPUT_JOYSTATE _DInput{ 0 };  //!< DirectInput用入力情報
+        DINPUT_JOYSTATE _DTrigger{ 0 };  //!< DirectInput用トリガー入力情報
     };
 
 }

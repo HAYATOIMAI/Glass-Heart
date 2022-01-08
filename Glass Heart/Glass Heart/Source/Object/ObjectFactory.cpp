@@ -99,13 +99,11 @@ std::unique_ptr<ObjectBase> PlayerCreate::Create(GameMain& game) {
     return player;
 }
 
-std::unique_ptr<ObjectBase> EnemyCreate::Create(GameMain& game)
-{
+std::unique_ptr<ObjectBase> EnemyCreate::Create(GameMain& game) {
     return std::unique_ptr<ObjectBase>();
 }
 
-std::unique_ptr<ObjectBase> StageCreate::Create(GameMain& game)
-{
+std::unique_ptr<ObjectBase> StageCreate::Create(GameMain& game) {
     auto stage = std::make_unique<Stage::Stage>(game);
     return stage;
 }
