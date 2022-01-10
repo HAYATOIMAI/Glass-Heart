@@ -11,28 +11,28 @@
 
 namespace GlassHeart {
 
-	namespace Player {
-		class Player;
-	}
+    namespace Player {
+        class Player;
+    }
 
-	namespace State {
+    namespace State {
 
-		class StateBase : public StateBaseRoot {
-		public:
-			/**
-			 * @brief コンストラクタ
-			 * 
-			 * @param[in] owner
-			 */
-			StateBase(Player::Player& owner) : _owner{ owner } {};
-			/**
-			 * @brief 描画処理
-			 */
-			void Draw() override;
-		protected:
-			Player::Player& _owner; //!< プレイヤークラスの参照
-		};
-	}
+        class StateBase : public StateBaseRoot {
+        public:
+            /**
+             * @brief コンストラクタ
+             * 
+             * @param[in] owner
+             */
+            StateBase(Player::Player& owner) : _owner{ owner } {};
+            /**
+             * @brief 描画処理
+             */
+            void Draw() override;
+        protected:
+            Player::Player& _owner; //!< プレイヤークラスの参照
+        };
+    }
 }
 
 

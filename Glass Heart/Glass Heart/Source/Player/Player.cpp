@@ -18,8 +18,7 @@
 
 using namespace GlassHeart::Player;
 
-Player::Player(GameMain& game) : GlassHeart::Object::ObjectBase{ game } {
-}
+Player::Player(GameMain& game) : GlassHeart::Object::ObjectBase{ game } {}
 void Player::Input(AppFrame::InputManager& input) {
     _cameraManage->Input(input);
 
@@ -29,6 +28,8 @@ void Player::Input(AppFrame::InputManager& input) {
     }
     else if (input.GetJoyPad().GetXinputRight()) {
         _angularSpeed += (DX_PI_F / 180.0f) * 3.0f;
+    }
+    if (input.GetJoyPad().GetXinputButtonA()) {
     }
     _stateManage->Input(input);
 }
@@ -49,6 +50,7 @@ void Player::Process() {
     // オブジェクトサーバーに位置を送信
     GetObjectServer().Register("Player", _position);
 
+    
 }
 void Player::Render() {
     _stateManage->Draw();

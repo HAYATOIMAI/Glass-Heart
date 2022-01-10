@@ -1,37 +1,38 @@
 
 /*****************************************************************//**
- * @file   StateIdle.cpp
- * @brief  アイドル状態クラスの処理
+ * @file   StateRun.cpp
+ * @brief  走り状態クラスの処理
  * 
  * @author Hayato Imai
- * @date   December 2021
+ * @date   January 2022
  *********************************************************************/
-#include "StateIdle.h"
-#include <AppFrame.h>
+#include "StateRun.h"
 #include "../Player/Player.h"
-#include "../Model/ModelAnimeManager.h"
 #include "../Collision/CollisionManager.h"
+#include "../Model/ModelAnimeManager.h"
+#include <AppFrame.h>
 
 using namespace GlassHeart::State;
 
-void StateIdle::Enter() {
-	_owner.SetForwardSpeed(0.0f);
-	_owner.GetModelAnime().ChangeAnime("MO_SDChar_idle", true);
+void StateRun::Enter() {
+	_owner.SetForwardSpeed(10.0f);
+	_owner.GetModelAnime().ChangeAnime("MO_SDChar_run", true);
 }
 
-void StateIdle::Input(AppFrame::InputManager& input) {
+void StateRun::Input(AppFrame::InputManager& input) {
+
 	if (input.GetJoyPad().GetXinputButtonB()) {
 		_owner.GetStateManage().PushBack("Action");
 	}
 	if (input.GetJoyPad().GetXinputUp()) {
-		_owner.GetStateManage().PushBack("Run");
+		return;
 	}
 	if (input.GetJoyPad().GetXinputButtonA()) {
 		_owner.GetStateManage().PushBack("Jump");
 	}
+	_owner.GetStateManage().PopBack();
 }
 
-void StateIdle::Update() {
-	_owner.GetPosition() = _owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 300, 0 });
-
+void StateRun::Update() {
+	_owner.Move(VScale(_owner.GetForward(), _owner.GetForwardSpeed()));
 }
