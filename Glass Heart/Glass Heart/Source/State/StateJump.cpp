@@ -39,7 +39,7 @@ void StateJump::Input(AppFrame::InputManager& input) {
 
 void StateJump::Update() {
 
-    auto T = true;
+    auto T = false;
     if (isJump) {
         JumpFunction(T);
     }

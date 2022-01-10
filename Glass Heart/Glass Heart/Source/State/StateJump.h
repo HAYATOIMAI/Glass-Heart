@@ -17,6 +17,10 @@ namespace GlassHeart {
     }
 
     namespace State {
+        /**
+         * @class StateJump
+         * @brief ƒWƒƒƒ“ƒvó‘Ô
+         */
         class StateJump : public StateBase{
         public:
             StateJump(Player::Player& owner);
