@@ -36,7 +36,6 @@ void StateManager::PopBack() {
 	if (_states.empty()) {
 		return;
 	}
-	//_states.back()->Exit();
 	_states.pop_back();
 	if (_states.empty()) {
 		return;

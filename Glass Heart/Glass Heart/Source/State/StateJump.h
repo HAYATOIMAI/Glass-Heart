@@ -28,14 +28,16 @@ namespace GlassHeart {
             void Input(AppFrame::InputManager& input) override;
             void Update() override;
             void JumpFunction(const bool isJumpStart);
-            void  JumpStart();
+            void JumpStart();
             VECTOR JumpProcess();
             void  JumpEnd(const VECTOR& jumppos);
         private:
             float _gravity{ 0.0f };  //!< d—Í‰Á‘¬“x
             double _jumpTimer{ 0.0 };
             double _groundY{ 0.0 };
-            bool isJump{ false };
+            double _jumpPower{0.0};
+            double _jumpAngle{ 0.0 };
+            bool _isJump{ false };
             VECTOR _jumpStartPosition;
             VECTOR _jumpVelocity;
         };

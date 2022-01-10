@@ -17,8 +17,16 @@
 #include <sstream>
 
 using namespace GlassHeart::Player;
+namespace {
+    constexpr auto DegreeToRadian = DX_PI_F / 180.0f;
+}
 
-Player::Player(GameMain& game) : GlassHeart::Object::ObjectBase{ game } {}
+
+Player::Player(GameMain& game) : GlassHeart::Object::ObjectBase{ game } {
+    _jumpStartPosition = VGet(0.0f, 0.0f, 0.0f);
+    _jumpVelocity = VGet(0.0f, 0.0f, 0.0f);
+}
+
 void Player::Input(AppFrame::InputManager& input) {
     _cameraManage->Input(input);
 
@@ -30,7 +38,12 @@ void Player::Input(AppFrame::InputManager& input) {
         _angularSpeed += (DX_PI_F / 180.0f) * 3.0f;
     }
     if (input.GetJoyPad().GetXinputButtonA()) {
+        _isJump = true;
+        if (_isJump) {
+            JumpFunction(_isJump);
+        }
     }
+
     _stateManage->Input(input);
 }
 void Player::Process() {
@@ -49,10 +62,14 @@ void Player::Process() {
     _cameraManage->Update();
     // オブジェクトサーバーに位置を送信
     GetObjectServer().Register("Player", _position);
-
-    
 }
 void Player::Render() {
+#ifdef _DEBUG
+    std::stringstream ss;
+    ss << "プレイヤー座標" << _position.x << _position.y << _position.z << "\n";
+    DrawString(370 - 36, -25 + 115, ss.str().c_str(), GetColor(255, 255, 255));
+#endif // _DEBUG
+
     _stateManage->Draw();
 }
 void Player::ComputeWorldTransform() {
@@ -70,6 +87,54 @@ void Player::Move(const VECTOR& forward) {
     pos = _collsionManage->CheckTerrain(pos, { 0, forward.y, forward.z });
     // 座標更新
     _position = pos;
+}
+void GlassHeart::Player::Player::JumpFunction(const bool isJumpStart)
+{
+    if (isJumpStart) {
+        JumpStart();
+    }
+
+    auto jumpposition = JumpProcess();
+
+    if (isJumpStart || jumpposition.y > _groundY) {
+        _position = jumpposition;
+    }
+    else {
+        JumpEnd(jumpposition);
+        _isJump = false;
+    }
+}
+void GlassHeart::Player::Player::JumpStart()
+{
+    _jumpTimer = 0.0;
+    _jumpStartPosition = _position;
+
+    VECTOR jumpbase = VGet(0.0f, 0.0f, static_cast<float>(-_jumpPower));
+    MATRIX jump_rotate = MMult(MGetRotX(static_cast<float>(_jumpAngle) * DegreeToRadian), MGetRotY(_rotation.y * DegreeToRadian));
+
+
+    _jumpVelocity = VTransform(jumpbase, jump_rotate);
+}
+VECTOR GlassHeart::Player::Player::JumpProcess()
+{
+    // ベクトル
+    VECTOR jumpposition = VAdd(_position, _jumpVelocity);
+
+    _jumpVelocity.y -= static_cast<float>(_gravity);
+
+    ////放物線
+    //VECTOR jumppos = VAdd(_jumpStartPosition, VScale(_jumpVelocity, _jumpTimer));
+    //auto jumpY = (0.5 * _gravity * _jumpTimer * _jumpTimer);
+
+    //jumppos.y -= jumpY;
+    //_jumpTimer += 1.0;
+
+    return jumpposition;
+}
+void GlassHeart::Player::Player::JumpEnd(const VECTOR& jumppos)
+{
+
+  
 }
 void Player::HitCheckEnemy() {
 }

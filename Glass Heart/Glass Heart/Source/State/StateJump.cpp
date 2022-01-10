@@ -10,6 +10,7 @@
 #include "StateJump.h"
 #include "../Player/Player.h"
 #include "../Model/ModelAnimeManager.h"
+#include "../Collision/CollisionManager.h"
 #include <AppFrame.h>
 
 namespace {
@@ -33,35 +34,25 @@ void StateJump::Input(AppFrame::InputManager& input) {
         _owner.GetStateManage().PushBack("Run");
     }
     if (input.GetJoyPad().GetXinputButtonA()) {
+        _isJump = true;
+        if (_isJump) {
+            JumpFunction(_isJump);
+        }
         return;
     }
+    _owner.GetStateManage().PopBack();
 }
 
 void StateJump::Update() {
-
-    auto T = false;
-    if (isJump) {
-        JumpFunction(T);
-    }
+    _owner.GetPosition() = _owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 300, 0 });
 }
 
 void StateJump::JumpFunction(const bool isJumpStart) {
-    if (isJumpStart){
-        JumpStart();
-    }
 
-    auto jumpposition = JumpProcess();
-
-    if (isJumpStart || jumpposition.y) {
-        _owner.SetPosition(jumpposition);
-    }
-    else {
-        JumpEnd(jumpposition);
-    }
 }
 
 void StateJump::JumpStart() {
-
+   
 }
 
 VECTOR StateJump::JumpProcess() {
@@ -73,4 +64,5 @@ VECTOR StateJump::JumpProcess() {
 }
 
 void StateJump::JumpEnd(const VECTOR& jumppos) {
+    _isJump = false;
 }
