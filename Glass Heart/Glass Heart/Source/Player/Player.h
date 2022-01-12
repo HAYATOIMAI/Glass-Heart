@@ -78,7 +78,7 @@ namespace GlassHeart {
             void JumpFunction(const bool isJumpStart);
             void JumpStart();
             VECTOR JumpProcess();
-            void  JumpEnd(const VECTOR& jumppos);
+            bool  JumpEnd(const VECTOR& jumppos);
         protected:
             float _forwardSpeed{ 0.0f };  //!< 前進スピード
             float _angularSpeed{ 0.0f };  //!< 
@@ -91,6 +91,7 @@ namespace GlassHeart {
             bool _isJump{ false };
             VECTOR _jumpStartPosition;
             VECTOR _jumpVelocity;
+            VECTOR _lastPosition;
             /**
              * @brief 敵との接触判定
              * @details 使用予定無し

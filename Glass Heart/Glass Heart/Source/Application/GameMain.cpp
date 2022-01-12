@@ -18,24 +18,23 @@ using namespace GlassHeart;
 
 /** 実体 */
 GameMain _gameMain;
-
+/** コンストラクタ */
 GameMain::GameMain() {
 }
-
+/** デストラクタ */
 GameMain::~GameMain() {
 }
-
-//!< 初期化処理
+/**  初期化処理 */
 bool GameMain::Initialize(HINSTANCE hInstance) {
     if (!base::Initialize(hInstance)) { return false; }
 
-    //!< リソースサーバーの取得
+    /** リソースサーバーの取得 */
     auto& res = GetResourceServer();
 
-    //!< リソースのカレントフォルダ設定
+    /** リソースのカレントフォルダ設定 */
     res.ChangeCurrentFile("resource");
-
-    // マテリアルの自己発光色を暗い青色にする
+     
+    /** マテリアルの自己発光色を暗い青色にする */
 #ifdef _DEBUG
     MATERIALPARAM material;
     material.Diffuse = GetColorF(0.0f, 0.0f, 0.0f, 1.0f);
@@ -45,15 +44,13 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     material.Power = 20.0f;
     SetMaterialParam(material);
 #endif
-
-    //!< 使用する音のテーブル
+    /** 使用する音のテーブル */
     const AppFrame::ResourceServer::SoundMap usesound{
     {"damage", {"damage.wav", true}},
     {"bgm1", {"sublight.wav", false}},
     {"bgm2", {"stage1.mid", false}},
     };
-
-    //!< 音を読み込み
+    /** 音を読み込み */
     res.LoadSounds(usesound);
 
     //!< サウンドコンポーネントの取得
@@ -89,12 +86,10 @@ void GameMain::Terminate() {
 //!< 入力処理
 void GameMain::Input() {
     base::Input();
-    
 }
 //!< 更新処理
 void GameMain::Process() {
     base::Process();
-    
 }
 //!< 描画処理
 void GameMain::Render() {

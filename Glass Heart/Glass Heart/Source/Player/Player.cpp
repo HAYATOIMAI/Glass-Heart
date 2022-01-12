@@ -25,6 +25,7 @@ namespace {
 Player::Player(GameMain& game) : GlassHeart::Object::ObjectBase{ game } {
     _jumpStartPosition = VGet(0.0f, 0.0f, 0.0f);
     _jumpVelocity = VGet(0.0f, 0.0f, 0.0f);
+    _lastPosition = _position;
 }
 
 void Player::Input(AppFrame::InputManager& input) {
@@ -62,6 +63,8 @@ void Player::Process() {
     _cameraManage->Update();
     // オブジェクトサーバーに位置を送信
     GetObjectServer().Register("Player", _position);
+
+    _lastPosition = _position;
 }
 void Player::Render() {
 #ifdef _DEBUG
@@ -131,10 +134,14 @@ VECTOR GlassHeart::Player::Player::JumpProcess()
 
     return jumpposition;
 }
-void GlassHeart::Player::Player::JumpEnd(const VECTOR& jumppos)
-{
+bool Player::JumpEnd(const VECTOR& jumppos){
+    if (_lastPosition.y < jumppos.y) {
+        return false;
+    }
+    auto linestart 
 
-  
+
+    return false;
 }
 void Player::HitCheckEnemy() {
 }
