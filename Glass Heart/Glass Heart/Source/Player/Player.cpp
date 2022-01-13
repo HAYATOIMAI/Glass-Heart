@@ -138,8 +138,6 @@ bool Player::JumpEnd(const VECTOR& jumppos){
     if (_lastPosition.y < jumppos.y) {
         return false;
     }
-    auto linestart 
-
 
     return false;
 }
