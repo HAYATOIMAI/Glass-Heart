@@ -9,6 +9,7 @@
 #pragma once
 
 #include "../Object/ObjectBase.h"
+#include <AppFrame.h>
 
 namespace AppFrame {
     class InputManager;

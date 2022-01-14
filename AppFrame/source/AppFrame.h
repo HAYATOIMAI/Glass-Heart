@@ -17,3 +17,6 @@
 #include "Sound/SoundManager.h"
 #include "Mode/ModeBase.h"
 #include "Mode/ModeServer.h"
+#include "Math/Matrix.h"
+#include "Math/Utility.h"
+#include "Math/Vector4.h"
