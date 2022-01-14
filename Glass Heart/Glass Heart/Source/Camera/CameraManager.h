@@ -1,7 +1,7 @@
 
 /*****************************************************************//**
  * @file   CameraManager.h
- * @brief  
+ * @brief  カメラマネージャー
  * 
  * @author Hayato Imai
  * @date   December 2021
@@ -43,7 +43,7 @@ namespace GlassHeart {
             VECTOR _position{ 0, 0, 0 };
             VECTOR _target{ 0, 0, 0 };
             VECTOR _forwardOfTarget{ 0, 0, 0 };
-            float targetDist{ 500 };
+            float targetDist{ 100 };
             float vertDist{ 100 };
         };
     }

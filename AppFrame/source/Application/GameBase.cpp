@@ -106,7 +106,7 @@ namespace AppFrame {
 	}
 
 	void GameBase::Run() {
-		//! メインループ
+		// メインループ
 		while (_gameState != GameState::End) {
 			Input();    //!< 入力
 			Process();  //!< 更新

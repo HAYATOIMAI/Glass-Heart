@@ -80,8 +80,8 @@ std::unique_ptr<ObjectBase> PlayerCreate::Create(GameMain& game) {
     // カメラの生成
     auto camera = std::make_shared<GlassHeart::Camera::CameraManager>();
     camera->Init();
-    //camera->SetPosition({ 0, 50, -200 });
-    camera->SetPosition({ 180, 50, 200 });
+    camera->SetPosition({ 0, 50, -200 });
+   // camera->SetPosition({ 180, 50, 200 });
     camera->SetTarget({ 0, 50, 0 });
 
     // プレイヤーの生成
@@ -102,7 +102,8 @@ std::unique_ptr<ObjectBase> PlayerCreate::Create(GameMain& game) {
     return player;
 }
 
-std::unique_ptr<ObjectBase> EnemyCreate::Create(GameMain& game) {
+std::unique_ptr<ObjectBase> TestCreate::Create(GameMain& game) {
+
     return std::unique_ptr<ObjectBase>();
 }
 

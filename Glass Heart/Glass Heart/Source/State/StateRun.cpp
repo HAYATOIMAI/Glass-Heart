@@ -24,7 +24,7 @@ void StateRun::Input(AppFrame::InputManager& input) {
 	if (input.GetJoyPad().GetXinputButtonB()) {
 		_owner.GetStateManage().PushBack("Action");
 	}
-	if (input.GetJoyPad().GetXinputUp()) {
+	if (input.GetJoyPad().GetXinputRight()) {
 		return;
 	}
 	if (input.GetJoyPad().GetXinputButtonA()) {

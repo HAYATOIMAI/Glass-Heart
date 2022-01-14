@@ -27,7 +27,7 @@ void ModeGame::Init() {
 	{"SkySphere", "skysphere.mv1"},
 	{"Ground",    "ground.mv1"},
 	{"Terrain",   "Ground/Ground.mv1"},
-	{"Spider",    "Spider_3.mv1"},
+	{"Test",      "Otameshi.mv1"},
 	};
 	//!< ƒ‚ƒfƒ‹‚Ì“Ç‚Ýž‚Ý
 	GetResourceServer().LoadModels(usemap);

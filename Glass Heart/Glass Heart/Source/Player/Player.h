@@ -17,6 +17,8 @@ namespace AppFrame {
 
 namespace GlassHeart {
 
+    class GameMain;
+
     namespace Camera {
         class CameraManager;
     }

@@ -23,7 +23,7 @@ void StateIdle::Input(AppFrame::InputManager& input) {
 	if (input.GetJoyPad().GetXinputButtonB()) {
 		_owner.GetStateManage().PushBack("Action");
 	}
-	if (input.GetJoyPad().GetXinputUp()) {
+	if (input.GetJoyPad().GetXinputLeft() || input.GetJoyPad().GetXinputRight()) {
 		_owner.GetStateManage().PushBack("Run");
 	}
 	if (input.GetJoyPad().GetXinputButtonA()) {

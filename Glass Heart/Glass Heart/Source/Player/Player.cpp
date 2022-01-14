@@ -13,10 +13,10 @@
 #include "../Model/ModelAnimeManager.h"
 #include "../State/StateManager.h"
 #include "../Application/GameMain.h"
-#include <AppFrame.h>
 #include <sstream>
 
 using namespace GlassHeart::Player;
+
 namespace {
     constexpr auto DegreeToRadian = DX_PI_F / 180.0f;
 }
@@ -33,10 +33,12 @@ void Player::Input(AppFrame::InputManager& input) {
 
     _angularSpeed = 0;
     if (input.GetJoyPad().GetXinputLeft()) {
-        _angularSpeed -= (DX_PI_F / 180.0f) * 3.0f;
+       // _angularSpeed -= (DX_PI_F / 180.0f) * 3.0f;
+
+        _angularSpeed = 90.0f * (DX_PI_F / 180.0f);
     }
     else if (input.GetJoyPad().GetXinputRight()) {
-        _angularSpeed += (DX_PI_F / 180.0f) * 3.0f;
+       // _angularSpeed += (DX_PI_F / 180.0f) * 3.0f;
     }
     if (input.GetJoyPad().GetXinputButtonA()) {
         _isJump = true;
@@ -91,8 +93,7 @@ void Player::Move(const VECTOR& forward) {
     // 座標更新
     _position = pos;
 }
-void GlassHeart::Player::Player::JumpFunction(const bool isJumpStart)
-{
+void GlassHeart::Player::Player::JumpFunction(const bool isJumpStart) {
     if (isJumpStart) {
         JumpStart();
     }
@@ -123,7 +124,7 @@ VECTOR GlassHeart::Player::Player::JumpProcess()
     // ベクトル
     VECTOR jumpposition = VAdd(_position, _jumpVelocity);
 
-    _jumpVelocity.y -= static_cast<float>(_gravity);
+    _jumpVelocity.y -= _gravity;
 
     ////放物線
     //VECTOR jumppos = VAdd(_jumpStartPosition, VScale(_jumpVelocity, _jumpTimer));
