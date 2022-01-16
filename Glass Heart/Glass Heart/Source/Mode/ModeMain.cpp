@@ -19,11 +19,11 @@ ModeMain::ModeMain(GameMain& game) : AppFrame::ModeBase{ game }, _gameMain{game}
 }
 
 ObjectFactory& ModeMain::GetObjectFactory() {
-	return _gameMain.GetObjectFactory();
+    return _gameMain.GetObjectFactory();
 }
 
 ObjectServer& ModeMain::GetObjectServer() {
-	return _gameMain.GetObjectServer();
+    return _gameMain.GetObjectServer();
 }
 
 

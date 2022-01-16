@@ -21,59 +21,59 @@ ModeGame::ModeGame(GameMain& game) : ModeMain{ game } {
 }
 //!< 初期化処理
 void ModeGame::Init() {
-	//!< 使用するモデル
-	AppFrame::ResourceServer::ModelMap usemap{
-	{"Player",    "SDChar/SDChar.mv1"},
-	{"SkySphere", "skysphere.mv1"},
-	{"Ground",    "ground.mv1"},
-	{"Terrain",   "Ground/Ground.mv1"},
-	{"Test",      "Otameshi.mv1"},
-	};
-	//!< モデルの読み込み
-	GetResourceServer().LoadModels(usemap);
+    //!< 使用するモデル
+    AppFrame::ResourceServer::ModelMap usemap{
+    {"Player",    "SDChar/SDChar.mv1"},
+    {"SkySphere", "skysphere.mv1"},
+    {"Ground",    "ground.mv1"},
+    {"Terrain",   "Ground/Ground.mv1"},
+    {"Test",      "Otameshi.mv1"},
+    };
+    //!< モデルの読み込み
+    GetResourceServer().LoadModels(usemap);
 }
 //!< 入り口処理
 void ModeGame::Enter() {
-	// ファクトリの生成とクリエイターの登録
-	auto& of = GetObjectFactory();
+    // ファクトリの生成とクリエイターの登録
+    auto& of = GetObjectFactory();
 
-	of.Register("Player", std::make_unique<Object::PlayerCreate>());
-	of.Register("Stage", std::make_unique<Object::StageCreate>());
+    of.Register("Player", std::make_unique<Object::PlayerCreate>());
+    of.Register("Stage", std::make_unique<Object::StageCreate>());
 
-	auto player = of.Create("Player");
+    auto player = of.Create("Player");
 
-	auto& os = GetObjectServer();
+    auto& os = GetObjectServer();
 
-	os.Register("Player", player->GetPosition());
-	os.Add(std::move(player));
+    os.Register("Player", player->GetPosition());
+    os.Add(std::move(player));
 
-	auto stage = of.Create("Stage");
-	os.Add(std::move(stage));
+    auto stage = of.Create("Stage");
+    os.Add(std::move(stage));
 
-	Process();
+    Process();
 }
 //!< 入力処理
 void ModeGame::Input(AppFrame::InputManager& input) {
-	if (input.GetJoyPad().GetXinputStart()) {
-		GetModeServer().GoToMode("Title");
-	}
-	GetObjectServer().Input(input);
+    if (input.GetJoyPad().GetXinputStart()) {
+        GetModeServer().GoToMode("Title");
+    }
+    GetObjectServer().Input(input);
 }
 //!< 更新処理
 void ModeGame::Process() {
-	GetObjectFactory().UpdateSpawn();
-	GetObjectServer().Process();
+    GetObjectFactory().UpdateSpawn();
+    GetObjectServer().Process();
 }
 //!< 描画処理
 void ModeGame::Render() {
-	GetObjectServer().Render();
+    GetObjectServer().Render();
 }
 //!< 終了処理
 void ModeGame::Exit() {
-	//!< オブジェクトを消去
-	GetObjectServer().AllClear();
-	//!< リソースの消去
-	GetResourceServer().AllClear();
-	//!< クリエイターを削除
-	GetObjectFactory().Clear();
+    //!< オブジェクトを消去
+    GetObjectServer().AllClear();
+    //!< リソースの消去
+    GetResourceServer().AllClear();
+    //!< クリエイターを削除
+    GetObjectFactory().Clear();
 }

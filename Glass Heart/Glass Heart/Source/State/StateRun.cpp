@@ -27,6 +27,9 @@ void StateRun::Input(AppFrame::InputManager& input) {
 	if (input.GetJoyPad().GetXinputRight()) {
 		return;
 	}
+	if (input.GetJoyPad().GetXinputLeft()) {
+		return;
+	}
 	if (input.GetJoyPad().GetXinputButtonA()) {
 		_owner.GetStateManage().PushBack("Jump");
 	}
