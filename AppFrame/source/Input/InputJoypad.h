@@ -58,6 +58,12 @@ namespace AppFrame {
         bool GetXinputThumbRX() { return _xInput.ThumbRX; }
         // 右スティックの縦軸値
         bool GetXinputThumbRY() { return _xInput.ThumbRY; }
+
+        /**  左スティックの横軸値 */
+        short GetAnalogStickLX() { return _xInput.ThumbLX; }
+        /** 左スティックの縦軸値 */
+        short GetAnalogStickLY() { return _xInput.ThumbLY; }
+
     private:
         int _inputInfo{ 0 };  //!< 入力情報
         int _trgInfo{ 0 };  //!< トリガー入力情報

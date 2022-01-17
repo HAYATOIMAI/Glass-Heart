@@ -20,7 +20,10 @@ namespace GlassHeart {
     }
 
     namespace State {
-
+       /**
+        * @class StateRun
+        * @brief プレイヤーの走り状態クラス
+        */
         class StateRun : public StateBase{
         public:
             StateRun(Player::Player& owner) : StateBase{ owner } {};

@@ -1,6 +1,15 @@
+
+/*****************************************************************//**
+ * @file   Stage.cpp
+ * @brief  ステージ処理
+ * 
+ * @author Hayato Imai
+ * @date   January 2022
+ *********************************************************************/
 #include "Stage.h"
 #include "../Model/ModelManager.h"
 #include "../Object/ObjectServer.h"
+#include <numbers>
 
 using namespace GlassHeart::Stage;
 
@@ -13,6 +22,12 @@ Stage::Stage(GameMain& game) : ObjectBase{game} {
 	_ground = std::make_unique<Model::ModelManager>(*this);
 	_ground->handle("Terrain");
 	_ground->SetScale({ 30.f, 10.f, 30.f });
+
+	_test = std::make_unique<Model::ModelManager>(*this);
+	_test->handle("Test");
+	_test->SetRotation(VGet(0.0f, 270.0f * std::numbers::pi_v<float> / 180.0f, 0.0f));
+	_test->SetScale({ 500.f,  80.f, 80.f });
+
 	// ナビメッシュを非表示
 	MV1SetFrameVisible(_ground->GetHandle(), 3, FALSE);
 	// フレーム1をナビメッシュとして使用
@@ -31,5 +46,6 @@ void Stage::Process() {
 
 void Stage::Render() {
 	_skySphere->Draw();
-	_ground->Draw();
+	//_ground->Draw();
+	_test->Draw();
 }

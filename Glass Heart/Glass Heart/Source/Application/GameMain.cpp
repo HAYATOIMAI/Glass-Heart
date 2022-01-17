@@ -70,10 +70,10 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
 
     //!< ƒ‚[ƒhƒT[ƒo[‚ð¶¬‚µAAMGƒ‚[ƒh‚ð“o˜^
     _modeServer = std::make_unique<AppFrame::ModeServer>("Amg", std::make_shared<GlassHeart::Mode::ModeAmg>(*this));
-    // ƒ`[ƒ€ƒƒSƒ‚[ƒh‚ð“o˜^
-    _modeServer->Register("TeamLogo", std::make_shared<GlassHeart::Mode::ModeTeamLogo>(*this));
-    // ƒ^ƒCƒgƒ‹ƒ‚[ƒh‚ð“o˜^
-    _modeServer->Register("Title", std::make_shared<GlassHeart::Mode::ModeTitle>(*this));
+    //// ƒ`[ƒ€ƒƒSƒ‚[ƒh‚ð“o˜^
+    //_modeServer->Register("TeamLogo", std::make_shared<GlassHeart::Mode::ModeTeamLogo>(*this));
+    //// ƒ^ƒCƒgƒ‹ƒ‚[ƒh‚ð“o˜^
+    //_modeServer->Register("Title", std::make_shared<GlassHeart::Mode::ModeTitle>(*this));
     // ƒCƒ“ƒQ[ƒ€ƒ‚[ƒh‚ð“o˜^
     _modeServer->Register("InGame", std::make_shared<GlassHeart::Mode::ModeGame>(*this));
 

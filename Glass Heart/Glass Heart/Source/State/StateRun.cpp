@@ -11,11 +11,16 @@
 #include "../Collision/CollisionManager.h"
 #include "../Model/ModelAnimeManager.h"
 #include <AppFrame.h>
+#include <numbers>
 
 using namespace GlassHeart::State;
 
+namespace {
+	constexpr auto DefaultSpeed = 10.0f;
+}
+
 void StateRun::Enter() {
-	_owner.SetForwardSpeed(10.0f);
+	_owner.SetForwardSpeed(DefaultSpeed);
 	_owner.GetModelAnime().ChangeAnime("MO_SDChar_run", true);
 }
 
@@ -24,8 +29,19 @@ void StateRun::Input(AppFrame::InputManager& input) {
 	if (input.GetJoyPad().GetXinputButtonB()) {
 		_owner.GetStateManage().PushBack("Action");
 	}
-	if (input.GetJoyPad().GetXinputUp()) {
-		return;
+	if (input.GetJoyPad().GetAnalogStickLX() >= 3000) {
+		// ‰E•ûŒü‚ÉŒü‚«‚ð•ÏX
+		_owner.SetRotation(VGet(0.0f, 0.0f, 0.0f));
+		if (input.GetJoyPad().GetAnalogStickLX() >= 10000)	{
+			_owner.SetForwardSpeed(DefaultSpeed * 50.0f);
+		}
+	}
+	if (input.GetJoyPad().GetAnalogStickLX() <= 3000) {
+		// ¶•ûŒü‚ÉŒü‚«‚ð•ÏX
+		_owner.SetRotation(VGet(0.0f, 180.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
+		if (input.GetJoyPad().GetAnalogStickLX() <= 10000) {
+			_owner.SetForwardSpeed(DefaultSpeed * 2.0f);
+		}
 	}
 	if (input.GetJoyPad().GetXinputButtonA()) {
 		_owner.GetStateManage().PushBack("Jump");

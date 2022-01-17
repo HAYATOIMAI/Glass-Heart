@@ -107,7 +107,7 @@ namespace GlassHeart {
 		 * @class EnemyCreate
 		 * @brief エネミー用のクリエイター
 		 */
-		class EnemyCreate : public CreateBase {
+		class TestCreate : public CreateBase {
 			virtual std::unique_ptr<ObjectBase> Create(GameMain& game);
 		};
 		/**
