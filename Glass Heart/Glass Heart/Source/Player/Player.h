@@ -71,7 +71,7 @@ namespace GlassHeart {
             void ComputeWorldTransform() override;
 
             float GetForwardSpeed() { return _forwardSpeed; }
-            void SetForwardSpeed(float forwardspeed) { _forwardSpeed = forwardspeed; }
+            void SetForwardSpeed(float forwardSpeed) { _forwardSpeed = forwardSpeed; }
             /**
              * @brief 移動処理
              *
@@ -81,7 +81,7 @@ namespace GlassHeart {
             void JumpFunction(const bool isJumpStart);
             void JumpStart();
             VECTOR JumpProcess();
-            bool  JumpEnd(const VECTOR& jumppos);
+            bool  JumpEnd(const VECTOR& jumpPos);
         protected:
             float _forwardSpeed{ 0.0f };  //!< 前進スピード
             float _angularSpeed{ 0.0f };  //!< 

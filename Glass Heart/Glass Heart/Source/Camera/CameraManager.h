@@ -43,8 +43,8 @@ namespace GlassHeart {
             VECTOR _position{ 0, 0, 0 };
             VECTOR _target{ 0, 0, 0 };
             VECTOR _forwardOfTarget{ 0, 0, 0 };
-            float targetDist{ 100 };
-            float vertDist{ 100 };
+            float targetDist{ 100.0f };
+            float vertDist{ 100.0f };
         };
     }
 }

@@ -15,11 +15,12 @@
 #include "../Application/GameMain.h"
 #include <sstream>
 #include <cmath>
+#include <numbers>
 
 using namespace GlassHeart::Player;
 
 namespace {
-	constexpr auto DegreeToRadian = DX_PI_F / 180.0f;
+	constexpr auto DegreeToRadian = std::numbers::pi_v<float> / 180.0f;
 }
 
 /** コンストラクタ */
@@ -33,36 +34,6 @@ void Player::Input(AppFrame::InputManager& input) {
 	_cameraManage->Input(input);
 
 	_angularSpeed = 0;
-	if (input.GetJoyPad().GetXinputThumbLX()) {
-
-		auto fx = 0.0f; auto fy = 0.0f;
-		auto isLeft = false;
-
-		fx = static_cast<float>(input.GetJoyPad().GetAnalogStickLX() / 10000.f);
-		fy = static_cast<float>(input.GetJoyPad().GetAnalogStickLY() / 10000.f);
-
-		auto length = sqrt(fx * fx + fy * fy);
-		auto analogMin = 0.2f;
-		if (length < analogMin) {
-			length = 0.0f;
-		}
-		else {
-			length = 5.0f;
-			isLeft = true;
-		}
-		if (fx > 0 ) {
-			//_angularSpeed += 180.0f * (DX_PI_F / 180.0f);
-		}
-		else {
-			_angularSpeed -= 180.0f * (DX_PI_F / 180.0f);
-		}	
-	}
-	if (input.GetJoyPad().GetXinputButtonA()) {
-		_isJump = true;
-		if (_isJump) {
-			JumpFunction(_isJump);
-		}
-	}
 
 	_stateManage->Input(input);
 }
@@ -83,13 +54,14 @@ void Player::Process() {
 	_cameraManage->Update();
 	// オブジェクトサーバーに位置を送信
 	GetObjectServer().Register("Player", _position);
-
 	_lastPosition = _position;
 }
 /** 描画処理 */
 void Player::Render() {
 #ifdef _DEBUG
-	
+	DrawFormatString(0, 0, static_cast<unsigned int> (_position.x), "プレイヤーX座標", GetColor(255, 255, 255)); 
+	DrawFormatString(0, 0, static_cast<unsigned int> (_position.y), "プレイヤーY座標", GetColor(255, 255, 255));
+	DrawFormatString(0, 0, static_cast<unsigned int> (_position.z), "プレイヤーZ座標", GetColor(255, 255, 255));
 #endif // _DEBUG
 
 	_stateManage->Draw();
@@ -99,7 +71,7 @@ void Player::ComputeWorldTransform() {
 	auto world = MGetScale(_scale);
 	world = MMult(world, MGetRotZ(_rotation.z));
 	world = MMult(world, MGetRotX(_rotation.x));
-	world = MMult(world, MGetRotY(_rotation.y + DX_PI_F));
+	world = MMult(world, MGetRotY(_rotation.y + std::numbers::pi_v<float>));
 	_worldTransform = MMult(world, MGetTranslate(_position));
 }
 /** 移動処理 */

@@ -15,8 +15,8 @@ using namespace GlassHeart::Camera;
 
 namespace {
 
-     constexpr auto CameraDisX = 11;  //!< XŽ²‚Ì”{—¦
-     constexpr auto CameraDisY = 2;   //!< YŽ²‚Ì”{—¦
+     constexpr auto CameraDisX = 8;  //!< XŽ²‚Ì”{—¦
+     constexpr auto CameraDisY = 3;   //!< YŽ²‚Ì”{—¦
      constexpr auto CameraDisZ = 10;  //!< ZŽ²‚Ì”{—¦
 }
 
@@ -38,8 +38,7 @@ void CameraManager::Update() {
     forward.x = 0.0f;
     forward.y = 0.0f;
     // ƒ^[ƒQƒbƒg‚ÌŒü‚«‚Ì^‹t‚É’·‚³‚ðtargetDist
-    auto fromTarget = VScale(forward, +targetDist);
-
+    auto fromTarget = VScale(forward, -targetDist);
     fromTarget.x = vertDist * CameraDisX;
     fromTarget.y = vertDist * CameraDisY;
     fromTarget.z = vertDist + CameraDisZ;

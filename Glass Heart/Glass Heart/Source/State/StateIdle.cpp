@@ -33,5 +33,4 @@ void StateIdle::Input(AppFrame::InputManager& input) {
 
 void StateIdle::Update() {
 	_owner.GetPosition() = _owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 300, 0 });
-
 }
