@@ -78,28 +78,17 @@ namespace GlassHeart {
              * @param[in] forward
              */
             virtual void Move(const VECTOR& forward);
-            void JumpFunction(const bool isJumpStart);
-            void JumpStart();
-            VECTOR JumpProcess();
-            bool  JumpEnd(const VECTOR& jumpPos);
         protected:
             float _forwardSpeed{ 0.0f };  //!< 前進スピード
             float _angularSpeed{ 0.0f };  //!< 
             VECTOR _backDelta{ 0, 0, 0 };  //!<
-            double _gravity{ 9.8 };  //!< 重力加速度
-            double _jumpTimer{ 0.0 };
-            double _groundY{ 0.0 };
-            double _jumpPower{ 100.0 };
-            double _jumpAngle{ 87.5 };
-            bool _isJump{ false };
-            VECTOR _jumpStartPosition;
-            VECTOR _jumpVelocity;
-            VECTOR _lastPosition;
+            VECTOR _lastPosition{ 0.0f , 0.0f,  0.0f };
             /**
              * @brief 敵との接触判定
              * @details 使用予定無し
              */
             void HitCheckEnemy();
+            
         };
     }
 }

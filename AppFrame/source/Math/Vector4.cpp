@@ -10,7 +10,7 @@
 #include "Matrix.h"
 #include <cmath>
 
-namespace AppFrame {
+namespace AppFrame::Math {
     /** コンストラクタ */
     Vector4::Vector4() {
         _x = 0.0;

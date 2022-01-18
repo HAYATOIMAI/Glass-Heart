@@ -10,7 +10,7 @@
 #include <tuple>
 #include <DxLib.h>
 
-namespace AppFrame {
+namespace AppFrame::Math {
 
     class Vector4;
 
