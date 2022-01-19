@@ -13,8 +13,6 @@
 #include "../Model/ModelAnimeManager.h"
 #include "../State/StateManager.h"
 #include "../Application/GameMain.h"
-#include <sstream>
-#include <cmath>
 #include <numbers>
 
 using namespace GlassHeart::Player;
@@ -25,7 +23,7 @@ namespace {
 
 /** コンストラクタ */
 Player::Player(GameMain& game) : GlassHeart::Object::ObjectBase{ game } {
-    _position = VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f);
+    _rotation = VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f);
 }
 /** 入力処理 */
 void Player::Input(AppFrame::InputManager& input) {
