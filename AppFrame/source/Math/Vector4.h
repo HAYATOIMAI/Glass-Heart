@@ -8,7 +8,7 @@
  *********************************************************************/
 #pragma once
 
-namespace AppFrame {
+namespace AppFrame::Math {
     
     class Matrix;
 

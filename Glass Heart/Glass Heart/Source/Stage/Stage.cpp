@@ -25,7 +25,7 @@ Stage::Stage(GameMain& game) : ObjectBase{game} {
 
 	_test = std::make_unique<Model::ModelManager>(*this);
 	_test->handle("Test");
-	_test->SetRotation(VGet(0.0f, 270.0f * std::numbers::pi_v<float> / 180.0f, 0.0f));
+	_test->SetRotation(VGet(0.0f,180.0f * std::numbers::pi_v<float> / 180.0f, 0.0f));
 	_test->SetScale({ 500.f,  80.f, 80.f });
 
 	// ナビメッシュを非表示
@@ -45,7 +45,14 @@ void Stage::Process() {
 }
 
 void Stage::Render() {
-	_skySphere->Draw();
+	//_skySphere->Draw();
 	//_ground->Draw();
 	_test->Draw();
+#ifdef _DEBUG
+	float linelength = 10000.f;
+	VECTOR v = { 0, 0, 0 };
+	DrawLine3D(VAdd(v, VGet(-linelength, 0, 0)), VAdd(v, VGet(linelength, 0, 0)), GetColor(255, 0, 0));
+	DrawLine3D(VAdd(v, VGet(0, -linelength, 0)), VAdd(v, VGet(0, linelength, 0)), GetColor(0, 255, 0));
+	DrawLine3D(VAdd(v, VGet(0, 0, -linelength)), VAdd(v, VGet(0, 0, linelength)), GetColor(255, 255, 255));
+#endif // DEBUG
 }

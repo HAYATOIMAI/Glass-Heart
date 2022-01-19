@@ -11,7 +11,7 @@
 #include "Utility.h"
 #include <cmath>
 
-namespace AppFrame {
+namespace AppFrame::Math {
     Matrix::Matrix() {
         Unit();
     }

@@ -1,7 +1,7 @@
 
 /*****************************************************************//**
  * @file   StateJump.h
- * @brief  ジャンプ状態クラスの宣言
+ * @brief  プレイヤーのジャンプ状態クラスの宣言
  * 
  * @author Hayato Imai
  * @date   January 2022
@@ -30,16 +30,17 @@ namespace GlassHeart {
             void JumpFunction(const bool isJumpStart);
             void JumpStart();
             VECTOR JumpProcess();
-            void  JumpEnd(const VECTOR& jumppos);
+            bool  JumpEnd(const VECTOR& jumppos);
         private:
-            float _gravity{ 0.0f };  //!< 重力加速度
+            double _gravity{ 9.8 };  //!< 重力加速度
             double _jumpTimer{ 0.0 };
             double _groundY{ 0.0 };
-            double _jumpPower{0.0};
-            double _jumpAngle{ 0.0 };
+            double _jumpPower{ 100.0 };
+            double _jumpAngle{ 87.5 };
             bool _isJump{ false };
             VECTOR _jumpStartPosition;
             VECTOR _jumpVelocity;
+            VECTOR _lastPosition;
         };
     }
 }

@@ -11,7 +11,7 @@
 #include <array>
 #include <tuple>
 
-namespace AppFrame {
+namespace AppFrame::Math {
 
     class Vector4;
 

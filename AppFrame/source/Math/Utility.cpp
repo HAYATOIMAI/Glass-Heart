@@ -17,7 +17,7 @@ namespace {
 }
 
 
-namespace AppFrame {
+namespace AppFrame::Math {
 
     int Utility::GetRandom(const int min, const int max) {
         std::uniform_int_distribution<int>  distr(min, max);
