@@ -35,6 +35,9 @@ namespace AppFrame {
 
     bool GameBase::Initialize(HINSTANCE hInstance) {
 
+        //Log.txtを出力しない
+        SetOutApplicationLogValidFlag(true);
+
         //! ウィンドウのタイトルを設定する
         SetMainWindowText("Glass Heart");
 
