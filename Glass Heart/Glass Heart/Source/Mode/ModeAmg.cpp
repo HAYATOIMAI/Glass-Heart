@@ -42,7 +42,7 @@ void ModeAmg::Enter() {
 //!< “ü—Íˆ—
 void ModeAmg::Input(AppFrame::InputManager& input) {
     if (input.GetJoyPad().GetXinputButtonB()) {
-        GetModeServer().GoToMode("InGame");
+        GetModeServer().GoToMode("TeamLogo");
     }
 }
 //!< XVˆ—

@@ -72,9 +72,9 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     //!< モードサーバーを生成し、AMGモードを登録
     _modeServer = std::make_unique<AppFrame::ModeServer>("Amg", std::make_shared<GlassHeart::Mode::ModeAmg>(*this));
     //// チームロゴモードを登録
-    //_modeServer->Register("TeamLogo", std::make_shared<GlassHeart::Mode::ModeTeamLogo>(*this));
+    _modeServer->Register("TeamLogo", std::make_shared<GlassHeart::Mode::ModeTeamLogo>(*this));
     //// タイトルモードを登録
-    //_modeServer->Register("Title", std::make_shared<GlassHeart::Mode::ModeTitle>(*this));
+    _modeServer->Register("Title", std::make_shared<GlassHeart::Mode::ModeTitle>(*this));
     // インゲームモードを登録
     _modeServer->Register("InGame", std::make_shared<GlassHeart::Mode::ModeGame>(*this));
 
@@ -95,7 +95,6 @@ void GameMain::Process() {
 //!< 描画処理
 void GameMain::Render() {
     base::Render();
-    _modeServer->Render();
 }
 //!< メインループ
 void GameMain::Run() {

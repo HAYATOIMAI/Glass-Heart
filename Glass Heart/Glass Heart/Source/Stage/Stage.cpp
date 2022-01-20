@@ -30,13 +30,15 @@ Stage::Stage(GameMain& game) : ObjectBase{game} {
 
 	_testWhiteAndBlack = std::make_unique<Model::ModelManager>(*this);
 	_testWhiteAndBlack->handle("TestWB");
+	_testWhiteAndBlack->SetPosition(VGet(120.0f, 0.0f, -55.0f));
 	_testWhiteAndBlack->SetRotation(VGet(0.0f, 180.0f * std::numbers::pi_v<float> / 180.0f, 0.0f));
 	_testWhiteAndBlack->SetScale({ 50.f,  80.f, 80.f });
 
 	// ナビメッシュを非表示
-	MV1SetFrameVisible(_ground->GetHandle(), 3, FALSE);
+	//MV1SetFrameVisible(_test->GetHandle(), 3, FALSE);
 	// フレーム1をナビメッシュとして使用
-	MV1SetupCollInfo(_ground->GetHandle(), 1, 10, 10, 10);
+	MV1SetupCollInfo(_test->GetHandle(), 1, 10, 10, 10);
+	MV1SetupCollInfo(_testWhiteAndBlack->GetHandle(), 1, 10, 10, 10);
 
 	// フォグの設定
 	SetFogEnable(TRUE);
@@ -53,10 +55,11 @@ void Stage::Render() {
 	//_skySphere->Draw();
 	//_ground->Draw();
 	_test->Draw();
-	//_testWhiteAndBlack->Draw();
+	_testWhiteAndBlack->Draw();
 #ifdef _DEBUG
-	float linelength = 10000.f;
+	auto linelength = 10000.f;
 	VECTOR v = { 0, 0, 0 };
+	
 	DrawLine3D(VAdd(v, VGet(-linelength, 0, 0)), VAdd(v, VGet(linelength, 0, 0)), GetColor(255, 0, 0));
 	DrawLine3D(VAdd(v, VGet(0, -linelength, 0)), VAdd(v, VGet(0, linelength, 0)), GetColor(0, 255, 0));
 	DrawLine3D(VAdd(v, VGet(0, 0, -linelength)), VAdd(v, VGet(0, 0, linelength)), GetColor(255, 255, 255));

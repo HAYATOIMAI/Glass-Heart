@@ -14,6 +14,7 @@
 #include "../State/StateManager.h"
 #include "../Application/GameMain.h"
 #include <numbers>
+#include <sstream>
 
 using namespace GlassHeart::Player;
 
@@ -24,19 +25,26 @@ namespace {
 /** コンストラクタ */
 Player::Player(GameMain& game) : GlassHeart::Object::ObjectBase{ game } {
     _rotation = VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f);
+   // _state = State::White;
 }
 /** 入力処理 */
 void Player::Input(AppFrame::InputManager& input) {
     _cameraManage->Input(input);
     _angularSpeed = 0;
     _stateManage->Input(input);
-    if (input.GetJoyPad().GetXinputButtonB())
-    {
-        HitCheckEnemy();
+
+    if (input.GetJoyPad().GetXinputLeftShoulder() && _colourCount == 0) {
+        ColorCollisionDetectionSystem();   
+        _colourCount = 60;
     }
 }
 /** 更新処理 */
 void Player::Process() {
+
+    if (_colourCount > 0) {
+        --_colourCount;
+    }
+
     // 角度の更新
     auto angle = GetRotation();
     angle.y += _angularSpeed;
@@ -53,20 +61,24 @@ void Player::Process() {
     // オブジェクトサーバーに位置を送信
     GetObjectServer().Register("Player", _position);
     _lastPosition = _position;
+
+   // ColorCollisionDetectionSystem();
 }
 /** 描画処理 */
 void Player::Render() {
 #ifdef _DEBUG
+    //プレイヤーの座標を表示
     auto x = 0; auto y = 0; auto size = 32;
+    auto i = 0; auto o = 32 * 6;
     SetFontSize(size);
     DrawFormatString(x, y, GetColor(255, 0, 0), "プレイヤーX座標 =  %.3f ", _position.x); y += size;
     DrawFormatString(x, y, GetColor(255, 0, 0), "プレイヤーY座標 =  %.3f ", _position.y); y += size;
     DrawFormatString(x, y, GetColor(255, 0, 0), "プレイヤーZ座標 =  %.3f ", _position.z); y += size;
+    DrawFormatString(i, o, GetColor(255, 0, 0), _stateName.c_str(), _state); y += size;
     _cameraManage->Render();
     DrawLine3D(VGet(_lastPosition.x, _lastPosition.y, _lastPosition.z), VGet(_position.x, _position.y / 200.0f, _position.z), GetColor(255, 0, 0));
 
 #endif // _DEBUG
-
     _stateManage->Draw();
 }
 /** ワールド座標変換 */
@@ -87,7 +99,20 @@ void Player::Move(const VECTOR& forward) {
     // 座標更新
     _position = pos;
 }
+/** 色判定処理 */
+void Player::ColorCollisionDetectionSystem(){
 
-void Player::HitCheckEnemy() {
+    auto animHandel = _modelAnimeManage->GetHandle();
 
+
+    if (_state == State::White) {
+        _stateName = "Black";
+        MV1SetMaterialSpcColor(animHandel, 0, GetColorF(0.0f, 0.0f, 0.0f, 0.0f));
+        _state = State::Black;
+    }
+    else if (_state == State::Black) {
+        _stateName = "White";
+        MV1SetMaterialSpcColor(animHandel, 0, GetColorF(1.0f, 1.0f, 1.0f, 0.0f));
+        _state = State::White;
+    }
 }
