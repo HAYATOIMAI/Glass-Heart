@@ -59,7 +59,7 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     sm.SetVolume("bgm1", 128);
 
 #ifdef _DEBUG
-    sm.SetMute(false);
+    sm.SetMute(true);
 #else
     sm.SetMute(false);
 #endif // DEBUG

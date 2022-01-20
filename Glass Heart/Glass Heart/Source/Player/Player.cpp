@@ -25,7 +25,7 @@ namespace {
 /** コンストラクタ */
 Player::Player(GameMain& game) : GlassHeart::Object::ObjectBase{ game } {
     _rotation = VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f);
-   // _state = State::White;
+   _state = State::White;
 }
 /** 入力処理 */
 void Player::Input(AppFrame::InputManager& input) {
