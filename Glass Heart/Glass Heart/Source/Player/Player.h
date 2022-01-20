@@ -88,7 +88,7 @@ namespace GlassHeart {
              * @details Žg—p—\’è–³‚µ
              */
             void HitCheckEnemy();
-            
+           
         };
     }
 }

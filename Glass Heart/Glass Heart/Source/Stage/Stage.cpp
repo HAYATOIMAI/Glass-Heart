@@ -28,6 +28,11 @@ Stage::Stage(GameMain& game) : ObjectBase{game} {
 	_test->SetRotation(VGet(0.0f,180.0f * std::numbers::pi_v<float> / 180.0f, 0.0f));
 	_test->SetScale({ 500.f,  80.f, 80.f });
 
+	_testWhiteAndBlack = std::make_unique<Model::ModelManager>(*this);
+	_testWhiteAndBlack->handle("TestWB");
+	_testWhiteAndBlack->SetRotation(VGet(0.0f, 180.0f * std::numbers::pi_v<float> / 180.0f, 0.0f));
+	_testWhiteAndBlack->SetScale({ 50.f,  80.f, 80.f });
+
 	// ナビメッシュを非表示
 	MV1SetFrameVisible(_ground->GetHandle(), 3, FALSE);
 	// フレーム1をナビメッシュとして使用
@@ -48,6 +53,7 @@ void Stage::Render() {
 	//_skySphere->Draw();
 	//_ground->Draw();
 	_test->Draw();
+	//_testWhiteAndBlack->Draw();
 #ifdef _DEBUG
 	float linelength = 10000.f;
 	VECTOR v = { 0, 0, 0 };

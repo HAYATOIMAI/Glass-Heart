@@ -47,8 +47,8 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     /** 使用する音のテーブル */
     const AppFrame::ResourceServer::SoundMap usesound{
     {"damage", {"damage.wav", true}},
-    {"bgm1", {"sublight.wav", false}},
-    {"bgm2", {"stage1.mid", false}},
+    {"bgm1", {"sublight.wav", true}},
+    {"bgm2", {"stage1.mid", true}},
     };
     /** 音を読み込み */
     res.LoadSounds(usesound);
@@ -56,9 +56,10 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     //!< サウンドコンポーネントの取得
     auto& sm = GetSoundManager();
     sm.SetVolume("damage", 128);
+    sm.SetVolume("bgm1", 128);
 
 #ifdef _DEBUG
-    sm.SetMute(true);
+    sm.SetMute(false);
 #else
     sm.SetMute(false);
 #endif // DEBUG

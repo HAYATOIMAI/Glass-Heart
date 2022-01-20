@@ -23,11 +23,12 @@ ModeGame::ModeGame(GameMain& game) : ModeMain{ game } {
 void ModeGame::Init() {
     //!< 使用するモデル
     AppFrame::ResourceServer::ModelMap usemap{
-    {"Player",    "SDChar/SDChar.mv1"},
+    {"Player",    "Test/sotai.mv1"},
     {"SkySphere", "skysphere.mv1"},
     {"Ground",    "ground.mv1"},
     {"Terrain",   "Ground/Ground.mv1"},
     {"Test",      "Test/ST_test.mv1"},
+    {"TestWB",    "Test/TestWB.mv1"},
     };
     //!< モデルの読み込み
     GetResourceServer().LoadModels(usemap);
@@ -49,6 +50,10 @@ void ModeGame::Enter() {
 
     auto stage = of.Create("Stage");
     os.Add(std::move(stage));
+
+    auto& sm = GetSoundManager();
+
+    sm.PlayLoop("bgm1");
 
     Process();
 }

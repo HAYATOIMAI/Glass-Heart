@@ -13,5 +13,5 @@
 using namespace GlassHeart::State;
 
 void StateBase::Draw() {
-	_owner.GetModelAnime().Draw();
+	_owner.GetModelAnime().MeshDraw();
 }

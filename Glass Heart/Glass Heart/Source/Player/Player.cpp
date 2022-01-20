@@ -30,6 +30,10 @@ void Player::Input(AppFrame::InputManager& input) {
     _cameraManage->Input(input);
     _angularSpeed = 0;
     _stateManage->Input(input);
+    if (input.GetJoyPad().GetXinputButtonB())
+    {
+        HitCheckEnemy();
+    }
 }
 /** 更新処理 */
 void Player::Process() {
@@ -60,6 +64,7 @@ void Player::Render() {
     DrawFormatString(x, y, GetColor(255, 0, 0), "プレイヤーZ座標 =  %.3f ", _position.z); y += size;
     _cameraManage->Render();
     DrawLine3D(VGet(_lastPosition.x, _lastPosition.y, _lastPosition.z), VGet(_position.x, _position.y / 200.0f, _position.z), GetColor(255, 0, 0));
+
 #endif // _DEBUG
 
     _stateManage->Draw();
@@ -84,4 +89,5 @@ void Player::Move(const VECTOR& forward) {
 }
 
 void Player::HitCheckEnemy() {
+
 }

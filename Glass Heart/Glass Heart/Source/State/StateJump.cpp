@@ -73,7 +73,6 @@ void StateJump::JumpStart() {
     VECTOR jumpbase = VGet(0.0f, 0.0f, static_cast<float>(-_jumpPower));
     MATRIX jump_rotate = MMult(MGetRotX(static_cast<float>(_jumpAngle) * DegreeToRadian), MGetRotY(_owner.GetRotation().y * DegreeToRadian));
 
-
     _jumpVelocity = VTransform(jumpbase, jump_rotate);
 }
 
