@@ -84,7 +84,7 @@ void CollisionManager::PlayerFromEnemy() {
     }
 }
 VECTOR CollisionManager::CheckTerrain(const VECTOR& pos, const VECTOR& forward) {
-    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Test");
+    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("TestStage");
     auto newPos = VAdd(pos, forward);
     auto start = VAdd(newPos, { 0, 100, 0 });
     auto end = VAdd(newPos, { 0, -10000, 0 });

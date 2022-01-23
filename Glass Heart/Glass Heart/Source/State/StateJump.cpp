@@ -46,7 +46,9 @@ void StateJump::Input(AppFrame::InputManager& input) {
 }
 
 void StateJump::Update() {
-    _owner.GetPosition() = _owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 300, 0 });
+   // _owner.GetPosition() = _owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 3000, 0 });
+    
+    _owner.SetPosition(_owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 300, 70 }));
     _lastPosition = _owner.GetPosition();
 }
 
@@ -79,7 +81,7 @@ void StateJump::JumpStart() {
 VECTOR StateJump::JumpProcess() {
     VECTOR jumpposition = VAdd(_jumpStartPosition, _jumpVelocity);
 
-    _jumpVelocity.y -= _gravity;
+    _jumpVelocity.y -= static_cast<float>(_gravity);
 
     return jumpposition;
 }

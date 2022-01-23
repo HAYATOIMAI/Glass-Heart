@@ -29,6 +29,8 @@ namespace GlassHeart {
             void Enter() override;
             void Input(AppFrame::InputManager& input) override;
             void Update() override;
+        private:
+            int _cnt{ 0 };
         };
     }
 }
