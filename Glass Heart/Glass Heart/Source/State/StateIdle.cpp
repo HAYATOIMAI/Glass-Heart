@@ -26,11 +26,16 @@ void StateIdle::Input(AppFrame::InputManager& input) {
 	if (input.GetJoyPad().GetXinputThumbLX()) {
 		_owner.GetStateManage().PushBack("Run");
 	}
-	if (input.GetJoyPad().GetXinputButtonA()) {
+	if (input.GetJoyPad().GetXinputButtonA() && _cnt == 0) {
+		_cnt = 60;
 		_owner.GetStateManage().PushBack("Jump");
 	}
 }
 
 void StateIdle::Update() {
-	_owner.GetPosition() = _owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 300, 0 });
+	_owner.SetPosition(_owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 300, 0 }));
+	
+	if (_cnt > 0) {
+		--_cnt;
+	}
 }

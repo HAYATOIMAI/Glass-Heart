@@ -16,9 +16,9 @@
 
 namespace {
 
-    constexpr auto SCREENWIDTH  = 1920;   //!< 画面の横幅
+    constexpr auto SCREENWIDTH  = 1920;  //!< 画面の横幅
     constexpr auto SCREENHEIGHT = 1080;  //!< 画面の縦幅
-    constexpr auto SCREENDEPTH  = 32;     //!< カラービット数
+    constexpr auto SCREENDEPTH  = 32;    //!< カラービット数
 }
 
 namespace AppFrame {

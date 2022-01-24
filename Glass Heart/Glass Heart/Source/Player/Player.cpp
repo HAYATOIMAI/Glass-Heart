@@ -14,7 +14,12 @@
 #include "../State/StateManager.h"
 #include "../Application/GameMain.h"
 #include <numbers>
-#include <sstream>
+
+namespace {
+    constexpr auto PlayerPositionX = 0.0f;     //!< プレイヤーの初期位置X
+    constexpr auto PlayerPositionY = 70.0f;    //!< プレイヤーの初期位置Y
+    constexpr auto PlayerPositionZ = -140.0f;  //!< プレイヤーの初期位置Z
+}
 
 using namespace GlassHeart::Player;
 
@@ -25,15 +30,17 @@ namespace {
 /** コンストラクタ */
 Player::Player(GameMain& game) : GlassHeart::Object::ObjectBase{ game } {
     _rotation = VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f);
-   // _state = State::White;
+   _crState = ColourState::White;
+   _position = VGet(PlayerPositionX, PlayerPositionY, PlayerPositionZ);
 }
 /** 入力処理 */
 void Player::Input(AppFrame::InputManager& input) {
     _cameraManage->Input(input);
     _angularSpeed = 0;
     _stateManage->Input(input);
-
+    //LBボタンを押すと色変更
     if (input.GetJoyPad().GetXinputLeftShoulder() && _colourCount == 0) {
+        //連打防止のため1秒(60フレーム)間入力を制限
         ColorCollisionDetectionSystem();   
         _colourCount = 60;
     }
@@ -61,8 +68,6 @@ void Player::Process() {
     // オブジェクトサーバーに位置を送信
     GetObjectServer().Register("Player", _position);
     _lastPosition = _position;
-
-   // ColorCollisionDetectionSystem();
 }
 /** 描画処理 */
 void Player::Render() {
@@ -74,10 +79,10 @@ void Player::Render() {
     DrawFormatString(x, y, GetColor(255, 0, 0), "プレイヤーX座標 =  %.3f ", _position.x); y += size;
     DrawFormatString(x, y, GetColor(255, 0, 0), "プレイヤーY座標 =  %.3f ", _position.y); y += size;
     DrawFormatString(x, y, GetColor(255, 0, 0), "プレイヤーZ座標 =  %.3f ", _position.z); y += size;
-    DrawFormatString(i, o, GetColor(255, 0, 0), _stateName.c_str(), _state); y += size;
+    DrawFormatString(i, o, GetColor(255, 0, 0), _stateName.c_str(), _crState); y += size;
+    //カメラの位置を表示
     _cameraManage->Render();
     DrawLine3D(VGet(_lastPosition.x, _lastPosition.y, _lastPosition.z), VGet(_position.x, _position.y / 200.0f, _position.z), GetColor(255, 0, 0));
-
 #endif // _DEBUG
     _stateManage->Draw();
 }
@@ -94,25 +99,36 @@ void Player::Move(const VECTOR& forward) {
     auto pos = _position;
     // X成分のみ移動後位置から真下に線分判定
     pos = _collsionManage->CheckTerrain(pos, { forward.x, forward.y, 0 });
+    //Y成分
+    pos = _collsionManage->CheckTerrain(pos, { forward.x, forward.y, forward.z });
     // Z成分のみ移動後位置から真下に線分判定
     pos = _collsionManage->CheckTerrain(pos, { 0, forward.y, forward.z });
+
+    pos = _collsionManage->CheckHitWall(pos, { forward.x, forward.y, 0 });
+
+    pos = _collsionManage->CheckHitWall(pos, { forward.x, forward.y, forward.z });
+
+    pos = _collsionManage->CheckHitWall(pos, { 0, forward.y, forward.z });
+
     // 座標更新
     _position = pos;
 }
 /** 色判定処理 */
 void Player::ColorCollisionDetectionSystem(){
 
-    auto animHandel = _modelAnimeManage->GetHandle();
+    auto animHandle = _modelAnimeManage->GetHandle();
 
-
-    if (_state == State::White) {
+    if (_crState == ColourState::White) {
         _stateName = "Black";
-        MV1SetMaterialSpcColor(animHandel, 0, GetColorF(0.0f, 0.0f, 0.0f, 0.0f));
-        _state = State::Black;
+        MV1SetMaterialSpcColor(animHandle, 0, GetColorF(0.0f, 0.0f, 0.0f, 0.0f));
+
+
+
+        _crState = ColourState::Black;
     }
-    else if (_state == State::Black) {
+    else if (_crState == ColourState::Black) {
         _stateName = "White";
-        MV1SetMaterialSpcColor(animHandel, 0, GetColorF(1.0f, 1.0f, 1.0f, 0.0f));
-        _state = State::White;
+        MV1SetMaterialSpcColor(animHandle, 0, GetColorF(1.0f, 1.0f, 1.0f, 0.0f));
+        _crState = ColourState::White;
     }
 }

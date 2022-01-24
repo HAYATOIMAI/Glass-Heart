@@ -29,6 +29,7 @@ void ModeGame::Init() {
     {"Terrain",   "Ground/Ground.mv1"},
     {"Test",      "Test/ST_test.mv1"},
     {"TestWB",    "Test/TestWB.mv1"},
+    {"TestStage", "Test/TestStege2.mv1"},
     };
     //!< ƒ‚ƒfƒ‹‚Ì“Ç‚Ýž‚Ý
     GetResourceServer().LoadModels(usemap);

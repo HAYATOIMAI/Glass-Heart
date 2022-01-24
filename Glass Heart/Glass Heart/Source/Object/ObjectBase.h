@@ -140,14 +140,14 @@ namespace GlassHeart {
             ObjectState _objectState{ ObjectState::Active };
 
             std::unique_ptr<GlassHeart::State::StateManager> _stateManage;  //!< ステートマネージャーのユニークポインタ
-            std::shared_ptr<GlassHeart::Collision::CollisionManager> _collsionManage;  //!< コリジョンのユニークポインタ
-            std::shared_ptr<GlassHeart::Camera::CameraManager> _cameraManage;  //!< カメラのユニークポインタ
+            std::shared_ptr<GlassHeart::Collision::CollisionManager> _collsionManage;  //!< コリジョンのシェアードポインタ
+            std::shared_ptr<GlassHeart::Camera::CameraManager> _cameraManage;  //!< カメラのシェアードポインタ
             std::unique_ptr<GlassHeart::Model::ModelAnimeManager> _modelAnimeManage; //!< モデルアニメマネージャーのユニークポインタ
 
-            MATRIX _worldTransform{ MGetIdent() };
-            VECTOR _position{ 0, 0, 0 };
-            VECTOR _rotation{ 0, 0, 0 };
-            VECTOR _scale{ 1, 1, 1 };
+            MATRIX _worldTransform{ MGetIdent() }; //!< ワールド座標変換
+            VECTOR _position{ 0, 0, 0 };  //!< 位置情報
+            VECTOR _rotation{ 0, 0, 0 };  //!< 角度
+            VECTOR _scale{ 1, 1, 1 };     //!< 拡大率
         };
     }
 }

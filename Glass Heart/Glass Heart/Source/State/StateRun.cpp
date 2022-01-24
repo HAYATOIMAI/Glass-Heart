@@ -33,7 +33,7 @@ void StateRun::Input(AppFrame::InputManager& input) {
         // ‰E•ûŒü‚ÉŒü‚«‚ğ•ÏX
         _owner.SetRotation(VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
         if (input.GetJoyPad().GetAnalogStickLX() >= 10000)	{
-            _owner.SetForwardSpeed(DefaultSpeed * 50.0f);
+            _owner.SetForwardSpeed(DefaultSpeed * 2.0f);
         }
     }
     if (input.GetJoyPad().GetAnalogStickLX() <= 3000) {
