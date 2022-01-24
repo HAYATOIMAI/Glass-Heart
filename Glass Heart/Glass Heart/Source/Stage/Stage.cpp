@@ -42,9 +42,13 @@ Stage::Stage(GameMain& game) : ObjectBase{ game } {
 
     // ナビメッシュを非表示
     MV1SetFrameVisible(_testStage->GetHandle(), 0, FALSE);
-    // フレーム1をナビメッシュとして使用
-    MV1SetupCollInfo(_testStage->GetHandle(), 1, 10, 10, 10);
-   // MV1SetupCollInfo(_testWhiteAndBlack->GetHandle(), 1, 10, 10, 10);
+    MV1SetFrameVisible(_testStage->GetHandle(), 1, FALSE);
+    MV1SetFrameVisible(_testStage->GetHandle(), 4, FALSE);
+    MV1SetFrameVisible(_testStage->GetHandle(), 5, FALSE);
+
+    // フレーム0をナビメッシュとして使用
+    MV1SetupCollInfo(_testStage->GetHandle(), 0, 10, 10, 10);
+    MV1SetupCollInfo(_testStage->GetHandle(), 3, 10, 10, 10);
 
     // フォグの設定
     SetFogEnable(TRUE);

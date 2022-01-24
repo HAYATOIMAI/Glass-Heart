@@ -15,9 +15,9 @@ using namespace GlassHeart::Camera;
 
 namespace {
 
-     constexpr auto CameraDisX = -1;  //!< XŽ²‚Ì”{—¦
-     constexpr auto CameraDisY = 4.5;   //!< YŽ²‚Ì”{—¦
-     constexpr auto CameraDisZ = 10;  //!< ZŽ²‚Ì”{—¦
+     constexpr auto CameraDisX = 0;  //!< XŽ²‚Ì”{—¦
+     constexpr auto CameraDisY = 4;   //!< YŽ²‚Ì”{—¦
+     constexpr auto CameraDisZ = 8;  //!< ZŽ²‚Ì”{—¦
 }
 
 CameraManager::CameraManager() {
@@ -49,7 +49,7 @@ void CameraManager::Update() {
     // ƒJƒƒ‰‚ÌˆÊ’u‚ðƒvƒŒƒCƒ„[‚Ì‰¡ˆÊ’u‚É‚·‚é
     _position = VAdd(_target, fromTarget);
     // ƒJƒƒ‰‚ð³ŽË‰e‚É•ÏX
-    SetupCamera_Ortho(1500.0f);
+  //  SetupCamera_Ortho(1500.0f);
     SetCameraPositionAndTarget_UpVecY(_position, _target);
 }
 

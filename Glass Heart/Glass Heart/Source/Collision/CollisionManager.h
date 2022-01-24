@@ -42,6 +42,8 @@ namespace GlassHeart {
             void PlayerFromEnemy();
             VECTOR CheckTerrain(const VECTOR& pos, const VECTOR& forward);
 
+            VECTOR CheckHitWall(const VECTOR& pos, const VECTOR& forward);
+
             struct Report {
                 ReportId id{ ReportId::None };
                 VECTOR position{ 0, 0, 0 };
@@ -50,10 +52,12 @@ namespace GlassHeart {
             void SetReport(Report report) { *_report = report; }
             Report& GetReport() const { return *_report; }
             MV1_COLL_RESULT_POLY mcrp() { return _mcrp; }
+            MV1_COLL_RESULT_POLY_DIM CollPol() { return _collpol; }
         private:
             Object::ObjectBase& _owner;
             std::unique_ptr<Report> _report;
             MV1_COLL_RESULT_POLY _mcrp;
+            MV1_COLL_RESULT_POLY_DIM _collpol;
         };
     }
 

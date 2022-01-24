@@ -15,12 +15,12 @@
 
 using namespace GlassHeart::Collision;
 
-Sphere::Sphere(const VECTOR& center, float radius)
+GlassHeart::Collision::Sphere::Sphere(const VECTOR& center, float radius)
     :center(center)
     , radius(radius) {
 }
 
-bool Sphere::Contains(const VECTOR& point) const {
+bool GlassHeart::Collision::Sphere::Contains(const VECTOR& point) const {
     auto distSq = VSquareSize(VSub(center, point));
     return distSq <= (radius * radius);
 }
@@ -37,7 +37,7 @@ CollisionManager::CollisionManager(GlassHeart::Object::ObjectBase& owner) : _own
     _report = std::make_unique<Report>();
 }
 
-void CollisionManager::EnemyFromPlayer() {
+void GlassHeart::Collision::CollisionManager::EnemyFromPlayer() {
     // 右手のフレーム(28番)の位置に球を設定
     auto handle = _owner.GetModelAnime().GetHandle();
     auto mat = MV1GetFrameLocalWorldMatrix(handle, 28);
@@ -61,7 +61,7 @@ void CollisionManager::EnemyFromPlayer() {
     }
 }
 
-void CollisionManager::PlayerFromEnemy() {
+void GlassHeart::Collision::CollisionManager::PlayerFromEnemy() {
     // 牙のフレーム(28番)の位置に球を設定
     auto handle = _owner.GetModelAnime().GetHandle();
     auto mat = MV1GetFrameLocalWorldMatrix(handle, 28);
@@ -88,7 +88,7 @@ VECTOR CollisionManager::CheckTerrain(const VECTOR& pos, const VECTOR& forward) 
     auto newPos = VAdd(pos, forward);
     auto start = VAdd(newPos, { 0, 100, 0 });
     auto end = VAdd(newPos, { 0, -10000, 0 });
-    _mcrp = MV1CollCheck_Line(handle, 1, start, end);
+    _mcrp = MV1CollCheck_Line(handle, 0, start, end);
 
     if (_mcrp.HitFlag == 0) {
         // 衝突なし移動しない
@@ -97,5 +97,25 @@ VECTOR CollisionManager::CheckTerrain(const VECTOR& pos, const VECTOR& forward) 
     // 衝突あれば移動する
     newPos = _mcrp.HitPosition;
     return  newPos;
+}
+
+VECTOR CollisionManager::CheckHitWall(const VECTOR& pos, const VECTOR& forward) {
+    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("TestStage");
+    auto newPos = VAdd(pos, forward);
+    auto c1 = VAdd(newPos, { 100.f, 0.f, 0.f });
+    auto c2 = VAdd(newPos, { 1000.f, 0.f, 0.f });
+    _collpol = MV1CollCheck_Capsule(handle, 3, c1, c2, 100.0f);
+
+    if (_collpol.HitNum == 0) {
+        return pos;
+    }
+    if (_collpol.HitNum >= 1)
+    {
+        newPos = VSub(pos, forward);
+    }
+
+   // DrawCapsule3D(c1, c2, 100.f, 10, GetColor(255, 0, 0), GetColor(255, 255, 255), FALSE);
+
+    return newPos;
 }
 

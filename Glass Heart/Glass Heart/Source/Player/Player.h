@@ -85,8 +85,6 @@ namespace GlassHeart {
             float GetForwardSpeed() { return _forwardSpeed; }
             void SetForwardSpeed(float forwardSpeed) { _forwardSpeed = forwardSpeed; }
 
-            //ColourState GetColourState() { return _crState; }
-
         protected:
             /**
              * @brief êFèÛë‘

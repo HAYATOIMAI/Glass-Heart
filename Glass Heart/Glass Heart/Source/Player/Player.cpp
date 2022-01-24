@@ -15,6 +15,12 @@
 #include "../Application/GameMain.h"
 #include <numbers>
 
+namespace {
+    constexpr auto PlayerPositionX = 0.0f;     //!< プレイヤーの初期位置X
+    constexpr auto PlayerPositionY = 70.0f;    //!< プレイヤーの初期位置Y
+    constexpr auto PlayerPositionZ = -140.0f;  //!< プレイヤーの初期位置Z
+}
+
 using namespace GlassHeart::Player;
 
 namespace {
@@ -25,6 +31,7 @@ namespace {
 Player::Player(GameMain& game) : GlassHeart::Object::ObjectBase{ game } {
     _rotation = VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f);
    _crState = ColourState::White;
+   _position = VGet(PlayerPositionX, PlayerPositionY, PlayerPositionZ);
 }
 /** 入力処理 */
 void Player::Input(AppFrame::InputManager& input) {
@@ -96,6 +103,13 @@ void Player::Move(const VECTOR& forward) {
     pos = _collsionManage->CheckTerrain(pos, { forward.x, forward.y, forward.z });
     // Z成分のみ移動後位置から真下に線分判定
     pos = _collsionManage->CheckTerrain(pos, { 0, forward.y, forward.z });
+
+    pos = _collsionManage->CheckHitWall(pos, { forward.x, forward.y, 0 });
+
+    pos = _collsionManage->CheckHitWall(pos, { forward.x, forward.y, forward.z });
+
+    pos = _collsionManage->CheckHitWall(pos, { 0, forward.y, forward.z });
+
     // 座標更新
     _position = pos;
 }
