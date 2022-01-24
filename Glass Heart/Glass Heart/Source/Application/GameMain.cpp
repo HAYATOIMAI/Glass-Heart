@@ -47,8 +47,8 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     /** 使用する音のテーブル */
     const AppFrame::ResourceServer::SoundMap usesound{
     {"damage", {"damage.wav", true}},
-    {"bgm1", {"sublight.wav", false}},
-    {"bgm2", {"stage1.mid", false}},
+    {"bgm1", {"sublight.wav", true}},
+    {"bgm2", {"stage1.mid", true}},
     };
     /** 音を読み込み */
     res.LoadSounds(usesound);
@@ -56,6 +56,7 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     //!< サウンドコンポーネントの取得
     auto& sm = GetSoundManager();
     sm.SetVolume("damage", 128);
+    sm.SetVolume("bgm1", 128);
 
 #ifdef _DEBUG
     sm.SetMute(true);
@@ -68,14 +69,16 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     //!< オブジェクトファクトリーの生成
     _objFactory = std::make_unique<GlassHeart::Object::ObjectFactory>(*this);
 
-    //!< モードサーバーを生成し、AMGモードを登録
-    _modeServer = std::make_unique<AppFrame::ModeServer>("Amg", std::make_shared<GlassHeart::Mode::ModeAmg>(*this));
-    //// チームロゴモードを登録
+    ////!< モードサーバーを生成し、AMGモードを登録
+    //_modeServer = std::make_unique<AppFrame::ModeServer>("Amg", std::make_shared<GlassHeart::Mode::ModeAmg>(*this));
+    ////// チームロゴモードを登録
     //_modeServer->Register("TeamLogo", std::make_shared<GlassHeart::Mode::ModeTeamLogo>(*this));
-    //// タイトルモードを登録
+    ////// タイトルモードを登録
     //_modeServer->Register("Title", std::make_shared<GlassHeart::Mode::ModeTitle>(*this));
-    // インゲームモードを登録
-    _modeServer->Register("InGame", std::make_shared<GlassHeart::Mode::ModeGame>(*this));
+    //// インゲームモードを登録
+    //_modeServer->Register("InGame", std::make_shared<GlassHeart::Mode::ModeGame>(*this));
+
+    _modeServer = std::make_unique<AppFrame::ModeServer>("InGame", std::make_shared<GlassHeart::Mode::ModeGame>(*this));
 
     return true;
 }
@@ -94,7 +97,6 @@ void GameMain::Process() {
 //!< 描画処理
 void GameMain::Render() {
     base::Render();
-    _modeServer->Render();
 }
 //!< メインループ
 void GameMain::Run() {

@@ -57,7 +57,7 @@ namespace GlassHeart {
             void AllClear();
             /**
              * @brief オブジェクトの登録
-             * 　　　 登録するとオブジェクトから情報を得ることができる
+             * 　　　 登録するとオブジェクトから情報を得る
              *
              * @param[in] key 任意の文字列キー
              * @param[in] vec オブジェクトの位置

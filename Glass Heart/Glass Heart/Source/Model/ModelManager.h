@@ -47,6 +47,11 @@ namespace GlassHeart {
              */
             virtual void Draw();
             /**
+             * @brief
+             * 
+             */
+            virtual void MeshDraw();
+            /**
              * @brief ハンドルの取得
              *
              * @return  モデルのハンドル
@@ -96,7 +101,3 @@ namespace GlassHeart {
         };
     }
 }
-
-
-
-
