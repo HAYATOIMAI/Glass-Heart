@@ -107,10 +107,11 @@ VECTOR CollisionManager::CheckHitWall(const VECTOR& pos, const VECTOR& forward) 
     _collpol = MV1CollCheck_Capsule(handle, 3, c1, c2, 100.0f);
 
     if (_collpol.HitNum == 0) {
+        // Õ“Ë–³‚µ
         return pos;
     }
-    if (_collpol.HitNum >= 1)
-    {
+    if (_collpol.HitNum >= 1) {
+        // Õ“Ë—L‚è ‰Ÿ‚µ–ß‚·
         newPos = VSub(pos, forward);
     }
 
