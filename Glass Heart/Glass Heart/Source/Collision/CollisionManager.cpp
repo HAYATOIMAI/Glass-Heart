@@ -83,6 +83,7 @@ void GlassHeart::Collision::CollisionManager::PlayerFromEnemy() {
         }
     }
 }
+/** è∞Ç∆ÇÃìñÇΩÇËîªíË */
 VECTOR CollisionManager::CheckTerrain(const VECTOR& pos, const VECTOR& forward) {
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("TestStage");
     auto newPos = VAdd(pos, forward);
@@ -98,13 +99,18 @@ VECTOR CollisionManager::CheckTerrain(const VECTOR& pos, const VECTOR& forward) 
     newPos = _mcrp.HitPosition;
     return  newPos;
 }
-
+/** ï«Ç∆ÇÃìñÇΩÇËîªíË */
 VECTOR CollisionManager::CheckHitWall(const VECTOR& pos, const VECTOR& forward) {
+
+    auto black = 3;
+    auto white = 0;
+    auto round = 0.5f;
+
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("TestStage");
     auto newPos = VAdd(pos, forward);
-    auto c1 = VAdd(newPos, { 100.f, 0.f, 0.f });
-    auto c2 = VAdd(newPos, { 1000.f, 0.f, 0.f });
-    _collpol = MV1CollCheck_Capsule(handle, 3, c1, c2, 100.0f);
+    auto c1 = VAdd(newPos, { 5.f, 0.f, 0.f });
+    auto c2 = VAdd(newPos, { 5.f, 0.f, 0.f });
+    _collpol = MV1CollCheck_Capsule(handle, black, c1, c2, round);
 
     if (_collpol.HitNum == 0) {
         // è’ìÀñ≥Çµ
@@ -115,8 +121,15 @@ VECTOR CollisionManager::CheckHitWall(const VECTOR& pos, const VECTOR& forward) 
         newPos = VSub(pos, forward);
     }
 
-   // DrawCapsule3D(c1, c2, 100.f, 10, GetColor(255, 0, 0), GetColor(255, 255, 255), FALSE);
+#ifdef _DEBUG
+    _debugNum1 = c1;
+    _debugNum2 = c2;
+#endif // _DEBUG
 
     return newPos;
+}
+
+void GlassHeart::Collision::CollisionManager::Render(){
+    DrawCapsule3D(_debugNum1, _debugNum2, 0.5f, 10, GetColor(255, 0, 0), GetColor(255, 255, 255), FALSE);
 }
 

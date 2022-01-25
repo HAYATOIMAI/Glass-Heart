@@ -44,6 +44,8 @@ namespace GlassHeart {
 
             VECTOR CheckHitWall(const VECTOR& pos, const VECTOR& forward);
 
+            void Render();
+
             struct Report {
                 ReportId id{ ReportId::None };
                 VECTOR position{ 0, 0, 0 };
@@ -58,6 +60,9 @@ namespace GlassHeart {
             std::unique_ptr<Report> _report;
             MV1_COLL_RESULT_POLY _mcrp;
             MV1_COLL_RESULT_POLY_DIM _collpol;
+
+            VECTOR _debugNum1{ 0, 0, 0 };
+            VECTOR _debugNum2{ 0, 0, 0 };
         };
     }
 

@@ -85,6 +85,8 @@ namespace GlassHeart {
             float GetForwardSpeed() { return _forwardSpeed; }
             void SetForwardSpeed(float forwardSpeed) { _forwardSpeed = forwardSpeed; }
 
+            std::string& GetCrName() { return _stateName; }
+
         protected:
             /**
              * @brief 色状態
@@ -100,7 +102,7 @@ namespace GlassHeart {
             VECTOR _backDelta{ 0, 0, 0 };  //!<
             VECTOR _lastPosition{ 0.0f , 0.0f,  0.0f };
             std::string _stateName{ "Black" }; //!< 状態名変数
-            int _colourCount{ 0 };
+            int _colourCount{ 0 };  //!< 色変更のクールタイム用カウンター
         };
     }
 }

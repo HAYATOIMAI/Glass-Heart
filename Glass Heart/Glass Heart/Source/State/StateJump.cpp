@@ -47,7 +47,6 @@ void StateJump::Input(AppFrame::InputManager& input) {
 
 void StateJump::Update() {
    // _owner.GetPosition() = _owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 3000, 0 });
-    
     _owner.SetPosition(_owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 300, 70 }));
     _lastPosition = _owner.GetPosition();
 }
@@ -91,5 +90,5 @@ bool StateJump::JumpEnd(const VECTOR& jumppos) {
         return false;
     }
 
-    return false;
+    return true;
 }

@@ -22,7 +22,7 @@ namespace GlassHeart {
             /**
              * @brief コンストラクタ
              * 
-             * @param[in] owner
+             * @param[in] owner プレイヤークラスへの参照
              */
             StateBase(Player::Player& owner) : _owner{ owner } {};
             /**
