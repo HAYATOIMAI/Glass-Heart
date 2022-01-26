@@ -23,14 +23,9 @@ namespace {
 
 using namespace GlassHeart::Player;
 
-namespace {
-    constexpr auto DegreeToRadian = std::numbers::pi_v<float> / 180.0f;
-}
-
 /** コンストラクタ */
 Player::Player(GameMain& game) : GlassHeart::Object::ObjectBase{ game } {
     _rotation = VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f);
-    _crState = ColourState::White;
     _position = VGet(PlayerPositionX, PlayerPositionY, PlayerPositionZ);
 }
 /** 入力処理 */
@@ -47,7 +42,7 @@ void Player::Input(AppFrame::InputManager& input) {
 }
 /** 更新処理 */
 void Player::Process() {
-    // 
+    // 入力制限の為カウンタを減少
     if (_colourCount > 0) {
         --_colourCount;
     }
@@ -123,7 +118,7 @@ void Player::ColorCollisionDetectionSystem() {
 
     auto animHandle = _modelAnimeManage->GetHandle();
 
-    if (_crState == ColourState::White) {
+   /* if (_crState == ColourState::White) {
         _stateName = "Black";
         MV1SetMaterialSpcColor(animHandle, 0, GetColorF(0.0f, 0.0f, 0.0f, 0.0f));
 
@@ -133,5 +128,17 @@ void Player::ColorCollisionDetectionSystem() {
         _stateName = "White";
         MV1SetMaterialSpcColor(animHandle, 0, GetColorF(1.0f, 1.0f, 1.0f, 0.0f));
         _crState = ColourState::White;
+    }*/
+
+    if (_crState == ColourState::Black) {
+        _stateName = "Black";
+        MV1SetMaterialSpcColor(animHandle, 0, GetColorF(0.0f, 0.0f, 0.0f, 0.0f));
+
+        _crState = ColourState::White;
+    }
+    else if (_crState == ColourState::White) {
+        _stateName = "White";
+        MV1SetMaterialSpcColor(animHandle, 0, GetColorF(1.0f, 1.0f, 1.0f, 0.0f));
+        _crState = ColourState::Black;
     }
 }

@@ -46,7 +46,6 @@ void StateJump::Input(AppFrame::InputManager& input) {
 }
 
 void StateJump::Update() {
-   // _owner.GetPosition() = _owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 3000, 0 });
     _owner.SetPosition(_owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 300, 70 }));
     _lastPosition = _owner.GetPosition();
 }
@@ -72,23 +71,29 @@ void StateJump::JumpStart() {
     _jumpStartPosition = _owner.GetPosition();
 
     VECTOR jumpbase = VGet(0.0f, 0.0f, static_cast<float>(-_jumpPower));
-    MATRIX jump_rotate = MMult(MGetRotX(static_cast<float>(_jumpAngle) * DegreeToRadian), MGetRotY(_owner.GetRotation().y * DegreeToRadian));
+    MATRIX jump_rotate = MGetRotX(static_cast<float>(_jumpAngle) * DegreeToRadian);
 
     _jumpVelocity = VTransform(jumpbase, jump_rotate);
 }
 
 VECTOR StateJump::JumpProcess() {
-    VECTOR jumpposition = VAdd(_jumpStartPosition, _jumpVelocity);
+    VECTOR jumpPosition = VAdd(_owner.GetPosition(), _jumpVelocity);
 
-    _jumpVelocity.y -= static_cast<float>(_gravity);
+    _jumpVelocity.y -= _gravity;
 
-    return jumpposition;
+    return jumpPosition;
 }
 
 bool StateJump::JumpEnd(const VECTOR& jumppos) {
     if (_lastPosition.y < jumppos.y) {
-        return false;
+        _isJump = false;
+        return false;  
     }
+    VECTOR  lineStart = VGet(_lastPosition.x, _lastPosition.y, _lastPosition.z);
+    VECTOR  lineEnd = VGet(jumppos.x, jumppos.y, jumppos.z);
 
+    _owner.GetCollision().CheckTerrain(lineStart, lineEnd);
+
+    _isJump = false;
     return true;
 }

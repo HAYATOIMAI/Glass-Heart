@@ -1,5 +1,5 @@
 
-/*****************************************************************//**
+/*********************************************************************
  * @file   Player.h
  * @brief  プレイヤークラスの宣言
  *
@@ -96,13 +96,13 @@ namespace GlassHeart {
                 Black,
             };
 
-            ColourState _crState; //!< 色状態を管理する変数
+            ColourState _crState{ ColourState::Black }; //!< 色状態を管理する変数
             float _forwardSpeed{ 0.0f };  //!< 前進スピード
             float _angularSpeed{ 0.0f };  //!< 
-            VECTOR _backDelta{ 0, 0, 0 };  //!<
-            VECTOR _lastPosition{ 0.0f , 0.0f,  0.0f };
+            VECTOR _backDelta{ 0.0f, 0.0f, 0.0f };  //!< 
+            VECTOR _lastPosition{ 0.0f, 0.0f, 0.0f };
             std::string _stateName{ "Black" }; //!< 状態名変数
-            int _colourCount{ 0 };  //!< 色変更のクールタイム用カウンター
+            int _colourCount{ 0 };  //!< 色変更クールタイム用カウンター
         };
     }
 }

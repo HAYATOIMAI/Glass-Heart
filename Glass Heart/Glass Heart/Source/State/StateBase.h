@@ -1,7 +1,7 @@
 
 /*****************************************************************//**
  * @file   StateBase.h
- * @brief  状態の基底クラス
+ * @brief  プレイヤーの状態基底クラスの宣言
  * 
  * @author Hayato Imai
  * @date   December 2021
@@ -16,7 +16,10 @@ namespace GlassHeart {
     }
 
     namespace State {
-
+        /**
+         * @class StateBase
+         * @brief プレイヤーの状態基底クラス
+         */
         class StateBase : public StateBaseRoot {
         public:
             /**

@@ -8,7 +8,7 @@
  *********************************************************************/
 #pragma once
 #include "StateBase.h"
-#include <DxLib.h>
+#include <AppFrame.h>
 
 namespace GlassHeart {
 
@@ -32,7 +32,7 @@ namespace GlassHeart {
             VECTOR JumpProcess();
             bool  JumpEnd(const VECTOR& jumppos);
         private:
-            double _gravity{ 9.8 };  //!< 重力加速度
+            float _gravity{ 9.8f };  //!< 重力加速度
             double _jumpTimer{ 0.0 };
             double _groundY{ 0.0 };
             double _jumpPower{ 100.0 };

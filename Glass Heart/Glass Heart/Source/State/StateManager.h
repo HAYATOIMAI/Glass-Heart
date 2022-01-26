@@ -73,5 +73,5 @@ namespace GlassHeart {
             std::unordered_map<std::string, std::shared_ptr<StateBaseRoot>>	_registry;  //!< 状態のレジストリ
             std::list<std::shared_ptr<StateBaseRoot>> _states;  //!< 状態のリスト
         };
-    }
-}
+    } // State
+} // GlassHeart
