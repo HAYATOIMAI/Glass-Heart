@@ -30,16 +30,18 @@ namespace GlassHeart {
             void JumpFunction(const bool isJumpStart);
             void JumpStart();
             VECTOR JumpProcess();
-            bool  JumpEnd(const VECTOR& jumppos);
+            void JumpLand();
         private:
             float _gravity{ 9.8f };  //!< 重力加速度
-            double _jumpTimer{ 0.0 };
+            float _jumpTimer{ 0.0f };
+            float _jumpRise{ 0.0f }; //!< 上昇速度
+            float _jumpPower{ 100.0f };
+            float _jumpAngle{ 87.5f };
+            float _jumpHeight{ 15.0f }; //!< ジャンプの高さ
             double _groundY{ 0.0 };
-            double _jumpPower{ 100.0 };
-            double _jumpAngle{ 87.5 };
             bool _isJump{ false };
             VECTOR _jumpStartPosition;
-            VECTOR _jumpVelocity;
+            VECTOR _jumpVelocity; //!< 速度
             VECTOR _lastPosition;
         };
     }

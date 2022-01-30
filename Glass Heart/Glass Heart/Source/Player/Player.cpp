@@ -118,18 +118,6 @@ void Player::ColorCollisionDetectionSystem() {
 
     auto animHandle = _modelAnimeManage->GetHandle();
 
-   /* if (_crState == ColourState::White) {
-        _stateName = "Black";
-        MV1SetMaterialSpcColor(animHandle, 0, GetColorF(0.0f, 0.0f, 0.0f, 0.0f));
-
-        _crState = ColourState::Black;
-    }
-    else if (_crState == ColourState::Black) {
-        _stateName = "White";
-        MV1SetMaterialSpcColor(animHandle, 0, GetColorF(1.0f, 1.0f, 1.0f, 0.0f));
-        _crState = ColourState::White;
-    }*/
-
     if (_crState == ColourState::Black) {
         _stateName = "Black";
         MV1SetMaterialSpcColor(animHandle, 0, GetColorF(0.0f, 0.0f, 0.0f, 0.0f));

@@ -20,7 +20,7 @@ namespace AppFrame {
 
         for (auto i = 0; i < 16; ++i) {
             //! キーのトリガ情報生成(押した瞬間しか反応しないキー情報)
-            _triggerKey.Buttons[i] = (_xInput.Buttons[i] ^ oldinput.Buttons[i]) & _xInput.Buttons[i];
+            _xTrigger.Buttons[i] = (_xInput.Buttons[i] ^ oldinput.Buttons[i]) & _xInput.Buttons[i];
         }
 
         for (auto i = 0; i < 16; ++i) {

@@ -77,7 +77,7 @@ namespace GlassHeart {
              */
             virtual void Move(const VECTOR& forward);
             /**
-             * @brief　色判定処理
+             * @brief 色判定処理
              * 
              */
             void ColorCollisionDetectionSystem();
@@ -87,6 +87,16 @@ namespace GlassHeart {
 
             std::string& GetCrName() { return _stateName; }
 
+            VECTOR GetLastPosition() { return _lastPosition; }
+
+            enum class Jump {
+                JumpStart, //!< 地面(フロアメッシュに)に触れているか
+                JumpLoop,  //!< ジャンプ中
+                JumpEnd    //!< 地面(フロアメッシュに)に触れていないか(落下中か)
+            };
+
+            Jump GetJumpState() const { return _jumpState; }
+            void SetJumpState(const Player::Jump& jumpState) { _jumpState = jumpState; }
         protected:
             /**
              * @brief 色状態
@@ -97,6 +107,7 @@ namespace GlassHeart {
             };
 
             ColourState _crState{ ColourState::Black }; //!< 色状態を管理する変数
+            Jump _jumpState{ Jump::JumpStart };
             float _forwardSpeed{ 0.0f };  //!< 前進スピード
             float _angularSpeed{ 0.0f };  //!< 
             VECTOR _backDelta{ 0.0f, 0.0f, 0.0f };  //!< 

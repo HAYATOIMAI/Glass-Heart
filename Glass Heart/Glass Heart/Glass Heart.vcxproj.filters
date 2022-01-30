@@ -129,6 +129,9 @@
     <ClInclude Include="Source\State\StateJump.h">
       <Filter>ヘッダー ファイル\State</Filter>
     </ClInclude>
+    <ClInclude Include="Source\State\StateJumpFall.h">
+      <Filter>ヘッダー ファイル\State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Camera\CameraManager.cpp">
@@ -189,6 +192,9 @@
       <Filter>ソース ファイル\State</Filter>
     </ClCompile>
     <ClCompile Include="Source\State\StateJump.cpp">
+      <Filter>ソース ファイル\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\State\StateJumpFall.cpp">
       <Filter>ソース ファイル\State</Filter>
     </ClCompile>
   </ItemGroup>

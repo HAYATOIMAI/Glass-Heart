@@ -26,7 +26,11 @@ void StateIdle::Input(AppFrame::InputManager& input) {
 	if (input.GetJoyPad().GetXinputThumbLX()) {
 		_owner.GetStateManage().PushBack("Run");
 	}
-	if (input.GetJoyPad().GetXinputButtonA() && _cnt == 0) {
+	//if (input.GetJoyPad().GetTrg().Buttons[XINPUT_BUTTON_A]) {
+	//	_cnt = 60;
+	//	_owner.GetStateManage().PushBack("Jump");
+	//}
+	if (input.GetJoyPad().GetXTriggerButtonA() && _cnt == 0) {
 		_cnt = 60;
 		_owner.GetStateManage().PushBack("Jump");
 	}

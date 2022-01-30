@@ -15,6 +15,7 @@ namespace GlassHeart {
     namespace Model {
         class ModelManager;
     }
+
     class GameMain;
 
     namespace Stage {
