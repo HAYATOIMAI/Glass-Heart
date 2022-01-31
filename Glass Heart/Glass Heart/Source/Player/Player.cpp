@@ -61,6 +61,8 @@ void Player::Process() {
     _cameraManage->Update();
     // オブジェクトサーバーに位置を送信
     GetObjectServer().Register("Player", _position);
+    
+    Gravity();
     _lastPosition = _position;
 }
 /** 描画処理 */
@@ -128,5 +130,15 @@ void Player::ColorCollisionDetectionSystem() {
         _stateName = "White";
         MV1SetMaterialSpcColor(animHandle, 0, GetColorF(1.0f, 1.0f, 1.0f, 0.0f));
         _crState = ColourState::Black;
+    }
+}
+
+void Player::Gravity() {
+    _gravity += 1;
+    _position.y += _gravity;
+
+    if (_position.y < PlayerPositionY)
+    {
+        _position.y = PlayerPositionY;
     }
 }

@@ -89,14 +89,7 @@ namespace GlassHeart {
 
             VECTOR GetLastPosition() { return _lastPosition; }
 
-            enum class Jump {
-                JumpStart, //!< 地面(フロアメッシュに)に触れているか
-                JumpLoop,  //!< ジャンプ中
-                JumpEnd    //!< 地面(フロアメッシュに)に触れていないか(落下中か)
-            };
-
-            Jump GetJumpState() const { return _jumpState; }
-            void SetJumpState(const Player::Jump& jumpState) { _jumpState = jumpState; }
+            void Gravity();
         protected:
             /**
              * @brief 色状態
@@ -107,13 +100,13 @@ namespace GlassHeart {
             };
 
             ColourState _crState{ ColourState::Black }; //!< 色状態を管理する変数
-            Jump _jumpState{ Jump::JumpStart };
             float _forwardSpeed{ 0.0f };  //!< 前進スピード
             float _angularSpeed{ 0.0f };  //!< 
             VECTOR _backDelta{ 0.0f, 0.0f, 0.0f };  //!< 
             VECTOR _lastPosition{ 0.0f, 0.0f, 0.0f };
             std::string _stateName{ "Black" }; //!< 状態名変数
             int _colourCount{ 0 };  //!< 色変更クールタイム用カウンター
+            float _gravity{ 9.8f };
         };
     }
 }

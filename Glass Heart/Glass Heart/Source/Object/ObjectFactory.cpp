@@ -19,6 +19,7 @@
 #include "../State/StateRun.h"
 #include "../State/StateJump.h"
 #include "../State/StateBase.h"
+#include "../State/StateJumpUp.h"
 #include "../State/StateJumpFall.h"
 #include "../Stage/Stage.h"
 #include <AppFrame.h>
@@ -98,7 +99,8 @@ std::unique_ptr<ObjectBase> PlayerCreate::Create(GameMain& game) {
     auto state = std::make_unique<State::StateManager>("Idle", std::make_shared<State::StateIdle>(*player));
     state->Register("Run", std::make_shared<State::StateRun>(*player));
     state->Register("Jump", std::make_shared<State::StateJump>(*player));
-    //state->Register("JumpFall", std::make_shared<State::JumpFall>(*player));
+    state->Register("JumpUp", std::make_shared<State::StateJumpUp>(*player));
+    state->Register("JumpFall", std::make_shared<State::StateJumpFall>(*player));
     player->SetStateManage(std::move(state));
 
     return player;

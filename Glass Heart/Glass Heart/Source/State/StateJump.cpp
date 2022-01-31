@@ -29,14 +29,12 @@ StateJump::StateJump(Player::Player& owner) : StateBase{ owner } {
 /** 入り口処理 */
 void StateJump::Enter() {
 
-    if (_owner.GetCollision().Mcrp().HitFlag == 1) {
-        _jumpRise = _jumpHeight;
-        _owner.SetJumpState(Player::Player::Jump::JumpStart);
-    }
-    else {
-        _jumpRise = 0.0f;
-        _owner.SetJumpState(Player::Player::Jump::JumpLoop);
-    }
+    _jumpTimer = 0.0f;
+    _jumpStartPosition = _owner.GetPosition();
+
+    VECTOR jumpbase = VGet(0.0f, _jumpPower, 0.0f);
+
+    _jumpVelocity = jumpbase;
 
     _owner.GetModelAnime().ChangeAnime("MO_SDChar_jumpStart", true);
 }
@@ -47,68 +45,62 @@ void StateJump::Input(AppFrame::InputManager& input) {
     }
     if (input.GetJoyPad().GetXTriggerButtonA()) {
         _isJump = true;
-
     }
-   // _owner.GetStateManage().PopBack();
+
 }
 /** 更新処理 */
 void StateJump::Update() {
 
-    if (_isJump ) {
-        _lastPosition = _owner.GetPosition();
-        JumpFunction(_isJump);
+    _vY += 1.0f;
+    _jumpVelocity.y += _vY;
+
+    if (_jumpVelocity.y > 70.0f) {
+        _owner.GetStateManage().PushBack("JumpUp");
     }
    
-   ///_owner.SetPosition(_owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 300, 70 }));
 }
 
 void StateJump::JumpFunction(const bool isJumpStart) {
-    if (isJumpStart) {
-        JumpStart();
-    }
 
-  // _owner.SetPosition(JumpProcess());
    auto jump = JumpProcess();
 
     if (isJumpStart || /*_owner.GetJumpState() == Player::Player::Jump::JumpLoop &&*/ jump.y > 0.0f) {
         _owner.SetPosition(jump);
     }
     else {
-        JumpLand();
+        JumpLand(jump);
         _isJump = false;
     }
-
-}
-/** ジャンプ開始処理 */
-void StateJump::JumpStart() {
-    _jumpTimer = 0.0;
-    _jumpStartPosition = _owner.GetPosition();
-
-    VECTOR jumpbase = VGet(0.0f, _jumpPower, 0.0f);
-    MATRIX jump_rotate = MMult(MGetRotX(_jumpAngle * DegreeToRadian),MGetRotY(_owner.GetRotation().y * DegreeToRadian));
-
-    //_jumpVelocity = VTransform(jumpbase, jump_rotate);
-    _jumpVelocity = jumpbase;
 }
 /** ジャンプ中処理 */
 VECTOR StateJump::JumpProcess() {
     //放物線の式で計算
-    VECTOR jumpPosition = VAdd(_jumpStartPosition, VScale(_jumpVelocity, _jumpTimer));
-    auto jumpY = (0.5 * _gravity * _jumpTimer * _jumpTimer);
+    //VECTOR jumpPosition = VAdd(_jumpStartPosition, VScale(_jumpVelocity, _jumpTimer));
+    //auto jumpY = (0.5 * _gravity * _jumpTimer * _jumpTimer);
 
-    jumpPosition.y -= jumpY;
-    _jumpTimer += 1.0f;
+    //jumpPosition.y -= jumpY;
+    //_jumpTimer += 1.0f;
+    
+    // ベクトルで計算
+    VECTOR jumpPosition = VAdd(_owner.GetPosition(), _jumpVelocity);
+
+    _jumpVelocity.y -= _gravity;
 
     return jumpPosition;
 }
-/** 着地処理 */
-void StateJump::JumpLand() {
 
-    _owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 300, 70 });
-
-    if (_owner.GetCollision().Mcrp().HitFlag && _jumpVelocity.y < 0) {
-        _owner.SetPosition(VGet(0.0f, _owner.GetCollision().Mcrp().HitPosition.y, 0.0f));
-        _jumpVelocity = VGet(0.0f, 0.0f, 0.0f);
+bool StateJump::JumpLand(const VECTOR& pos) {
+    if (_lastPosition.y < pos.y)
+    {
+        return false;
     }
 
+  /*  _owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 300, 70 });
+
+    if (_owner.GetCollision().Mcrp().HitFlag == 1 && _jumpVelocity.y < 0) {
+        _owner.SetPosition(VGet(0.0f, _owner.GetCollision().Mcrp().HitPosition.y, 0.0f));
+        _jumpVelocity = VGet(0.0f, 0.0f, 0.0f);
+        return true;
+    }*/
+    return false;
 }

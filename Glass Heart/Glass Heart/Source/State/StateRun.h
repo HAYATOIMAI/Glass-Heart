@@ -9,10 +9,6 @@
 #pragma once
 #include "StateBase.h"
 
-namespace AppFrame {
-    class InputManager;
-}
-
 namespace GlassHeart {
 
     namespace Player {

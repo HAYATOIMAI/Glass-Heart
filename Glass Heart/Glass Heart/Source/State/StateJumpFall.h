@@ -1,10 +1,10 @@
 
 /*********************************************************************
- * @file   StateIdle.h
- * @brief  アイドル状態クラスの宣言
+ * @file   StateBaseFall.h
+ * @brief  
  * 
  * @author Hayato Imai
- * @date   December 2021
+ * @date   January 2022
  *********************************************************************/
 #pragma once
 #include "StateBase.h"
@@ -14,21 +14,30 @@ namespace GlassHeart {
     namespace Player {
         class Player;
     }
+
     namespace State {
         /**
-         * @class StateIdle
-         * @brief アイドル状態クラスの宣言
+         * @class StateJumpFall 
+         * @brief ジャンプ下降状態
          */
-        class StateIdle : public StateBase {
+        class StateJumpFall : public StateBase {
         public:
-            StateIdle(Player::Player& owner) : StateBase{ owner } {};
+            StateJumpFall(Player::Player& owner);
             void Enter() override;
-            void Input(AppFrame::InputManager& input) override;
             void Update() override;
+            void Input(AppFrame::InputManager& input) override;
+            /**
+             * @brief 着地処理
+             * 
+             * @return 
+             */
+            bool JumpLand();
         private:
-            int _cnt{ 0 };
+
         };
     }
+
 }
+
 
 
