@@ -44,6 +44,8 @@ void StateJump::Input(AppFrame::InputManager& input) {
         _owner.GetStateManage().PushBack("Run");
     }
     if (input.GetJoyPad().GetXTriggerButtonA()) {
+        _gravity = -7.0f; // Y軸のジャンプ量
+       
         _isJump = true;
     }
 
@@ -51,24 +53,28 @@ void StateJump::Input(AppFrame::InputManager& input) {
 /** 更新処理 */
 void StateJump::Update() {
 
-    _vY += 1.0f;
-    _jumpVelocity.y += _vY;
+    /*_vY -= 1.0f;
+    _jumpVelocity.y -= _vY;*/
 
-    if (_jumpVelocity.y > 70.0f) {
-        _owner.GetStateManage().PushBack("JumpUp");
-    }
-   
+    if (_isJump == true){
+        
+         JumpFunction(_isJump);
+    }   
 }
 
 void StateJump::JumpFunction(const bool isJumpStart) {
 
    auto jump = JumpProcess();
 
-    if (isJumpStart || /*_owner.GetJumpState() == Player::Player::Jump::JumpLoop &&*/ jump.y > 0.0f) {
+    if (isJumpStart ||  jump.y > 70.0f) {
         _owner.SetPosition(jump);
+        if (_owner.GetPosition().y > 700.f) {
+            _owner.GetStateManage().PushBack("JumpUp");
+        }
     }
     else {
-        JumpLand(jump);
+       
+        //JumpLand(jump);
         _isJump = false;
     }
 }
@@ -84,7 +90,7 @@ VECTOR StateJump::JumpProcess() {
     // ベクトルで計算
     VECTOR jumpPosition = VAdd(_owner.GetPosition(), _jumpVelocity);
 
-    _jumpVelocity.y -= _gravity;
+    _jumpVelocity.y += _gravity;
 
     return jumpPosition;
 }
@@ -95,12 +101,12 @@ bool StateJump::JumpLand(const VECTOR& pos) {
         return false;
     }
 
-  /*  _owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 300, 70 });
+   
 
     if (_owner.GetCollision().Mcrp().HitFlag == 1 && _jumpVelocity.y < 0) {
         _owner.SetPosition(VGet(0.0f, _owner.GetCollision().Mcrp().HitPosition.y, 0.0f));
         _jumpVelocity = VGet(0.0f, 0.0f, 0.0f);
         return true;
-    }*/
+    }
     return false;
 }

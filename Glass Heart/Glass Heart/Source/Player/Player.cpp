@@ -62,7 +62,7 @@ void Player::Process() {
     // オブジェクトサーバーに位置を送信
     GetObjectServer().Register("Player", _position);
     
-    Gravity();
+   // Gravity();
     _lastPosition = _position;
 }
 /** 描画処理 */

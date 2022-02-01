@@ -47,8 +47,8 @@ Stage::Stage(GameMain& game) : ObjectBase{ game } {
     MV1SetFrameVisible(_testStage->GetHandle(), 5, FALSE);
 
     // フレーム0をナビメッシュとして使用
-    MV1SetupCollInfo(_testStage->GetHandle(), 0, 10, 10, 10);
-    MV1SetupCollInfo(_testStage->GetHandle(), 3, 10, 10, 10);
+    MV1SetupCollInfo(_testStage->GetHandle(), 0, 4, 4, 4);
+    MV1SetupCollInfo(_testStage->GetHandle(), 3, 4, 4, 4);
 
     // フォグの設定
     SetFogEnable(TRUE);

@@ -23,7 +23,7 @@ ModeGame::ModeGame(GameMain& game) : ModeMain{ game } {
 void ModeGame::Init() {
     //!< Žg—p‚·‚éƒ‚ƒfƒ‹
     AppFrame::ResourceServer::ModelMap usemap{
-    {"Player",    "Test/sotai.mv1"},
+    {"Player",    "Test/boy_black_mesh.mv1"},
     {"SkySphere", "skysphere.mv1"},
     {"Ground",    "ground.mv1"},
     {"Terrain",   "Ground/Ground.mv1"},
