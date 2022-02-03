@@ -9,20 +9,22 @@
 
 #include "StateJumpUp.h"
 #include "../Player/Player.h"
+#include <numbers>
+
 
 using namespace GlassHeart::State;
 
 StateJumpUp::StateJumpUp(Player::Player& owner) : StateBase{owner} {}
 
 void StateJumpUp::Enter() {
-    _vX = -16.0f;
-    _vY = -6.0f;
+    _vX = -7.0f;
+    _vY = -16.0f;
 }
 
 void StateJumpUp::Input(AppFrame::InputManager& input) {}
 
 void StateJumpUp::Update() {
-
+    // —Ž‰º’†‚Å–³‚¯‚ê‚Îã¸
     if (_isfall != true) {
         auto j = JumpUpdate();
         _owner.SetPosition(j);
@@ -30,7 +32,8 @@ void StateJumpUp::Update() {
     else {
         _owner.GetStateManage().PushBack("JumpFall");
     }
-    if (_owner.GetPosition().y > 700.0f && _owner.GetPosition().y < 1000.0f) {
+    // ˆê’è‚Ì‚‚³‚É’B‚µ‚½‚ç—Ž‰ºŠJŽn
+    if (_owner.GetPosition().y > 700.0f && _owner.GetPosition().y < 1200.0f) {
         _isfall = true;
     }
 }
@@ -42,5 +45,4 @@ VECTOR StateJumpUp::JumpUpdate() {
     _jumpVelocity.y += _vY;
 
     return jumpPosition;
-   // return VECTOR();
 }

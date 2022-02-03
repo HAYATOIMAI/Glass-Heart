@@ -37,6 +37,7 @@ void CameraManager::Update() {
     auto forward = _forwardOfTarget;
     forward.x = 0.0f;
     forward.y = 0.0f;
+    forward.z = 0.0f;
     // ターゲットの向きの真逆に長さをtargetDist
     auto fromTarget = VScale(forward, -targetDist);
     fromTarget.x = vertDist * CameraDisX;

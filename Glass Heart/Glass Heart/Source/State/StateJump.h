@@ -29,12 +29,11 @@ namespace GlassHeart {
             void Update() override;
             void JumpFunction(const bool isJumpStart);
             VECTOR JumpProcess();
-            bool JumpLand(const VECTOR& pos);
         private:
             float _gravity{ 0.f };  //!< d—Í‰Á‘¬“x
-            float _jumpTimer{ 0.0f };
             float _jumpPower{ 100.0f };
             bool _isJump{ false };
+            bool _isfall{ false };
             VECTOR _jumpStartPosition;
             VECTOR _jumpVelocity; //!< ‘¬“x
             VECTOR _lastPosition;

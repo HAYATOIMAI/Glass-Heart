@@ -97,6 +97,25 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckTerrain(const VECTOR& pos, 
     newPos = _mcrp.HitPosition;
     return  newPos;
 }
+VECTOR GlassHeart::Collision::CollisionManager::CheckJumpStand(const VECTOR& pos, const VECTOR& forward) {
+
+    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("TestStage");
+    auto newPos = VAdd(pos, forward);
+    auto start = VAdd(newPos, { 0, 100, 0 });
+    auto end = VAdd(newPos, { 0, -10000, 0 });
+    _stand = MV1CollCheck_Line(handle, 4, start, end);
+
+    if (_stand.HitFlag == 0) {
+        // è’ìÀÇ»Çµà⁄ìÆÇµÇ»Ç¢
+        return pos;
+    }
+    if (_stand.HitFlag == 1)  {
+        // è’ìÀÇ†ÇÍÇŒà⁄ìÆÇ∑ÇÈ
+        newPos = _stand.HitPosition;
+    }
+
+    return  newPos;
+}
 /** ï«Ç∆ÇÃìñÇΩÇËîªíË */
 VECTOR GlassHeart::Collision::CollisionManager::CheckHitWall(const VECTOR& pos, const VECTOR& forward) {
 
@@ -123,6 +142,23 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckHitWall(const VECTOR& pos, 
     _debugNum1 = c1;
     _debugNum2 = c2;
 #endif // _DEBUG
+
+    return newPos;
+}
+VECTOR GlassHeart::Collision::CollisionManager::CheckHitCeiling(const VECTOR& pos, const VECTOR& forward)
+{
+    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("TestStage");
+    auto newPos = VAdd(pos, forward);
+    auto start = VAdd(newPos, { 0, -10000, 0 });
+    auto end = VAdd(newPos, { 0, 100, 0 });
+    _ceiling = MV1CollCheck_Line(handle, 5, start, end);
+
+    if (_ceiling.HitFlag == 0) {
+        return pos;
+    }
+    if (_ceiling.HitFlag == 1) {
+        newPos = _ceiling.HitPosition;
+    }
 
     return newPos;
 }

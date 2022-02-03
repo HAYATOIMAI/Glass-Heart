@@ -26,12 +26,6 @@ namespace GlassHeart {
             void Enter() override;
             void Update() override;
             void Input(AppFrame::InputManager& input) override;
-            /**
-             * @brief ’…’nˆ—
-             * 
-             * @return 
-             */
-            bool JumpLand();
         private:
 
         };

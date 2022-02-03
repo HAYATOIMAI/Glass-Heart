@@ -28,13 +28,16 @@ StateJump::StateJump(Player::Player& owner) : StateBase{ owner } {
 }
 /** 入り口処理 */
 void StateJump::Enter() {
-
-    _jumpTimer = 0.0f;
     _jumpStartPosition = _owner.GetPosition();
 
-    VECTOR jumpbase = VGet(0.0f, _jumpPower, 0.0f);
-
-    _jumpVelocity = jumpbase;
+    if (_owner.GetRotation().y == 270.0f * (std::numbers::pi_v<float> / 180.0f)) {
+        VECTOR jumpbase = VGet(-12.0f, _jumpPower, 0.0f);
+        _jumpVelocity = jumpbase;
+    }
+    else if(_owner.GetRotation().y ==  90.0f * (std::numbers::pi_v<float> / 180.0f)) {
+        VECTOR jumpbase = VGet(12.0f, _jumpPower, 0.0f);
+        _jumpVelocity = jumpbase;
+    }
 
     _owner.GetModelAnime().ChangeAnime("MO_SDChar_jumpStart", true);
 }
@@ -44,48 +47,43 @@ void StateJump::Input(AppFrame::InputManager& input) {
         _owner.GetStateManage().PushBack("Run");
     }
     if (input.GetJoyPad().GetXTriggerButtonA()) {
-        _gravity = -7.0f; // Y軸のジャンプ量
-       
+        _gravity = -8.0f; // Y軸のジャンプ量
         _isJump = true;
     }
-
 }
 /** 更新処理 */
 void StateJump::Update() {
-
-    /*_vY -= 1.0f;
-    _jumpVelocity.y -= _vY;*/
-
+    // 対応するボタンが押されたらジャンプ処理実行
     if (_isJump == true){
-        
          JumpFunction(_isJump);
     }   
-}
 
+    
+
+    // 空中ブロックの天井との当たり判定(現状機能せず)
+    //_owner.GetCollision().CheckHitCeiling(_owner.GetPosition(), { 0, -100, 0 });
+
+}
+/** ジャンプ処理制御 */
 void StateJump::JumpFunction(const bool isJumpStart) {
 
-   auto jump = JumpProcess();
-
+    auto jump = JumpProcess();
+    // 一定の高さ以上かフラグがtrueならジャンプ開始
     if (isJumpStart ||  jump.y > 70.0f) {
         _owner.SetPosition(jump);
+        // 一定の高さ以上になったら上昇状態に移行
         if (_owner.GetPosition().y > 700.f) {
+
             _owner.GetStateManage().PushBack("JumpUp");
         }
     }
     else {
-       
-        //JumpLand(jump);
         _isJump = false;
     }
+
 }
 /** ジャンプ中処理 */
 VECTOR StateJump::JumpProcess() {
-    //放物線の式で計算
-    //VECTOR jumpPosition = VAdd(_jumpStartPosition, VScale(_jumpVelocity, _jumpTimer));
-    //auto jumpY = (0.5 * _gravity * _jumpTimer * _jumpTimer);
-
-    //jumpPosition.y -= jumpY;
-    //_jumpTimer += 1.0f;
     
     // ベクトルで計算
     VECTOR jumpPosition = VAdd(_owner.GetPosition(), _jumpVelocity);
@@ -93,20 +91,4 @@ VECTOR StateJump::JumpProcess() {
     _jumpVelocity.y += _gravity;
 
     return jumpPosition;
-}
-
-bool StateJump::JumpLand(const VECTOR& pos) {
-    if (_lastPosition.y < pos.y)
-    {
-        return false;
-    }
-
-   
-
-    if (_owner.GetCollision().Mcrp().HitFlag == 1 && _jumpVelocity.y < 0) {
-        _owner.SetPosition(VGet(0.0f, _owner.GetCollision().Mcrp().HitPosition.y, 0.0f));
-        _jumpVelocity = VGet(0.0f, 0.0f, 0.0f);
-        return true;
-    }
-    return false;
 }

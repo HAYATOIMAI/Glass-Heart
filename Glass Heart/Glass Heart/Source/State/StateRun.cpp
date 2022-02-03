@@ -43,7 +43,7 @@ void StateRun::Input(AppFrame::InputManager& input) {
             _owner.SetForwardSpeed(DefaultSpeed * 2.0f);
         }
     }
-    if (input.GetJoyPad().GetXinputButtonA()) {
+    if (input.GetJoyPad().GetXTriggerButtonA()) {
         _owner.GetStateManage().PushBack("Jump");
     }
     _owner.GetStateManage().PopBack();

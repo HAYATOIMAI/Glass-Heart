@@ -27,13 +27,7 @@ Stage::Stage(GameMain& game) : ObjectBase{ game } {
     _test->handle("Test");
     _test->SetRotation(VGet(0.0f, 180.0f * std::numbers::pi_v<float> / 180.0f, 0.0f));
     _test->SetScale({ 500.f,  80.f, 80.f });
-
-    _testWhiteAndBlack = std::make_unique<Model::ModelManager>(*this);
-    _testWhiteAndBlack->handle("TestWB");
-    _testWhiteAndBlack->SetPosition(VGet(120.0f, 0.0f, -55.0f));
-    _testWhiteAndBlack->SetRotation(VGet(0.0f, 180.0f * std::numbers::pi_v<float> / 180.0f, 0.0f));
-    _testWhiteAndBlack->SetScale({ 50.f,  80.f, 80.f });
-
+    // 仮ステージのモデル
     _testStage = std::make_unique<Model::ModelManager>(*this);
     _testStage->handle("TestStage");
     _testStage->SetPosition(VGet(0.0f, 0.0f, 10.0f));
@@ -49,6 +43,7 @@ Stage::Stage(GameMain& game) : ObjectBase{ game } {
     // フレーム0をナビメッシュとして使用
     MV1SetupCollInfo(_testStage->GetHandle(), 0, 4, 4, 4);
     MV1SetupCollInfo(_testStage->GetHandle(), 3, 4, 4, 4);
+    MV1SetupCollInfo(_testStage->GetHandle(), 4, 4, 4, 4);
 
     // フォグの設定
     SetFogEnable(TRUE);

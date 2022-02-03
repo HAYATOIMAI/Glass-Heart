@@ -41,8 +41,9 @@ namespace GlassHeart {
             void EnemyFromPlayer();
             void PlayerFromEnemy();
             VECTOR CheckTerrain(const VECTOR& pos, const VECTOR& forward);
-
+            VECTOR CheckJumpStand(const VECTOR& pos, const VECTOR& forward);
             VECTOR CheckHitWall(const VECTOR& pos, const VECTOR& forward);
+            VECTOR CheckHitCeiling(const VECTOR& pos, const VECTOR& forward);
 
             void Render();
 
@@ -55,11 +56,16 @@ namespace GlassHeart {
             Report& GetReport() const { return *_report; }
             MV1_COLL_RESULT_POLY Mcrp() { return _mcrp; }
             MV1_COLL_RESULT_POLY_DIM CollPol() { return _collpol; }
+            MV1_COLL_RESULT_POLY GetStand() { return _stand; }
+            MV1_COLL_RESULT_POLY GetCeliling() { return _ceiling; }
         private:
             Object::ObjectBase& _owner;
             std::unique_ptr<Report> _report;
             MV1_COLL_RESULT_POLY _mcrp;
+            MV1_COLL_RESULT_POLY _stand;
+            MV1_COLL_RESULT_POLY _ceiling;
             MV1_COLL_RESULT_POLY_DIM _collpol;
+
 
             VECTOR _debugNum1{ 0, 0, 0 };
             VECTOR _debugNum2{ 0, 0, 0 };
