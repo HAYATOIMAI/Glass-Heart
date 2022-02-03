@@ -21,11 +21,11 @@ namespace AppFrame {
      * @brief 画像ファイル用
      */
     struct DivGraph {
-        std::string _fileName{ "" };
-        int _xNum{ 0 };
-        int _yNum{ 0 };
-        int _xSize{ 0 };
-        int _ySize{ 0 };
+        std::string fileName{ "" };
+        int xNum{ 0 };
+        int yNum{ 0 };
+        int xSize{ 0 };
+        int ySize{ 0 };
     };
     /**
      * @class ResourceServer

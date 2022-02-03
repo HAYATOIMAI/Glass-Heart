@@ -23,13 +23,12 @@ ModeGame::ModeGame(GameMain& game) : ModeMain{ game } {
 void ModeGame::Init() {
     //!< 使用するモデル
     AppFrame::ResourceServer::ModelMap usemap{
-    {"Player",    "Test/sotai.mv1"},
+    {"Player",    "boy/boy_black_mesh.mv1"},
     {"SkySphere", "skysphere.mv1"},
     {"Ground",    "ground.mv1"},
     {"Terrain",   "Ground/Ground.mv1"},
     {"Test",      "Test/ST_test.mv1"},
-    {"TestWB",    "Test/TestWB.mv1"},
-    {"TestStage", "Test/TestStege2.mv1"},
+    {"TestStage", "Test/ST_0.ver1.mv1"},
     };
     //!< モデルの読み込み
     GetResourceServer().LoadModels(usemap);

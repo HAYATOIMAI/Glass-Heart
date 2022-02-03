@@ -15,6 +15,7 @@ namespace GlassHeart {
     namespace Model {
         class ModelManager;
     }
+
     class GameMain;
 
     namespace Stage {
@@ -29,7 +30,6 @@ namespace GlassHeart {
             std::unique_ptr<Model::ModelManager> _skySphere;
             std::unique_ptr<Model::ModelManager> _ground;
             std::unique_ptr<Model::ModelManager> _test;
-            std::unique_ptr<Model::ModelManager> _testWhiteAndBlack;
             std::unique_ptr<Model::ModelManager> _testStage;
         };
     }

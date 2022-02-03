@@ -58,7 +58,7 @@ namespace AppFrame {
             return false;
         }
 
-        SetBackgroundColor(0, 0, 255);
+        //SetBackgroundColor(0, 0, 255);
 
         //! •`‰ææ‰æ–Ê‚ğ— ‚É‚·‚é
         SetDrawScreen(DX_SCREEN_BACK);

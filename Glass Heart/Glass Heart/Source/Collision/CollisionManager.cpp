@@ -1,5 +1,5 @@
 
-/*****************************************************************//**
+/*********************************************************************
  * @file   CollisionManager.cpp
  * @brief  コリジョンマネージャークラスの処理
  *
@@ -12,8 +12,6 @@
 #include "../Model/ModelAnimeManager.h"
 #include "../Application/GameMain.h"
 #include <AppFrame.h>
-
-using namespace GlassHeart::Collision;
 
 GlassHeart::Collision::Sphere::Sphere(const VECTOR& center, float radius)
     :center(center)
@@ -33,7 +31,7 @@ bool GlassHeart::Collision::Intersect(const Sphere& a, const Sphere& b)
 }
 
 
-CollisionManager::CollisionManager(GlassHeart::Object::ObjectBase& owner) : _owner{ owner } {
+GlassHeart::Collision::CollisionManager::CollisionManager(GlassHeart::Object::ObjectBase& owner) : _owner{ owner } {
     _report = std::make_unique<Report>();
 }
 
@@ -84,7 +82,7 @@ void GlassHeart::Collision::CollisionManager::PlayerFromEnemy() {
     }
 }
 /** 床との当たり判定 */
-VECTOR CollisionManager::CheckTerrain(const VECTOR& pos, const VECTOR& forward) {
+VECTOR GlassHeart::Collision::CollisionManager::CheckTerrain(const VECTOR& pos, const VECTOR& forward) {
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("TestStage");
     auto newPos = VAdd(pos, forward);
     auto start = VAdd(newPos, { 0, 100, 0 });
@@ -99,8 +97,27 @@ VECTOR CollisionManager::CheckTerrain(const VECTOR& pos, const VECTOR& forward) 
     newPos = _mcrp.HitPosition;
     return  newPos;
 }
+VECTOR GlassHeart::Collision::CollisionManager::CheckJumpStand(const VECTOR& pos, const VECTOR& forward) {
+
+    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("TestStage");
+    auto newPos = VAdd(pos, forward);
+    auto start = VAdd(newPos, { 0, 100, 0 });
+    auto end = VAdd(newPos, { 0, -10000, 0 });
+    _stand = MV1CollCheck_Line(handle, 4, start, end);
+
+    if (_stand.HitFlag == 0) {
+        // 衝突なし移動しない
+        return pos;
+    }
+    if (_stand.HitFlag == 1)  {
+        // 衝突あれば移動する
+        newPos = _stand.HitPosition;
+    }
+
+    return  newPos;
+}
 /** 壁との当たり判定 */
-VECTOR CollisionManager::CheckHitWall(const VECTOR& pos, const VECTOR& forward) {
+VECTOR GlassHeart::Collision::CollisionManager::CheckHitWall(const VECTOR& pos, const VECTOR& forward) {
 
     auto black = 3;
     auto white = 0;
@@ -128,7 +145,24 @@ VECTOR CollisionManager::CheckHitWall(const VECTOR& pos, const VECTOR& forward) 
 
     return newPos;
 }
+VECTOR GlassHeart::Collision::CollisionManager::CheckHitCeiling(const VECTOR& pos, const VECTOR& forward)
+{
+    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("TestStage");
+    auto newPos = VAdd(pos, forward);
+    auto start = VAdd(newPos, { 0, -10000, 0 });
+    auto end = VAdd(newPos, { 0, 100, 0 });
+    _ceiling = MV1CollCheck_Line(handle, 5, start, end);
 
+    if (_ceiling.HitFlag == 0) {
+        return pos;
+    }
+    if (_ceiling.HitFlag == 1) {
+        newPos = _ceiling.HitPosition;
+    }
+
+    return newPos;
+}
+/** デバッグ用当たり判定表示 */
 void GlassHeart::Collision::CollisionManager::Render(){
     DrawCapsule3D(_debugNum1, _debugNum2, 0.5f, 10, GetColor(255, 0, 0), GetColor(255, 255, 255), FALSE);
 }

@@ -35,11 +35,11 @@ namespace AppFrame {
             handles.clear();
             _graphs.erase(key.data());
         }
-        auto allnum = divgraph._xNum * divgraph._yNum;
+        auto allnum = divgraph.xNum * divgraph.yNum;
         std::vector<int> handles(allnum);
-        LoadDivGraph(divgraph._fileName.c_str(), allnum,
-            divgraph._xNum, divgraph._yNum,
-            divgraph._xSize, divgraph._ySize, handles.data());
+        LoadDivGraph(divgraph.fileName.c_str(), allnum,
+            divgraph.xNum, divgraph.yNum,
+            divgraph.xSize, divgraph.ySize, handles.data());
 
         _graphs.emplace(key, std::make_pair(divgraph, handles));
     }
@@ -48,7 +48,7 @@ namespace AppFrame {
         for (auto&& [key, graph] : graphmap) {
             auto gra = graph;
             // _currentPath(格納フォルダ)＋ファイル名
-            gra._fileName = (_currrntPath / gra._fileName).generic_string();
+            gra.fileName = (_currrntPath / gra.fileName).generic_string();
             LoadGraphic(key, gra);
         }
     }
