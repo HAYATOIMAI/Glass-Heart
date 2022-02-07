@@ -35,10 +35,11 @@ namespace GlassHeart {
             bool _isJump{ false };
             bool _isfall{ false };
             VECTOR _jumpStartPosition;
+            VECTOR _moveVector;
             VECTOR _jumpVelocity; //!< ‘¬“x
             VECTOR _lastPosition;
         };
-    }
-}
+    } //  State 
+} // GlassHeart
 
 

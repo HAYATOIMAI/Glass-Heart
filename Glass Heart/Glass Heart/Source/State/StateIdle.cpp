@@ -34,7 +34,7 @@ void StateIdle::Update() {
 	if (_owner.GetCollision().GetStand().HitFlag == 1) {
 		// Ú‚µ‚Ä‚¢‚é‘«ê‚ÆˆÙ‚È‚éF‚Ìê‡‚Ì‚Ý‚Æ‚Ç‚Ü‚é
 		if (_owner.GetCrName() == "White") {
-			_owner.SetPosition(_owner.GetCollision().CheckJumpStand(_owner.GetPosition(), { 0, 700, 0 }));
+			_owner.SetPosition(_owner.GetCollision().CheckJumpStand(_owner.GetPosition(), { 0, 300, 0 }));
 		}
 		else if (_owner.GetCrName() == "Black") {
 			_owner.SetPosition(_owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 7, 0 }));
@@ -42,7 +42,7 @@ void StateIdle::Update() {
 	}
 	// ‹ó’†‚Ì‘«ê‚ÆÚ‚µ‚Ä‚¢‚È‚©‚Á‚½‚ç’nã‚Ì‘«ê‚É–ß‚·
 	if (_owner.GetCollision().GetStand().HitFlag == 0) {
-		_owner.SetPosition(_owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 700, 0 }));
+		_owner.SetPosition(_owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 300, 0 }));
 	}
 
 	if (_cnt > 0) {

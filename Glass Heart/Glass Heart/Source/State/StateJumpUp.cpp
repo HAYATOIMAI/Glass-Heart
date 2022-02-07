@@ -33,7 +33,7 @@ void StateJumpUp::Update() {
         _owner.GetStateManage().PushBack("JumpFall");
     }
     // ˆê’è‚Ì‚‚³‚É’B‚µ‚½‚ç—Ž‰ºŠJŽn
-    if (_owner.GetPosition().y > 700.0f && _owner.GetPosition().y < 1200.0f) {
+    if (_owner.GetPosition().y > 1000.0f) {
         _isfall = true;
     }
 }

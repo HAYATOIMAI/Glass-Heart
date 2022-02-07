@@ -35,15 +35,24 @@ Stage::Stage(GameMain& game) : ObjectBase{ game } {
     _testStage->SetScale({ 1.f, 1.f, 1.f });
 
     // ナビメッシュを非表示
-    MV1SetFrameVisible(_testStage->GetHandle(), 0, FALSE);
-    MV1SetFrameVisible(_testStage->GetHandle(), 1, FALSE);
+    //MV1SetFrameVisible(_testStage->GetHandle(), 0, FALSE);
+    //MV1SetFrameVisible(_testStage->GetHandle(), 1, FALSE);
+    MV1SetFrameVisible(_testStage->GetHandle(), 2, FALSE);
+    MV1SetFrameVisible(_testStage->GetHandle(), 3, FALSE);
     MV1SetFrameVisible(_testStage->GetHandle(), 4, FALSE);
     MV1SetFrameVisible(_testStage->GetHandle(), 5, FALSE);
+    MV1SetFrameVisible(_testStage->GetHandle(), 6, FALSE);
+    MV1SetFrameVisible(_testStage->GetHandle(), 7, FALSE);
+    MV1SetFrameVisible(_testStage->GetHandle(), 8, FALSE);
 
     // フレーム0をナビメッシュとして使用
-    MV1SetupCollInfo(_testStage->GetHandle(), 0, 4, 4, 4);
+    MV1SetupCollInfo(_testStage->GetHandle(), 2, 4, 4, 4);
     MV1SetupCollInfo(_testStage->GetHandle(), 3, 4, 4, 4);
     MV1SetupCollInfo(_testStage->GetHandle(), 4, 4, 4, 4);
+    MV1SetupCollInfo(_testStage->GetHandle(), 5, 4, 4, 4);
+    MV1SetupCollInfo(_testStage->GetHandle(), 6, 4, 4, 4);
+    MV1SetupCollInfo(_testStage->GetHandle(), 7, 4, 4, 4);
+    MV1SetupCollInfo(_testStage->GetHandle(), 8, 4, 4, 4);
 
     // フォグの設定
     SetFogEnable(TRUE);

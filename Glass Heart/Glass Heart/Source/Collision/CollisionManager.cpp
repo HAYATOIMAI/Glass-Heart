@@ -87,7 +87,7 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckTerrain(const VECTOR& pos, 
     auto newPos = VAdd(pos, forward);
     auto start = VAdd(newPos, { 0, 100, 0 });
     auto end = VAdd(newPos, { 0, -10000, 0 });
-    _mcrp = MV1CollCheck_Line(handle, 0, start, end);
+    _mcrp = MV1CollCheck_Line(handle, 4, start, end);
 
     if (_mcrp.HitFlag == 0) {
         // è’ìÀÇ»Çµà⁄ìÆÇµÇ»Ç¢
@@ -101,8 +101,8 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckJumpStand(const VECTOR& pos
 
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("TestStage");
     auto newPos = VAdd(pos, forward);
-    auto start = VAdd(newPos, { 0, 100, 0 });
-    auto end = VAdd(newPos, { 0, -10000, 0 });
+    auto start = VAdd(newPos, { 0, 30, 0 });
+    auto end = VAdd(newPos, { 0, -100, 0 });
     _stand = MV1CollCheck_Line(handle, 4, start, end);
 
     if (_stand.HitFlag == 0) {
