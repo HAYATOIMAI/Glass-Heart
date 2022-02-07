@@ -33,8 +33,6 @@ void ModeGame::Init() {
     //!< モデルの読み込み
     GetResourceServer().LoadModels(usemap);
 }
-//Girl/PC3
-//boy/PC2_Ver2
 //!< 入り口処理
 void ModeGame::Enter() {
     // ファクトリの生成とクリエイターの登録
