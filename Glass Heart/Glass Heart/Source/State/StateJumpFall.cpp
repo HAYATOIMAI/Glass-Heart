@@ -21,7 +21,7 @@ void StateJumpFall::Input(AppFrame::InputManager& input) {}
 void StateJumpFall::Update() {
     // 一定の高さ以上だったら　地面と接しているか確認
     if (_owner.GetPosition().y >= 300) {
-        _owner.GetCollision().CheckJumpStand(_owner.GetPosition(), { 0, 3, 0 });
+        _owner.GetCollision().CheckJumpStand(_owner.GetPosition(), { 0, 300, 0 });
         _owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 300, 0 });
         // 空中の足場と接しているか
         if (_owner.GetCollision().GetStand().HitFlag == 1) {

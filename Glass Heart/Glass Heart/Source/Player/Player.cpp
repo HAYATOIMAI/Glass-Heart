@@ -134,12 +134,18 @@ void Player::ColorCollisionDetectionSystem() {
 
     if (_crState == ColourState::Black) {
         _stateName = "Black";
-        MV1SetMaterialSpcColor(animHandle, 0, GetColorF(0.0f, 0.0f, 0.0f, 0.0f));
+        MV1SetFrameVisible(animHandle, 0, FALSE);
+        MV1SetFrameVisible(animHandle, 1, TRUE);
+        MV1SetFrameVisible(animHandle, 2, FALSE);
+        MV1SetFrameVisible(animHandle, 3, TRUE);
         _crState = ColourState::White;
     }
     else if (_crState == ColourState::White) {
         _stateName = "White";
-        MV1SetMaterialSpcColor(animHandle, 0, GetColorF(1.0f, 1.0f, 1.0f, 0.0f));
+        MV1SetFrameVisible(animHandle, 1, FALSE);
+        MV1SetFrameVisible(animHandle, 0, TRUE);
+        MV1SetFrameVisible(animHandle, 3, FALSE);
+        MV1SetFrameVisible(animHandle, 2, TRUE);
         _crState = ColourState::Black;
     }
 }
