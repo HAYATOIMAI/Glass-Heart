@@ -21,7 +21,7 @@ namespace {
 
 void StateRun::Enter() {
     _owner.SetForwardSpeed(DefaultSpeed);
-    _owner.GetModelAnime().ChangeAnime("MO_SDChar_run", true);
+    _owner.GetModelAnime().ChangeAnime("dash", true);
 }
 
 void StateRun::Input(AppFrame::InputManager& input) {

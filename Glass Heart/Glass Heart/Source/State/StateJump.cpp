@@ -39,7 +39,7 @@ void StateJump::Enter() {
         _jumpVelocity = jumpbase;
     }
 
-    _owner.GetModelAnime().ChangeAnime("MO_SDChar_jumpStart", true);
+    _owner.GetModelAnime().ChangeAnime("Jump_start", true);
 }
 /** “ü—Íˆ— */
 void StateJump::Input(AppFrame::InputManager& input) {
