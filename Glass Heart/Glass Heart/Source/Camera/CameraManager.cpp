@@ -16,8 +16,8 @@ using namespace GlassHeart::Camera;
 namespace {
 
      constexpr auto CameraDisX = 0;  //!< X軸の倍率
-     constexpr auto CameraDisY = 4;   //!< Y軸の倍率
-     constexpr auto CameraDisZ = 8;  //!< Z軸の倍率
+     constexpr auto CameraDisY = 3;   //!< Y軸の倍率
+     constexpr auto CameraDisZ = 6;  //!< Z軸の倍率
 }
 
 CameraManager::CameraManager() {
@@ -50,7 +50,7 @@ void CameraManager::Update() {
     // カメラの位置をプレイヤーの横位置にする
     _position = VAdd(_target, fromTarget);
     // カメラを正射影に変更
-  //  SetupCamera_Ortho(1500.0f);
+    //SetupCamera_Ortho(900.0f);
     SetCameraPositionAndTarget_UpVecY(_position, _target);
 }
 
@@ -58,8 +58,8 @@ void CameraManager::Render() {
 #ifdef _DEBUG
     auto x = 0; auto y = 32 * 3; auto size = 32;
     SetFontSize(size);
-    DrawFormatString(x, y, GetColor(255, 0, 0), "カメラX座標 =  %.3f ", _position.x); y += size;
-    DrawFormatString(x, y, GetColor(255, 0, 0), "カメラY座標 =  %.3f ", _position.y); y += size;
-    DrawFormatString(x, y, GetColor(255, 0, 0), "カメラZ座標 =  %.3f ", _position.z); y += size;
+    DrawFormatString(x, y, GetColor(255, 255, 255), "カメラX座標 =  %.3f ", _position.x); y += size;
+    DrawFormatString(x, y, GetColor(255, 255, 255), "カメラY座標 =  %.3f ", _position.y); y += size;
+    DrawFormatString(x, y, GetColor(255, 255, 255), "カメラZ座標 =  %.3f ", _position.z); y += size;
 #endif // _DEBUG
 }

@@ -16,8 +16,8 @@
 #include <numbers>
 
 namespace {
-    constexpr auto PlayerPositionX = 0.0f;     //!< プレイヤーの初期位置X
-    constexpr auto PlayerPositionY = 70.0f;    //!< プレイヤーの初期位置Y
+    constexpr auto PlayerPositionX = -150.0f;     //!< プレイヤーの初期位置X
+    constexpr auto PlayerPositionY = 40.0f;    //!< プレイヤーの初期位置Y
     constexpr auto PlayerPositionZ = -140.0f;  //!< プレイヤーの初期位置Z
 }
 
@@ -76,7 +76,7 @@ void Player::Render() {
     DrawFormatString(x, y, GetColor(255, 255, 255), "プレイヤーY座標 =  %.3f ", _position.y); y += size;
     DrawFormatString(x, y, GetColor(255, 255, 255), "プレイヤーZ座標 =  %.3f ", _position.z); y += size;
     // 色状態を表示
-    DrawFormatString(i, o, GetColor(255, 0, 0), _stateName.c_str(), _crState); y += size;
+    DrawFormatString(i, o, GetColor(255, 255, 255), _stateName.c_str(), _crState); y += size;
     //カメラの位置を表示
     _cameraManage->Render();
     DrawLine3D(VGet(_lastPosition.x, _lastPosition.y, _lastPosition.z), VGet(_position.x, _position.y / 200.0f, _position.z), GetColor(255, 0, 0));
@@ -101,13 +101,13 @@ void Player::Move(const VECTOR& forward) {
     //Y成分
     pos = _collsionManage->CheckTerrain(pos, { forward.x, forward.y, forward.z });
     // Z成分のみ移動後位置から真下に線分判定
-    pos = _collsionManage->CheckTerrain(pos, { 0, forward.y, forward.z });
+    //pos = _collsionManage->CheckTerrain(pos, { 0, forward.y, forward.z });
 
-    pos = _collsionManage->CheckJumpStand(pos, { forward.x, forward.y, 0 });
+    pos = _collsionManage->CheckDeath(pos, { forward.x, forward.y, 0 });
 
-    pos = _collsionManage->CheckJumpStand(pos, { forward.x, forward.y, forward.z });
+    pos = _collsionManage->CheckDeath(pos, { forward.x, forward.y, forward.z });
 
-    pos = _collsionManage->CheckJumpStand(pos, { 0, forward.y, forward.z });
+    //pos = _collsionManage->CheckDeath(pos, { 0, forward.y, forward.z });
 
     // 色状態が白のときのみ黒のメッシュと判定を行う
     if (_crState == ColourState::Black) {
@@ -116,14 +116,20 @@ void Player::Move(const VECTOR& forward) {
         // Y成分
         pos = _collsionManage->CheckHitWall(pos, { forward.x, forward.y, forward.z });
         // Z成分
-        pos = _collsionManage->CheckHitWall(pos, { 0, forward.y, forward.z });
+        //pos = _collsionManage->CheckHitWall(pos, { 0, forward.y, forward.z });
 
-        pos = _collsionManage->CheckJumpStand(pos, { forward.x, forward.y, 0 });
+        pos = _collsionManage->CheckDeath(pos, { forward.x, forward.y, 0 });
 
-        pos = _collsionManage->CheckJumpStand(pos, { forward.x, forward.y, forward.z });
+        pos = _collsionManage->CheckDeath(pos, { forward.x, forward.y, forward.z });
 
-        pos = _collsionManage->CheckJumpStand(pos, { 0, forward.y, forward.z });
+       // pos = _collsionManage->CheckDeath(pos, { 0, forward.y, forward.z });
     }
+
+    if (_collsionManage->GetStand().HitFlag == 1)
+    {
+        _position = VGet(PlayerPositionX, PlayerPositionY, PlayerPositionZ);
+    }
+
     // 座標更新
     _position = pos;
 }

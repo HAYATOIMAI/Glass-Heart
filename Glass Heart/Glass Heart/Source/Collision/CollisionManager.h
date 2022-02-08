@@ -41,7 +41,7 @@ namespace GlassHeart {
             void EnemyFromPlayer();
             void PlayerFromEnemy();
             VECTOR CheckTerrain(const VECTOR& pos, const VECTOR& forward);
-            VECTOR CheckJumpStand(const VECTOR& pos, const VECTOR& forward);
+            VECTOR CheckDeath(const VECTOR& pos, const VECTOR& forward);
             VECTOR CheckHitWall(const VECTOR& pos, const VECTOR& forward);
             VECTOR CheckHitCeiling(const VECTOR& pos, const VECTOR& forward);
 

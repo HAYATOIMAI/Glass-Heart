@@ -31,17 +31,17 @@ void StateIdle::Input(AppFrame::InputManager& input) {
 
 void StateIdle::Update() {
 	// ‹ó’†‚Ì‘«ê‚ÆÚ‚µ‚Ä‚¢‚é‚©
-	if (_owner.GetCollision().GetStand().HitFlag == 1) {
+	if (_owner.GetCollision().Mcrp().HitFlag == 1) {
 		// Ú‚µ‚Ä‚¢‚é‘«ê‚ÆˆÙ‚È‚éF‚Ìê‡‚Ì‚İ‚Æ‚Ç‚Ü‚é
 		if (_owner.GetCrName() == "White") {
-			_owner.SetPosition(_owner.GetCollision().CheckJumpStand(_owner.GetPosition(), { 0, 700, 0 }));
+			_owner.SetPosition(_owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 700, 0 }));
 		}
 		else if (_owner.GetCrName() == "Black") {
-			_owner.SetPosition(_owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 7, 0 }));
+			_owner.SetPosition(_owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 700, 0 }));
 		}
 	}
 	// ‹ó’†‚Ì‘«ê‚ÆÚ‚µ‚Ä‚¢‚È‚©‚Á‚½‚ç’nã‚Ì‘«ê‚É–ß‚·
-	if (_owner.GetCollision().GetStand().HitFlag == 0) {
+	if (_owner.GetCollision().Mcrp().HitFlag == 0) {
 		_owner.SetPosition(_owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 700, 0 }));
 	}
 

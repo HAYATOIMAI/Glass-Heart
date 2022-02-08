@@ -85,9 +85,9 @@ void GlassHeart::Collision::CollisionManager::PlayerFromEnemy() {
 VECTOR GlassHeart::Collision::CollisionManager::CheckTerrain(const VECTOR& pos, const VECTOR& forward) {
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("TestStage");
     auto newPos = VAdd(pos, forward);
-    auto start = VAdd(newPos, { 0, 100, 0 });
+    auto start = VAdd(newPos, { 0, 50, 0 });
     auto end = VAdd(newPos, { 0, -10000, 0 });
-    _mcrp = MV1CollCheck_Line(handle, 0, start, end);
+    _mcrp = MV1CollCheck_Line(handle, 2, start, end);
 
     if (_mcrp.HitFlag == 0) {
         // è’ìÀÇ»Çµà⁄ìÆÇµÇ»Ç¢
@@ -97,13 +97,13 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckTerrain(const VECTOR& pos, 
     newPos = _mcrp.HitPosition;
     return  newPos;
 }
-VECTOR GlassHeart::Collision::CollisionManager::CheckJumpStand(const VECTOR& pos, const VECTOR& forward) {
+VECTOR GlassHeart::Collision::CollisionManager::CheckDeath(const VECTOR& pos, const VECTOR& forward) {
 
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("TestStage");
     auto newPos = VAdd(pos, forward);
     auto start = VAdd(newPos, { 0, 100, 0 });
-    auto end = VAdd(newPos, { 0, -10000, 0 });
-    _stand = MV1CollCheck_Line(handle, 4, start, end);
+    auto end = VAdd(newPos, { 0, -1000, 0 });
+    _stand = MV1CollCheck_Line(handle, 1, start, end);
 
     if (_stand.HitFlag == 0) {
         // è’ìÀÇ»Çµà⁄ìÆÇµÇ»Ç¢
@@ -119,15 +119,14 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckJumpStand(const VECTOR& pos
 /** ï«Ç∆ÇÃìñÇΩÇËîªíË */
 VECTOR GlassHeart::Collision::CollisionManager::CheckHitWall(const VECTOR& pos, const VECTOR& forward) {
 
-    auto black = 3;
-    auto white = 0;
+    auto wall = 7;
     auto round = 0.5f;
 
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("TestStage");
     auto newPos = VAdd(pos, forward);
     auto c1 = VAdd(newPos, { 5.f, 0.f, 0.f });
     auto c2 = VAdd(newPos, { 5.f, 0.f, 0.f });
-    _collpol = MV1CollCheck_Capsule(handle, black, c1, c2, round);
+    _collpol = MV1CollCheck_Capsule(handle, wall, c1, c2, round);
 
     if (_collpol.HitNum == 0) {
         // è’ìÀñ≥Çµ
