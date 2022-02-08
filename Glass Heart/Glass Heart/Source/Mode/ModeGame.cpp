@@ -23,12 +23,20 @@ ModeGame::ModeGame(GameMain& game) : ModeMain{ game } {
 void ModeGame::Init() {
     //!< 使用するモデル
     AppFrame::ResourceServer::ModelMap usemap{
+<<<<<<< HEAD
     {"Player",    "boy/PC2_Ver2.mv1"},
+=======
+    {"Player",    "Boy/PC2_Ver2.mv1"},
+>>>>>>> 20d15396b0340e91c89ed3ce4e63dcdfdc047354
     {"SkySphere", "skysphere.mv1"},
     {"Ground",    "ground.mv1"},
     {"Terrain",   "Ground/Ground.mv1"},
     {"Test",      "Test/ST_test.mv1"},
+<<<<<<< HEAD
     {"TestStage", "Test/TestStege2.mv1"},
+=======
+    {"TestStage", "Test/ST_0.ver3.mv1"},
+>>>>>>> 20d15396b0340e91c89ed3ce4e63dcdfdc047354
     };
     //!< モデルの読み込み
     GetResourceServer().LoadModels(usemap);

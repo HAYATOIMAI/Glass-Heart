@@ -24,18 +24,18 @@ using namespace GlassHeart::State;
 StateJump::StateJump(Player::Player& owner) : StateBase{ owner } {
     _jumpStartPosition = VGet(0.0f, 0.0f, 0.0f);
     _jumpVelocity = VGet(0.0f, 0.0f, 0.0f);
+    _moveVector = VGet(0.0f, 0.0f, 0.0f);
     _lastPosition = _owner.GetPosition();
 }
 /** 入り口処理 */
 void StateJump::Enter() {
-    _jumpStartPosition = _owner.GetPosition();
 
     if (_owner.GetRotation().y == 270.0f * (std::numbers::pi_v<float> / 180.0f)) {
-        VECTOR jumpbase = VGet(-12.0f, _jumpPower, 0.0f);
+        VECTOR jumpbase = VGet(0.0f, _jumpPower, 0.0f);
         _jumpVelocity = jumpbase;
     }
     else if(_owner.GetRotation().y ==  90.0f * (std::numbers::pi_v<float> / 180.0f)) {
-        VECTOR jumpbase = VGet(12.0f, _jumpPower, 0.0f);
+        VECTOR jumpbase = VGet(0.0f, _jumpPower, 0.0f);
         _jumpVelocity = jumpbase;
     }
 <<<<<<< HEAD
@@ -71,26 +71,38 @@ void StateJump::Update() {
     if (_isJump == true){
          JumpFunction(_isJump);
     }   
-
-    
-
-    // 空中ブロックの天井との当たり判定(現状機能せず)
-    //_owner.GetCollision().CheckHitCeiling(_owner.GetPosition(), { 0, -100, 0 });
-
 }
 /** ジャンプ処理制御 */
 void StateJump::JumpFunction(const bool isJumpStart) {
 
+<<<<<<< HEAD
     auto jump = JumpProcess();
     // 一定の高さ以上かフラグがtrueならジャンプ開始
     if (isJumpStart ||  jump.y > 35.0f) {
         _owner.SetPosition(jump);
         // 一定の高さ以上になったら上昇状態に移行
         if (_owner.GetPosition().y > 100.f) {
+=======
+>>>>>>> 20d15396b0340e91c89ed3ce4e63dcdfdc047354
 
-            _owner.GetStateManage().PushBack("JumpUp");
+    _owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 300, 0 });
+
+    if (_owner.GetCollision().Mcrp().HitFlag )
+    {
+        auto jump = JumpProcess();
+        // 一定の高さ以上かフラグがtrueならジャンプ開始
+        if (isJumpStart || jump.y > 0.0f) {
+            _owner.SetPosition(jump);
+            //　移動ベクトルがマイナスになったら下降状態に移行
+            if (_jumpVelocity.y < 0) {
+                _owner.GetStateManage().PushBack("JumpFall");
+            }
+        }
+        else {
+            _isJump = false;
         }
     }
+<<<<<<< HEAD
     else {
         _isJump = false;
     }
@@ -108,6 +120,8 @@ void StateJump::JumpFunction(const bool isJumpStart) {
     //    _isfall = true;
     //}
 
+=======
+>>>>>>> 20d15396b0340e91c89ed3ce4e63dcdfdc047354
 }
 /** ジャンプ中処理 */
 VECTOR StateJump::JumpProcess() {

@@ -87,7 +87,11 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckTerrain(const VECTOR& pos, 
     auto newPos = VAdd(pos, forward);
     auto start = VAdd(newPos, { 0, 50, 0 });
     auto end = VAdd(newPos, { 0, -10000, 0 });
+<<<<<<< HEAD
     _mcrp = MV1CollCheck_Line(handle, 2, start, end);
+=======
+    _mcrp = MV1CollCheck_Line(handle, 4, start, end);
+>>>>>>> 20d15396b0340e91c89ed3ce4e63dcdfdc047354
 
     if (_mcrp.HitFlag == 0) {
         // è’ìÀÇ»Çµà⁄ìÆÇµÇ»Ç¢
@@ -101,9 +105,15 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckDeath(const VECTOR& pos, co
 
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("TestStage");
     auto newPos = VAdd(pos, forward);
+<<<<<<< HEAD
     auto start = VAdd(newPos, { 0, 100, 0 });
     auto end = VAdd(newPos, { 0, -1000, 0 });
     _stand = MV1CollCheck_Line(handle, 1, start, end);
+=======
+    auto start = VAdd(newPos, { 0, 30, 0 });
+    auto end = VAdd(newPos, { 0, -100, 0 });
+    _stand = MV1CollCheck_Line(handle, 4, start, end);
+>>>>>>> 20d15396b0340e91c89ed3ce4e63dcdfdc047354
 
     if (_stand.HitFlag == 0) {
         // è’ìÀÇ»Çµà⁄ìÆÇµÇ»Ç¢

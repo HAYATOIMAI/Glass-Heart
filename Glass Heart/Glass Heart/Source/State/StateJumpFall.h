@@ -27,11 +27,7 @@ namespace GlassHeart {
             void Update() override;
             void Input(AppFrame::InputManager& input) override;
         private:
-
+            float _addVx{ 0.0f }; //!< ストレイフ用X軸移動量
         };
     }
-
 }
-
-
-

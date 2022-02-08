@@ -18,6 +18,8 @@ namespace AppFrame {
          * @brief 更新処理
          */
         void Process();
+
+        void InputReject();
         // 方向キー上
         bool GetXinputUp() { return _xInput.Buttons[XINPUT_BUTTON_DPAD_UP]; }
         // 方向キー下
@@ -60,11 +62,9 @@ namespace AppFrame {
         bool GetXinputThumbRY() { return _xInput.ThumbRY; }
         /**  左スティックの横軸値 */
         short GetAnalogStickLX() { return _xInput.ThumbLX; }
-        /** 左スティックの縦軸値 */
-        short GetAnalogStickLY() { return _xInput.ThumbLY; }
+        /** 左スティックの横軸値のセッター */
+       // short SetAnalogStickLx(short analog) { _xInput.ThumbLX = analog; }
 
-        /** トリガ入力を取得 */
-        XINPUT_STATE& GetTrg() { return _xTrigger; }
         // 方向キー上
         bool GetXTriggerUp() { return _xTrigger.Buttons[XINPUT_BUTTON_DPAD_UP]; }
         // 方向キー下
@@ -102,5 +102,4 @@ namespace AppFrame {
         DINPUT_JOYSTATE _dInput{ 0 };  //!< DirectInput用入力情報
         DINPUT_JOYSTATE _dTrigger{ 0 };  //!< DirectInput用トリガー入力情報
     };
-
 }
