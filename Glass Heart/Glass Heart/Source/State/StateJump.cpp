@@ -38,8 +38,13 @@ void StateJump::Enter() {
         VECTOR jumpbase = VGet(12.0f, _jumpPower, 0.0f);
         _jumpVelocity = jumpbase;
     }
+<<<<<<< HEAD
    
     _owner.GetModelAnime().ChangeAnime("MO_SDChar_jumpStart", true);
+=======
+
+    _owner.GetModelAnime().ChangeAnime("Jump_start", true);
+>>>>>>> 989e81406f870dcb22c2ed52ae5680147a58cf2f
 }
 /** “ü—Íˆ— */
 void StateJump::Input(AppFrame::InputManager& input) {

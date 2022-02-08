@@ -16,7 +16,7 @@ using namespace GlassHeart::State;
 
 void StateIdle::Enter() {
 	_owner.SetForwardSpeed(0.0f);
-	_owner.GetModelAnime().ChangeAnime("MO_SDChar_idle", true);
+	_owner.GetModelAnime().ChangeAnime("idle", true);
 }
 
 void StateIdle::Input(AppFrame::InputManager& input) {
