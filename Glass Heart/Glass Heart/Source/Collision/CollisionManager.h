@@ -35,15 +35,24 @@ namespace GlassHeart {
                 HitFromPlayer,
                 HitFromEnemy,
             };
-
+            /**
+             * @brief　コンストラクタ
+             * 
+             * @param owner　オブジェクトベースクラスへの参照
+             */
             CollisionManager(GlassHeart::Object::ObjectBase& owner);
-
-            void EnemyFromPlayer();
-            void PlayerFromEnemy();
+            /**
+             * @brief
+             * 
+             * @param pos
+             * @param forward
+             * @return 
+             */
             VECTOR CheckTerrain(const VECTOR& pos, const VECTOR& forward);
-            VECTOR CheckDeath(const VECTOR& pos, const VECTOR& forward);
+            VECTOR CheckJumpStand(const VECTOR& pos, const VECTOR& forward);
             VECTOR CheckHitWall(const VECTOR& pos, const VECTOR& forward);
             VECTOR CheckHitCeiling(const VECTOR& pos, const VECTOR& forward);
+            VECTOR CheckHitDeathFloor(const VECTOR& pos, const VECTOR& forward);
 
             void Render();
 
@@ -58,6 +67,7 @@ namespace GlassHeart {
             MV1_COLL_RESULT_POLY_DIM CollPol() { return _collpol; }
             MV1_COLL_RESULT_POLY GetStand() { return _stand; }
             MV1_COLL_RESULT_POLY GetCeliling() { return _ceiling; }
+            MV1_COLL_RESULT_POLY_DIM GetDeathMesh() { return _death; }
         private:
             Object::ObjectBase& _owner;
             std::unique_ptr<Report> _report;
@@ -65,6 +75,7 @@ namespace GlassHeart {
             MV1_COLL_RESULT_POLY _stand;
             MV1_COLL_RESULT_POLY _ceiling;
             MV1_COLL_RESULT_POLY_DIM _collpol;
+            MV1_COLL_RESULT_POLY_DIM _death;
 
 
             VECTOR _debugNum1{ 0, 0, 0 };

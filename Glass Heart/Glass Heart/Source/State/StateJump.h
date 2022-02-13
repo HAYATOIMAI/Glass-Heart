@@ -32,10 +32,10 @@ namespace GlassHeart {
         private:
             float _gravity{ 0.f };  //!< d—Í‰Á‘¬“x
             float _jumpPower{ 100.0f };
+            float _addVx{ 0.0f };
             bool _isJump{ false };
             bool _isfall{ false };
             VECTOR _jumpStartPosition;
-            VECTOR _moveVector;
             VECTOR _jumpVelocity; //!< ‘¬“x
             VECTOR _lastPosition;
         };

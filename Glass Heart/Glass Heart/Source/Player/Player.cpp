@@ -17,7 +17,7 @@
 
 namespace {
     constexpr auto PlayerPositionX = -150.0f;     //!< プレイヤーの初期位置X
-    constexpr auto PlayerPositionY = 40.0f;    //!< プレイヤーの初期位置Y
+    constexpr auto PlayerPositionY = 20.0f;    //!< プレイヤーの初期位置Y
     constexpr auto PlayerPositionZ = -140.0f;  //!< プレイヤーの初期位置Z
 }
 
@@ -25,10 +25,9 @@ using namespace GlassHeart::Player;
 
 /** コンストラクタ */
 Player::Player(GameMain& game) : GlassHeart::Object::ObjectBase{ game } {
-
     _rotation = VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f);
     _position = VGet(PlayerPositionX, PlayerPositionY, PlayerPositionZ);
-    
+   
 }
 /** 入力処理 */
 void Player::Input(AppFrame::InputManager& input) {
@@ -39,7 +38,7 @@ void Player::Input(AppFrame::InputManager& input) {
     if (input.GetJoyPad().GetXinputLeftShoulder() && _colourCount == 0) {
         //連打防止のため1秒(60フレーム)間入力を制限
         ColorCollisionDetectionSystem();
-        _colourCount = 60;
+        _colourCount = 20;
     }
 }
 /** 更新処理 */
@@ -63,6 +62,7 @@ void Player::Process() {
     _cameraManage->Update();
     // オブジェクトサーバーに位置を送信
     GetObjectServer().Register("Player", _position);
+
     _lastPosition = _position;
 }
 /** 描画処理 */
@@ -100,34 +100,21 @@ void Player::Move(const VECTOR& forward) {
     pos = _collsionManage->CheckTerrain(pos, { forward.x, forward.y, 0 });
     //Y成分
     pos = _collsionManage->CheckTerrain(pos, { forward.x, forward.y, forward.z });
-    // Z成分のみ移動後位置から真下に線分判定
-    //pos = _collsionManage->CheckTerrain(pos, { 0, forward.y, forward.z });
 
-    pos = _collsionManage->CheckDeath(pos, { forward.x, forward.y, 0 });
+    pos = _collsionManage->CheckJumpStand(pos, { forward.x, forward.y, 0 });
 
-    pos = _collsionManage->CheckDeath(pos, { forward.x, forward.y, forward.z });
+    pos = _collsionManage->CheckJumpStand(pos, { forward.x, forward.y, forward.z });
 
-    //pos = _collsionManage->CheckDeath(pos, { 0, forward.y, forward.z });
+    pos = _collsionManage->CheckHitWall(pos, { forward.x, forward.y, 0 });
+    // Y成分
+    pos = _collsionManage->CheckHitWall(pos, { forward.x, forward.y, forward.z });
 
     // 色状態が白のときのみ黒のメッシュと判定を行う
-    if (_crState == ColourState::Black) {
+    if (_crState == ColourState::White || _crState == ColourState::Black) {
         // X成分
-        pos = _collsionManage->CheckHitWall(pos, { forward.x, forward.y, 0 });
-        // Y成分
-        pos = _collsionManage->CheckHitWall(pos, { forward.x, forward.y, forward.z });
-        // Z成分
-        //pos = _collsionManage->CheckHitWall(pos, { 0, forward.y, forward.z });
+        pos = _collsionManage->CheckJumpStand(pos, { forward.x, forward.y, 0 });
 
-        pos = _collsionManage->CheckDeath(pos, { forward.x, forward.y, 0 });
-
-        pos = _collsionManage->CheckDeath(pos, { forward.x, forward.y, forward.z });
-
-       // pos = _collsionManage->CheckDeath(pos, { 0, forward.y, forward.z });
-    }
-
-    if (_collsionManage->GetStand().HitFlag == 1)
-    {
-        _position = VGet(PlayerPositionX, PlayerPositionY, PlayerPositionZ);
+        pos = _collsionManage->CheckJumpStand(pos, { forward.x, forward.y, forward.z });
     }
 
     // 座標更新
@@ -139,7 +126,6 @@ void Player::ColorCollisionDetectionSystem() {
     auto animHandle = _modelAnimeManage->GetHandle();
 
     if (_crState == ColourState::Black) {
-<<<<<<< HEAD
         _stateName = "Black";
         MV1SetFrameVisible(animHandle, 0, FALSE);
         MV1SetFrameVisible(animHandle, 1, TRUE);
@@ -153,15 +139,13 @@ void Player::ColorCollisionDetectionSystem() {
         MV1SetFrameVisible(animHandle, 0, TRUE);
         MV1SetFrameVisible(animHandle, 3, FALSE);
         MV1SetFrameVisible(animHandle, 2, TRUE);
-=======
-        _stateName = "White";
-        MV1SetMaterialSpcColor(animHandle, 0, GetColorF(0.0f, 0.0f, 0.0f, 0.0f));
-        _crState = ColourState::White;
-    }
-    else if (_crState == ColourState::White) {
-        _stateName = "Black";
-        MV1SetMaterialSpcColor(animHandle, 0, GetColorF(1.0f, 1.0f, 1.0f, 0.0f));
->>>>>>> 20d15396b0340e91c89ed3ce4e63dcdfdc047354
         _crState = ColourState::Black;
+    }
+}
+
+void Player::ResetPos() {
+
+    if (_collsionManage->GetDeathMesh().HitNum >= 1) {
+        _position = VGet(PlayerPositionX, PlayerPositionY, PlayerPositionZ);
     }
 }

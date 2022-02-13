@@ -21,6 +21,7 @@
 #include "../State/StateBase.h"
 #include "../State/StateJumpUp.h"
 #include "../State/StateJumpFall.h"
+#include "../State/StateDead.h"
 #include "../Stage/Stage.h"
 #include <AppFrame.h>
 
@@ -101,6 +102,7 @@ std::unique_ptr<ObjectBase> PlayerCreate::Create(GameMain& game) {
     state->Register("Jump", std::make_shared<State::StateJump>(*player));
     state->Register("JumpUp", std::make_shared<State::StateJumpUp>(*player));
     state->Register("JumpFall", std::make_shared<State::StateJumpFall>(*player));
+    state->Register("Dead", std::make_shared<State::StateDead>(*player));
     player->SetStateManage(std::move(state));
 
     return player;

@@ -48,4 +48,7 @@ void StateRun::Input(AppFrame::InputManager& input) {
 
 void StateRun::Update() {
     _owner.Move(VScale(_owner.GetForward(), _owner.GetForwardSpeed()));
+    //if (_owner.GetCollision().GetDeathMesh().HitNum >= 1) {
+    //    _owner.GetStateManage().PushBack("Dead");
+    //}
 }

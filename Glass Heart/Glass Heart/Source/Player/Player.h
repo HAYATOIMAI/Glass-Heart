@@ -82,6 +82,8 @@ namespace GlassHeart {
              */
             void ColorCollisionDetectionSystem();
 
+            void ResetPos();
+
             float GetForwardSpeed() { return _forwardSpeed; }
             void SetForwardSpeed(float forwardSpeed) { _forwardSpeed = forwardSpeed; }
 

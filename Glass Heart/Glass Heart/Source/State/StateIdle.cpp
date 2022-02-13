@@ -34,26 +34,12 @@ void StateIdle::Update() {
 	if (_owner.GetCollision().Mcrp().HitFlag == 1) {
 		// Ú‚µ‚Ä‚¢‚é‘«ê‚ÆˆÙ‚È‚éF‚Ìê‡‚Ì‚İ‚Æ‚Ç‚Ü‚é
 		if (_owner.GetCrName() == "White") {
-<<<<<<< HEAD
-			_owner.SetPosition(_owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 700, 0 }));
-=======
-			_owner.SetPosition(_owner.GetCollision().CheckJumpStand(_owner.GetPosition(), { 0, 300, 0 }));
->>>>>>> 20d15396b0340e91c89ed3ce4e63dcdfdc047354
+			_owner.SetPosition(_owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 7, 0 }));
 		}
 		else if (_owner.GetCrName() == "Black") {
-			_owner.SetPosition(_owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 700, 0 }));
+			_owner.SetPosition(_owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 7, 0 }));
 		}
 	}
-	// ‹ó’†‚Ì‘«ê‚ÆÚ‚µ‚Ä‚¢‚È‚©‚Á‚½‚ç’nã‚Ì‘«ê‚É–ß‚·
-<<<<<<< HEAD
-	if (_owner.GetCollision().Mcrp().HitFlag == 0) {
-		_owner.SetPosition(_owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 700, 0 }));
-=======
-	if (_owner.GetCollision().GetStand().HitFlag == 0) {
-		_owner.SetPosition(_owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 300, 0 }));
->>>>>>> 20d15396b0340e91c89ed3ce4e63dcdfdc047354
-	}
-
 	if (_cnt > 0) {
 		--_cnt;
 	}

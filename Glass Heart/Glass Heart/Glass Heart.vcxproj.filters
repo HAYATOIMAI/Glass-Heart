@@ -141,6 +141,12 @@
     <ClInclude Include="Source\State\StateJumpUp.h">
       <Filter>ヘッダー ファイル\State\Jump</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\State\StateDead.h">
+      <Filter>ヘッダー ファイル\State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Camera\CameraManager.cpp">
@@ -209,8 +215,16 @@
     <ClCompile Include="Source\State\StateJumpUp.cpp">
       <Filter>ソース ファイル\State\Jump</Filter>
     </ClCompile>
+    <ClCompile Include="Source\State\StateDead.cpp">
+      <Filter>ソース ファイル\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Glass Heart.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
