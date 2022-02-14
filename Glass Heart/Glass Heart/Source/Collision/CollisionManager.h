@@ -51,8 +51,9 @@ namespace GlassHeart {
             VECTOR CheckTerrain(const VECTOR& pos, const VECTOR& forward);
             VECTOR CheckJumpStand(const VECTOR& pos, const VECTOR& forward);
             VECTOR CheckHitWall(const VECTOR& pos, const VECTOR& forward);
-            VECTOR CheckHitCeiling(const VECTOR& pos, const VECTOR& forward);
+            VECTOR CheckWThroughMeah(const VECTOR& pos, const VECTOR& forward);
             VECTOR CheckHitDeathFloor(const VECTOR& pos, const VECTOR& forward);
+            VECTOR CheckThroughBMesh(const VECTOR& pos, const VECTOR& forward);
 
             void Render();
 
@@ -66,16 +67,18 @@ namespace GlassHeart {
             MV1_COLL_RESULT_POLY Mcrp() { return _mcrp; }
             MV1_COLL_RESULT_POLY_DIM CollPol() { return _collpol; }
             MV1_COLL_RESULT_POLY GetStand() { return _stand; }
-            MV1_COLL_RESULT_POLY GetCeliling() { return _ceiling; }
-            MV1_COLL_RESULT_POLY_DIM GetDeathMesh() { return _death; }
+            MV1_COLL_RESULT_POLY GetWThrough() { return _wThrough; }
+            MV1_COLL_RESULT_POLY GetDeathMesh() { return _death; }
+            MV1_COLL_RESULT_POLY GetBThrough() { return _bThrough; }
         private:
             Object::ObjectBase& _owner;
             std::unique_ptr<Report> _report;
             MV1_COLL_RESULT_POLY _mcrp;
             MV1_COLL_RESULT_POLY _stand;
-            MV1_COLL_RESULT_POLY _ceiling;
+            MV1_COLL_RESULT_POLY _wThrough;
             MV1_COLL_RESULT_POLY_DIM _collpol;
-            MV1_COLL_RESULT_POLY_DIM _death;
+            MV1_COLL_RESULT_POLY _death;
+            MV1_COLL_RESULT_POLY _bThrough;
 
 
             VECTOR _debugNum1{ 0, 0, 0 };

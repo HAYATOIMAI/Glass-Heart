@@ -32,13 +32,13 @@ void StateIdle::Input(AppFrame::InputManager& input) {
 void StateIdle::Update() {
 	// ‹ó’†‚Ì‘«ê‚ÆÚ‚µ‚Ä‚¢‚é‚©
 	if (_owner.GetCollision().Mcrp().HitFlag == 1) {
-		// Ú‚µ‚Ä‚¢‚é‘«ê‚ÆˆÙ‚È‚éF‚Ìê‡‚Ì‚İ‚Æ‚Ç‚Ü‚é
-		if (_owner.GetCrName() == "White") {
-			_owner.SetPosition(_owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 7, 0 }));
-		}
-		else if (_owner.GetCrName() == "Black") {
-			_owner.SetPosition(_owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 7, 0 }));
-		}
+	    _owner.SetPosition(_owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 3, 0 }));
+	}
+	if (_owner.GetCollision().GetBThrough().HitFlag == 1) {
+		_owner.SetPosition(_owner.GetCollision().CheckThroughBMesh(_owner.GetPosition(), { 0, 3, 0 }));
+	}
+	if (_owner.GetCollision().GetWThrough().HitFlag == 1) {
+		_owner.SetPosition(_owner.GetCollision().CheckWThroughMeah(_owner.GetPosition(), { 0, 3, 0 }));
 	}
 	if (_cnt > 0) {
 		--_cnt;

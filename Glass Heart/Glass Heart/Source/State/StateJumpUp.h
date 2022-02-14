@@ -29,9 +29,7 @@ namespace GlassHeart {
             void Update() override;
             VECTOR JumpUpdate();
         private:
-            float _vX{ 0.0f };
             float _vY{ 0.0f };
-            float _gravity{ 0.0f };
             VECTOR _jumpVelocity{ 0.0f, 0.0f, 0.0f };
             bool _isfall{ false };
         };

@@ -9,6 +9,7 @@
 #include "ModelAnimeManager.h"
 #include <DxLib.h>
 #include "../Object/ObjectBase.h"
+#include "../Application/GameMain.h"
 
 using namespace GlassHeart::Model;
 
@@ -65,7 +66,7 @@ void ModelAnimeManager::Draw()
 
 void ModelAnimeManager::ChangeAnime(std::string_view key, bool repeate)
 {
-    auto newAnimIndex = _registry[key.data()];
+    auto newAnimIndex = _owner.GetGame().GetResourceServer().GetModelAnimIndex(_key, key);
     if (_animIndex == newAnimIndex) {
         return;
     }

@@ -23,7 +23,7 @@ ModeGame::ModeGame(GameMain& game) : ModeMain{ game } {
 void ModeGame::Init() {
     //!< Žg—p‚·‚éƒ‚ƒfƒ‹
     AppFrame::ResourceServer::ModelMap usemap{
-    {"Player",    "boy/PC2_Ver2.mv1"},
+    {"Player",    "Boy/PC2_motion.mv1"},
     {"SkySphere", "skysphere.mv1"},
     {"Ground",    "ground.mv1"},
     {"Terrain",   "Ground/Ground.mv1"},

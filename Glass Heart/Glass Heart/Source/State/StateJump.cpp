@@ -45,6 +45,7 @@ void StateJump::Input(AppFrame::InputManager& input) {
         //_owner.GetStateManage().PushBack("Run");
     }
     if (input.GetJoyPad().GetXTriggerButtonA()) {
+        _owner.GetStateManage().PushBack("JumpUp");
         _gravity = -8.0f; // Y軸のジャンプ量
         _isJump = true;
     }
@@ -61,7 +62,9 @@ void StateJump::Input(AppFrame::InputManager& input) {
 void StateJump::Update() {
     // 対応するボタンが押されたらジャンプ処理実行
     if (_isJump == true){
-         JumpFunction(_isJump);
+        
+        // JumpFunction(_isJump);
+        _isJump = false;
     }   
 }
 /** ジャンプ処理制御 */

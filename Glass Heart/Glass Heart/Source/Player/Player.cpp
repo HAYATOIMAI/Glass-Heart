@@ -101,20 +101,24 @@ void Player::Move(const VECTOR& forward) {
     //Y成分
     pos = _collsionManage->CheckTerrain(pos, { forward.x, forward.y, forward.z });
 
-    pos = _collsionManage->CheckJumpStand(pos, { forward.x, forward.y, 0 });
+   /* pos = _collsionManage->CheckJumpStand(pos, { forward.x, forward.y, 0 });
 
-    pos = _collsionManage->CheckJumpStand(pos, { forward.x, forward.y, forward.z });
+    pos = _collsionManage->CheckJumpStand(pos, { forward.x, forward.y, forward.z });*/
 
     pos = _collsionManage->CheckHitWall(pos, { forward.x, forward.y, 0 });
     // Y成分
     pos = _collsionManage->CheckHitWall(pos, { forward.x, forward.y, forward.z });
 
     // 色状態が白のときのみ黒のメッシュと判定を行う
-    if (_crState == ColourState::White || _crState == ColourState::Black) {
+    if (_crState == ColourState::White ) {
         // X成分
-        pos = _collsionManage->CheckJumpStand(pos, { forward.x, forward.y, 0 });
+        pos = _collsionManage->CheckWThroughMeah(pos, { forward.x, forward.y, 0 });
 
-        pos = _collsionManage->CheckJumpStand(pos, { forward.x, forward.y, forward.z });
+        pos = _collsionManage->CheckWThroughMeah(pos, { forward.x, forward.y, forward.z });
+    }
+
+    if (_crState == ColourState::Black) {
+        pos = _collsionManage->CheckThroughBMesh(pos, { forward.x, forward.y, 0 });
     }
 
     // 座標更新
@@ -126,7 +130,7 @@ void Player::ColorCollisionDetectionSystem() {
     auto animHandle = _modelAnimeManage->GetHandle();
 
     if (_crState == ColourState::Black) {
-        _stateName = "Black";
+        _stateName = "White";
         MV1SetFrameVisible(animHandle, 0, FALSE);
         MV1SetFrameVisible(animHandle, 1, TRUE);
         MV1SetFrameVisible(animHandle, 2, FALSE);
@@ -134,7 +138,7 @@ void Player::ColorCollisionDetectionSystem() {
         _crState = ColourState::White;
     }
     else if (_crState == ColourState::White) {
-        _stateName = "White";
+        _stateName = "Black";
         MV1SetFrameVisible(animHandle, 1, FALSE);
         MV1SetFrameVisible(animHandle, 0, TRUE);
         MV1SetFrameVisible(animHandle, 3, FALSE);
@@ -145,7 +149,7 @@ void Player::ColorCollisionDetectionSystem() {
 
 void Player::ResetPos() {
 
-    if (_collsionManage->GetDeathMesh().HitNum >= 1) {
+    if (_collsionManage->GetDeathMesh().HitFlag == 1) {
         _position = VGet(PlayerPositionX, PlayerPositionY, PlayerPositionZ);
     }
 }
