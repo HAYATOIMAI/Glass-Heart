@@ -23,6 +23,7 @@
 #include "../State/StateJumpFall.h"
 #include "../State/StateDead.h"
 #include "../Stage/Stage.h"
+#include "../CheckPoint/CheckPoint.h"
 #include <AppFrame.h>
 
 using namespace GlassHeart::Object;
@@ -108,9 +109,11 @@ std::unique_ptr<ObjectBase> PlayerCreate::Create(GameMain& game) {
     return player;
 }
 
-std::unique_ptr<ObjectBase> TestCreate::Create(GameMain& game) {
+std::unique_ptr<ObjectBase> CheckPointCreate::Create(GameMain& game) {
 
-    return std::unique_ptr<ObjectBase>();
+    auto checkPoint = std::make_unique<CheckPoint::CheckPoint>(game);
+
+    return checkPoint;
 }
 
 std::unique_ptr<ObjectBase> StageCreate::Create(GameMain& game) {

@@ -15,18 +15,18 @@ using namespace GlassHeart::Stage;
 
 Stage::Stage(GameMain& game) : ObjectBase{ game } {
     // スカイスフィアのモデル
-    _skySphere = std::make_unique<Model::ModelManager>(*this);
-    _skySphere->handle("SkySphere");
-    _skySphere->SetScale({ 80.f,  80.f, 80.f });
-    // 地面のモデル
-    _ground = std::make_unique<Model::ModelManager>(*this);
-    _ground->handle("Terrain");
-    _ground->SetScale({ 30.f, 10.f, 30.f });
+    //_skySphere = std::make_unique<Model::ModelManager>(*this);
+    //_skySphere->handle("SkySphere");
+    //_skySphere->SetScale({ 80.f,  80.f, 80.f });
+    //// 地面のモデル
+    //_ground = std::make_unique<Model::ModelManager>(*this);
+    //_ground->handle("Terrain");
+    //_ground->SetScale({ 30.f, 10.f, 30.f });
 
-    _test = std::make_unique<Model::ModelManager>(*this);
-    _test->handle("Test");
-    _test->SetRotation(VGet(0.0f, 180.0f * std::numbers::pi_v<float> / 180.0f, 0.0f));
-    _test->SetScale({ 500.f,  80.f, 80.f });
+    //_test = std::make_unique<Model::ModelManager>(*this);
+    //_test->handle("Test");
+    //_test->SetRotation(VGet(0.0f, 180.0f * std::numbers::pi_v<float> / 180.0f, 0.0f));
+    //_test->SetScale({ 500.f,  80.f, 80.f });
     // 仮ステージのモデル
     _testStage = std::make_unique<Model::ModelManager>(*this);
     _testStage->handle("TestStage");
@@ -35,13 +35,13 @@ Stage::Stage(GameMain& game) : ObjectBase{ game } {
     _testStage->SetScale({ 1.f, 1.f, 1.f });
 
     // ナビメッシュを非表示
-    MV1SetFrameVisible(_testStage->GetHandle(), 8, FALSE);
     MV1SetFrameVisible(_testStage->GetHandle(), 2, FALSE);
     MV1SetFrameVisible(_testStage->GetHandle(), 3, FALSE);
     MV1SetFrameVisible(_testStage->GetHandle(), 4, FALSE);
     MV1SetFrameVisible(_testStage->GetHandle(), 5, FALSE);
     MV1SetFrameVisible(_testStage->GetHandle(), 6, FALSE);
     MV1SetFrameVisible(_testStage->GetHandle(), 7, FALSE);
+    MV1SetFrameVisible(_testStage->GetHandle(), 8, FALSE);
     //以下のフレームをナビメッシュとして使用
     MV1SetupCollInfo(_testStage->GetHandle(), 2, 8, 8, 8);
     MV1SetupCollInfo(_testStage->GetHandle(), 3, 8, 8, 8);
@@ -59,7 +59,7 @@ Stage::Stage(GameMain& game) : ObjectBase{ game } {
 
 void Stage::Process() {
     // スカイスフィアをプレイヤと同じ位置にする
-    _skySphere->SetPosition(GetObjectServer().GetPosition("Player"));
+    //_skySphere->SetPosition(GetObjectServer().GetPosition("Player"));
 }
 
 void Stage::Render() {

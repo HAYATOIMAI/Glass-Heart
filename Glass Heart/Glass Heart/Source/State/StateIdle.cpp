@@ -17,6 +17,8 @@ using namespace GlassHeart::State;
 void StateIdle::Enter() {
 	_owner.SetForwardSpeed(0.0f);
 	_owner.GetModelAnime().ChangeAnime("idle", true);
+
+	
 }
 
 void StateIdle::Input(AppFrame::InputManager& input) {
@@ -24,7 +26,8 @@ void StateIdle::Input(AppFrame::InputManager& input) {
 		_owner.GetStateManage().PushBack("Run");
 	}
 	if (input.GetJoyPad().GetXTriggerButtonA() && _cnt == 0) {
-		_cnt = 60;
+		//連打防止のため5フレーム間入力を制限
+		_cnt = 5;
 		_owner.GetStateManage().PushBack("Jump");
 	}
 }
@@ -32,14 +35,15 @@ void StateIdle::Input(AppFrame::InputManager& input) {
 void StateIdle::Update() {
 	// 空中の足場と接しているか
 	if (_owner.GetCollision().Mcrp().HitFlag == 1) {
-	    _owner.SetPosition(_owner.GetCollision().CheckTerrain(_owner.GetPosition(), { 0, 3, 0 }));
+	    _owner.SetPosition(_owner.GetCollision().CheckHitFloor(_owner.GetPosition(), { 0, 3, 0 }));
 	}
 	if (_owner.GetCollision().GetBThrough().HitFlag == 1) {
 		_owner.SetPosition(_owner.GetCollision().CheckThroughBMesh(_owner.GetPosition(), { 0, 3, 0 }));
 	}
 	if (_owner.GetCollision().GetWThrough().HitFlag == 1) {
-		_owner.SetPosition(_owner.GetCollision().CheckWThroughMeah(_owner.GetPosition(), { 0, 3, 0 }));
+		_owner.SetPosition(_owner.GetCollision().CheckThroughWMesh(_owner.GetPosition(), { 0, 3, 0 }));
 	}
+	// 入力制限の為カウンタを減少
 	if (_cnt > 0) {
 		--_cnt;
 	}

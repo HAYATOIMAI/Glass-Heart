@@ -22,10 +22,38 @@ namespace GlassHeart {
          */
         class StateJumpFall : public StateBase {
         public:
+            /**
+             * @brief コンストラクタ
+             *
+             * @param owner プレイヤークラスへの参照
+             */
             StateJumpFall(Player::Player& owner);
+            /**
+             * @brief 入り口処理
+             *
+             */
             void Enter() override;
-            void Update() override;
+            /**
+            * @brief 入力処理
+            *
+            * @param input
+            */
             void Input(AppFrame::InputManager& input) override;
+            /**
+             * @brief 更新処理
+             *
+             */
+            void Update() override;
+            /**
+             * @brief 着地処理
+             * 
+             */
+            void Landing();
+            /**
+             * @brief 落下死処理
+             * 
+             */
+            void IsDeath();
         private:
             float _addVx{ 0.0f }; //!< ストレイフ用X軸移動量
         };

@@ -33,10 +33,10 @@ void StateRun::Input(AppFrame::InputManager& input) {
             _owner.SetForwardSpeed(DefaultSpeed * 2.0f);
         }
     }
-    if (input.GetJoyPad().GetAnalogStickLX() <= 3000) {
+    if (input.GetJoyPad().GetAnalogStickLX() <= -3000) {
         // 左方向に向きを変更
         _owner.SetRotation(VGet(0.0f, 90.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
-        if (input.GetJoyPad().GetAnalogStickLX() <= 10000) {
+        if (input.GetJoyPad().GetAnalogStickLX() <= -10000) {
             _owner.SetForwardSpeed(DefaultSpeed * 2.0f);
         }
     }
@@ -51,4 +51,15 @@ void StateRun::Update() {
     //if (_owner.GetCollision().GetDeathMesh().HitNum >= 1) {
     //    _owner.GetStateManage().PushBack("Dead");
     //}
+    // リスポーン処理
+    if (_owner.GetCollision().GetDeathMesh().HitFlag == 1) {
+
+        if (_owner.GetCrName() == "White") {
+            _owner.ResetPos();
+        }
+        if (_owner.GetCrName() == "Black") {
+            _owner.SetPosition(_owner.GetCollision().GetDeathMesh().HitPosition);
+        }
+        // _owner.GetStateManage().PushBack("Dead");
+    }
 }

@@ -24,11 +24,11 @@ void ModeGame::Init() {
     //!< 使用するモデル
     AppFrame::ResourceServer::ModelMap usemap{
     {"Player",    "Boy/PC2_motion.mv1"},
-    {"SkySphere", "skysphere.mv1"},
+   /* {"SkySphere", "skysphere.mv1"},
     {"Ground",    "ground.mv1"},
     {"Terrain",   "Ground/Ground.mv1"},
-    {"Test",      "Test/ST_test.mv1"},
-    {"TestStage", "Test/ST_0.ver4.mv1"},
+    {"Test",      "Test/ST_test.mv1"},*/
+    {"TestStage", "Test/Sample_ACom.mv1"},
     };
     //!< モデルの読み込み
     GetResourceServer().LoadModels(usemap);
@@ -40,9 +40,9 @@ void ModeGame::Enter() {
 
     of.Register("Player", std::make_unique<Object::PlayerCreate>());
     of.Register("Stage", std::make_unique<Object::StageCreate>());
+    of.Register("CheckPoint", std::make_unique<Object::CheckPointCreate>());
 
     auto player = of.Create("Player");
-
 
     auto& os = GetObjectServer();
 
@@ -51,6 +51,9 @@ void ModeGame::Enter() {
 
     auto stage = of.Create("Stage");
     os.Add(std::move(stage));
+
+    auto checkPoint = of.Create("CheckPoint");
+    os.Add(std::move(checkPoint));
 
     auto& sm = GetSoundManager();
 

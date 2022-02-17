@@ -84,12 +84,16 @@ namespace GlassHeart {
 
             void ResetPos();
 
+            void ReturnCheckPoint();
+
             float GetForwardSpeed() { return _forwardSpeed; }
             void SetForwardSpeed(float forwardSpeed) { _forwardSpeed = forwardSpeed; }
 
             std::string& GetCrName() { return _stateName; }
 
             VECTOR GetLastPosition() { return _lastPosition; }
+
+            VECTOR GetHighestPosition() { return _highestPosition; }
         protected:
             /**
              * @brief 色状態
@@ -102,10 +106,11 @@ namespace GlassHeart {
             ColourState _crState{ ColourState::White }; //!< 色状態を管理する変数
             float _forwardSpeed{ 0.0f };  //!< 前進スピード
             float _angularSpeed{ 0.0f };  //!< 
-            VECTOR _backDelta{ 0.0f, 0.0f, 0.0f };  //!< 
             VECTOR _lastPosition{ 0.0f, 0.0f, 0.0f };
+            VECTOR _highestPosition{ 0.0f, 0.0f, 0.0f };
             std::string _stateName{ "White" }; //!< 状態名変数
             int _colourCount{ 0 };  //!< 色変更クールタイム用カウンター
+            bool _checkPointFlag{ false };
         };
     }
 }
