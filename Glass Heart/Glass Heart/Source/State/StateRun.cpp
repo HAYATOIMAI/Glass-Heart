@@ -16,7 +16,7 @@
 using namespace GlassHeart::State;
 
 namespace {
-    constexpr auto DefaultSpeed = 10.0f;
+    constexpr auto DefaultSpeed = 3.5f;
 }
 
 void StateRun::Enter() {
@@ -29,35 +29,36 @@ void StateRun::Input(AppFrame::InputManager& input) {
     if (input.GetJoyPad().GetAnalogStickLX() >= 3000) {
         // 右方向に向きを変更
         _owner.SetRotation(VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
-        if (input.GetJoyPad().GetAnalogStickLX() >= 10000)	{
-            _owner.SetForwardSpeed(DefaultSpeed * 2.0f);
+        if (input.GetJoyPad().GetAnalogStickLX() >= 10000) {
+            _owner.SetForwardSpeed(DefaultSpeed * 1.0f);
         }
     }
-    if (input.GetJoyPad().GetAnalogStickLX() <= -3000) {
+    else if (input.GetJoyPad().GetAnalogStickLX() <= -3000) {
         // 左方向に向きを変更
         _owner.SetRotation(VGet(0.0f, 90.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
         if (input.GetJoyPad().GetAnalogStickLX() <= -10000) {
-            _owner.SetForwardSpeed(DefaultSpeed * 2.0f);
+            _owner.SetForwardSpeed(DefaultSpeed * 1.0f);
         }
     }
-    if (input.GetJoyPad().GetXTriggerButtonA()) {
+    else if (input.GetJoyPad().GetXTriggerButtonA()) {
         _owner.GetStateManage().PushBack("Jump");
     }
-    _owner.GetStateManage().PopBack();
+    else {
+        _owner.GetStateManage().PopBack();
+    }
 }
 
 void StateRun::Update() {
+
     _owner.Move(VScale(_owner.GetForward(), _owner.GetForwardSpeed()));
-    //if (_owner.GetCollision().GetDeathMesh().HitNum >= 1) {
-    //    _owner.GetStateManage().PushBack("Dead");
-    //}
+
     // リスポーン処理
     if (_owner.GetCollision().GetDeathMesh().HitFlag == 1) {
 
-        if (_owner.GetCrName() == "White") {
+        if (_owner.GetColourState() == Player::Player::ColourState::White) {
             _owner.ResetPos();
         }
-        if (_owner.GetCrName() == "Black") {
+        if (_owner.GetColourState() == Player::Player::ColourState::Black) {
             _owner.SetPosition(_owner.GetCollision().GetDeathMesh().HitPosition);
         }
         // _owner.GetStateManage().PushBack("Dead");

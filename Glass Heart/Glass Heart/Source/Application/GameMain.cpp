@@ -45,10 +45,17 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     SetMaterialParam(material);
 #endif
     /** 使用する音のテーブル */
-    const AppFrame::ResourceServer::SoundMap usesound{
-    {"damage", {"damage.wav", true}},
-    {"bgm1", {"sublight.wav", true}},
-    {"bgm2", {"stage1.mid", true}},
+    const AppFrame::ResourceServer::SoundMap usesound {
+    {"cancel",  {"Sound/SE/SE_Cancel.mp3",true}},
+    {"cursor",  {"Sound/SE/SE_Cursor.mp3",true}},
+    {"death",   {"Sound/SE/SE_Death.mp3",true}},
+    {"jump",    {"Sound/SE/SE_Jump.mp3",true}},
+    {"landing", {"Sound/SE/SE_Landing.mp3",true}},
+    {"pick",    {"Sound/SE/SE_Pick.mp3",true}},
+    {"run",     {"Sound/SE/SE_Run.mp3",true}},
+    {"select",  {"Sound/SE/SE_Select.mp3",true}},
+    {"walk",    {"Sound/SE/SE_Walk.mp3",true}},
+    {"bgm3", {"Sound/BGM01_Ver2.mp3, ", true}}
     };
     /** 音を読み込み */
     res.LoadSounds(usesound);
@@ -57,12 +64,9 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     auto& sm = GetSoundManager();
     sm.SetVolume("damage", 128);
     sm.SetVolume("bgm1", 128);
+    sm.SetVolume("bgm3", 128);
 
-#ifdef _DEBUG
-    sm.SetMute(true);
-#else
     sm.SetMute(false);
-#endif // DEBUG
 
     //!< オブジェクトサーバーの生成
     _objServer = std::make_unique<GlassHeart::Object::ObjectServer>();

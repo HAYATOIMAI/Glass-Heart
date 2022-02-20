@@ -36,7 +36,7 @@ GlassHeart::Collision::CollisionManager::CollisionManager(GlassHeart::Object::Ob
 }
 /** è∞Ç∆ÇÃìñÇΩÇËîªíË */
 VECTOR GlassHeart::Collision::CollisionManager::CheckHitFloor(const VECTOR& pos, const VECTOR& forward) {
-    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("TestStage");
+    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
     auto start = VAdd(newPos, { 0, 10, 0 });
     auto end = VAdd(newPos, { 0, -100, 0 });
@@ -56,10 +56,10 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckHitFloor(const VECTOR& pos,
 // ãÛíÜÇÃë´èÍÇ∆ÇÃìñÇΩÇËîªíË
 VECTOR GlassHeart::Collision::CollisionManager::CheckJumpStand(const VECTOR& pos, const VECTOR& forward) {
 
-    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("TestStage");
+    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
-    auto start = VAdd(newPos, { 0, 10, 0 });
-    auto end = VAdd(newPos, { 0, -200, 0 });
+    auto start = VAdd(newPos, { 0.f, 10.f, 0.f });
+    auto end = VAdd(newPos, { 0.f, -200.f, 0.f });
     _stand = MV1CollCheck_Line(handle, MV1SearchFrame(handle, "Floor_NavMesh"), start, end);
 
     if (_stand.HitFlag == 0) {
@@ -75,12 +75,12 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckJumpStand(const VECTOR& pos
 }
 /** ï«Ç∆ÇÃìñÇΩÇËîªíË */
 VECTOR GlassHeart::Collision::CollisionManager::CheckHitWall(const VECTOR& pos, const VECTOR& forward) {
-    auto round = 6.5f;
+    auto round = 10.5f;
 
-    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("TestStage");
+    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
-    auto c1 = VAdd(newPos, { -8.f, 0.f, 0.f });
-    auto c2 = VAdd(newPos, { -8.f, 0.f, 0.f });
+    auto c1 = VAdd(newPos, { -8.f, 10.f, 0.f });
+    auto c2 = VAdd(newPos, { -18.f, 20.f, 0.f });
     _collpol = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "Wall_NavMesh"), c1, c2, round);
 
     if (_collpol.HitNum == 0) {
@@ -97,12 +97,12 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckHitWall(const VECTOR& pos, 
 /**  íÍñ Ç‚ë§ñ Ç∆ÇÃìñÇΩÇËîªíË */
 VECTOR GlassHeart::Collision::CollisionManager::CheckHitSideAndBottom(const VECTOR& pos, const VECTOR& forward) {
 
-    auto round = 3.5f;
+    auto round = 6.5f;
 
-    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("TestStage");
+    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
-    auto c1 = VAdd(newPos, { -8.f, 10.f, 0.f });
-    auto c2 = VAdd(newPos, { -8.f, -10.f, 0.f });
+    auto c1 = VAdd(newPos, { -8.f, 40.f, 0.f });
+    auto c2 = VAdd(newPos, { -8.f, 120.f, 0.f });
     _sideBottom = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "Wall_NavMesh"), c1, c2, round);
 
     if (_sideBottom .HitNum == 0) {
@@ -117,11 +117,11 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckHitSideAndBottom(const VECT
 /** îíêFÇÃï«Ç∆ÇÃìñÇΩÇËîªíË */
 VECTOR GlassHeart::Collision::CollisionManager::CheckThroughWMesh(const VECTOR& pos, const VECTOR& forward) {
 
-    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Teststage");
+    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
     auto start = VAdd(newPos, { 0.f, 10.f, 0.f });
-    auto end = VAdd(newPos, { 0.f, -100.f, 0.f });
-    _wThrough = MV1CollCheck_Line(handle, MV1SearchFrame(handle, "ThroughFloor_NavMeshW"), start, end);
+    auto end = VAdd(newPos, { 0.f, -200.f, 0.f });
+    _wThrough = MV1CollCheck_Line(handle, MV1SearchFrame(handle, "WThroughFloor_NavMesh"), start, end);
 
     if (_wThrough.HitFlag == 0) {
         // è’ìÀñ≥Çµ
@@ -134,13 +134,16 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckThroughWMesh(const VECTOR& 
 
     return newPos;
 }
+
 VECTOR GlassHeart::Collision::CollisionManager::CheckHitDeathFloor(const VECTOR& pos, const VECTOR& forward) {
 
-    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("TestStage");
+    //auto round = 6.5f;
+
+    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
-    auto start = VAdd(newPos, { 0.f, 10.f, 0 });
-    auto end = VAdd(newPos, { 0.f, -100.f, 0 });
-    _death = MV1CollCheck_Line(handle, MV1SearchFrame(handle, "Death_NavMesh"), start, end);
+    auto c1 = VAdd(newPos, { 0.f, 10.f, 0.f });
+    auto c2 = VAdd(newPos, { 0.f, -100.f, 0.f });
+    _death = MV1CollCheck_Line(handle, MV1SearchFrame(handle, "Death_Mesh"), c1, c2);
 
     if(_death.HitFlag == 0) {
         // è’ìÀÇ»Çµà⁄ìÆÇµÇ»Ç¢
@@ -155,11 +158,11 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckHitDeathFloor(const VECTOR&
 }
 VECTOR GlassHeart::Collision::CollisionManager::CheckThroughBMesh(const VECTOR& pos, const VECTOR& forward) {
 
-    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("TestStage");
+    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
     auto start = VAdd(newPos, { 0.f, 10.f, 0.f });
     auto end = VAdd(newPos, { 0.f, -100.f, 0.f });
-    _bThrough = MV1CollCheck_Line(handle, MV1SearchFrame(handle, "ThroughFloor_NavMeshB"), start, end);
+    _bThrough = MV1CollCheck_Line(handle, MV1SearchFrame(handle, "BThroughFloor_NavMesh"), start, end);
 
     if (_bThrough.HitFlag == 0) {
         return pos;
@@ -174,11 +177,11 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckThroughWWallMesh(const VECT
 
     auto round = 6.5f;
 
-    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("TestStage");
+    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
-    auto c1 = VAdd(newPos, { -8.f, 0.f, 0.f });
-    auto c2 = VAdd(newPos, { -8.f, 0.f, 0.f });
-    _wWallThrough = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "ThroughWall_NavMeshW"), c1, c2, round);
+    auto c1 = VAdd(newPos, { -8.f, 40.f, 0.f });
+    auto c2 = VAdd(newPos, { -8.f, 120.f, 0.f });
+    _wWallThrough = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "WThroughWall_NavMesh"), c1, c2, round);
 
     if (_wWallThrough.HitNum == 0) {
         // è’ìÀñ≥Çµ
@@ -195,11 +198,11 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckThroughBWallMesh(const VECT
 
     auto round = 6.5f;
 
-    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("TestStage");
+    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
-    auto c1 = VAdd(newPos, { -8.f, 0.f, 0.f });
-    auto c2 = VAdd(newPos, { -8.f, 0.f, 0.f });
-    _bWallThrough = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "ThroughWall_NavMeshB"), c1, c2, round);
+    auto c1 = VAdd(newPos, { -8.f, 40.f, 0.f });
+    auto c2 = VAdd(newPos, { -8.f, 120.f, 0.f });
+    _bWallThrough = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "BThroughWall_NavMesh"), c1, c2, round);
 
     if (_bWallThrough.HitNum == 0) {
         return pos;
@@ -217,8 +220,8 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckPlayerCapsule(const VECTOR&
 
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Player");
     auto newPos = VAdd(pos, forward);
-    auto c1 = VAdd(newPos, { 100.f, 100.f, 200.f });
-    auto c2 = VAdd(newPos, { 100.f, 100.f, 200.f });
+    auto c1 = VAdd(newPos, { 100.f, pos.y, 200.f });
+    auto c2 = VAdd(newPos, { 100.f, pos.y -100.f, 200.f });
     _playercap = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "CollisionNavMesh"), c1, c2, round);
 
     if (_playercap.HitNum == 0)  {

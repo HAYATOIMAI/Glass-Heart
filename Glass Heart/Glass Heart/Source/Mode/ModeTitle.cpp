@@ -18,8 +18,9 @@ ModeTitle::ModeTitle(GameMain& game) : ModeMain{ game } {
 void ModeTitle::Init() {
     //! 使用する画像のテーブル
     const AppFrame::ResourceServer::GraphMap useGraph{
-    {"GameTitle",        {"GameTitle.png",        1, 1, 1553, 224}},
-    {"LeftClickToStart", {"LeftClickToStart.png", 1, 1, 1135, 107}},
+    {"GameTitle",        {"Title/Titlelogo.png",        1, 1, 1920, 1080}},
+    {"PressAnyButton", {"Title/TitleButton.png", 1, 1, 1920, 1080}},
+    {"Bg", {"Title/TitleButton.png", 1, 1, 1920, 1080}},
     };
 
     //!< リソースサーバーを取得
@@ -29,7 +30,9 @@ void ModeTitle::Init() {
     res.LoadGraphics(useGraph);
 
     //!< 画像のハンドルの取得
-    _titleBgHandle = res.GetGraph("GameTitle");
+    _titleBgHandle = res.GetGraph("Bg");
+    _leftClickToStart = res.GetGraph("PressAnyButton");
+    _gameTitleHandle = res.GetGraph("GameTitle");
 
     //!< サウンドマネージャーを取得
     auto& sm = GetSoundManager();

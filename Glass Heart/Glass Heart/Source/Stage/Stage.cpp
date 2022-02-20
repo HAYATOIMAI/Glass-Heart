@@ -15,9 +15,9 @@ using namespace GlassHeart::Stage;
 
 Stage::Stage(GameMain& game) : ObjectBase{ game } {
     // スカイスフィアのモデル
-    //_skySphere = std::make_unique<Model::ModelManager>(*this);
-    //_skySphere->handle("SkySphere");
-    //_skySphere->SetScale({ 80.f,  80.f, 80.f });
+    _skySphere = std::make_unique<Model::ModelManager>(*this);
+    _skySphere->handle("SkySphere");
+    _skySphere->SetScale({ 80.f,  80.f, 80.f });
     //// 地面のモデル
     //_ground = std::make_unique<Model::ModelManager>(*this);
     //_ground->handle("Terrain");
@@ -29,7 +29,7 @@ Stage::Stage(GameMain& game) : ObjectBase{ game } {
     //_test->SetScale({ 500.f,  80.f, 80.f });
     // 仮ステージのモデル
     _testStage = std::make_unique<Model::ModelManager>(*this);
-    _testStage->handle("TestStage");
+    _testStage->handle("Stage");
     _testStage->SetPosition(VGet(0.0f, 0.0f, 10.0f));
     _testStage->SetRotation(VGet(0.0f, 180.0f * std::numbers::pi_v<float> / 180.0f, 0.0f));
     _testStage->SetScale({ 1.f, 1.f, 1.f });

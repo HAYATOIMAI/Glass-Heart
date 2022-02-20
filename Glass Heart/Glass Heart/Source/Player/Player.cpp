@@ -16,9 +16,9 @@
 #include <numbers>
 
 namespace {
-    constexpr auto PlayerPositionX = -150.0f;     //!< プレイヤーの初期位置X
-    constexpr auto PlayerPositionY = 35.0f;    //!< プレイヤーの初期位置Y
-    constexpr auto PlayerPositionZ = -140.0f;  //!< プレイヤーの初期位置Z
+    constexpr auto StartPositionX = -150.0f;     //!< プレイヤーの初期位置X
+    constexpr auto StartPositionY = 35.0f;    //!< プレイヤーの初期位置Y
+    constexpr auto StartPositionZ = -140.0f;  //!< プレイヤーの初期位置Z
 }
 
 using namespace GlassHeart::Player;
@@ -26,7 +26,7 @@ using namespace GlassHeart::Player;
 /** コンストラクタ */
 Player::Player(GameMain& game) : GlassHeart::Object::ObjectBase{ game } {
     _rotation = VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f);
-    _position = VGet(PlayerPositionX, PlayerPositionY, PlayerPositionZ);
+    _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
     _radius = 25.0f;
 }
 /** 入力処理 */
@@ -128,35 +128,35 @@ void Player::Move(const VECTOR& forward) {
     //Y成分
     pos = _collsionManage->CheckHitFloor(pos, { forward.x, forward.y, forward.z });
 
-    pos = _collsionManage->CheckHitWall(pos, { forward.x, forward.y, 0 });
+    pos = _collsionManage->CheckHitWall(pos, { forward.x, forward.y, 0.f });
     // Y成分
     pos = _collsionManage->CheckHitWall(pos, { forward.x, forward.y, forward.z });
 
-    pos = _collsionManage->CheckHitDeathFloor(pos, { forward.x, forward.y, 0 });
+    pos = _collsionManage->CheckHitDeathFloor(pos, { forward.x, forward.y, 0.f });
 
     pos = _collsionManage->CheckHitDeathFloor(pos, { forward.x, forward.y, forward.z });
 
     // 色状態が白のときのみ黒のメッシュと判定を行う
     if (_crState == ColourState::White ) {
 
-        pos = _collsionManage->CheckThroughBMesh(pos, { forward.x, forward.y, 0 });
+        pos = _collsionManage->CheckThroughBMesh(pos, { forward.x, forward.y, 0.f });
 
-        pos = _collsionManage->CheckThroughBMesh(pos, { forward.x, forward.y, forward.z }); 
+       pos = _collsionManage->CheckThroughBMesh(pos, { forward.x, forward.y, forward.z }); 
 
-        pos = _collsionManage->CheckThroughBWallMesh(pos, { forward.x, forward.y, 0 });
+        pos = _collsionManage->CheckThroughBWallMesh(pos, { forward.x, forward.y, 0.f });
 
         pos = _collsionManage->CheckThroughBWallMesh(pos, { forward.x, forward.y,  forward.z });
     }
     // 色状態が黒のときのみ白のメッシュと判定を行う
     if (_crState == ColourState::Black) {
         // X成分
-        pos = _collsionManage->CheckThroughWMesh(pos, { forward.x, forward.y, 0 });
+        pos = _collsionManage->CheckThroughWMesh(pos, { forward.x, forward.y, 0.f });
 
-        pos = _collsionManage->CheckThroughWMesh(pos, { forward.x, forward.y, forward.z });
+        pos = _collsionManage->CheckThroughWMesh(pos, { forward.x, forward.y, forward.z});
 
-        pos = _collsionManage->CheckThroughWWallMesh(pos, { forward.x, forward.y, 0 });
+        pos = _collsionManage->CheckThroughWWallMesh(pos, { forward.x, forward.y, 0.f });
 
-        pos = _collsionManage->CheckThroughWWallMesh(pos, { forward.x, forward.y, forward.z });
+        pos = _collsionManage->CheckThroughWWallMesh(pos, { forward.x, forward.y, forward.z});
     }
 
     // 座標更新
@@ -197,7 +197,7 @@ void Player::ResetPos() {
         }
         else {
 
-            _position = VGet(PlayerPositionX, PlayerPositionY, PlayerPositionZ);
+            _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
 
         }
     }

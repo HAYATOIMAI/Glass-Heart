@@ -45,7 +45,6 @@ void StateJump::Update() {
     // 対応するボタンが押されたらジャンプ処理実行
     if (_isJump == true){
         _owner.GetStateManage().PushBack("JumpUp");
-        // JumpFunction(_isJump);
         _isJump = false;
     }   
 }

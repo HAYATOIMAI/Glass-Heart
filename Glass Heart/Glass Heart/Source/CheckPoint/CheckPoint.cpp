@@ -14,7 +14,7 @@ using namespace GlassHeart::CheckPoint;
 
 CheckPoint::CheckPoint(GameMain& game) : ObjectBase{ game } {
 
-    _checkPoint = LoadGraph("resource/Test/tree.png");
+    _checkPoint = LoadGraph("resource/Test/2dMaterial/light3.png");
     _position = VGet(-1500.0f, 35.0f, -140.0f);
     _radius = 100.0f;
     _hitFlag = false;
@@ -68,7 +68,7 @@ void CheckPoint::Render() {
 
     //DrawCircle(1920 / 2, 1080 / 2, 100, cr, FALSE);
 
-    DrawSphere3D(_checkPos, 100.0f, 32, cr, cr, FALSE);
+    //DrawSphere3D(_checkPos, 100.0f, 32, cr, cr, FALSE);
 
     DrawBillboard3D(_checkDrawPos, 0.5f, 0.5f, 120.0f, 0.0f, _checkPoint, TRUE);
 #ifdef _DEBUG

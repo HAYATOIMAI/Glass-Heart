@@ -39,35 +39,51 @@ void StateJumpFall::Input(AppFrame::InputManager& input) {
 }
 /** 更新処理 */
 void StateJumpFall::Update() {
-   
+
     // 足場と接しているか
     Landing();
 
     // リスポーン処理
     if (_owner.GetCollision().GetDeathMesh().HitFlag == 1) {
 
-        if (_owner.GetCrName() == "White") {
+        if (_owner.GetColourState() == Player::Player::ColourState::White) {
             _owner.ResetPos();
             // _owner.GetStateManage().PushBack("Dead");
         }
-        if (_owner.GetCrName() == "Black") {
+        if (_owner.GetColourState() == Player::Player::ColourState::Black) {
             _owner.SetPosition(_owner.GetCollision().GetDeathMesh().HitPosition);
         }
     }
+
     IsDeath();
+
+    //_owner.SetPosition(pos);
 }
 void StateJumpFall::Landing() {
 
-    _owner.GetCollision().CheckJumpStand(_owner.GetPosition(), { 0, 3, 0 });
-    _owner.GetCollision().CheckHitDeathFloor(_owner.GetPosition(), { 0, 3, 0 });
-    _owner.GetCollision().CheckThroughBMesh(_owner.GetPosition(), { 0, 3, 0 });
-    _owner.GetCollision().CheckThroughWMesh(_owner.GetPosition(), { 0, 3, 0 });
-   
+     _owner.GetCollision().CheckJumpStand(_owner.GetPosition(), { 0, 3, 0 });
+     _owner.GetCollision().CheckHitDeathFloor(_owner.GetPosition(), { 0, 3, 0 });
+     _owner.GetCollision().CheckThroughBMesh(_owner.GetPosition(), { 0, 3, 0 });
+     _owner.GetCollision().CheckThroughWMesh(_owner.GetPosition(), { 0, 3, 0 });
+     _owner.GetCollision().CheckHitWall(_owner.GetPosition(), { 0, 3, 0 });
 
     // 空中の足場と接していなかったらゆっくり落下させる
     // 途中スティックの入力があった場合、入力に応じた角度に補正
     if (_owner.GetCollision().GetStand().HitFlag == 0) {
         _owner.SetPosition(VGet(_owner.GetPosition().x + _addVx, _owner.GetPosition().y - DownVector, _owner.GetPosition().z));
+        if (_owner.GetCollision().CollPol().HitNum >= 1)
+        {
+            if (_owner.GetRotation().y == 270.0f * (std::numbers::pi_v<float> / 180.0f)) {
+                _owner.SetRotation(VGet(0.0f, 90.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
+                _reVx += 80.0f;
+            }
+            else if (_owner.GetRotation().y == 90.0f * (std::numbers::pi_v<float> / 180.0f)) {
+                _owner.SetRotation(VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
+                _reVx -= 80.0f;
+            }
+
+            _owner.SetPosition(VGet(_owner.GetPosition().x + _reVx, _owner.GetPosition().y, _owner.GetPosition().z));
+        }
     }
     else {
         // 着地したら状態を削除
@@ -78,24 +94,23 @@ void StateJumpFall::Landing() {
     // 空中の足場と接しているか
     if (_owner.GetCollision().GetStand().HitFlag == 1) {
         // 接している足場と異なる色の場合のみとどまる
-        if (_owner.GetCrName() == "White" || _owner.GetCrName() == "Black") {
             _owner.SetPosition(_owner.GetCollision().GetStand().HitPosition);
             // 着地したら状態を削除
             _owner.GetStateManage().PushBack("Idle");
-        }
     }
     // 白色のみ透ける足場に接しているか
     if (_owner.GetCollision().GetBThrough().HitFlag == 1) {
         // 接している足場と異なる色の場合のみとどまる
-        if (_owner.GetCrName() == "White") {
+        if (_owner.GetColourState() == Player::Player::ColourState::White) {
             _owner.SetPosition(_owner.GetCollision().GetBThrough().HitPosition);
             _owner.GetStateManage().PushBack("Idle");
         }
     }
+  
     // 黒色のみ透ける足場に接しているか
     if (_owner.GetCollision().GetWThrough().HitFlag == 1) {
         // 接している足場と異なる色の場合のみとどまる
-        if (_owner.GetCrName() == "Black") {
+        if (_owner.GetColourState() == Player::Player::ColourState::Black) {
             _owner.SetPosition(_owner.GetCollision().GetWThrough().HitPosition);
             _owner.GetStateManage().PushBack("Idle");
         }
@@ -115,7 +130,7 @@ void StateJumpFall::IsDeath() {
         auto difference = _owner.GetHighestPosition().y - landing;
         // 差分が大きかったら死亡
         if (difference > 50.0f) {
-            _owner.ResetPos();
+            //_owner.ResetPos();
         }
     }
 }

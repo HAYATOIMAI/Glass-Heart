@@ -24,11 +24,11 @@ void ModeGame::Init() {
     //!< 使用するモデル
     AppFrame::ResourceServer::ModelMap usemap{
     {"Player",    "Boy/PC2_motion.mv1"},
-   /* {"SkySphere", "skysphere.mv1"},
-    {"Ground",    "ground.mv1"},
+    //{"SkySphere", "skysphere.mv1"},
+    /*{"Ground",    "ground.mv1"},
     {"Terrain",   "Ground/Ground.mv1"},
     {"Test",      "Test/ST_test.mv1"},*/
-    {"TestStage", "Test/Sample_ACom.mv1"},
+    {"Stage", "Test/StageZenhan.mv1"},
     };
     //!< モデルの読み込み
     GetResourceServer().LoadModels(usemap);
@@ -57,7 +57,7 @@ void ModeGame::Enter() {
 
     auto& sm = GetSoundManager();
 
-    sm.PlayLoop("bgm1");
+    sm.PlayLoop("bgm3");
 
     Process();
 }

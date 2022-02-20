@@ -18,7 +18,7 @@ void StateIdle::Enter() {
 	_owner.SetForwardSpeed(0.0f);
 	_owner.GetModelAnime().ChangeAnime("idle", true);
 
-	
+	//MV1SetupCollInfo(_owner.GetModelAnime().GetHandle(), MV1SearchFrame(_owner.GetModelAnime().GetHandle(), "CollisionNavMesh"), 4, 4, 4);
 }
 
 void StateIdle::Input(AppFrame::InputManager& input) {
@@ -37,11 +37,16 @@ void StateIdle::Update() {
 	if (_owner.GetCollision().Mcrp().HitFlag == 1) {
 	    _owner.SetPosition(_owner.GetCollision().CheckHitFloor(_owner.GetPosition(), { 0, 3, 0 }));
 	}
+
 	if (_owner.GetCollision().GetBThrough().HitFlag == 1) {
-		_owner.SetPosition(_owner.GetCollision().CheckThroughBMesh(_owner.GetPosition(), { 0, 3, 0 }));
+		if (_owner.GetColourState() == Player::Player::ColourState::White) {
+			_owner.SetPosition(_owner.GetCollision().CheckThroughBMesh(_owner.GetPosition(), { 0, 3, 0 }));
+		}
 	}
 	if (_owner.GetCollision().GetWThrough().HitFlag == 1) {
-		_owner.SetPosition(_owner.GetCollision().CheckThroughWMesh(_owner.GetPosition(), { 0, 3, 0 }));
+		if (_owner.GetColourState() == Player::Player::ColourState::Black) {
+			_owner.SetPosition(_owner.GetCollision().CheckThroughWMesh(_owner.GetPosition(), { 0, 3, 0 }));
+		}	
 	}
 	// “ü—Í§ŒÀ‚Ìˆ×ƒJƒEƒ“ƒ^‚ðŒ¸­
 	if (_cnt > 0) {

@@ -54,7 +54,7 @@ namespace GlassHeart {
             float _vY{ 0.0f };  //!< ¡‰ñ‚ÌˆÚ“®—Ê
             float _vZ{ -140.0f };  //!< ¡‰ñ‚ÌˆÚ“®—Ê
 
-            VECTOR _position{ 0.0f, 0.0f, 0.0f };
+            VECTOR _position{ 0.0f, 0.0f, -140.0f }; //!< ˆÊ’u
         };
     }
 }

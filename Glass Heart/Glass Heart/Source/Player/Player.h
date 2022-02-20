@@ -35,6 +35,13 @@ namespace GlassHeart {
         class Player : public  Object::ObjectBase {
         public:
             /**
+             * @brief 色状態
+             */
+            enum class ColourState {
+                White,
+                Black,
+            };
+            /**
              * @brief コンストラクタ
              *
              * @param game ゲームメインクラスへの参照
@@ -94,14 +101,9 @@ namespace GlassHeart {
             VECTOR GetLastPosition() { return _lastPosition; }
 
             VECTOR GetHighestPosition() { return _highestPosition; }
+
+            ColourState& GetColourState() { return _crState; }
         protected:
-            /**
-             * @brief 色状態
-             */
-            enum class ColourState {
-                White,
-                Black,
-            };
 
             ColourState _crState{ ColourState::White }; //!< 色状態を管理する変数
             float _forwardSpeed{ 0.0f };  //!< 前進スピード
