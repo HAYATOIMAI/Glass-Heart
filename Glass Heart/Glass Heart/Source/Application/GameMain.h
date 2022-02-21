@@ -7,7 +7,6 @@
  * @date   December 2021
  *********************************************************************/
 #pragma once
-
 #include "AppFrame.h"
 
 namespace GlassHeart {
@@ -58,7 +57,7 @@ namespace GlassHeart {
 		inline Object::ObjectFactory& GetObjectFactory() const { return *_objFactory; }
 
 	private:
-		std::unique_ptr<GlassHeart::Object::ObjectServer> _objServer;  //!< オブジェクトサーバーのユニークポインタ
-		std::unique_ptr<GlassHeart::Object::ObjectFactory> _objFactory;	 //!< オブジェクトファクトリーのユニークポインタ
+		std::unique_ptr<Object::ObjectServer> _objServer;  //!< オブジェクトサーバーのユニークポインタ
+		std::unique_ptr<Object::ObjectFactory> _objFactory;	 //!< オブジェクトファクトリーのユニークポインタ
 	};
 }

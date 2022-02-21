@@ -11,31 +11,24 @@
 #include "../Object/ObjectBase.h"
 #include "../Application/GameMain.h"
 
-using namespace GlassHeart::Model;
+using namespace GlassHeart;
 
-ModelAnimeManager::ModelAnimeManager(Object::ObjectBase& owner) : ModelManager{ owner }
-{
-}
+Model::ModelAnimeManager::ModelAnimeManager(Object::ObjectBase& owner) : Model::ModelManager{ owner } {}
 
-ModelAnimeManager::~ModelAnimeManager()
-{
+Model::ModelAnimeManager::~ModelAnimeManager() {
     MV1DetachAnim(_handle, _attachIndex);
 }
 
-void ModelAnimeManager::Init()
-{
-}
+void Model::ModelAnimeManager::Init(){}
 
-void ModelAnimeManager::Register(std::string_view key, int animIndex)
-{
+void Model::ModelAnimeManager::Register(std::string_view key, int animIndex) {
     if (_registry.contains(key.data())) {
         _registry.erase(key.data());
     }
     _registry.emplace(key, animIndex);
 }
 
-void ModelAnimeManager::Update()
-{
+void Model::ModelAnimeManager::Update() {
     // çƒê∂éûä‘ÇÉZÉbÉgÇ∑ÇÈ
     MV1SetAttachAnimTime(_handle, _attachIndex, _playTime);
 
@@ -59,13 +52,11 @@ void ModelAnimeManager::Update()
     }
 }
 
-void ModelAnimeManager::Draw()
-{
+void Model::ModelAnimeManager::Draw() {
     MV1DrawModel(_handle);
 }
 
-void ModelAnimeManager::ChangeAnime(std::string_view key, bool repeate)
-{
+void Model::ModelAnimeManager::ChangeAnime(std::string_view key, bool repeate) {
     auto newAnimIndex = _owner.GetGame().GetResourceServer().GetModelAnimIndex(_key, key);
     if (_animIndex == newAnimIndex) {
         return;

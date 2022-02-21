@@ -9,13 +9,13 @@
 #include "ModeAmg.h"
 #include "../Application/GameMain.h"
 
-using namespace GlassHeart::Mode;
+using namespace GlassHeart;
 
 //!< コンストラクタ
-ModeAmg::ModeAmg(GameMain& game) : ModeMain{ game } {
+Mode::ModeAmg::ModeAmg(GameMain& game) : ModeMain{ game } {
 }
 //!< 初期化処理
-void ModeAmg::Init() {
+void Mode::ModeAmg::Init() {
     //! 使用する画像のテーブル
     const AppFrame::ResourceServer::GraphMap useGraph{
     {"AMGBg",          {"AMG.jpg",          1, 1, 1920, 1080}}
@@ -37,20 +37,19 @@ void ModeAmg::Init() {
 
 }
 //!< 入り口処理
-void ModeAmg::Enter() {
-}
+void Mode::ModeAmg::Enter() {}
 //!< 入力処理
-void ModeAmg::Input(AppFrame::InputManager& input) {
+void Mode::ModeAmg::Input(AppFrame::InputManager& input) {
     if (input.GetJoyPad().GetXinputButtonB()) {
         GetModeServer().GoToMode("TeamLogo");
     }
 }
 //!< 更新処理
-void ModeAmg::Process() {
+void Mode::ModeAmg::Process() {
     //_alpha = (_alpha + 8) % 255;
 }
 //!< 描画処理
-void ModeAmg::Render() {
+void Mode::ModeAmg::Render() {
     DrawGraph(0, 0, _titleBgHandle, FALSE);
     /*SetDrawBlendMode(DX_BLENDMODE_ALPHA, _alpha);
     SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);*/

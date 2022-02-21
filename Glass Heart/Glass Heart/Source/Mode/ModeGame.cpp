@@ -14,13 +14,12 @@
 #include "../Player/Player.h"
 #include <AppFrame.h>
 
-using namespace GlassHeart::Mode;
+using namespace GlassHeart;
 
 //!< コンストラクタ
-ModeGame::ModeGame(GameMain& game) : ModeMain{ game } {
-}
+Mode::ModeGame::ModeGame(GameMain& game) : ModeMain{ game } {}
 //!< 初期化処理
-void ModeGame::Init() {
+void Mode::ModeGame::Init() {
     //!< 使用するモデル
     AppFrame::ResourceServer::ModelMap usemap{
     {"Player",    "Boy/PC2_motion.mv1"},
@@ -34,7 +33,7 @@ void ModeGame::Init() {
     GetResourceServer().LoadModels(usemap);
 }
 //!< 入り口処理
-void ModeGame::Enter() {
+void Mode::ModeGame::Enter() {
     // ファクトリの生成とクリエイターの登録
     auto& of = GetObjectFactory();
 
@@ -62,23 +61,23 @@ void ModeGame::Enter() {
     Process();
 }
 //!< 入力処理
-void ModeGame::Input(AppFrame::InputManager& input) {
+void Mode::ModeGame::Input(AppFrame::InputManager& input) {
     if (input.GetJoyPad().GetXinputStart()) {
         GetModeServer().GoToMode("Title");
     }
     GetObjectServer().Input(input);
 }
 //!< 更新処理
-void ModeGame::Process() {
+void Mode::ModeGame::Process() {
     GetObjectFactory().UpdateSpawn();
     GetObjectServer().Process();
 }
 //!< 描画処理
-void ModeGame::Render() {
+void Mode::ModeGame::Render() {
     GetObjectServer().Render();
 }
 //!< 終了処理
-void ModeGame::Exit() {
+void Mode::ModeGame::Exit() {
     //!< オブジェクトを消去
     GetObjectServer().AllClear();
     //!< リソースの消去

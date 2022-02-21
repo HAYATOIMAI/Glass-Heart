@@ -14,20 +14,20 @@
 #include <numbers>
 #include <AppFrame.h>
 
-using namespace GlassHeart::State;
+using namespace GlassHeart;
 
 /** コンストラクタ */
-StateJump::StateJump(Player::Player& owner) : StateBase{ owner } {
+State::StateJump::StateJump(Player::Player& owner) : StateBase{ owner } {
     _lastPosition = _owner.GetPosition();
 }
 /** 入り口処理 */
-void StateJump::Enter() {
+void State::StateJump::Enter() {
     _isJump = true;
 
     _owner.GetModelAnime().ChangeAnime("Jump_start", true);
 }
 /** 入力処理 */
-void StateJump::Input(AppFrame::InputManager& input) {
+void State::StateJump::Input(AppFrame::InputManager& input) {
     if (input.GetJoyPad().GetXinputThumbLX()) {
         //_owner.GetStateManage().PushBack("Run");
     }
@@ -41,7 +41,7 @@ void StateJump::Input(AppFrame::InputManager& input) {
     //}
 }
 /** 更新処理 */
-void StateJump::Update() {
+void State::StateJump::Update() {
     // 対応するボタンが押されたらジャンプ処理実行
     if (_isJump == true){
         _owner.GetStateManage().PushBack("JumpUp");

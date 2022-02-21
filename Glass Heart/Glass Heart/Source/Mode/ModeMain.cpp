@@ -10,19 +10,15 @@
 #include "ModeMain.h"
 #include "../Application/GameMain.h"
 
-using namespace GlassHeart::Mode;
-using namespace GlassHeart::Object;
+using namespace GlassHeart;
 
+Mode::ModeMain::ModeMain(GameMain& game) : AppFrame::ModeBase{ game }, _gameMain{game} {}
 
-ModeMain::ModeMain(GameMain& game) : AppFrame::ModeBase{ game }, _gameMain{game} {
-
-}
-
-ObjectFactory& ModeMain::GetObjectFactory() {
+Object::ObjectFactory& Mode::ModeMain::GetObjectFactory() {
     return _gameMain.GetObjectFactory();
 }
 
-ObjectServer& ModeMain::GetObjectServer() {
+Object::ObjectServer& Mode::ModeMain::GetObjectServer() {
     return _gameMain.GetObjectServer();
 }
 

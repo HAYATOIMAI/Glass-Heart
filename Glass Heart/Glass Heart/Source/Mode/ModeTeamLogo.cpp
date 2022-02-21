@@ -9,13 +9,11 @@
 #include "ModeTeamLogo.h"
 #include "../Application/GameMain.h"
 
-using namespace GlassHeart::Mode;
+using namespace GlassHeart;
 
 //!< コンストラクタ
-ModeTeamLogo::ModeTeamLogo(GameMain& game) : ModeMain{ game }
-{
-}
-void ModeTeamLogo::Init() {
+Mode::ModeTeamLogo::ModeTeamLogo(GameMain& game) : Mode::ModeMain{ game }{}
+void Mode::ModeTeamLogo::Init() {
     //!< 使用する画像のテーブル
     const AppFrame::ResourceServer::GraphMap useGraph{
     {"TitleBg",          {"TeamLogo/TeamLogo.png",          1, 1, 1920, 1080}} };
@@ -35,20 +33,20 @@ void ModeTeamLogo::Init() {
     sm.SetVolume("bgm1", 50);
 }
 //!< 入り口処理
-void ModeTeamLogo::Enter() {
+void Mode::ModeTeamLogo::Enter() {
 }
 //!< 入力処理
-void ModeTeamLogo::Input(AppFrame::InputManager& input) {
+void Mode::ModeTeamLogo::Input(AppFrame::InputManager& input) {
     if (input.GetJoyPad().GetXinputButtonB()) {
         GetModeServer().GoToMode("Title");
     }
 }
 //!< 更新処理
-void ModeTeamLogo::Process() {
+void Mode::ModeTeamLogo::Process() {
     //_alpha = (_alpha + 8) % 255;
 }
 //!< 描画処理
-void ModeTeamLogo::Render() {
+void Mode::ModeTeamLogo::Render() {
     DrawGraph(0, 0, _titleBgHandle, FALSE);
     //SetDrawBlendMode(DX_BLENDMODE_ALPHA, _alpha);
 }

@@ -16,41 +16,41 @@
 #include <numbers>
 
 namespace {
-    constexpr auto StartPositionX = -150.0f;     //!< プレイヤーの初期位置X
+    constexpr auto StartPositionX = -150.0f;  //!< プレイヤーの初期位置X
     constexpr auto StartPositionY = 35.0f;    //!< プレイヤーの初期位置Y
     constexpr auto StartPositionZ = -140.0f;  //!< プレイヤーの初期位置Z
+    constexpr auto Recast = 30;  //!<　色変更リキャストタイム 
 }
 
-using namespace GlassHeart::Player;
+using namespace GlassHeart;
 
 /** コンストラクタ */
-Player::Player(GameMain& game) : GlassHeart::Object::ObjectBase{ game } {
+Player::Player::Player(GameMain& game) : GlassHeart::Object::ObjectBase{ game } {
     _rotation = VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f);
     _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
     _radius = 25.0f;
 }
 /** 入力処理 */
-void Player::Input(AppFrame::InputManager& input) {
+void Player::Player::Input(AppFrame::InputManager& input) {
     _cameraManage->Input(input);
     _angularSpeed = 0;
     _stateManage->Input(input);
     //LBボタンを押すと色変更
     if (input.GetJoyPad().GetXinputLeftShoulder() && _colourCount == 0) {
-        //連打防止のため1秒(60フレーム)間入力を制限
+        //連打防止のため0.5秒(30フレーム)間入力を制限
         ColorCollisionDetectionSystem();
-        _colourCount = 60;
+        _colourCount = Recast;
     }
     // Bボタンを押すとチェックポイントに保存
     if (_hitFlag == true) {
 
         if (input.GetJoyPad().GetXTriggerButtonB()) {
-
             _checkPointFlag = true;
         }
     }
 }
 /** 更新処理 */
-void Player::Process() {
+void Player::Player::Process() {
     // 入力制限の為カウンタを減少
     if (_colourCount > 0) {
         --_colourCount;
@@ -72,20 +72,21 @@ void Player::Process() {
     GetObjectServer().Register("Player", _position);
 
     _lastPosition = _position;
-
     // 高さの最大値を保存
     if (_lastPosition.y < _position.y ) {
         _highestPosition = _lastPosition;
     }
-
+    // チェックポイントとの当たり判定
     for (auto ite = GetObjectServer().GetObjectLists().begin(); ite != GetObjectServer().GetObjectLists().end(); ite++) {
-
+        // オブジェクトタイプがチェックポイントだったら
         if ((*ite)->GetObjectType() == ObjectBase::ObjectType::CheckPoint) {
-
+            // 円形と円形の当たり判定(当たったらtrueを返す)
             if (_collsionManage->CheckCircleToCircle(*this, **ite) == true) {
+                // 当たった
                 _hitFlag = true;
             }
             else {
+                // 当たらなかった
                 _hitFlag = false;
             }
         }
@@ -93,7 +94,7 @@ void Player::Process() {
 
 }
 /** 描画処理 */
-void Player::Render() {
+void Player::Player::Render() {
 #ifdef _DEBUG
     //プレイヤーの座標を表示
     auto x = 0; auto y = 0; auto size = 32;
@@ -113,7 +114,7 @@ void Player::Render() {
     _stateManage->Draw();
 }
 /** ワールド座標変換 */
-void Player::ComputeWorldTransform() {
+void Player::Player::ComputeWorldTransform() {
     auto world = MGetScale(_scale);
     world = MMult(world, MGetRotZ(_rotation.z));
     world = MMult(world, MGetRotX(_rotation.x));
@@ -121,10 +122,10 @@ void Player::ComputeWorldTransform() {
     _worldTransform = MMult(world, MGetTranslate(_position));
 }
 /** 移動処理 */
-void Player::Move(const VECTOR& forward) {
+void Player::Player::Move(const VECTOR& forward) {
     auto pos = _position;
     // X成分のみ移動後位置から真下に線分判定
-    pos = _collsionManage->CheckHitFloor(pos, { forward.x, forward.y, 0 });
+    pos = _collsionManage->CheckHitFloor(pos, { forward.x, forward.y, 0.f });
     //Y成分
     pos = _collsionManage->CheckHitFloor(pos, { forward.x, forward.y, forward.z });
 
@@ -132,9 +133,9 @@ void Player::Move(const VECTOR& forward) {
     // Y成分
     pos = _collsionManage->CheckHitWall(pos, { forward.x, forward.y, forward.z });
 
-    pos = _collsionManage->CheckHitDeathFloor(pos, { forward.x, forward.y, 0.f });
+    pos = _collsionManage->CheckHitDeathMesh(pos, { forward.x, forward.y, 0.f });
 
-    pos = _collsionManage->CheckHitDeathFloor(pos, { forward.x, forward.y, forward.z });
+    pos = _collsionManage->CheckHitDeathMesh(pos, { forward.x, forward.y, forward.z });
 
     // 色状態が白のときのみ黒のメッシュと判定を行う
     if (_crState == ColourState::White ) {
@@ -163,7 +164,7 @@ void Player::Move(const VECTOR& forward) {
     _position = pos;
 }
 /** 色判定処理 */
-void Player::ColorCollisionDetectionSystem() {
+void Player::Player::ColorCollisionDetectionSystem() {
 
     auto animHandle = _modelAnimeManage->GetHandle();
 
@@ -185,24 +186,22 @@ void Player::ColorCollisionDetectionSystem() {
     }
 }
 
-void Player::ResetPos() {
-
-    if (_collsionManage->GetDeathMesh().HitFlag == 1) {
-
+void Player::Player::ResetPos() {
+    // デスメッシュと当たっていたら
+    if (_collsionManage->GetDeathMesh().HitNum >= 1) {
+        // 
         if (_checkPointFlag == true) {
-
+            // オブジェクトサーバーからチェックポイントの座標を取得
             auto checkPos = GetObjectServer().GetPosition("CheckPoint");
+            // プレイヤーの座標をチェックポイントにする
             _position = checkPos;
-
         }
         else {
-
             _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
-
         }
     }
 }
 
-void GlassHeart::Player::Player::ReturnCheckPoint()
+void Player::Player::ReturnCheckPoint()
 {
 }

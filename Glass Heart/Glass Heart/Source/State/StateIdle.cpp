@@ -12,16 +12,14 @@
 #include "../Model/ModelAnimeManager.h"
 #include "../Collision/CollisionManager.h"
 
-using namespace GlassHeart::State;
+using namespace GlassHeart;
 
-void StateIdle::Enter() {
+void State::StateIdle::Enter() {
 	_owner.SetForwardSpeed(0.0f);
 	_owner.GetModelAnime().ChangeAnime("idle", true);
-
-	//MV1SetupCollInfo(_owner.GetModelAnime().GetHandle(), MV1SearchFrame(_owner.GetModelAnime().GetHandle(), "CollisionNavMesh"), 4, 4, 4);
 }
 
-void StateIdle::Input(AppFrame::InputManager& input) {
+void State::StateIdle::Input(AppFrame::InputManager& input) {
 	if (input.GetJoyPad().GetXinputThumbLX()) {
 		_owner.GetStateManage().PushBack("Run");
 	}
@@ -32,7 +30,7 @@ void StateIdle::Input(AppFrame::InputManager& input) {
 	}
 }
 
-void StateIdle::Update() {
+void State::StateIdle::Update() {
 	// ãÛíÜÇÃë´èÍÇ∆ê⁄ÇµÇƒÇ¢ÇÈÇ©
 	if (_owner.GetCollision().Mcrp().HitFlag == 1) {
 	    _owner.SetPosition(_owner.GetCollision().CheckHitFloor(_owner.GetPosition(), { 0, 3, 0 }));

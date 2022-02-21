@@ -11,9 +11,9 @@
 #include "../Object/ObjectServer.h"
 #include <numbers>
 
-using namespace GlassHeart::Stage;
+using namespace GlassHeart;
 
-Stage::Stage(GameMain& game) : ObjectBase{ game } {
+Stage::Stage::Stage(GameMain& game) : Object::ObjectBase{ game } {
     // スカイスフィアのモデル
     _skySphere = std::make_unique<Model::ModelManager>(*this);
     _skySphere->handle("SkySphere");
@@ -57,12 +57,12 @@ Stage::Stage(GameMain& game) : ObjectBase{ game } {
     SetFogStartEnd(50.0f, 15000.0f);
 }
 
-void Stage::Process() {
+void Stage::Stage::Process() {
     // スカイスフィアをプレイヤと同じ位置にする
     //_skySphere->SetPosition(GetObjectServer().GetPosition("Player"));
 }
 
-void Stage::Render() {
+void Stage::Stage::Render() {
     //_skySphere->Draw();
     //_ground->Draw();
    // _test->Draw();

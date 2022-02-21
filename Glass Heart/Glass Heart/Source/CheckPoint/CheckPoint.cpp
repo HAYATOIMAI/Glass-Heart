@@ -15,7 +15,7 @@ using namespace GlassHeart::CheckPoint;
 CheckPoint::CheckPoint(GameMain& game) : ObjectBase{ game } {
 
     _checkPoint = LoadGraph("resource/Test/2dMaterial/light3.png");
-    _position = VGet(-1500.0f, 35.0f, -140.0f);
+    _position = VGet(-150.0f, 35.0f, -140.0f);
     _radius = 100.0f;
     _hitFlag = false;
 }
@@ -50,7 +50,7 @@ void CheckPoint::Process() {
 void GlassHeart::CheckPoint::CheckPoint::RenderCircle(const VECTOR checkDrawPos, float range) {
     for (float i = 0.0; i < 360.0; i++) {
 
-        float radian = DX_PI / 180 * i;
+        float radian = DX_PI_F / 180 * i;
         float x = range * std::cos(radian);
         float z = range * std::sin(radian);
 

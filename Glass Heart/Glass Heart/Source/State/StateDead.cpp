@@ -11,21 +11,21 @@
 #include "../State/StateManager.h"
 #include <numbers>
 
-using namespace GlassHeart::State;
+using namespace GlassHeart;
 
-StateDead::StateDead(Player::Player& owner) : StateBase{owner} {
+State::StateDead::StateDead(Player::Player& owner) : StateBase{owner} {
     _position = VGet(0.0f, 0.0f, 0.0f);
 }
 
-void StateDead::Enter() {
+void State::StateDead::Enter() {
     _position = VGet(-150.0f, 20.0f, -140.0f);
 }
 
-void StateDead::Update() {
+void State::StateDead::Update() {
     ResetPos();
 }
 
-void StateDead::ResetPos() {
+void State::StateDead::ResetPos() {
     auto r = VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f);
     _owner.SetPosition(_position);
     _owner.SetRotation(r);

@@ -35,6 +35,12 @@ namespace GlassHeart {
              */
             void Enter() override;
             /**
+             * @brief
+             * 
+             * @param input
+             */
+            void Input(AppFrame::InputManager& input) override;
+            /**
              * @brief XVˆ—
              * 
              */
@@ -54,6 +60,7 @@ namespace GlassHeart {
             float _vY{ 0.0f };  //!< ¡‰ñ‚ÌˆÚ“®—Ê
             float _vZ{ -140.0f };  //!< ¡‰ñ‚ÌˆÚ“®—Ê
 
+            float _addVx{ 0.0f };
             VECTOR _position{ 0.0f, 0.0f, -140.0f }; //!< ˆÊ’u
         };
     }

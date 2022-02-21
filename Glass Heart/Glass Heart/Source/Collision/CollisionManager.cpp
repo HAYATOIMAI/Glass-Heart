@@ -13,33 +13,36 @@
 #include "../Application/GameMain.h"
 #include "../Player/Player.h"
 #include <AppFrame.h>
+
+using namespace GlassHeart;
+
 /** 球体の当たり判定 */
-GlassHeart::Collision::Sphere::Sphere(const VECTOR& center, float radius)
+Collision::Sphere::Sphere(const VECTOR& center, float radius)
     :center(center)
     , radius(radius) {
 }
 
-bool GlassHeart::Collision::Sphere::Contains(const VECTOR& point) const {
+bool Collision::Sphere::Contains(const VECTOR& point) const {
     auto distSq = VSquareSize(VSub(center, point));
     return distSq <= (radius * radius);
 }
 
-bool GlassHeart::Collision::Intersect(const Sphere& a, const Sphere& b)
+bool Collision::Intersect(const Sphere& a, const Sphere& b)
 {
     auto distSq = VSquareSize(VSub(a.center, b.center));
     float sumRadii = a.radius + b.radius;
     return distSq <= (sumRadii * sumRadii);
 }
 /** コンストラクタ */
-GlassHeart::Collision::CollisionManager::CollisionManager(GlassHeart::Object::ObjectBase& owner) : _owner{ owner } {
+Collision::CollisionManager::CollisionManager(GlassHeart::Object::ObjectBase& owner) : _owner{ owner } {
     _report = std::make_unique<Report>();
 }
 /** 床との当たり判定 */
-VECTOR GlassHeart::Collision::CollisionManager::CheckHitFloor(const VECTOR& pos, const VECTOR& forward) {
+VECTOR Collision::CollisionManager::CheckHitFloor(const VECTOR& pos, const VECTOR& forward) {
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
-    auto start = VAdd(newPos, { 0, 10, 0 });
-    auto end = VAdd(newPos, { 0, -100, 0 });
+    auto start = VAdd(newPos, { 0.f, 10.f, 0.f });
+    auto end = VAdd(newPos, { 0.f, -100.f, 0.f });
     _mcrp = MV1CollCheck_Line(handle, MV1SearchFrame(handle, "Floor_NavMesh"), start, end);
 
     if (_mcrp.HitFlag == 0) {
@@ -54,12 +57,12 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckHitFloor(const VECTOR& pos,
     return  newPos;
 }
 // 空中の足場との当たり判定
-VECTOR GlassHeart::Collision::CollisionManager::CheckJumpStand(const VECTOR& pos, const VECTOR& forward) {
+VECTOR Collision::CollisionManager::CheckJumpStand(const VECTOR& pos, const VECTOR& forward) {
 
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
     auto start = VAdd(newPos, { 0.f, 10.f, 0.f });
-    auto end = VAdd(newPos, { 0.f, -200.f, 0.f });
+    auto end = VAdd(newPos, { 0.f, -100.f, 0.f });
     _stand = MV1CollCheck_Line(handle, MV1SearchFrame(handle, "Floor_NavMesh"), start, end);
 
     if (_stand.HitFlag == 0) {
@@ -74,7 +77,7 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckJumpStand(const VECTOR& pos
     return  newPos;
 }
 /** 壁との当たり判定 */
-VECTOR GlassHeart::Collision::CollisionManager::CheckHitWall(const VECTOR& pos, const VECTOR& forward) {
+VECTOR Collision::CollisionManager::CheckHitWall(const VECTOR& pos, const VECTOR& forward) {
     auto round = 10.5f;
 
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
@@ -95,7 +98,7 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckHitWall(const VECTOR& pos, 
     return newPos;
 }
 /**  底面や側面との当たり判定 */
-VECTOR GlassHeart::Collision::CollisionManager::CheckHitSideAndBottom(const VECTOR& pos, const VECTOR& forward) {
+VECTOR Collision::CollisionManager::CheckHitSideAndBottom(const VECTOR& pos, const VECTOR& forward) {
 
     auto round = 6.5f;
 
@@ -115,7 +118,7 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckHitSideAndBottom(const VECT
     return newPos;
 }
 /** 白色の壁との当たり判定 */
-VECTOR GlassHeart::Collision::CollisionManager::CheckThroughWMesh(const VECTOR& pos, const VECTOR& forward) {
+VECTOR Collision::CollisionManager::CheckThroughWMesh(const VECTOR& pos, const VECTOR& forward) {
 
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
@@ -135,28 +138,28 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckThroughWMesh(const VECTOR& 
     return newPos;
 }
 
-VECTOR GlassHeart::Collision::CollisionManager::CheckHitDeathFloor(const VECTOR& pos, const VECTOR& forward) {
+VECTOR Collision::CollisionManager::CheckHitDeathMesh(const VECTOR& pos, const VECTOR& forward) {
 
-    //auto round = 6.5f;
+    auto round = 10.5f;
 
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
-    auto c1 = VAdd(newPos, { 0.f, 10.f, 0.f });
-    auto c2 = VAdd(newPos, { 0.f, -100.f, 0.f });
-    _death = MV1CollCheck_Line(handle, MV1SearchFrame(handle, "Death_Mesh"), c1, c2);
+    auto c1 = VAdd(newPos, { -8.f, 10.f, 0.f });
+    auto c2 = VAdd(newPos, { -18.f, 20.f, 0.f });
+    _death = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "Death_Mesh"), c1, c2,round);
 
-    if(_death.HitFlag == 0) {
+    if(_death.HitNum == 0) {
         // 衝突なし移動しない
         return pos;
     }
-    else if (_death.HitFlag == 1) {
+    else if (_death.HitNum>= 1) {
     // 衝突あれば移動する
-        newPos = _death.HitPosition;
+        newPos = VAdd(pos, forward);
     }
 
     return  newPos;
 }
-VECTOR GlassHeart::Collision::CollisionManager::CheckThroughBMesh(const VECTOR& pos, const VECTOR& forward) {
+VECTOR Collision::CollisionManager::CheckThroughBMesh(const VECTOR& pos, const VECTOR& forward) {
 
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
@@ -173,7 +176,7 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckThroughBMesh(const VECTOR& 
 
     return newPos;
 }
-VECTOR GlassHeart::Collision::CollisionManager::CheckThroughWWallMesh(const VECTOR& pos, const VECTOR& forward) {
+VECTOR Collision::CollisionManager::CheckThroughWWallMesh(const VECTOR& pos, const VECTOR& forward) {
 
     auto round = 6.5f;
 
@@ -194,7 +197,7 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckThroughWWallMesh(const VECT
 
     return newPos;
 }
-VECTOR GlassHeart::Collision::CollisionManager::CheckThroughBWallMesh(const VECTOR& pos, const VECTOR& forward) {
+VECTOR Collision::CollisionManager::CheckThroughBWallMesh(const VECTOR& pos, const VECTOR& forward) {
 
     auto round = 6.5f;
 
@@ -214,7 +217,7 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckThroughBWallMesh(const VECT
 
     return newPos;
 }
-VECTOR GlassHeart::Collision::CollisionManager::CheckPlayerCapsule(const VECTOR& pos, const VECTOR& forward) {
+VECTOR Collision::CollisionManager::CheckPlayerCapsule(const VECTOR& pos, const VECTOR& forward) {
 
     auto round = 106.5f;
 
@@ -233,10 +236,10 @@ VECTOR GlassHeart::Collision::CollisionManager::CheckPlayerCapsule(const VECTOR&
 
     return  newPos;
 }
-void GlassHeart::Collision::CollisionManager::RenderCircle(const VECTOR circlePos, float range, int red, int green, int blue) {
-    for (float i = 0.0; i < 360.0; i++) {
+void Collision::CollisionManager::RenderCircle(const VECTOR circlePos, float range, int red, int green, int blue) {
+    for (float i = 0.0f; i < 360.0f; i++) {
 
-        float radian = DX_PI / 180 * i;
+        float radian = DX_PI_F / 180 * i;
         float x = range * std::cos(radian);
         float z = range * std::sin(radian);
 
@@ -247,7 +250,7 @@ void GlassHeart::Collision::CollisionManager::RenderCircle(const VECTOR circlePo
 
     }
 }
-bool GlassHeart::Collision::CollisionManager::CheckCircleToCircle(const GlassHeart::Object::ObjectBase& owner, const GlassHeart::Object::ObjectBase& target)  {
+bool Collision::CollisionManager::CheckCircleToCircle(const GlassHeart::Object::ObjectBase& owner, const GlassHeart::Object::ObjectBase& target)  {
     _radius1 = owner.GetRadius();
     _radius2 = target.GetRadius();
 
@@ -264,7 +267,7 @@ bool GlassHeart::Collision::CollisionManager::CheckCircleToCircle(const GlassHea
     return false;
 }
 /** デバッグ用当たり判定表示 */
-void GlassHeart::Collision::CollisionManager::Render(){
+void Collision::CollisionManager::Render(){
     DrawCapsule3D(_debugNum1, _debugNum2, 0.5f, 10, GetColor(255, 0, 0), GetColor(255, 255, 255), FALSE);
 }
 

@@ -9,10 +9,10 @@
 #include "ObjectServer.h"
 #include "ObjectBase.h"
 
-using namespace GlassHeart::Object;
+using namespace GlassHeart;
 
 // !オブジェクトの追加
-void ObjectServer::Add(std::unique_ptr<ObjectBase> obj) {
+void Object::ObjectServer::Add(std::unique_ptr<Object::ObjectBase> obj) {
     if (_updating) {
         // 更新中は_pendingObjectsに追加する
         _pendingObjects.emplace_back(std::move(obj));
@@ -22,7 +22,7 @@ void ObjectServer::Add(std::unique_ptr<ObjectBase> obj) {
     }
 }
 //! 入力処理
-void ObjectServer::Input(AppFrame::InputManager& input) {
+void Object::ObjectServer::Input(AppFrame::InputManager& input) {
     _updating = true;
     for (auto&& obj : _objects) {
         if (obj->IsActive()) {
@@ -33,7 +33,7 @@ void ObjectServer::Input(AppFrame::InputManager& input) {
     _updating = false;
 }
 //! 更新処理
-void ObjectServer::Process() {
+void Object::ObjectServer::Process() {
     for (auto&& obj : _objects) {
         if (obj->IsActive()) {
             //! オブジェクトを更新する
@@ -54,7 +54,7 @@ void ObjectServer::Process() {
     erase_if(_objects, [](auto&& obj) { return obj->IsDead(); });
 }
 //! 描画処理
-void ObjectServer::Render() {
+void Object::ObjectServer::Render() {
     for (auto&& obj : _objects) {
         if (obj->IsActive()) {
             //! オブジェクトを描画する
@@ -63,19 +63,19 @@ void ObjectServer::Render() {
     }
 }
 //! 全オブジェクトを削除
-void ObjectServer::AllClear() {
+void Object::ObjectServer::AllClear() {
     _objects.clear();
     _pendingObjects.clear();
 }
 //! オブジェクトを登録
-void ObjectServer::Register(std::string_view key, VECTOR vec) {
+void Object::ObjectServer::Register(std::string_view key, VECTOR vec) {
     if (_registry.contains(key.data())) {
         _registry[key.data()] = vec;
     }
     _registry.emplace(key, vec);
 }
 /** オブジェクトの位置を取得 */
-VECTOR ObjectServer::GetPosition(std::string_view key) {
+VECTOR Object::ObjectServer::GetPosition(std::string_view key) {
     if (_registry.contains(key.data())) {
         return _registry[key.data()];
     }
@@ -83,7 +83,7 @@ VECTOR ObjectServer::GetPosition(std::string_view key) {
     return { 0, 0, 0 };
 }
 
-VECTOR ObjectServer::GetForward(std::string_view key) {
+VECTOR Object::ObjectServer::GetForward(std::string_view key) {
     if (_registry.contains(key.data())) {
         return _registry[key.data()];
     }

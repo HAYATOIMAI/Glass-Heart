@@ -9,13 +9,13 @@
 #include "ModeTitle.h"
 #include "../Application/GameMain.h"
 
-using namespace GlassHeart::Mode;
+using namespace GlassHeart;
 
 //!< コンストラクタ
-ModeTitle::ModeTitle(GameMain& game) : ModeMain{ game } {
+Mode::ModeTitle::ModeTitle(GameMain& game) : ModeMain{ game } {
 }
 //!< 初期化処理
-void ModeTitle::Init() {
+void Mode::ModeTitle::Init() {
     //! 使用する画像のテーブル
     const AppFrame::ResourceServer::GraphMap useGraph{
     {"GameTitle",        {"Title/Titlelogo.png",        1, 1, 1920, 1080}},
@@ -41,19 +41,19 @@ void ModeTitle::Init() {
 
 }
 //!< 入り口処理
-void ModeTitle::Enter() {
+void Mode::ModeTitle::Enter() {
 }
 //!< 入力処理
-void ModeTitle::Input(AppFrame::InputManager& input) {
+void Mode::ModeTitle::Input(AppFrame::InputManager& input) {
     if (input.GetJoyPad().GetXinputButtonB()) {
         GetModeServer().GoToMode("InGame");
     }
 }
 //!< 更新処理
-void ModeTitle::Process() {
+void Mode::ModeTitle::Process() {
 }
 //!< 描画処理
-void ModeTitle::Render() {
+void Mode::ModeTitle::Render() {
     DrawGraph(0, 0, _titleBgHandle, FALSE);
     //SetDrawBlendMode(DX_BLENDMODE_ALPHA, _alpha);
     DrawGraph(1920 / 2 - 1135 / 2, 700 - 107 / 2, _leftClickToStart, TRUE);

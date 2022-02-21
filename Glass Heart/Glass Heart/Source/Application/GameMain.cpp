@@ -69,20 +69,20 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     sm.SetMute(false);
 
     //!< オブジェクトサーバーの生成
-    _objServer = std::make_unique<GlassHeart::Object::ObjectServer>();
+    _objServer = std::make_unique<Object::ObjectServer>();
     //!< オブジェクトファクトリーの生成
-    _objFactory = std::make_unique<GlassHeart::Object::ObjectFactory>(*this);
+    _objFactory = std::make_unique<Object::ObjectFactory>(*this);
 
     ////!< モードサーバーを生成し、AMGモードを登録
-    //_modeServer = std::make_unique<AppFrame::ModeServer>("Amg", std::make_shared<GlassHeart::Mode::ModeAmg>(*this));
+    //_modeServer = std::make_unique<AppFrame::ModeServer>("Amg", std::make_shared<Mode::ModeAmg>(*this));
     ////// チームロゴモードを登録
-    //_modeServer->Register("TeamLogo", std::make_shared<GlassHeart::Mode::ModeTeamLogo>(*this));
+    //_modeServer->Register("TeamLogo", std::make_shared<Mode::ModeTeamLogo>(*this));
     ////// タイトルモードを登録
-    //_modeServer->Register("Title", std::make_shared<GlassHeart::Mode::ModeTitle>(*this));
+    //_modeServer->Register("Title", std::make_shared<Mode::ModeTitle>(*this));
     //// インゲームモードを登録
-    //_modeServer->Register("InGame", std::make_shared<GlassHeart::Mode::ModeGame>(*this));
+    //_modeServer->Register("InGame", std::make_shared<Mode::ModeGame>(*this));
 
-    _modeServer = std::make_unique<AppFrame::ModeServer>("InGame", std::make_shared<GlassHeart::Mode::ModeGame>(*this));
+    _modeServer = std::make_unique<AppFrame::ModeServer>("InGame", std::make_shared<Mode::ModeGame>(*this));
 
     return true;
 }
