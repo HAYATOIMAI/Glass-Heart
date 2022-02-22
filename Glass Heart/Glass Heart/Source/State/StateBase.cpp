@@ -13,7 +13,7 @@
 using namespace GlassHeart;
 
 void State::StateBase::Draw() {
-    //MV1SetFrameVisible(_owner.GetModelAnime().GetHandle(), 4, FALSE);
-    //MV1SetFrameVisible(_owner.GetModelAnime().GetHandle(), 5, FALSE);
+    MV1SetFrameVisible(_owner.GetModelAnime().GetHandle(), 4, FALSE);
+    MV1SetFrameVisible(_owner.GetModelAnime().GetHandle(), 5, FALSE);
     _owner.GetModelAnime().Draw();
 }

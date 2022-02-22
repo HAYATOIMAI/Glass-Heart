@@ -26,20 +26,22 @@ void State::StateJumpFall::Enter() {
 }
 
 void State::StateJumpFall::Input(AppFrame::InputManager& input) {
-    input.GetJoyPad().InputReject();
+   
 
-    if (input.GetJoyPad().GetAnalogStickLX() >= 5000) {
+    if (input.GetJoyPad().GetAnalogStickLX() >= 5000 && input.GetJoyPad().GetAnalogStickLX() > 1) {
         // 右方向に向きを変更
         _owner.SetRotation(VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
-        _addVx = -StraifVector;
+        _subVx = -StraifVector;
+        input.GetJoyPad().InputReject();
     }
-    if (input.GetJoyPad().GetAnalogStickLX() <= -5000) {
+    if (input.GetJoyPad().GetAnalogStickLX() <= -5000 && input.GetJoyPad().GetAnalogStickLX() < 1) {
         
         // 左方向に向きを変更
         _owner.SetRotation(VGet(0.0f, 90.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
         _addVx = StraifVector;
+        input.GetJoyPad().InputReject();
     }
-    _addVx = 0.0f;
+   
 }
 /** 更新処理 */
 void State::StateJumpFall::Update() {
@@ -73,7 +75,14 @@ void State::StateJumpFall::Landing() {
     // 空中の足場と接していなかったらゆっくり落下させる
     // 途中スティックの入力があった場合、入力に応じた角度に補正
     if (_owner.GetCollision().GetStand().HitFlag == 0) {
-            _owner.SetPosition(VGet(_owner.GetPosition().x + _addVx, _owner.GetPosition().y - DownVector, _owner.GetPosition().z));
+            if (_addVx > 0 )  {
+                _owner.SetPosition(VGet(_owner.GetPosition().x + _addVx, _owner.GetPosition().y - DownVector, _owner.GetPosition().z));
+                _addVx = 0;
+            }
+            else  {
+                _owner.SetPosition(VGet(_owner.GetPosition().x + _subVx, _owner.GetPosition().y - DownVector, _owner.GetPosition().z));
+                _subVx = 0;
+            }
         //_owner.SetPosition(VGet(_owner.GetPosition().x + _addVx, _owner.GetPosition().y - DownVector, _owner.GetPosition().z));
         if (_owner.GetCollision().CollPol().HitNum >= 1)
         {
@@ -92,7 +101,7 @@ void State::StateJumpFall::Landing() {
     else {
         // 着地したら状態を削除
         _owner.GetStateManage().PushBack("Idle");
-        _addVx = 0.f;
+        //_addVx = 0.f;
     }
 
     // 空中の足場と接しているか

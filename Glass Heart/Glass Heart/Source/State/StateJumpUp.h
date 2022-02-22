@@ -57,10 +57,9 @@ namespace GlassHeart {
             bool _isfall{ false }; //!< —Ž‰º’†‚©‚ð”»’f‚·‚éƒtƒ‰ƒO
 
             float _vX{ 0.0f };  //!< ¡‰ñ‚ÌˆÚ“®—Ê
-            float _vY{ 0.0f };  //!< ¡‰ñ‚ÌˆÚ“®—Ê
-            float _vZ{ -140.0f };  //!< ¡‰ñ‚ÌˆÚ“®—Ê
 
             float _addVx{ 0.0f };
+            float _subVx{ 0.0f };
             VECTOR _position{ 0.0f, 0.0f, -140.0f }; //!< ˆÊ’u
         };
     }

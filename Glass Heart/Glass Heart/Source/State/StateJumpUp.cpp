@@ -33,18 +33,18 @@ void State::StateJumpUp::Enter() {
     _owner.GetModelAnime().ChangeAnime("Jump_Loop", true);
 }
 void State::StateJumpUp::Input(AppFrame::InputManager& input) {
-    input.GetJoyPad().InputReject();
-
-    if (input.GetJoyPad().GetAnalogStickLX() > 5000) {
+   
+    if (input.GetJoyPad().GetAnalogStickLX() >= 5000 && input.GetJoyPad().GetAnalogStickLX() > 1) {
         // 右方向に向きを変更
         _owner.SetRotation(VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
-        _addVx = -StraifVector;
+        _subVx -= StraifVector;
     }
-    if (input.GetJoyPad().GetAnalogStickLX() < -5000) {
+    if (input.GetJoyPad().GetAnalogStickLX() <= -5000 && input.GetJoyPad().GetAnalogStickLX() < 1) {
         // 左方向に向きを変更
         _owner.SetRotation(VGet(0.0f, 90.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
         _addVx = StraifVector;
     }
+    input.GetJoyPad().InputReject();
 }
 /** 更新処理 */
 void State::StateJumpUp::Update() {
@@ -64,7 +64,15 @@ void State::StateJumpUp::Update() {
         // 底面に衝突したか
         if (_owner.GetCollision().GetSideAndBottom().HitNum == 0) {
             // 衝突していないのでそのままジャンプ
-            _owner.SetPosition(VGet(jump.x + _addVx, jump.y, jump.z));
+           // _owner.SetPosition(VGet(jump.x + _addVx, jump.y, jump.z));
+            if (_addVx > 1) {
+                _owner.SetPosition(VGet(_position.x  + _addVx, jump.y, jump.z));
+                _addVx = 0;
+            }
+            else  {
+                _owner.SetPosition(VGet(_position.x  + _subVx, jump.y, jump.z));
+                _subVx = 0;
+            }
         }
         else if (_owner.GetCollision().GetSideAndBottom().HitNum >= 1) {
             // 衝突したので押し戻す

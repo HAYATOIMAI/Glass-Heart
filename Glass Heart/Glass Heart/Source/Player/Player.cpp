@@ -48,6 +48,10 @@ void Player::Player::Input(AppFrame::InputManager& input) {
             _checkPointFlag = true;
         }
     }
+    if (input.GetJoyPad().GetXTriggerRightThumb()) {
+        ResetPos();
+    }
+
 }
 /** XVˆ— */
 void Player::Player::Process() {

@@ -18,7 +18,7 @@ namespace AppFrame {
         GetJoypadXInputState(DX_INPUT_PAD1, &_xInput);
         GetJoypadDirectInputState(DX_INPUT_PAD1, &_dInput);
 
-        SetJoypadDeadZone(DX_INPUT_PAD1, 0.25);
+        //SetJoypadDeadZone(DX_INPUT_PAD1, 0.25);
 
         for (auto i = 0; i < 16; ++i) {
             //! キーのトリガ情報生成(押した瞬間しか反応しないキー情報)
@@ -31,7 +31,7 @@ namespace AppFrame {
         }
     }
     void InputJoypad::InputReject() {
-        XINPUT_STATE _xInput{ 0 };  //!< XInput用入力情報
-        XINPUT_STATE _xTrigger{ 0 };  //!< XInput用トリガー入力情報
+         _xInput.ThumbLX = 0;  //!< XInput用入力情報
+         _xTrigger.ThumbLX = 0;  //!< XInput用トリガー入力情報
     }
 }

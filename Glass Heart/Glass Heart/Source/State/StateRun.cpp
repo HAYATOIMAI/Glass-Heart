@@ -58,10 +58,10 @@ void State::StateRun::Update() {
     if (_owner.GetCollision().GetDeathMesh().HitNum >= 1) {
 
         if (_owner.GetColourState() == Player::Player::ColourState::White) {
-            _owner.ResetPos();
+            _owner.SetPosition(pos);
         }
         if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-            _owner.SetPosition(pos);
+            _owner.ResetPos();
         }
         // _owner.GetStateManage().PushBack("Dead");
     }
