@@ -18,7 +18,7 @@
 namespace {
     constexpr auto StartPositionX = -150.0f;  //!< プレイヤーの初期位置X
     constexpr auto StartPositionY = 35.0f;    //!< プレイヤーの初期位置Y
-    constexpr auto StartPositionZ = -140.0f;  //!< プレイヤーの初期位置Z
+    constexpr auto StartPositionZ = -55.0f;  //!< プレイヤーの初期位置Z
     constexpr auto Recast = 30;  //!<　色変更リキャストタイム 
 }
 
@@ -59,6 +59,24 @@ void Player::Player::Process() {
     if (_colourCount > 0) {
         --_colourCount;
     }
+    // とりあえずのタイマー
+    if (_count < 60) {
+
+        ++_count;
+
+    }
+    if (_count == 60) {
+
+        _count = 0;
+        ++_countSeconds;
+
+    }
+    if (_countSeconds == 60) {
+
+        _countSeconds = 0;
+        ++_countMinutes;
+
+    }
     // 角度の更新
     auto angle = GetRotation();
     angle.y += _angularSpeed;
@@ -70,16 +88,16 @@ void Player::Player::Process() {
     // モデルの更新
     _modelAnimeManage->Update();
     // カメラの更新
-    _cameraManage->SetTarget(_position, GetForward());
-    _cameraManage->Update();
+    //_cameraManage->SetTarget(_position, GetForward());
+    //_cameraManage->Update();
     // オブジェクトサーバーに位置を送信
     GetObjectServer().Register("Player", _position);
 
-    _lastPosition = _position;
-    // 高さの最大値を保存
-    if (_lastPosition.y < _position.y ) {
-        _highestPosition = _lastPosition;
-    }
+    //_lastPosition = _position;
+    //// 高さの最大値を保存
+    //if (_lastPosition.y < _position.y ) {
+    //    _highestPosition = _lastPosition;
+    //}
     // チェックポイントとの当たり判定
     for (auto ite = GetObjectServer().GetObjectLists().begin(); ite != GetObjectServer().GetObjectLists().end(); ite++) {
         // オブジェクトタイプがチェックポイントだったら
@@ -102,15 +120,21 @@ void Player::Player::Render() {
 #ifdef _DEBUG
     //プレイヤーの座標を表示
     auto x = 0; auto y = 0; auto size = 32;
-    auto i = 0; auto o = 32 * 6;
+    auto i = 0; auto o = 32 * 6; auto timeY = 32 * 10;
+    auto white = GetColor(255, 255, 255);
+
     SetFontSize(size);
     DrawFormatString(x, y, GetColor(255, 255, 255), "プレイヤーX座標 =  %.3f ", _position.x); y += size;
     DrawFormatString(x, y, GetColor(255, 255, 255), "プレイヤーY座標 =  %.3f ", _position.y); y += size;
     DrawFormatString(x, y, GetColor(255, 255, 255), "プレイヤーZ座標 =  %.3f ", _position.z); y += size;
     // 色状態を表示
     DrawFormatString(i, o, GetColor(255, 255, 255), _stateName.c_str(), _crState); y += size;
+    // 現在の時間(仮)
+    DrawFormatString(x, timeY, white, "現在の時間 %d ", _count); timeY += size;
+    DrawFormatString(x, timeY, white, "現在の時間:秒 %d ", _countSeconds); timeY += size;
+    DrawFormatString(x, timeY, white, "現在の時間:分 %d ", _countMinutes); timeY += size;
     //カメラの位置を表示
-    _cameraManage->Render();
+   // _cameraManage->Render();
     //DrawLine3D(VGet(_lastPosition.x, _lastPosition.y, _lastPosition.z), VGet(_position.x, _position.y / 200.0f, _position.z), GetColor(255, 0, 0));
     // コリジョン情報を表示
     _collsionManage->Render();
@@ -146,7 +170,7 @@ void Player::Player::Move(const VECTOR& forward) {
 
         pos = _collsionManage->CheckThroughBMesh(pos, { forward.x, forward.y, 0.f });
 
-       pos = _collsionManage->CheckThroughBMesh(pos, { forward.x, forward.y, forward.z }); 
+        pos = _collsionManage->CheckThroughBMesh(pos, { forward.x, forward.y, forward.z }); 
 
         pos = _collsionManage->CheckThroughBWallMesh(pos, { forward.x, forward.y, 0.f });
 
@@ -163,7 +187,6 @@ void Player::Player::Move(const VECTOR& forward) {
 
         pos = _collsionManage->CheckThroughWWallMesh(pos, { forward.x, forward.y, forward.z});
     }
-
     // 座標更新
     _position = pos;
 }

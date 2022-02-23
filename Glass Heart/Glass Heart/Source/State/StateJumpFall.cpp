@@ -13,7 +13,7 @@
 #include <numbers>
 
 namespace {
-    constexpr auto DownVector = 13.5f; // 下降量
+    constexpr auto DownVector = 13.5f; // Y軸の移動量ベクトル下降量
     constexpr auto StraifVector = 10.0f; // ストレイフ用X軸移動量
 }
 
@@ -35,13 +35,11 @@ void State::StateJumpFall::Input(AppFrame::InputManager& input) {
         input.GetJoyPad().InputReject();
     }
     if (input.GetJoyPad().GetAnalogStickLX() <= -5000 && input.GetJoyPad().GetAnalogStickLX() < 1) {
-        
         // 左方向に向きを変更
         _owner.SetRotation(VGet(0.0f, 90.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
         _addVx = StraifVector;
         input.GetJoyPad().InputReject();
     }
-   
 }
 /** 更新処理 */
 void State::StateJumpFall::Update() {
@@ -83,9 +81,7 @@ void State::StateJumpFall::Landing() {
                 _owner.SetPosition(VGet(_owner.GetPosition().x + _subVx, _owner.GetPosition().y - DownVector, _owner.GetPosition().z));
                 _subVx = 0;
             }
-        //_owner.SetPosition(VGet(_owner.GetPosition().x + _addVx, _owner.GetPosition().y - DownVector, _owner.GetPosition().z));
-        if (_owner.GetCollision().CollPol().HitNum >= 1)
-        {
+        if (_owner.GetCollision().CollPol().HitNum >= 1) {
             if (_owner.GetRotation().y == 270.0f * (std::numbers::pi_v<float> / 180.0f)) {
                 _owner.SetRotation(VGet(0.0f, 90.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
                 _reVx += 80.0f;
@@ -94,7 +90,6 @@ void State::StateJumpFall::Landing() {
                 _owner.SetRotation(VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
                 _reVx -= 80.0f;
             }
-
             _owner.SetPosition(VGet(_owner.GetPosition().x + _reVx, _owner.GetPosition().y, _owner.GetPosition().z));
         }
     }
@@ -106,7 +101,6 @@ void State::StateJumpFall::Landing() {
 
     // 空中の足場と接しているか
     if (_owner.GetCollision().GetStand().HitFlag == 1) {
-        // 接している足場と異なる色の場合のみとどまる
             _owner.SetPosition(_owner.GetCollision().GetStand().HitPosition);
             // 着地したら状態を削除
             _owner.GetStateManage().PushBack("Idle");
@@ -126,22 +120,6 @@ void State::StateJumpFall::Landing() {
         if (_owner.GetColourState() == Player::Player::ColourState::Black) {
             _owner.SetPosition(_owner.GetCollision().GetWThrough().HitPosition);
             _owner.GetStateManage().PushBack("Idle");
-        }
-    }
-}
-
-void State::StateJumpFall::IsDeath() {
-    // 落下死処理
-    // レンガブロックに着地したか
-    if (_owner.GetCollision().GetStand().HitFlag == 1) {
-        // 着地処理
-        _owner.SetPosition(_owner.GetCollision().GetStand().HitPosition);
-        auto landing = _owner.GetCollision().GetStand().HitPosition.y;
-        // 最高地点と着地地点との差分を取得
-        auto difference = _owner.GetHighestPosition().y - landing;
-        // 差分が大きかったら死亡
-        if (difference > 50.0f) {
-            //_owner.ResetPos();
         }
     }
 }

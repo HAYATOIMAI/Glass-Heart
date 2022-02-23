@@ -49,11 +49,6 @@ namespace GlassHeart {
              * 
              */
             void Landing();
-            /**
-             * @brief 落下死処理
-             * 
-             */
-            void IsDeath();
         private:
             float _addVx{ 0.0f }; //!< ストレイフ用X軸移動量
             float _subVx{ 0.0f };

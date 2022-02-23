@@ -153,6 +153,15 @@
     <ClInclude Include="Source\CheckPoint\CheckPoint.h">
       <Filter>ヘッダー ファイル\CheckPoint</Filter>
     </ClInclude>
+    <ClInclude Include="Source\State\StateFall.h">
+      <Filter>ヘッダー ファイル\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Player\LoadParamater.h">
+      <Filter>ヘッダー ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera\FollowCamera.h">
+      <Filter>ヘッダー ファイル\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Camera\CameraManager.cpp">
@@ -226,6 +235,15 @@
     </ClCompile>
     <ClCompile Include="Source\CheckPoint\CheckPoint.cpp">
       <Filter>ソース ファイル\CheckPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\State\StateFall.cpp">
+      <Filter>ソース ファイル\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Player\LoadParamater.cpp">
+      <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera\FollowCamera.cpp">
+      <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

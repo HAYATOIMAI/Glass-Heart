@@ -16,7 +16,7 @@
 using namespace GlassHeart;
 
 namespace {
-    constexpr auto DefaultSpeed = 3.5f;
+    constexpr auto DefaultSpeed = 3.5f; //!< 歩行スピード
 }
 
 void State::StateRun::Enter() {
@@ -52,6 +52,30 @@ void State::StateRun::Input(AppFrame::InputManager& input) {
 void State::StateRun::Update() {
 
     _owner.Move(VScale(_owner.GetForward(), _owner.GetForwardSpeed()));
+
+    _owner.GetCollision().CheckJumpStand(_owner.GetPosition(), { 0, 3, 0 });   
+
+    if (_owner.GetCollision().GetStand().HitFlag == 1)  {
+        
+        if (_owner.GetCollision().GetStand().HitFlag == 0) {
+            auto x = _owner.GetCollision().GetStand().HitPosition.x - _owner.GetLastPosition().x;
+           // _owner.SetPosition(VGet(_owner.GetPosition().x + x, _owner.GetPosition().y, _owner.GetPosition().z));
+            //_owner.GetStateManage().PushBack("Fall");
+
+        }
+    }
+    if (_owner.GetCollision().GetBThrough().HitFlag == 1) {
+        if (_owner.GetColourState() == Player::Player::ColourState::Black)  {
+
+            //_owner.GetStateManage().PushBack("Fall");
+        }
+    }
+    if (_owner.GetCollision().GetWThrough().HitFlag == 1) {
+        if (_owner.GetColourState() == Player::Player::ColourState::White) {
+
+            //_owner.GetStateManage().PushBack("Fall");
+        }
+    }
 
     auto pos = _owner.GetPosition();
     // リスポーン処理

@@ -78,12 +78,12 @@ VECTOR Collision::CollisionManager::CheckJumpStand(const VECTOR& pos, const VECT
 }
 /** •Ç‚Æ‚Ì“–‚½‚è”»’è */
 VECTOR Collision::CollisionManager::CheckHitWall(const VECTOR& pos, const VECTOR& forward) {
-    auto round = 10.5f;
+    auto round = 6.5f;
 
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
     auto c1 = VAdd(newPos, { -8.f, 10.f, 0.f });
-    auto c2 = VAdd(newPos, { -18.f, 20.f, 0.f });
+    auto c2 = VAdd(newPos, { -8.f, 20.f, 0.f });
     _collpol = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "Wall_NavMesh"), c1, c2, round);
 
     if (_collpol.HitNum == 0) {

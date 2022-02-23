@@ -49,6 +49,7 @@ namespace GlassHeart {
                 Object = 0,
                 Player,
                 Enemy,
+                Camera,
                 Stage,
                 CheckPoint
             };

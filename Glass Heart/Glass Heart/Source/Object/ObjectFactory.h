@@ -117,6 +117,13 @@ namespace GlassHeart {
         class StageCreate : public CreateBase {
             virtual std::unique_ptr<ObjectBase> Create(GameMain& game);
         };
+        /**
+         * @class StageCreate
+         * @brief カメラフォロー用のクリエイター
+         */
+        class FollowCameraCreate : public CreateBase {
+            virtual std::unique_ptr<ObjectBase> Create(GameMain& game);
+        };
     }
 }
 

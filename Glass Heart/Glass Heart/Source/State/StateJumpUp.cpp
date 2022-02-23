@@ -15,6 +15,8 @@
 
 namespace {
     constexpr auto StraifVector = 10.0f; // ストレイフ用X軸移動量
+    constexpr auto JumpVecY = 80.0f;  //!< ジャンプ用Y軸移動量ベクトル
+    constexpr auto RerocateY = 35.0f; //!< 足場の底面や側面衝突時の位置修正量
 }
 
 using namespace GlassHeart;
@@ -23,11 +25,11 @@ State::StateJumpUp::StateJumpUp(Player::Player& owner) : State::StateBase{ owner
 /** 入り口処理 */
 void State::StateJumpUp::Enter() {
     if (_owner.GetRotation().y == 270.0f * (std::numbers::pi_v<float> / 180.0f)) {
-        VECTOR jumpbase = VGet(0.0f, 80.0f, 0.0f);
+        VECTOR jumpbase = VGet(0.0f, JumpVecY, 0.0f);
         _jumpVelocity = jumpbase;
     }
     else if (_owner.GetRotation().y == 90.0f * (std::numbers::pi_v<float> / 180.0f)) {
-        VECTOR jumpbase = VGet(0.0f, 80.f, 0.0f);
+        VECTOR jumpbase = VGet(0.0f, JumpVecY, 0.0f);
         _jumpVelocity = jumpbase;
     }
     _owner.GetModelAnime().ChangeAnime("Jump_Loop", true);
@@ -56,7 +58,7 @@ void State::StateJumpUp::Update() {
     _owner.GetCollision().CheckThroughBWallMesh(_owner.GetPosition(), { 0.f, 3.f, 0.f });
     _owner.GetCollision().CheckThroughWWallMesh(_owner.GetPosition(), { 0.f, 3.f, 0.f });
 
-    // 落下中もしくはYが0以下で無ければ上昇
+    // 落下中もしくは移動ベクトルが0以下で無ければ上昇
     if (_isfall != true || jump.y > 0.f) {
 
         _position = _owner.GetPosition();
@@ -64,7 +66,6 @@ void State::StateJumpUp::Update() {
         // 底面に衝突したか
         if (_owner.GetCollision().GetSideAndBottom().HitNum == 0) {
             // 衝突していないのでそのままジャンプ
-           // _owner.SetPosition(VGet(jump.x + _addVx, jump.y, jump.z));
             if (_addVx > 1) {
                 _owner.SetPosition(VGet(_position.x  + _addVx, jump.y, jump.z));
                 _addVx = 0;
@@ -76,7 +77,7 @@ void State::StateJumpUp::Update() {
         }
         else if (_owner.GetCollision().GetSideAndBottom().HitNum >= 1) {
             // 衝突したので押し戻す
-            _owner.SetPosition(VGet(_position.x, _position.y - 35.f, _position.z));
+            _owner.SetPosition(VGet(_position.x, _position.y - RerocateY, _position.z));
             _vX = 0.f;
             
         }
@@ -111,9 +112,6 @@ void State::StateJumpUp::Update() {
 
         //}
     }
-
-   
-
     // 移動ベクトルがマイナスになったら下降状態に移行
     if (_jumpVelocity.y < 0) {
         _owner.GetStateManage().PushBack("JumpFall");
@@ -124,6 +122,8 @@ void State::StateJumpUp::Update() {
 /** ジャンプ中処理 */
 VECTOR State::StateJumpUp::JumpUpdate() {
     // ベクトルで計算
+    // 移動ベクトルに重力加速度を足し続けて
+    // 0より小さくなったら落下
     VECTOR jumpPosition = VAdd(_owner.GetPosition(), _jumpVelocity);
 
     _jumpVelocity.y += _jY;

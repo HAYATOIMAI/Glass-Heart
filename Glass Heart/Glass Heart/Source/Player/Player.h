@@ -112,6 +112,9 @@ namespace GlassHeart {
             VECTOR _highestPosition{ 0.0f, 0.0f, 0.0f };
             std::string _stateName{ "White" }; //!< 状態名変数
             int _colourCount{ 0 };  //!< 色変更クールタイム用カウンター
+            int _count{ 0 };         //!< フレームカウント
+            int _countSeconds{ 0 };  //!< 秒
+            int _countMinutes{ 0 };  //!< 分
             bool _checkPointFlag{ false };
         };
     }

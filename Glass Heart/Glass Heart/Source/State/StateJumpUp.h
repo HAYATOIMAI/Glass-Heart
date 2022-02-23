@@ -52,14 +52,15 @@ namespace GlassHeart {
              */
             VECTOR JumpUpdate();
         private:
-            float _jY{ -8.0f }; //!< Y軸のジャンプ量
+            float _jY{ -8.0f }; //!< 重力加速度
+                                //  
             VECTOR _jumpVelocity{ 0.0f, 0.0f, 0.0f }; //!< ジャンプ速度
             bool _isfall{ false }; //!< 落下中かを判断するフラグ
 
             float _vX{ 0.0f };  //!< 今回の移動量
 
-            float _addVx{ 0.0f };
-            float _subVx{ 0.0f };
+            float _addVx{ 0.0f }; //!< 右方向へのストレイフ量
+            float _subVx{ 0.0f }; //!< 左方向へのストレイフ量
             VECTOR _position{ 0.0f, 0.0f, -140.0f }; //!< 位置
         };
     }

@@ -12,6 +12,7 @@
 namespace GlassHeart {
 
     class GameMain;
+
     namespace Object {
         class ObjectServer;
         class ObjectFactory;

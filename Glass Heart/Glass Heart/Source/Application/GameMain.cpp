@@ -36,13 +36,13 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
      
     /** マテリアルの自己発光色を暗い青色にする */
 #ifdef _DEBUG
-    MATERIALPARAM material;
+   /* MATERIALPARAM material;
     material.Diffuse = GetColorF(0.0f, 0.0f, 0.0f, 1.0f);
     material.Specular = GetColorF(0.0f, 0.0f, 0.0f, 0.0f);
     material.Ambient = GetColorF(0.0f, 0.0f, 0.0f, 0.0f);
     material.Emissive = GetColorF(0.0f, 0.0f, 0.5f, 0.0f);
     material.Power = 20.0f;
-    SetMaterialParam(material);
+    SetMaterialParam(material);*/
 #endif
     /** 使用する音のテーブル */
     const AppFrame::ResourceServer::SoundMap usesound {

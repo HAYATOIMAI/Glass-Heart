@@ -27,7 +27,7 @@ void Mode::ModeGame::Init() {
     /*{"Ground",    "ground.mv1"},
     {"Terrain",   "Ground/Ground.mv1"},
     {"Test",      "Test/ST_test.mv1"},*/
-    {"Stage", "Test/StageZenhan.mv1"},
+    {"Stage", "Test/Zenhan.mv1"},
     };
     //!< ƒ‚ƒfƒ‹‚Ì“Ç‚Ýž‚Ý
     GetResourceServer().LoadModels(usemap);
@@ -38,6 +38,7 @@ void Mode::ModeGame::Enter() {
     auto& of = GetObjectFactory();
 
     of.Register("Player", std::make_unique<Object::PlayerCreate>());
+    of.Register("FollowCamera", std::make_unique<Object::FollowCameraCreate>());
     of.Register("Stage", std::make_unique<Object::StageCreate>());
     of.Register("CheckPoint", std::make_unique<Object::CheckPointCreate>());
 
@@ -47,6 +48,10 @@ void Mode::ModeGame::Enter() {
 
     os.Register("Player", player->GetPosition());
     os.Add(std::move(player));
+
+    auto followCamera = of.Create("FollowCamera");
+    os.Register("FollowCamera", followCamera->GetPosition());
+    os.Add(std::move(followCamera));
 
     auto stage = of.Create("Stage");
     os.Add(std::move(stage));
