@@ -13,48 +13,44 @@
 
 using namespace GlassHeart::Mode;
 
-//int ModeMain::_count;
-//int ModeMain::_countSeconds;
-//int ModeMain::_countMinutes;
+int ModeMain::_count;
+int ModeMain::_countSeconds;
+int ModeMain::_countMinutes;
 
-//!< コンストラクタ
+/** コンストラクタ */
 ModeClear::ModeClear(GameMain& game) : ModeMain{ game } {
 }
-//!< 初期化処理
+/** 初期化処理 */
 void ModeClear::Init() {
-    //! 使用する画像のテーブル
+    // 使用する画像のテーブル
     const AppFrame::ResourceServer::GraphMap useGraph{
     {"TitleBG",       {"Title/TitleBG.png",     1, 1, 1920, 1080}},
     };
 
-    //!< リソースサーバーを取得
+    // リソースサーバーを取得
     auto& res = GetResourceServer();
-
-    //!< 画像の読み込み
+    // 画像の読み込み
     res.LoadGraphics(useGraph);
-    //!< 画像のハンドルの取得
+    // 画像のハンドルの取得
     _bgHandle = res.GetGraph("TitleBG");
 
-
-    //!< サウンドマネージャーを取得
+    // サウンドマネージャーを取得
     /*auto& sm = GetSoundManager();
     sm.PlayLoop("bgm1");
     sm.SetVolume("bgm1", 50);*/
-
 }
-//!< 入り口処理
-void ModeClear::Enter() {
-}
-//!< 入力処理
+/** 入り口処理 */
+void ModeClear::Enter() {}
+/** 入力処理 */
 void ModeClear::Input(AppFrame::InputManager& input) {
     if (input.GetJoyPad().GetXinputButtonB()) {
         GetModeServer().GoToMode("Title");
     }
 }
-//!< 更新処理
+/** 更新処理 */ 
 void ModeClear::Process() {
 }
-//!< 描画処理
+/** 描画処理 */
 void ModeClear::Render() {
 
     DrawGraph(0, 0, _bgHandle, FALSE);
@@ -67,7 +63,7 @@ void ModeClear::Render() {
     DrawFormatString(x, y, black, "現在の時間: %d分 ", _countMinutes); y += size;
 
 }
-//!< 終了処理
+/** 終了処理 */
 void ModeClear::Exit() {
     //!< オブジェクトを消去
     GetObjectServer().AllClear();

@@ -26,7 +26,9 @@ namespace GlassHeart {
 
             void Landing();
         private:
-
+            float _addVx{ 0.0f }; //!< ストレイフ用X軸移動量
+            float _subVx{ 0.0f };
+            float _reVx{ 0.0f };
         };
     }
 }

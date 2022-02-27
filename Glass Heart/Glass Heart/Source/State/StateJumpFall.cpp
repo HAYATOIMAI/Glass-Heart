@@ -26,8 +26,6 @@ void State::StateJumpFall::Enter() {
 }
 
 void State::StateJumpFall::Input(AppFrame::InputManager& input) {
-   
-
     if (input.GetJoyPad().GetAnalogStickLX() >= 5000 && input.GetJoyPad().GetAnalogStickLX() > 1) {
         // ‰E•ûŒü‚ÉŒü‚«‚ğ•ÏX
         _owner.SetRotation(VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
@@ -60,7 +58,6 @@ void State::StateJumpFall::Update() {
             _owner.SetPosition(VGet(pos.x, pos.y, pos.z));
         }
     }
-    //IsDeath();
 }
 void State::StateJumpFall::Landing() {
 

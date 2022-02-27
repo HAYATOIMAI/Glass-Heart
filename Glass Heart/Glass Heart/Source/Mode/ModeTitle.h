@@ -11,7 +11,7 @@
 #include <AppFrame.h>
 
 namespace GlassHeart {
-
+    /** 前方宣言 */
     class GameMain;
 
     namespace Mode {
@@ -59,10 +59,10 @@ namespace GlassHeart {
              */
             void Render() override;
         private:
-            int _gameTitleHandle{ -1 };  //!< ゲームタイトル画像
-            int _leftClickToStart{ -1 };  //!< Left click to Start画像
-            int _titleBgHandle{ -1 };  //!< 背景画像
+            int _title{ -1 };               //!< タイトル画像
+            int _titleBgHandle{ -1 };       //!< ゲームタイトル画像
+            int _titleButtonHandle{ -1 };   //!< Press Any Button画像
+            int _titleLogo{ -1 };           //!< 背景画像
         };
     }
-
 }

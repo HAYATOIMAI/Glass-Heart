@@ -46,16 +46,21 @@ void State::StateRun::Input(AppFrame::InputManager& input) {
 	else {
 		_owner.GetStateManage().PopBack();
 	}
-
 }
 
 void State::StateRun::Update() {
 
+	auto pos = _owner.GetPosition();
+
 	_owner.Move(VScale(_owner.GetForward(), _owner.GetForwardSpeed()));
 
-	//_owner.GetCollision().CheckFall(_owner.GetPosition(), { 0.0f, 0.0f, 0.f })
+	_owner.GetCollision().CheckFall(pos, { 0.0f, 3.0f, 0.f });
 
-	auto pos = _owner.GetPosition();
+	if (_owner.GetCollision().GetFall().HitFlag == 0) {
+		_owner.GetStateManage().PushBack("Fall");
+	}
+
+	
 	// ƒŠƒXƒ|[ƒ“ˆ—
 	if (_owner.GetCollision().GetDeathMesh().HitNum >= 1) {
 

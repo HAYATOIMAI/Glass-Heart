@@ -30,58 +30,55 @@ namespace AppFrame {
         _gameInstance = this;
     }
 
-    GameBase::~GameBase() {
-    }
+    GameBase::~GameBase() {}
 
     bool GameBase::Initialize(HINSTANCE hInstance) {
 
-        //Log.txtを出力しない
+        // Log.txtを出力しない
         SetOutApplicationLogValidFlag(true);
 
-        //! ウィンドウのタイトルを設定する
+        // ウィンドウのタイトルを設定する
         SetMainWindowText("Glass Heart");
 
-        //! 画面モードのを設定
+        // 画面モードのを設定
         SetGraphMode(SCREENWIDTH, SCREENHEIGHT, SCREENDEPTH);
 
 #ifndef _DEBUG
-        //! Releaseビルド時にウィンドウモードを解除する
-        ChangeWindowMode(false);
-#endif // !_DEBUG
+        // Releaseビルド時にウィンドウモードを解除する
+        ChangeWindowMode(true);
+#endif // _DEBUG
 #ifdef _DEBUG
         //! Debugビルド時にウィンドウモードに指定する
         ChangeWindowMode(true);
 #endif // DEBUG
 
-        //! Dxライブラリ初期化
+        // Dxライブラリ初期化
         if (DxLib_Init() == -1) {
             return false;
         }
 
-        //SetBackgroundColor(0, 0, 255);
-
-        //! 描画先画面を裏にする
+        // 描画先画面を裏にする
         SetDrawScreen(DX_SCREEN_BACK);
 
-        //! Ｚバッファを有効にする
+        // Ｚバッファを有効にする
         SetUseZBuffer3D(TRUE);
 
-        //! Ｚバッファへの書き込みを有効にする
+        // Ｚバッファへの書き込みを有効にする
         SetWriteZBuffer3D(TRUE);
 
-        //! インプットマネージャーの生成
+        // インプットマネージャーの生成
         _inputManage = std::make_unique<InputManager>();
 
-        //! リソースサーバーの生成
+        // リソースサーバーの生成
         _resServer = std::make_unique<ResourceServer>(*this);
 
-        //! サウンドマネージャーの生成
+        // サウンドマネージャーの生成
         _soundManage = std::make_unique<SoundManager>(*this);
 
         return true;
     }
     void GameBase::Terminate() {
-        //! Dxライブラリ終了
+        // Dxライブラリ終了
         DxLib_End();
     }
 
@@ -105,6 +102,10 @@ namespace AppFrame {
             _gameState = GameState::End;
         }
 #endif // DEBUG
+        if (_inputManage->GetJoyPad().GetXinputBack()) {
+            _gameState = GameState::End;
+        }
+
         _modeServer->Input(*_inputManage);
     }
 

@@ -22,9 +22,9 @@ namespace GlassHeart {
 
             FollowCamera(GameMain& game);
 
-            ~FollowCamera();
+            ~FollowCamera() {};
 
-            void Init() override;
+            void Init() override {};
 
             void Process() override;
 

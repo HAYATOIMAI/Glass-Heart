@@ -103,8 +103,6 @@ namespace GlassHeart {
 
             VECTOR GetLastPosition() { return _lastPosition; }
 
-            VECTOR GetHighestPosition() { return _highestPosition; }
-
             ColourState& GetColourState() { return _crState; }
         protected:
 
@@ -112,7 +110,6 @@ namespace GlassHeart {
             float _forwardSpeed{ 0.0f };  //!< 前進スピード
             float _angularSpeed{ 0.0f };  //!< 
             VECTOR _lastPosition{ 0.0f, 0.0f, 0.0f };
-            VECTOR _highestPosition{ 0.0f, 0.0f, 0.0f };
             std::string _stateName{ "White" }; //!< 状態名変数
             int _colourCount{ 0 };  //!< 色変更クールタイム用カウンター
             bool _checkPointFlag{ false };

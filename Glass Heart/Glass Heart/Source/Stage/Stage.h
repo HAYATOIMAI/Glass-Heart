@@ -43,7 +43,7 @@ namespace GlassHeart {
             void Render() override;
             ObjectType GetObjectType() const override { return ObjectType::Stage; }
         private:
-            std::unique_ptr<Model::ModelManager> _skySphere;
+            //std::unique_ptr<Model::ModelManager> _skySphere;
           //  std::unique_ptr<Model::ModelManager> _ground;
           //  std::unique_ptr<Model::ModelManager> _test;
             std::unique_ptr<Model::ModelManager> _testStage; //!< ステージ用ユニークポインタ

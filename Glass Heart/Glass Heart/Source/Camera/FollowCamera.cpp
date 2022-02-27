@@ -20,39 +20,44 @@ namespace {
 
 using namespace GlassHeart::Camera;
 
+/** コンストラクタ */
 FollowCamera::FollowCamera(GameMain& game) : ObjectBase{ game } {
 
     _rotation = VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f);
     _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
 
     Init();
-
 }
-
-FollowCamera::~FollowCamera() {}
-
-void FollowCamera::Init() {}
-
+/** 更新処理 */
 void FollowCamera::Process() {
-
     auto player = GetObjectServer().GetPosition("Player");
 
     // プレイヤーに向かうベクトル
     auto forwoard = VSub(player, _position);
-    // プレイヤーに向かう単位ベクトル
-    forwoard = VNorm(forwoard);
-    // プレイヤーに向かう移動量ベクトル
-    auto delta = VScale(forwoard, _forwardSpeed);
 
     if (player.y - 2.5 < _position.y && _position.y < player.y + 2.5
         && player.x - 2.5 < _position.x && _position.x < player.x + 2.5) {
     }
     else {
+        // 距離（長さ）
+        auto dist = VSize(forwoard);
 
-        // プレイヤーに向かって移動
-        _position = VAdd(_position, delta);
+        VECTOR delta = { 0,0,0 };
+        // プレイヤーに向かう単位ベクトル
+        forwoard = VNorm(forwoard);
+
+        if (dist > (1080 / 4)) {
+            // プレイヤーに向かう移動量ベクトル
+            delta = VScale(forwoard, -(1080 / 4));
+            _position = VAdd(player, delta);
+        }
+        else {
+            // プレイヤーに向かう移動量ベクトル
+            delta = VScale(forwoard, _forwardSpeed);
+            // プレイヤーに向かって移動
+            _position = VAdd(_position, delta);
+        }
         _rotation.y = std::atan2f(forwoard.x, forwoard.z);
-
     }
 
     ComputeWorldTransform();
@@ -63,9 +68,9 @@ void FollowCamera::Process() {
     GetObjectServer().Register("Camera", _position);
 
 }
-
+/** 描画処理 */
 void FollowCamera::Render() {
-
+#ifdef _DEBUG
     //カメラの位置を表示
     _cameraManage->Render();
     //カメラマンの座標を表示
@@ -74,5 +79,5 @@ void FollowCamera::Render() {
     DrawFormatString(x, y, GetColor(255, 255, 255), "カメラマンX座標 =  %.3f ", _position.x); y += size;
     DrawFormatString(x, y, GetColor(255, 255, 255), "カメラマンY座標 =  %.3f ", _position.y); y += size;
     DrawFormatString(x, y, GetColor(255, 255, 255), "カメラマンZ座標 =  %.3f ", _position.z); y += size;
-
+#endif // _DEBUG
 }

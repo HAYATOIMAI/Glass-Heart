@@ -11,52 +11,40 @@
 
 using namespace GlassHeart;
 
-//!< コンストラクタ
-Mode::ModeTitle::ModeTitle(GameMain& game) : ModeMain{ game } {
-}
-//!< 初期化処理
+// コンストラクタ
+Mode::ModeTitle::ModeTitle(GameMain& game) : ModeMain{ game } {}
+// 初期化処理
 void Mode::ModeTitle::Init() {
-    //! 使用する画像のテーブル
+    // 使用する画像のテーブル
     const AppFrame::ResourceServer::GraphMap useGraph{
-    {"GameTitle",        {"Title/Titlelogo.png",        1, 1, 1920, 1080}},
-    {"PressAnyButton", {"Title/TitleButton.png", 1, 1, 1920, 1080}},
-    {"Bg", {"Title/TitleButton.png", 1, 1, 1920, 1080}},
+        {"TitleButton",   {"Title/TitleButton.png", 1, 1, 1920, 1080}},
+        {"TitleLogo",     {"Title/TitleLogo.png",   1, 1, 1920, 1080}},
+        {"Title",         {"Title/Title.png",       1, 1, 1920, 1080}},
     };
 
-    //!< リソースサーバーを取得
+    // リソースサーバーを取得
     auto& res = GetResourceServer();
 
-    //!< 画像の読み込み
+    // 画像の読み込み
     res.LoadGraphics(useGraph);
 
-    //!< 画像のハンドルの取得
-    _titleBgHandle = res.GetGraph("Bg");
-    _leftClickToStart = res.GetGraph("PressAnyButton");
-    _gameTitleHandle = res.GetGraph("GameTitle");
-
-    //!< サウンドマネージャーを取得
-    auto& sm = GetSoundManager();
-    sm.PlayLoop("bgm1");
-    sm.SetVolume("bgm1", 50);
-
+    // 画像のハンドルの取得
+    _title = res.GetGraph("Title");
+    _titleBgHandle = res.GetGraph("TitleBG");
+    _titleButtonHandle = res.GetGraph("TitleButton");
+    _titleLogo = res.GetGraph("TitleLogo");
 }
-//!< 入り口処理
-void Mode::ModeTitle::Enter() {
-}
-//!< 入力処理
+// 入り口処理
+void Mode::ModeTitle::Enter() {}
+// 入力処理
 void Mode::ModeTitle::Input(AppFrame::InputManager& input) {
     if (input.GetJoyPad().GetXinputButtonB()) {
         GetModeServer().GoToMode("InGame");
     }
 }
-//!< 更新処理
-void Mode::ModeTitle::Process() {
-}
-//!< 描画処理
+// 更新処理
+void Mode::ModeTitle::Process() {}
+// 描画処理
 void Mode::ModeTitle::Render() {
-    DrawGraph(0, 0, _titleBgHandle, FALSE);
-    //SetDrawBlendMode(DX_BLENDMODE_ALPHA, _alpha);
-    DrawGraph(1920 / 2 - 1135 / 2, 700 - 107 / 2, _leftClickToStart, TRUE);
-    SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
-    DrawGraph(0, 0, _gameTitleHandle, TRUE);
+    DrawGraph(0, 0, _title, FALSE);
 }

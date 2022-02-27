@@ -14,7 +14,6 @@
 using namespace GlassHeart::Camera;
 
 namespace {
-
      constexpr auto CameraDisX = 0;  //!< X軸の倍率
      constexpr auto CameraDisY = 1;   //!< Y軸の倍率
      constexpr auto CameraDisZ = 7;  //!< Z軸の倍率
@@ -28,11 +27,9 @@ void CameraManager::Init() {
     SetCameraNearFar(50.0f, 10000.0f);
 }
 
-void CameraManager::Input(AppFrame::InputManager& input) {
-}
+void CameraManager::Input(AppFrame::InputManager& input) {}
 
 void CameraManager::Update() {
-
     // ターゲットの向き※Yは無視
     auto forward = _forwardOfTarget;
     forward.x = 0.0f;
@@ -43,14 +40,8 @@ void CameraManager::Update() {
     fromTarget.x = vertDist * CameraDisX;
     fromTarget.y = vertDist * CameraDisY;
     fromTarget.z = vertDist * CameraDisZ;
-    /*fromTarget.x = -120.5f;
-    fromTarget.y = 70.0f;
-    fromTarget.z = 3.0f;*/
-
     // カメラの位置をプレイヤーの横位置にする
     _position = VAdd(_target, fromTarget);
-    // カメラを正射影に変更
-    //SetupCamera_Ortho(900.0f);
     SetCameraPositionAndTarget_UpVecY(_position, _target);
 }
 

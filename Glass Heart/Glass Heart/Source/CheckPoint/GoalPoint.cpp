@@ -15,8 +15,8 @@ using namespace GlassHeart::CheckPoint;
 
 GoalPoint::GoalPoint(GameMain& game) : ObjectBase{ game } {
 
-    //_goalPoint = LoadGraph("resource/Test/2dMaterial/light3.png");
-    _position = VGet(-600.0f, 35.0f, -140.0f);
+    _goalPoint = LoadGraph("resource/Test/2dMaterial/light3.png");
+    _position = VGet(556.0f, 2555.0f, -55.0f);
     _radius = 100.0f;
     _hitFlag = false;
 }
@@ -40,11 +40,8 @@ void GoalPoint::Process() {
             else {
 
                 _hitFlag = false;
-
             }
-
         }
-
     }
 }
 
@@ -59,27 +56,18 @@ void GoalPoint::Render() {
     auto green = GetColor(0, 255, 0);
 
     if (_hitFlag == true) {
-
         _collsionManage->RenderCircle(_position, _radius, red);
-
     }
     else {
-
         _collsionManage->RenderCircle(_position, _radius, green);
-
     }
-
 #endif // _DEBUG
-
 }
 
 void GoalPoint::GoToGameClear() {
 
-    if (_hitFlag==true) {
-    
-        _game.GetModeServer().GoToMode("GameClear");
-    
-    }
-    
+    if (_hitFlag == true) {
 
+        _game.GetModeServer().GoToMode("GameClear");
+    }
 }

@@ -15,9 +15,9 @@ using namespace GlassHeart;
 
 Stage::Stage::Stage(GameMain& game) : Object::ObjectBase{ game } {
     // スカイスフィアのモデル
-    _skySphere = std::make_unique<Model::ModelManager>(*this);
+    /*_skySphere = std::make_unique<Model::ModelManager>(*this);
     _skySphere->handle("SkySphere");
-    _skySphere->SetScale({ 80.f,  80.f, 80.f });
+    _skySphere->SetScale({ 80.f,  80.f, 80.f });*/
     //// 地面のモデル
     //_ground = std::make_unique<Model::ModelManager>(*this);
     //_ground->handle("Terrain");
@@ -42,6 +42,7 @@ Stage::Stage::Stage(GameMain& game) : Object::ObjectBase{ game } {
     MV1SetFrameVisible(_testStage->GetHandle(), 6, FALSE);
     MV1SetFrameVisible(_testStage->GetHandle(), 7, FALSE);
     MV1SetFrameVisible(_testStage->GetHandle(), 8, FALSE);
+    MV1SetFrameVisible(_testStage->GetHandle(), 9, FALSE);
     //以下のフレームをナビメッシュとして使用
     MV1SetupCollInfo(_testStage->GetHandle(), 2, 8, 8, 8);
     MV1SetupCollInfo(_testStage->GetHandle(), 3, 8, 8, 8);

@@ -18,16 +18,6 @@ namespace GlassHeart {
 
     namespace Collision {
 
-        struct Sphere {
-            Sphere(const VECTOR& center, float radius);
-            bool Contains(const VECTOR& point) const;
-
-            VECTOR center;
-            float radius;
-        };
-
-        bool Intersect(const Sphere& a, const Sphere& b);
-
         class CollisionManager {
         public:
             enum class ReportId {
@@ -44,20 +34,40 @@ namespace GlassHeart {
             /**
              * @brief 床との当たり判定
              * 
-             * @param pos 位置ベクトル
-             * @param forward フォワードベクトル
-             * @return 
+             * @param[in] pos 位置ベクトル
+             * @param[in] forward 移動量ベクトル
+             * @return 位置ベクトル
              */
             VECTOR CheckHitFloor(const VECTOR& pos, const VECTOR& forward);
+            /**
+             * @brief 空中の足場との当たり判定
+             * 
+             * @param[in] pos 位置ベクトル
+             * @param[in] forward  移動量ベクトル
+             * @return  位置ベクトル
+             */
             VECTOR CheckJumpStand(const VECTOR& pos, const VECTOR& forward);
+            /**
+             * @brief 壁との当たり判定
+             * 
+             * @param[in] pos 位置ベクトル
+             * @param[in] forward 移動量ベクトル
+             * @return 位置ベクトル
+             */
             VECTOR CheckHitWall(const VECTOR& pos, const VECTOR& forward);
+            /**
+             * @brief 空中の足場の底面や側面との当たり判定
+             * 
+             * @param[in] pos 位置ベクトル
+             * @param[in] forward 移動量ベクトル
+             * @return 位置ベクトル
+             */
             VECTOR CheckHitSideAndBottom(const VECTOR& pos, const VECTOR& forward);
             VECTOR CheckThroughWMesh(const VECTOR& pos, const VECTOR& forward);
             VECTOR CheckHitDeathMesh(const VECTOR& pos, const VECTOR& forward);
             VECTOR CheckThroughBMesh(const VECTOR& pos, const VECTOR& forward);
             VECTOR CheckThroughWWallMesh(const VECTOR& pos, const VECTOR& forward);
             VECTOR CheckThroughBWallMesh(const VECTOR& pos, const VECTOR& forward);
-            VECTOR CheckPlayerCapsule(const VECTOR& pos, const VECTOR& forward);
             VECTOR CheckFall(const VECTOR& pos, const VECTOR& forward);
             VECTOR CheckBFall(const VECTOR& pos, const VECTOR& forward);
             VECTOR CheckWFall(const VECTOR& pos, const VECTOR& forward);
@@ -84,7 +94,6 @@ namespace GlassHeart {
             MV1_COLL_RESULT_POLY GetBThrough() { return _bThrough; }
             MV1_COLL_RESULT_POLY_DIM GetBWallThroughMesh() { return _bWallThrough; }
             MV1_COLL_RESULT_POLY_DIM GetWWallThroughMesh() { return _wWallThrough; }
-            MV1_COLL_RESULT_POLY_DIM GetPlayerCapsule() { return _playercap; }
             MV1_COLL_RESULT_POLY GetFall() { return _fall; }
             MV1_COLL_RESULT_POLY GetBFall() { return _bFall; }
             MV1_COLL_RESULT_POLY GetWFall() { return _wFall; }
@@ -100,7 +109,6 @@ namespace GlassHeart {
             MV1_COLL_RESULT_POLY _bThrough;
             MV1_COLL_RESULT_POLY_DIM _bWallThrough;
             MV1_COLL_RESULT_POLY_DIM _wWallThrough;
-            MV1_COLL_RESULT_POLY_DIM _playercap;
             MV1_COLL_RESULT_POLY _fall;
             MV1_COLL_RESULT_POLY _bFall;
             MV1_COLL_RESULT_POLY _wFall;

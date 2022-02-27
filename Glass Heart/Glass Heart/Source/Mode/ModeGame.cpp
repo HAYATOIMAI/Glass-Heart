@@ -16,9 +16,9 @@
 
 using namespace GlassHeart;
 
-int Mode::ModeMain::_count;
-int Mode::ModeMain::_countSeconds;
-int Mode::ModeMain::_countMinutes;
+//int Mode::ModeMain::_count;
+//int Mode::ModeMain::_countSeconds;
+//int Mode::ModeMain::_countMinutes;
 
 //!< コンストラクタ
 Mode::ModeGame::ModeGame(GameMain& game) : ModeMain{ game } {}
@@ -27,11 +27,7 @@ void Mode::ModeGame::Init() {
     //!< 使用するモデル
     AppFrame::ResourceServer::ModelMap usemap{
     {"Player",    "Boy/PC2_motion.mv1"},
-    //{"SkySphere", "skysphere.mv1"},
-    /*{"Ground",    "ground.mv1"},
-    {"Terrain",   "Ground/Ground.mv1"},
-    {"Test",      "Test/ST_test.mv1"},*/
-    {"Stage", "Test/Zenhan.mv1"},
+    {"Stage", "Stage/Zenhan01.mv1"},
     };
     //!< モデルの読み込み
     GetResourceServer().LoadModels(usemap);
@@ -64,9 +60,12 @@ void Mode::ModeGame::Enter() {
     auto checkPoint = of.Create("CheckPoint");
     os.Add(std::move(checkPoint));
 
+    auto goalPoint = of.Create("GoalPoint");
+    os.Add(std::move(goalPoint));
+
     auto& sm = GetSoundManager();
 
-    sm.PlayLoop("bgm3");
+    sm.PlayLoop("bgm");
 
     _count = 0;
     _countSeconds = 0;
@@ -77,7 +76,7 @@ void Mode::ModeGame::Enter() {
 //!< 入力処理
 void Mode::ModeGame::Input(AppFrame::InputManager& input) {
     if (input.GetJoyPad().GetXinputStart()) {
-        GetModeServer().GoToMode("Title");
+        //GetModeServer().GoToMode("Title");
     }
     GetObjectServer().Input(input);
 }
@@ -114,6 +113,10 @@ void Mode::ModeGame::Render() {
 }
 //!< 終了処理
 void Mode::ModeGame::Exit() {
+
+    auto& sm = GetSoundManager();
+    sm.StopSound("bgm");
+
     ////!< オブジェクトを消去
     //GetObjectServer().AllClear();
     ////!< リソースの消去

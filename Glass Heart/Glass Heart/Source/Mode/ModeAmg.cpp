@@ -11,44 +11,36 @@
 
 using namespace GlassHeart;
 
-//!< コンストラクタ
-Mode::ModeAmg::ModeAmg(GameMain& game) : ModeMain{ game } {
-}
-//!< 初期化処理
+/** コンストラクタ */
+Mode::ModeAmg::ModeAmg(GameMain& game) : ModeMain{ game } {}
+/** 初期化処理 */
 void Mode::ModeAmg::Init() {
-    //! 使用する画像のテーブル
+    // 使用する画像のテーブル
     const AppFrame::ResourceServer::GraphMap useGraph{
     {"AMGBg",          {"AMG.jpg",          1, 1, 1920, 1080}}
     };
-
-    //!< リソースサーバーを取得
+    // リソースサーバーを取得
     auto& res = GetResourceServer();
 
-    //!< 画像の読み込み
+    // 画像の読み込み
     res.LoadGraphics(useGraph);
 
-    //!< 画像のハンドルの取得
+    // 画像のハンドルの取得
     _titleBgHandle = res.GetGraph("AMGBg");
-
-    //!< サウンドマネージャーを取得
-    auto& sm = GetSoundManager();
-    sm.PlayLoop("bgm1");
-    sm.SetVolume("bgm1", 50);
-
 }
-//!< 入り口処理
+/** 入り口処理 */
 void Mode::ModeAmg::Enter() {}
-//!< 入力処理
+/** 入力処理 */
 void Mode::ModeAmg::Input(AppFrame::InputManager& input) {
     if (input.GetJoyPad().GetXinputButtonB()) {
         GetModeServer().GoToMode("TeamLogo");
     }
 }
-//!< 更新処理
+/** 更新処理 */ 
 void Mode::ModeAmg::Process() {
     //_alpha = (_alpha + 8) % 255;
 }
-//!< 描画処理
+/** 描画処理 */
 void Mode::ModeAmg::Render() {
     DrawGraph(0, 0, _titleBgHandle, FALSE);
     /*SetDrawBlendMode(DX_BLENDMODE_ALPHA, _alpha);
