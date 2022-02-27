@@ -236,7 +236,53 @@ VECTOR Collision::CollisionManager::CheckPlayerCapsule(const VECTOR& pos, const 
 
     return  newPos;
 }
-void Collision::CollisionManager::RenderCircle(const VECTOR circlePos, float range, int red, int green, int blue) {
+VECTOR Collision::CollisionManager::CheckFall(const VECTOR& pos, const VECTOR& forward) {
+    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
+    auto newPos = VAdd(pos, forward);
+    auto start = VAdd(newPos, { 0.f, 10.f, 0.f });
+    auto end = VAdd(newPos, { 0.f, -100.f, 0.f });
+    _fall = MV1CollCheck_Line(handle, MV1SearchFrame(handle, "Floor_NavMesh"), start, end);
+
+    if (_fall.HitFlag == 0) {
+        newPos = VAdd(pos, forward);
+    }
+    else if (_fall.HitFlag == 1) {
+        newPos = _fall.HitPosition;
+    }
+    return newPos;
+}
+VECTOR GlassHeart::Collision::CollisionManager::CheckBFall(const VECTOR& pos, const VECTOR& forward) {
+
+    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
+    auto newPos = VAdd(pos, forward);
+    auto start = VAdd(newPos, { 0.f, 10.f, 0.f });
+    auto end = VAdd(newPos, { 0.f, -100.f, 0.f });
+    _bFall = MV1CollCheck_Line(handle, MV1SearchFrame(handle, "BThroughFloor_NavMesh"), start, end);
+
+    if (_bFall.HitFlag == 0) {
+        newPos = VAdd(pos, forward);
+    }else if(_bFall.HitFlag == 1) {
+        newPos = _bFall.HitPosition;
+    
+    }
+    return newPos;
+}
+VECTOR GlassHeart::Collision::CollisionManager::CheckWFall(const VECTOR& pos, const VECTOR& forward) {
+    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
+    auto newPos = VAdd(pos, forward);
+    auto start = VAdd(newPos, { 0.f, 10.f, 0.f });
+    auto end = VAdd(newPos, { 0.f, -100.f, 0.f });
+    _wFall = MV1CollCheck_Line(handle, MV1SearchFrame(handle, "WThroughFloor_NavMesh"), start, end);
+
+    if (_wFall.HitFlag == 0) {
+        newPos = VAdd(pos, forward);
+    }
+    else if (_wFall.HitFlag == 1) {
+        newPos = _wFall.HitPosition;
+    }
+    return  newPos;
+}
+void GlassHeart::Collision::CollisionManager::RenderCircle(const VECTOR circlePos, float range, unsigned int color) {
     for (float i = 0.0f; i < 360.0f; i++) {
 
         float radian = DX_PI_F / 180 * i;
@@ -246,7 +292,7 @@ void Collision::CollisionManager::RenderCircle(const VECTOR circlePos, float ran
         VECTOR move = { x, 0.0f, z };
 
         VECTOR newPos = VAdd(circlePos, move);
-        DrawPixel3D(newPos, GetColor(red, green, blue));
+        DrawPixel3D(newPos, color);
 
     }
 }

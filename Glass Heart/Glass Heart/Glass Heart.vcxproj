@@ -163,10 +163,12 @@
     <ClInclude Include="Source\Camera\CameraManager.h" />
     <ClInclude Include="Source\Camera\FollowCamera.h" />
     <ClInclude Include="Source\CheckPoint\CheckPoint.h" />
+    <ClInclude Include="Source\CheckPoint\GoalPoint.h" />
     <ClInclude Include="Source\Collision\CollisionManager.h" />
     <ClInclude Include="Source\Model\ModelAnimeManager.h" />
     <ClInclude Include="Source\Model\ModelManager.h" />
     <ClInclude Include="Source\Mode\ModeAmg.h" />
+    <ClInclude Include="Source\Mode\ModeClear.h" />
     <ClInclude Include="Source\Mode\ModeGame.h" />
     <ClInclude Include="Source\Mode\ModeMain.h" />
     <ClInclude Include="Source\Mode\ModeTeamLogo.h" />
@@ -192,10 +194,12 @@
     <ClCompile Include="Source\Camera\CameraManager.cpp" />
     <ClCompile Include="Source\Camera\FollowCamera.cpp" />
     <ClCompile Include="Source\CheckPoint\CheckPoint.cpp" />
+    <ClCompile Include="Source\CheckPoint\GoalPoint.cpp" />
     <ClCompile Include="Source\Collision\CollisionManager.cpp" />
     <ClCompile Include="Source\Model\ModelAnimeManager.cpp" />
     <ClCompile Include="Source\Model\ModelManager.cpp" />
     <ClCompile Include="Source\Mode\ModeAmg.cpp" />
+    <ClCompile Include="Source\Mode\ModeClear.cpp" />
     <ClCompile Include="Source\Mode\ModeGame.cpp" />
     <ClCompile Include="Source\Mode\ModeMain.cpp" />
     <ClCompile Include="Source\Mode\ModeTeamLogo.cpp" />

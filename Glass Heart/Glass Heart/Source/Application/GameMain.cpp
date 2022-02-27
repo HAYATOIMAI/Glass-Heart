@@ -11,6 +11,7 @@
 #include "../Mode/ModeGame.h"
 #include "../Mode/ModeTitle.h"
 #include "../Mode/ModeTeamLogo.h"
+#include "../Mode/ModeClear.h"
 #include "../Object/ObjectFactory.h"
 #include "../Object/ObjectServer.h"
 
@@ -55,7 +56,7 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     {"run",     {"Sound/SE/SE_Run.mp3",true}},
     {"select",  {"Sound/SE/SE_Select.mp3",true}},
     {"walk",    {"Sound/SE/SE_Walk.mp3",true}},
-    {"bgm3", {"Sound/BGM01_Ver2.mp3, ", true}}
+    {"bgm3", {"Sound/BGM/BGM01_Ver2.mp3, ", true}}
     };
     /** ‰¹‚ð“Ç‚Ýž‚Ý */
     res.LoadSounds(usesound);
@@ -81,12 +82,14 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     //_modeServer->Register("Title", std::make_shared<Mode::ModeTitle>(*this));
     //// ƒCƒ“ƒQ[ƒ€ƒ‚[ƒh‚ð“o˜^
     //_modeServer->Register("InGame", std::make_shared<Mode::ModeGame>(*this));
+    //ƒQ[ƒ€ƒNƒŠƒAƒ‚[ƒh‚ð“o˜^
+    //_modeServer->Register("GameClear", std::make_shared<GlassHeart::Mode::ModeClear>(*this));
 
     _modeServer = std::make_unique<AppFrame::ModeServer>("InGame", std::make_shared<Mode::ModeGame>(*this));
 
     return true;
 }
-//!< ‰ð•úˆ—
+/** ‰ð•úˆ— */
 void GameMain::Terminate() {
     base::Terminate();
 }

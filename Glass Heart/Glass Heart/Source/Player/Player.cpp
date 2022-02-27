@@ -59,24 +59,6 @@ void Player::Player::Process() {
     if (_colourCount > 0) {
         --_colourCount;
     }
-    // とりあえずのタイマー
-    if (_count < 60) {
-
-        ++_count;
-
-    }
-    if (_count == 60) {
-
-        _count = 0;
-        ++_countSeconds;
-
-    }
-    if (_countSeconds == 60) {
-
-        _countSeconds = 0;
-        ++_countMinutes;
-
-    }
     // 角度の更新
     auto angle = GetRotation();
     angle.y += _angularSpeed;
@@ -129,10 +111,6 @@ void Player::Player::Render() {
     DrawFormatString(x, y, GetColor(255, 255, 255), "プレイヤーZ座標 =  %.3f ", _position.z); y += size;
     // 色状態を表示
     DrawFormatString(i, o, GetColor(255, 255, 255), _stateName.c_str(), _crState); y += size;
-    // 現在の時間(仮)
-    DrawFormatString(x, timeY, white, "現在の時間 %d ", _count); timeY += size;
-    DrawFormatString(x, timeY, white, "現在の時間:秒 %d ", _countSeconds); timeY += size;
-    DrawFormatString(x, timeY, white, "現在の時間:分 %d ", _countMinutes); timeY += size;
     //カメラの位置を表示
    // _cameraManage->Render();
     //DrawLine3D(VGet(_lastPosition.x, _lastPosition.y, _lastPosition.z), VGet(_position.x, _position.y / 200.0f, _position.z), GetColor(255, 0, 0));
@@ -152,40 +130,45 @@ void Player::Player::ComputeWorldTransform() {
 /** 移動処理 */
 void Player::Player::Move(const VECTOR& forward) {
     auto pos = _position;
+
     // X成分のみ移動後位置から真下に線分判定
     pos = _collsionManage->CheckHitFloor(pos, { forward.x, forward.y, 0.f });
-    //Y成分
-    pos = _collsionManage->CheckHitFloor(pos, { forward.x, forward.y, forward.z });
+
+    pos = _collsionManage->CheckFall(pos, { forward.x, forward.y, 0.f });
+
+    if (_collsionManage->GetFall().HitFlag == 0) {
+        _stateManage->PushBack("Fall");
+    }
 
     pos = _collsionManage->CheckHitWall(pos, { forward.x, forward.y, 0.f });
-    // Y成分
-    pos = _collsionManage->CheckHitWall(pos, { forward.x, forward.y, forward.z });
 
     pos = _collsionManage->CheckHitDeathMesh(pos, { forward.x, forward.y, 0.f });
-
-    pos = _collsionManage->CheckHitDeathMesh(pos, { forward.x, forward.y, forward.z });
 
     // 色状態が白のときのみ黒のメッシュと判定を行う
     if (_crState == ColourState::White ) {
 
         pos = _collsionManage->CheckThroughBMesh(pos, { forward.x, forward.y, 0.f });
 
-        pos = _collsionManage->CheckThroughBMesh(pos, { forward.x, forward.y, forward.z }); 
-
         pos = _collsionManage->CheckThroughBWallMesh(pos, { forward.x, forward.y, 0.f });
 
-        pos = _collsionManage->CheckThroughBWallMesh(pos, { forward.x, forward.y,  forward.z });
+        pos = _collsionManage->CheckBFall(pos, { forward.x, forward.y, 0.f });
+
+        if (_collsionManage->GetBFall().HitFlag == 0) {
+            //_stateManage->PushBack("Fall");
+        }
     }
     // 色状態が黒のときのみ白のメッシュと判定を行う
     if (_crState == ColourState::Black) {
         // X成分
         pos = _collsionManage->CheckThroughWMesh(pos, { forward.x, forward.y, 0.f });
 
-        pos = _collsionManage->CheckThroughWMesh(pos, { forward.x, forward.y, forward.z});
-
         pos = _collsionManage->CheckThroughWWallMesh(pos, { forward.x, forward.y, 0.f });
 
-        pos = _collsionManage->CheckThroughWWallMesh(pos, { forward.x, forward.y, forward.z});
+        pos = _collsionManage->CheckWFall(pos, { forward.x, forward.y, 0.f });
+
+        if (_collsionManage->GetWFall().HitFlag == 0) {
+            //_stateManage->PushBack("Fall");
+        }
     }
     // 座標更新
     _position = pos;

@@ -44,10 +44,16 @@ void FollowCamera::Process() {
     // プレイヤーに向かう移動量ベクトル
     auto delta = VScale(forwoard, _forwardSpeed);
 
-    // プレイヤーに向かって移動
-    _position = VAdd(_position, delta);
-    _rotation.y = std::atan2f(forwoard.x, forwoard.z);
-    
+    if (player.y - 2.5 < _position.y && _position.y < player.y + 2.5
+        && player.x - 2.5 < _position.x && _position.x < player.x + 2.5) {
+    }
+    else {
+
+        // プレイヤーに向かって移動
+        _position = VAdd(_position, delta);
+        _rotation.y = std::atan2f(forwoard.x, forwoard.z);
+
+    }
 
     ComputeWorldTransform();
     // カメラの更新
@@ -62,7 +68,7 @@ void FollowCamera::Render() {
 
     //カメラの位置を表示
     _cameraManage->Render();
-    //プレイヤーの座標を表示
+    //カメラマンの座標を表示
     auto x = 0; auto y = 32 * 7;  auto size = 32;
     SetFontSize(size);
     DrawFormatString(x, y, GetColor(255, 255, 255), "カメラマンX座標 =  %.3f ", _position.x); y += size;

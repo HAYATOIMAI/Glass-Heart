@@ -162,6 +162,12 @@
     <ClInclude Include="Source\Camera\FollowCamera.h">
       <Filter>ヘッダー ファイル\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Mode\ModeClear.h">
+      <Filter>ヘッダー ファイル\Mode</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CheckPoint\GoalPoint.h">
+      <Filter>ヘッダー ファイル\CheckPoint</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Camera\CameraManager.cpp">
@@ -244,6 +250,12 @@
     </ClCompile>
     <ClCompile Include="Source\Camera\FollowCamera.cpp">
       <Filter>ソース ファイル\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mode\ModeClear.cpp">
+      <Filter>ソース ファイル\Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CheckPoint\GoalPoint.cpp">
+      <Filter>ソース ファイル\CheckPoint</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

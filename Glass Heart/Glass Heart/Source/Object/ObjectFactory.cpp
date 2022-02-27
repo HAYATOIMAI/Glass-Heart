@@ -25,10 +25,17 @@
 #include "../State/StateFall.h"
 #include "../Stage/Stage.h"
 #include "../CheckPoint/CheckPoint.h"
+#include "../CheckPoint/GoalPoint.h"
 #include "../Camera/FollowCamera.h"
 #include <AppFrame.h>
 
 using namespace GlassHeart;
+
+namespace {
+
+    constexpr auto FOLLOWSPEED = 5.0f;
+
+}
 
 //! コンストラクタ
 Object::ObjectFactory::ObjectFactory(GameMain& game) : _game{ game } {
@@ -136,4 +143,10 @@ std::unique_ptr<Object::ObjectBase> GlassHeart::Object::FollowCameraCreate::Crea
     followCamera->SetForwardSpeed(5.0f);
 
     return followCamera;
+}
+
+std::unique_ptr<Object::ObjectBase> GlassHeart::Object::GoalPointCreate::Create(GameMain& game) {
+    auto goalPoint = std::make_unique<CheckPoint::GoalPoint>(game);
+
+    return goalPoint;
 }

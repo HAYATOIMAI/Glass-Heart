@@ -12,7 +12,11 @@
 
 using namespace GlassHeart;
 
-Mode::ModeMain::ModeMain(GameMain& game) : AppFrame::ModeBase{ game }, _gameMain{game} {}
+Mode::ModeMain::ModeMain(GameMain& game) : AppFrame::ModeBase{ game }, _gameMain{game} {
+    _count = 0;
+    _countSeconds = 0;
+    _countMinutes = 0;
+}
 
 Object::ObjectFactory& Mode::ModeMain::GetObjectFactory() {
     return _gameMain.GetObjectFactory();

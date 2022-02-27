@@ -1,30 +1,29 @@
 
 /*****************************************************************//**
- * @file   CheckPoint.cpp
- * @brief  チェックポイントの処理
+ * @file   GoalPoint.cpp
+ * @brief  ゴールポイントの処理
  *
  * @author Yoshihiro Takahashi
  * @date   December 2021
  *********************************************************************/
-#include "CheckPoint.h"
-
+#include "GoalPoint.h"
 #include "../Application/GameMain.h"
 #include "../Object/ObjectServer.h"
 #include "../Player/Player.h"
 
 using namespace GlassHeart::CheckPoint;
 
-CheckPoint::CheckPoint(GameMain& game) : ObjectBase{ game } {
+GoalPoint::GoalPoint(GameMain& game) : ObjectBase{ game } {
 
-    _checkPoint = LoadGraph("resource/Test/2dMaterial/light3.png");
-    _position = VGet(-150.0f, 35.0f, -140.0f);
+    //_goalPoint = LoadGraph("resource/Test/2dMaterial/light3.png");
+    _position = VGet(-600.0f, 35.0f, -140.0f);
     _radius = 100.0f;
     _hitFlag = false;
 }
 
-CheckPoint::~CheckPoint() {}
+GoalPoint::~GoalPoint() {}
 
-void CheckPoint::Process() {
+void GoalPoint::Process() {
 
     GetObjectServer().Register("CheckPoint", _position);
 
@@ -36,7 +35,7 @@ void CheckPoint::Process() {
             if (_collsionManage->CheckCircleToCircle(*this, **ite) == true) {
 
                 _hitFlag = true;
-
+                GoToGameClear();
             }
             else {
 
@@ -49,11 +48,11 @@ void CheckPoint::Process() {
     }
 }
 
-void CheckPoint::Render() {
+void GoalPoint::Render() {
 
     auto cr = GetColor(0, 0, 255);
 
-    DrawBillboard3D(_checkDrawPos, 0.5f, 0.5f, 120.0f, 0.0f, _checkPoint, TRUE);
+    DrawBillboard3D(_goalDrawPos, 0.5f, 0.5f, 120.0f, 0.0f, _goalPoint, TRUE);
 #ifdef _DEBUG
 
     auto red = GetColor(255, 0, 0);
@@ -71,5 +70,16 @@ void CheckPoint::Render() {
     }
 
 #endif // _DEBUG
+
+}
+
+void GoalPoint::GoToGameClear() {
+
+    if (_hitFlag==true) {
+    
+        _game.GetModeServer().GoToMode("GameClear");
+    
+    }
+    
 
 }

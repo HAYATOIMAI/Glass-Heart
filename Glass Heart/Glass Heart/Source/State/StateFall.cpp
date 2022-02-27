@@ -42,6 +42,10 @@ void State::StateFall::Landing() {
     if (_owner.GetCollision().GetStand().HitFlag == 0) {
         _owner.SetPosition(VGet(_owner.GetPosition().x, _owner.GetPosition().y - DownVector, _owner.GetPosition().z));
     }
+    else  {
+        // ’…’n‚µ‚½‚çó‘Ô‚ğíœ
+        _owner.GetStateManage().PushBack("Idle");
+    }
 
 
     // ‹ó’†‚Ì‘«ê‚ÆÚ‚µ‚Ä‚¢‚é‚©

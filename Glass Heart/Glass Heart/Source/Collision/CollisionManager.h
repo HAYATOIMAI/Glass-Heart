@@ -58,9 +58,11 @@ namespace GlassHeart {
             VECTOR CheckThroughWWallMesh(const VECTOR& pos, const VECTOR& forward);
             VECTOR CheckThroughBWallMesh(const VECTOR& pos, const VECTOR& forward);
             VECTOR CheckPlayerCapsule(const VECTOR& pos, const VECTOR& forward);
-
+            VECTOR CheckFall(const VECTOR& pos, const VECTOR& forward);
+            VECTOR CheckBFall(const VECTOR& pos, const VECTOR& forward);
+            VECTOR CheckWFall(const VECTOR& pos, const VECTOR& forward);
             // ‰~‚Ì“–‚½‚è”»’è•`‰æ
-            void RenderCircle(const VECTOR circlePos, float range, int red, int green, int blue);
+            void RenderCircle(const VECTOR circlePos, float range, unsigned int color);
             // ‰~‚Ì“–‚½‚è”»’è
             bool CheckCircleToCircle(const GlassHeart::Object::ObjectBase& owner, const GlassHeart::Object::ObjectBase& target);
 
@@ -83,6 +85,9 @@ namespace GlassHeart {
             MV1_COLL_RESULT_POLY_DIM GetBWallThroughMesh() { return _bWallThrough; }
             MV1_COLL_RESULT_POLY_DIM GetWWallThroughMesh() { return _wWallThrough; }
             MV1_COLL_RESULT_POLY_DIM GetPlayerCapsule() { return _playercap; }
+            MV1_COLL_RESULT_POLY GetFall() { return _fall; }
+            MV1_COLL_RESULT_POLY GetBFall() { return _bFall; }
+            MV1_COLL_RESULT_POLY GetWFall() { return _wFall; }
         private:
             Object::ObjectBase& _owner;
             std::unique_ptr<Report> _report;
@@ -96,6 +101,9 @@ namespace GlassHeart {
             MV1_COLL_RESULT_POLY_DIM _bWallThrough;
             MV1_COLL_RESULT_POLY_DIM _wWallThrough;
             MV1_COLL_RESULT_POLY_DIM _playercap;
+            MV1_COLL_RESULT_POLY _fall;
+            MV1_COLL_RESULT_POLY _bFall;
+            MV1_COLL_RESULT_POLY _wFall;
 
             VECTOR _debugNum1{ 0, 0, 0 };
             VECTOR _debugNum2{ 0, 0, 0 };

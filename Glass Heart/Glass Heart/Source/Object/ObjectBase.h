@@ -51,7 +51,8 @@ namespace GlassHeart {
                 Enemy,
                 Camera,
                 Stage,
-                CheckPoint
+                CheckPoint,
+                GoalPoint
             };
             /**
              * @brief オブジェクトの状態

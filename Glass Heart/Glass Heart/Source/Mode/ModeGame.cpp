@@ -16,6 +16,10 @@
 
 using namespace GlassHeart;
 
+int Mode::ModeMain::_count;
+int Mode::ModeMain::_countSeconds;
+int Mode::ModeMain::_countMinutes;
+
 //!< コンストラクタ
 Mode::ModeGame::ModeGame(GameMain& game) : ModeMain{ game } {}
 //!< 初期化処理
@@ -41,6 +45,7 @@ void Mode::ModeGame::Enter() {
     of.Register("FollowCamera", std::make_unique<Object::FollowCameraCreate>());
     of.Register("Stage", std::make_unique<Object::StageCreate>());
     of.Register("CheckPoint", std::make_unique<Object::CheckPointCreate>());
+    of.Register("GoalPoint", std::make_unique<Object::GoalPointCreate>());
 
     auto player = of.Create("Player");
 
@@ -63,6 +68,10 @@ void Mode::ModeGame::Enter() {
 
     sm.PlayLoop("bgm3");
 
+    _count = 0;
+    _countSeconds = 0;
+    _countMinutes = 0;
+
     Process();
 }
 //!< 入力処理
@@ -76,17 +85,39 @@ void Mode::ModeGame::Input(AppFrame::InputManager& input) {
 void Mode::ModeGame::Process() {
     GetObjectFactory().UpdateSpawn();
     GetObjectServer().Process();
+
+    if (_count < 60) {
+        ++_count;
+    }
+    if (_count == 60) {
+        _count = 0;
+        ++_countSeconds;
+    }
+    if (_countSeconds == 60) {
+        _countSeconds = 0;
+        ++_countMinutes;
+    }
 }
 //!< 描画処理
 void Mode::ModeGame::Render() {
     GetObjectServer().Render();
+
+#ifdef _DEBUG
+    auto x = 1000; auto y = 0; auto size = 32;
+    auto white = GetColor(255, 255, 255);
+
+    // 現在の時間(仮)
+    DrawFormatString(x, y, white, "現在の時間: %d ", _count); y += size;
+    DrawFormatString(x, y, white, "現在の時間: %d秒 ", _countSeconds); y += size;
+    DrawFormatString(x, y, white, "現在の時間: %d分 ", _countMinutes); y += size;
+#endif // DEBUG
 }
 //!< 終了処理
 void Mode::ModeGame::Exit() {
-    //!< オブジェクトを消去
-    GetObjectServer().AllClear();
-    //!< リソースの消去
-    GetResourceServer().AllClear();
-    //!< クリエイターを削除
-    GetObjectFactory().Clear();
+    ////!< オブジェクトを消去
+    //GetObjectServer().AllClear();
+    ////!< リソースの消去
+    //GetResourceServer().AllClear();
+    ////!< クリエイターを削除
+    //GetObjectFactory().Clear();
 }
