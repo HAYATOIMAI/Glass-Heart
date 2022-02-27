@@ -73,6 +73,12 @@
     <Filter Include="ヘッダー ファイル\State\Jump">
       <UniqueIdentifier>{eccb3026-58d3-4d9a-9398-7677f2a931aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\CheckPoint">
+      <UniqueIdentifier>{245e110c-04e3-4d00-ae05-62dcfcd05958}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\CheckPoint">
+      <UniqueIdentifier>{9acbd6c9-cd2a-4c46-9b3f-688422b9ff06}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Camera\CameraManager.h">
@@ -141,6 +147,27 @@
     <ClInclude Include="Source\State\StateJumpUp.h">
       <Filter>ヘッダー ファイル\State\Jump</Filter>
     </ClInclude>
+    <ClInclude Include="Source\State\StateDead.h">
+      <Filter>ヘッダー ファイル\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CheckPoint\CheckPoint.h">
+      <Filter>ヘッダー ファイル\CheckPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\State\StateFall.h">
+      <Filter>ヘッダー ファイル\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Player\LoadParamater.h">
+      <Filter>ヘッダー ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera\FollowCamera.h">
+      <Filter>ヘッダー ファイル\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mode\ModeClear.h">
+      <Filter>ヘッダー ファイル\Mode</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CheckPoint\GoalPoint.h">
+      <Filter>ヘッダー ファイル\CheckPoint</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Camera\CameraManager.cpp">
@@ -208,6 +235,27 @@
     </ClCompile>
     <ClCompile Include="Source\State\StateJumpUp.cpp">
       <Filter>ソース ファイル\State\Jump</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\State\StateDead.cpp">
+      <Filter>ソース ファイル\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CheckPoint\CheckPoint.cpp">
+      <Filter>ソース ファイル\CheckPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\State\StateFall.cpp">
+      <Filter>ソース ファイル\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Player\LoadParamater.cpp">
+      <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera\FollowCamera.cpp">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mode\ModeClear.cpp">
+      <Filter>ソース ファイル\Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CheckPoint\GoalPoint.cpp">
+      <Filter>ソース ファイル\CheckPoint</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

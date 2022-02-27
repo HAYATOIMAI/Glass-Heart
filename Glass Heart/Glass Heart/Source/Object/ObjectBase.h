@@ -49,7 +49,10 @@ namespace GlassHeart {
                 Object = 0,
                 Player,
                 Enemy,
-                Stage
+                Camera,
+                Stage,
+                CheckPoint,
+                GoalPoint
             };
             /**
              * @brief オブジェクトの状態
@@ -123,6 +126,12 @@ namespace GlassHeart {
             void SetScale(const VECTOR& scale) { _scale = scale; }
             VECTOR GetScale() const { return _scale; }
 
+            void SetRadius(const float radius) { _radius = radius; }
+            float GetRadius() const { return _radius; }
+
+            void SetHitFlag(const bool hitFlag) { _hitFlag = hitFlag; }
+            bool GetHitFlag() const { return _hitFlag; }
+
             void SetStateManage(std::unique_ptr<GlassHeart::State::StateManager> state);
             void SetModelManage(std::unique_ptr<GlassHeart::Model::ModelAnimeManager> model);
             void SetCameraManage(std::shared_ptr<GlassHeart::Camera::CameraManager> camera);
@@ -148,6 +157,9 @@ namespace GlassHeart {
             VECTOR _position{ 0, 0, 0 };  //!< 位置情報
             VECTOR _rotation{ 0, 0, 0 };  //!< 角度
             VECTOR _scale{ 1, 1, 1 };     //!< 拡大率
+
+            float _radius{ 0.0f };  //!< コリジョン用半径
+            bool _hitFlag{ false }; //!< コリジョン用フラグ
         };
     }
 }

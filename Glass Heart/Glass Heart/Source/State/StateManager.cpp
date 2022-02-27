@@ -9,21 +9,21 @@
 #include "StateManager.h"
 #include <AppFrame.h>
 
-using namespace GlassHeart::State;
+using namespace GlassHeart;
 
-StateManager::StateManager(std::string_view key, std::shared_ptr<StateBaseRoot> state) {
+State::StateManager::StateManager(std::string_view key, std::shared_ptr<StateBaseRoot> state) {
     Register(key, state);
     PushBack(key);
 }
 
-void StateManager::Register(std::string_view key, std::shared_ptr<StateBaseRoot> state) {
+void State::StateManager::Register(std::string_view key, std::shared_ptr<StateBaseRoot> state) {
     if (_registry.contains(key.data())) {
         _registry.erase(key.data());
     }
     _registry.emplace(key, state);
 }
 
-void StateManager::PushBack(std::string_view key) {
+void State::StateManager::PushBack(std::string_view key) {
     if (!_registry.contains(key.data())) {
         return;   // ƒL[‚ª–¢“o˜^
     }
@@ -32,7 +32,7 @@ void StateManager::PushBack(std::string_view key) {
     _states.push_back(pushScene);
 }
 
-void StateManager::PopBack() {
+void State::StateManager::PopBack() {
     if (_states.empty()) {
         return;
     }
@@ -43,26 +43,27 @@ void StateManager::PopBack() {
     _states.back()->Enter();
 }
 
-void StateManager::GoToState(std::string_view key) {
+void State::StateManager::GoToState(std::string_view key) {
     PopBack();
     PushBack(key.data());
+
 }
 
-void StateManager::Input(AppFrame::InputManager& input) {
+void State::StateManager::Input(AppFrame::InputManager& input) {
     if (_states.empty()) {
         return;
     }
     _states.back()->Input(input);
 }
 
-void StateManager::Update() {
+void State::StateManager::Update() {
     if (_states.empty()) {
         return;
     }
     _states.back()->Update();
 }
 
-void StateManager::Draw() const {
+void State::StateManager::Draw() const {
     if (_states.empty()) {
         return;
     }

@@ -96,6 +96,13 @@ namespace GlassHeart {
             virtual std::unique_ptr<ObjectBase> Create(GameMain& game) = 0;
         };
         /**
+        * @class GoalPointCreate
+        * @brief ゴールポイント用のクリエイター
+        */
+        class GoalPointCreate : public CreateBase {
+            virtual std::unique_ptr<ObjectBase> Create(GameMain& game);
+        };
+        /**
          * @class PlayerCreate
          * @brief プレイヤー用のクリエイター
          */
@@ -107,7 +114,7 @@ namespace GlassHeart {
          * @class EnemyCreate
          * @brief エネミー用のクリエイター
          */
-        class TestCreate : public CreateBase {
+        class CheckPointCreate : public CreateBase {
             virtual std::unique_ptr<ObjectBase> Create(GameMain& game);
         };
         /**
@@ -115,6 +122,13 @@ namespace GlassHeart {
          * @brief ステージ用のクリエイター
          */
         class StageCreate : public CreateBase {
+            virtual std::unique_ptr<ObjectBase> Create(GameMain& game);
+        };
+        /**
+         * @class StageCreate
+         * @brief カメラフォロー用のクリエイター
+         */
+        class FollowCameraCreate : public CreateBase {
             virtual std::unique_ptr<ObjectBase> Create(GameMain& game);
         };
     }

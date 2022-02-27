@@ -12,6 +12,7 @@
 namespace GlassHeart {
 
     class GameMain;
+
     namespace Object {
         class ObjectServer;
         class ObjectFactory;
@@ -73,6 +74,9 @@ namespace GlassHeart {
             Object::ObjectServer& GetObjectServer();
         protected:
             GameMain& _gameMain;
+            static int _count;         //!< フレームカウント
+            static int _countSeconds;  //!< 秒
+            static int _countMinutes;  //!< 分
         };
     }
 }

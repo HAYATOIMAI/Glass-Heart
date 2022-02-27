@@ -18,7 +18,7 @@ namespace AppFrame {
     class GameBase;
     /**
      * @class DivGraph
-     * @brief 画像ファイル用
+     * @brief 画像ファイル用構造体
      */
     struct DivGraph {
         std::string fileName{ "" };

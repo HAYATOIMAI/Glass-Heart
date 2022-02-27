@@ -11,6 +11,7 @@
 #include "../Mode/ModeGame.h"
 #include "../Mode/ModeTitle.h"
 #include "../Mode/ModeTeamLogo.h"
+#include "../Mode/ModeClear.h"
 #include "../Object/ObjectFactory.h"
 #include "../Object/ObjectServer.h"
 
@@ -36,19 +37,26 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
      
     /** マテリアルの自己発光色を暗い青色にする */
 #ifdef _DEBUG
-    MATERIALPARAM material;
+   /* MATERIALPARAM material;
     material.Diffuse = GetColorF(0.0f, 0.0f, 0.0f, 1.0f);
     material.Specular = GetColorF(0.0f, 0.0f, 0.0f, 0.0f);
     material.Ambient = GetColorF(0.0f, 0.0f, 0.0f, 0.0f);
     material.Emissive = GetColorF(0.0f, 0.0f, 0.5f, 0.0f);
     material.Power = 20.0f;
-    SetMaterialParam(material);
+    SetMaterialParam(material);*/
 #endif
     /** 使用する音のテーブル */
-    const AppFrame::ResourceServer::SoundMap usesound{
-    {"damage", {"damage.wav", true}},
-    {"bgm1", {"sublight.wav", true}},
-    {"bgm2", {"stage1.mid", true}},
+    const AppFrame::ResourceServer::SoundMap usesound {
+    {"cancel",  {"Sound/SE/SE_Cancel.mp3",true}},
+    {"cursor",  {"Sound/SE/SE_Cursor.mp3",true}},
+    {"death",   {"Sound/SE/SE_Death.mp3",true}},
+    {"jump",    {"Sound/SE/SE_Jump.mp3",true}},
+    {"landing", {"Sound/SE/SE_Landing.mp3",true}},
+    {"pick",    {"Sound/SE/SE_Pick.mp3",true}},
+    {"run",     {"Sound/SE/SE_Run.mp3",true}},
+    {"select",  {"Sound/SE/SE_Select.mp3",true}},
+    {"walk",    {"Sound/SE/SE_Walk.mp3",true}},
+    {"bgm3", {"Sound/BGM/BGM01_Ver2.mp3, ", true}}
     };
     /** 音を読み込み */
     res.LoadSounds(usesound);
@@ -57,32 +65,31 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     auto& sm = GetSoundManager();
     sm.SetVolume("damage", 128);
     sm.SetVolume("bgm1", 128);
+    sm.SetVolume("bgm3", 128);
 
-#ifdef _DEBUG
-    sm.SetMute(true);
-#else
     sm.SetMute(false);
-#endif // DEBUG
 
     //!< オブジェクトサーバーの生成
-    _objServer = std::make_unique<GlassHeart::Object::ObjectServer>();
+    _objServer = std::make_unique<Object::ObjectServer>();
     //!< オブジェクトファクトリーの生成
-    _objFactory = std::make_unique<GlassHeart::Object::ObjectFactory>(*this);
+    _objFactory = std::make_unique<Object::ObjectFactory>(*this);
 
     ////!< モードサーバーを生成し、AMGモードを登録
-    //_modeServer = std::make_unique<AppFrame::ModeServer>("Amg", std::make_shared<GlassHeart::Mode::ModeAmg>(*this));
+    //_modeServer = std::make_unique<AppFrame::ModeServer>("Amg", std::make_shared<Mode::ModeAmg>(*this));
     ////// チームロゴモードを登録
-    //_modeServer->Register("TeamLogo", std::make_shared<GlassHeart::Mode::ModeTeamLogo>(*this));
+    //_modeServer->Register("TeamLogo", std::make_shared<Mode::ModeTeamLogo>(*this));
     ////// タイトルモードを登録
-    //_modeServer->Register("Title", std::make_shared<GlassHeart::Mode::ModeTitle>(*this));
+    //_modeServer->Register("Title", std::make_shared<Mode::ModeTitle>(*this));
     //// インゲームモードを登録
-    //_modeServer->Register("InGame", std::make_shared<GlassHeart::Mode::ModeGame>(*this));
+    //_modeServer->Register("InGame", std::make_shared<Mode::ModeGame>(*this));
+    //ゲームクリアモードを登録
+    //_modeServer->Register("GameClear", std::make_shared<GlassHeart::Mode::ModeClear>(*this));
 
-    _modeServer = std::make_unique<AppFrame::ModeServer>("InGame", std::make_shared<GlassHeart::Mode::ModeGame>(*this));
+    _modeServer = std::make_unique<AppFrame::ModeServer>("InGame", std::make_shared<Mode::ModeGame>(*this));
 
     return true;
 }
-//!< 解放処理
+/** 解放処理 */
 void GameMain::Terminate() {
     base::Terminate();
 }
