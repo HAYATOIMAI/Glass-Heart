@@ -124,15 +124,15 @@ void Player::Player::Move(const VECTOR& forward) {
     // X成分のみ移動後位置から真下に線分判定
     pos = _collsionManage->CheckHitFloor(pos, { forward.x, forward.y, 0.f });
 
-    //_collsionManage->CheckFall(pos, { forward.x, forward.y, 0.f });
+    /*pos = _collsionManage->CheckFall(pos, { forward.x, forward.y, 0.f });
+
+    if (_collsionManage->GetFall().HitFlag == 0) {
+        GetStateManage().PushBack("Fall");
+    }*/
 
     pos = _collsionManage->CheckHitWall(pos, { forward.x, forward.y, 0.f });
 
     pos = _collsionManage->CheckHitDeathMesh(pos, { forward.x, forward.y, 0.f });
-
-#ifdef _Release
-    //pos = _collsionManage->CheckHitDeathMesh(pos, { forward.x, forward.y, 0.f });
-#endif // _Release
 
     // 色状態が白のときのみ黒のメッシュと判定を行う
     if (_crState == ColourState::White ) {
@@ -143,9 +143,9 @@ void Player::Player::Move(const VECTOR& forward) {
 
        // pos = _collsionManage->CheckBFall(pos, { forward.x, forward.y, 0.f });
 
-        if (_collsionManage->GetBFall().HitFlag == 0) {
-            //_stateManage->PushBack("Fall");
-        }
+        //if (_collsionManage->GetBFall().HitFlag == 0) {
+        //    //_stateManage->PushBack("Fall");
+        //}
     }
     // 色状態が黒のときのみ白のメッシュと判定を行う
     if (_crState == ColourState::Black) {
@@ -156,9 +156,9 @@ void Player::Player::Move(const VECTOR& forward) {
 
        // pos = _collsionManage->CheckWFall(pos, { forward.x, forward.y, 0.f });
 
-        if (_collsionManage->GetWFall().HitFlag == 0) {
-         //   _stateManage->PushBack("Fall");
-        }
+        //if (_collsionManage->GetWFall().HitFlag == 0) {
+        // //   _stateManage->PushBack("Fall");
+        //}
     }
     // 座標更新
     _position = pos;

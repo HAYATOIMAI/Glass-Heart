@@ -35,7 +35,7 @@ namespace AppFrame {
     bool GameBase::Initialize(HINSTANCE hInstance) {
 
         // Log.txtを出力しない
-        SetOutApplicationLogValidFlag(true);
+        SetOutApplicationLogValidFlag(false);
 
         // ウィンドウのタイトルを設定する
         SetMainWindowText("Glass Heart");
@@ -102,7 +102,7 @@ namespace AppFrame {
             _gameState = GameState::End;
         }
 #endif // DEBUG
-        if (_inputManage->GetJoyPad().GetXinputBack()) {
+        if (_inputManage->GetJoyPad().GetXinputBack() || 1 == CheckHitKey(KEY_INPUT_ESCAPE)) {
             _gameState = GameState::End;
         }
 

@@ -52,7 +52,7 @@ namespace GlassHeart {
              */
             VECTOR JumpUpdate();
         private:
-            float _jY{ -8.0f }; //!< 重力加速度
+            float _jY{ -2.0f }; //!< 重力加速度
                                 //  
             VECTOR _jumpVelocity{ 0.0f, 0.0f, 0.0f }; //!< ジャンプ速度
             bool _isfall{ false }; //!< 落下中かを判断するフラグ

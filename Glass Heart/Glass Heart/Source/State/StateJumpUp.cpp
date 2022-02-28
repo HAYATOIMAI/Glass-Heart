@@ -15,7 +15,7 @@
 
 namespace {
     constexpr auto StraifVector = 10.0f; // ストレイフ用X軸移動量
-    constexpr auto JumpVecY = 80.0f;  //!< ジャンプ用Y軸移動量ベクトル
+    constexpr auto JumpVecY = 40.0f;  //!< ジャンプ用Y軸移動量ベクトル
     constexpr auto RerocateY = 35.0f; //!< 足場の底面や側面衝突時の位置修正量
 }
 

@@ -13,7 +13,7 @@
 namespace {
 	constexpr float ALPHA_MIN = 0.f;
 	constexpr float ALPHA_MAX = 255.f;
-	constexpr float FADE_TIME = 60.f;
+	constexpr float FADE_TIME = 75.555f;
 	constexpr float ALPHA_DELTA = (ALPHA_MAX / FADE_TIME);
 }
 

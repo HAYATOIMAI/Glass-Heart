@@ -27,18 +27,21 @@ void State::StateFall::Enter() {
 }
 
 void State::StateFall::Input(AppFrame::InputManager& input) {
-    if (input.GetJoyPad().GetAnalogStickLX() >= 5000 && input.GetJoyPad().GetAnalogStickLX() > 1) {
-        // 右方向に向きを変更
-        _owner.SetRotation(VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
-        _subVx = -StraifVector;
-        input.GetJoyPad().InputReject();
-    }
-    if (input.GetJoyPad().GetAnalogStickLX() <= -5000 && input.GetJoyPad().GetAnalogStickLX() < 1) {
-        // 左方向に向きを変更
-        _owner.SetRotation(VGet(0.0f, 90.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
-        _addVx = StraifVector;
-        input.GetJoyPad().InputReject();
-    }
+    //if (input.GetJoyPad().GetAnalogStickLX() >= 5000 && input.GetJoyPad().GetAnalogStickLX() > 1) {
+    //    // 右方向に向きを変更
+    //    _owner.SetRotation(VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
+    //    _subVx = -StraifVector;
+    //    input.GetJoyPad().InputReject();
+    //}
+    //if (input.GetJoyPad().GetAnalogStickLX() <= -5000 && input.GetJoyPad().GetAnalogStickLX() < 1) {
+    //    // 左方向に向きを変更
+    //    _owner.SetRotation(VGet(0.0f, 90.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
+    //    _addVx = StraifVector;
+    //    input.GetJoyPad().InputReject();
+    //}
+    //else {
+    //    //_owner.GetStateManage().PopBack();
+    //}
 }
 
 void State::StateFall::Update() {

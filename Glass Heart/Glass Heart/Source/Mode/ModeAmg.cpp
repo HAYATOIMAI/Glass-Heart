@@ -15,6 +15,7 @@ using namespace GlassHeart;
 Mode::ModeAmg::ModeAmg(GameMain& game) : ModeMain{ game } {}
 /** 初期化処理 */
 void Mode::ModeAmg::Init() {
+    
     // 使用する画像のテーブル
     const AppFrame::ResourceServer::GraphMap useGraph{
     {"AMGBg",          {"AMG.jpg",          1, 1, 1920, 1080}}
@@ -27,9 +28,20 @@ void Mode::ModeAmg::Init() {
 
     // 画像のハンドルの取得
     _titleBgHandle = res.GetGraph("AMGBg");
+
+    //!< 使用するモデル
+    AppFrame::ResourceServer::ModelMap usemap{
+    {"Player",    "Boy/PC2_motion.mv1"},
+    {"Stage", "Stage/Zenhan01.mv1"},
+    };
+    //!< モデルの読み込み
+    GetResourceServer().LoadModels(usemap);
 }
 /** 入り口処理 */
-void Mode::ModeAmg::Enter() {}
+void Mode::ModeAmg::Enter() {
+    // 非同期読み込み開始
+    SetUseASyncLoadFlag(TRUE);
+}
 /** 入力処理 */
 void Mode::ModeAmg::Input(AppFrame::InputManager& input) {
     if (input.GetJoyPad().GetXinputButtonB()) {

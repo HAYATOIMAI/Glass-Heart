@@ -54,13 +54,6 @@ void State::StateRun::Update() {
 
 	_owner.Move(VScale(_owner.GetForward(), _owner.GetForwardSpeed()));
 
-	_owner.GetCollision().CheckFall(pos, { 0.0f, 3.0f, 0.f });
-
-	if (_owner.GetCollision().GetFall().HitFlag == 0) {
-		_owner.GetStateManage().PushBack("Fall");
-	}
-
-	
 	// ƒŠƒXƒ|[ƒ“ˆ—
 	if (_owner.GetCollision().GetDeathMesh().HitNum >= 1) {
 

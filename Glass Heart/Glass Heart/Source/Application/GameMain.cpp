@@ -81,9 +81,13 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     // ƒQ[ƒ€ƒNƒŠƒAƒ‚[ƒh‚ð“o˜^
     _modeServer->Register("GameClear", std::make_shared<GlassHeart::Mode::ModeClear>(*this));
 
-#ifdef _DEBUG
-    _modeServer = std::make_unique<AppFrame::ModeServer>("InGame", std::make_shared<Mode::ModeGame>(*this));
-#endif // _DEBUG
+//#ifdef _DEBUG
+//    _modeServer = std::make_unique<AppFrame::ModeServer>("InGame", std::make_shared<Mode::ModeGame>(*this));
+//    // ƒ^ƒCƒgƒ‹ƒ‚[ƒh‚ð“o˜^
+//    _modeServer->Register("Title", std::make_shared<Mode::ModeTitle>(*this));
+//    // ƒQ[ƒ€ƒNƒŠƒAƒ‚[ƒh‚ð“o˜^
+//    _modeServer->Register("GameClear", std::make_shared<GlassHeart::Mode::ModeClear>(*this));
+//#endif // _DEBUG
 
     return true;
 }

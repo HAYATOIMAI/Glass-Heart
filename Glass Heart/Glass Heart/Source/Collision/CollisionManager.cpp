@@ -106,7 +106,7 @@ VECTOR Collision::CollisionManager::CheckThroughWMesh(const VECTOR& pos, const V
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
     auto start = VAdd(newPos, { 0.f, 10.f, 0.f });
-    auto end = VAdd(newPos, { 0.f, -200.f, 0.f });
+    auto end = VAdd(newPos, { 0.f, -100.f, 0.f });
     _wThrough = MV1CollCheck_Line(handle, MV1SearchFrame(handle, "WThroughFloor_NavMesh"), start, end);
 
     if (_wThrough.HitFlag == 0) {
@@ -123,32 +123,14 @@ VECTOR Collision::CollisionManager::CheckThroughWMesh(const VECTOR& pos, const V
 
 VECTOR Collision::CollisionManager::CheckHitDeathMesh(const VECTOR& pos, const VECTOR& forward) {
 
-    auto round = 10.5f;
+    auto round = 6.5f;
 
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
     auto c1 = VAdd(newPos, { -8.f, 10.f, 0.f });
     auto c2 = VAdd(newPos, { -18.f, 20.f, 0.f });
     _death = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "Death_NavMesh"), c1, c2,round);
-#ifdef _DEBUG
 
-    auto isMuteki = true;
-
-    if (!isMuteki) {
-        if (_death.HitNum == 0) {
-            // è’ìÀÇ»Çµà⁄ìÆÇµÇ»Ç¢
-            return pos;
-        }
-        else if (_death.HitNum >= 1) {
-            // è’ìÀÇ†ÇÍÇŒà⁄ìÆÇ∑ÇÈ
-            newPos = VAdd(pos, forward);
-        }
-    }
-    return  newPos;
-
-#endif // _DEBUG
-
-#ifdef _Release
     if (_death.HitNum == 0) {
         // è’ìÀÇ»Çµà⁄ìÆÇµÇ»Ç¢
         return pos;
@@ -158,9 +140,6 @@ VECTOR Collision::CollisionManager::CheckHitDeathMesh(const VECTOR& pos, const V
         newPos = VAdd(pos, forward);
     }
     return  newPos;
-#endif // _Release
-
-   
 }
 VECTOR Collision::CollisionManager::CheckThroughBMesh(const VECTOR& pos, const VECTOR& forward) {
 
@@ -224,7 +203,7 @@ VECTOR Collision::CollisionManager::CheckFall(const VECTOR& pos, const VECTOR& f
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
     auto start = VAdd(newPos, { 0.f, 10.f, 0.f });
-    auto end = VAdd(newPos, { 0.f, -50.f, 0.f });
+    auto end = VAdd(newPos, { 0.f, -100.f, 0.f });
     _fall = MV1CollCheck_Line(handle, MV1SearchFrame(handle, "Floor_NavMesh"), start, end);
 
     if (_fall.HitFlag == 0) {
@@ -240,7 +219,7 @@ VECTOR Collision::CollisionManager::CheckBFall(const VECTOR& pos, const VECTOR& 
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
     auto start = VAdd(newPos, { 0.f, 10.f, 0.f });
-    auto end = VAdd(newPos, { 0.f, -50.f, 0.f });
+    auto end = VAdd(newPos, { 0.f, -100.f, 0.f });
     _bFall = MV1CollCheck_Line(handle, MV1SearchFrame(handle, "BThroughFloor_NavMesh"), start, end);
 
     if (_bFall.HitFlag == 0) {
