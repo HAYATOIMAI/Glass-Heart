@@ -24,14 +24,10 @@ using namespace GlassHeart;
 State::StateJumpUp::StateJumpUp(Player::Player& owner) : State::StateBase{ owner } {}
 /** 入り口処理 */
 void State::StateJumpUp::Enter() {
-    if (_owner.GetRotation().y == 270.0f * (std::numbers::pi_v<float> / 180.0f)) {
-        VECTOR jumpbase = VGet(0.0f, JumpVecY, 0.0f);
-        _jumpVelocity = jumpbase;
-    }
-    else if (_owner.GetRotation().y == 90.0f * (std::numbers::pi_v<float> / 180.0f)) {
-        VECTOR jumpbase = VGet(0.0f, JumpVecY, 0.0f);
-        _jumpVelocity = jumpbase;
-    }
+    // ジャンプ速度設定
+    VECTOR jumpbase = VGet(0.0f, JumpVecY, 0.0f);
+    _jumpVelocity = jumpbase;
+
     _owner.GetModelAnime().ChangeAnime("Jump_Loop", true);
 }
 void State::StateJumpUp::Input(AppFrame::InputManager& input) {
@@ -116,7 +112,6 @@ void State::StateJumpUp::Update() {
     if (_jumpVelocity.y < 0) {
         _owner.GetStateManage().PushBack("JumpFall");
         _isfall = true;
-
     }
 }
 /** ジャンプ中処理 */

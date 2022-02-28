@@ -23,8 +23,7 @@ using namespace GlassHeart;
 //!< コンストラクタ
 Mode::ModeGame::ModeGame(GameMain& game) : ModeMain{ game } {}
 //!< 初期化処理
-void Mode::ModeGame::Init() {
-   
+void Mode::ModeGame::Init() {  
 }
 //!< 入り口処理
 void Mode::ModeGame::Enter() {
@@ -64,7 +63,6 @@ void Mode::ModeGame::Enter() {
     _count = 0;
     _countSeconds = 0;
     _countMinutes = 0;
-
 
     // 非同期読み込み終了
     SetUseASyncLoadFlag(FALSE);

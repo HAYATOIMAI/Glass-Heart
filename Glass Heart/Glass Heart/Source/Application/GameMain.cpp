@@ -54,7 +54,7 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     {"run",     {"Sound/SE/SE_Run.mp3",true}},
     {"select",  {"Sound/SE/SE_Select.mp3",true}},
     {"walk",    {"Sound/SE/SE_Walk.mp3",true}},
-    {"bgm", {"Sound/BGM/BGM01_Ver2.mp3, ", true}}
+    {"bgm", {"Sound/BGM01_Ver2.mp3, ", true}}
     };
     /** âπÇì«Ç›çûÇ› */
     res.LoadSounds(usesound);

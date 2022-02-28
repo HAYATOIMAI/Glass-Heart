@@ -18,7 +18,7 @@ void Mode::ModeAmg::Init() {
     
     // 使用する画像のテーブル
     const AppFrame::ResourceServer::GraphMap useGraph{
-    {"AMGBg",          {"AMG.jpg",          1, 1, 1920, 1080}}
+    {"AMGBg",          {"Amg/AMG.jpg",          1, 1, 1920, 1080}}
     };
     // リソースサーバーを取得
     auto& res = GetResourceServer();

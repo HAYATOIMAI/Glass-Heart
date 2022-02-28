@@ -18,11 +18,11 @@ namespace AppFrame {
 
     class PathServer {
     public:
-        //PathServer(GameBase& game);
-        //virtual ~PathServer() = default;
+        PathServer(GameBase& game);
+        virtual ~PathServer() = default;
 
-        //virtual void Init();
-        //virtual void Release();
+        virtual void Init();
+        virtual void Release();
 
     private:
     };
