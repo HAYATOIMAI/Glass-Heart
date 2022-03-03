@@ -8,6 +8,7 @@
  *********************************************************************/
 #pragma once
 #include "StateManager.h"
+#include <AppFrame.h>
 
 namespace GlassHeart {
 

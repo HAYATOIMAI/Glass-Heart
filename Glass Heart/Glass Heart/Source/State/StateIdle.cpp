@@ -31,7 +31,7 @@ void State::StateIdle::Input(AppFrame::InputManager& input) {
 }
 
 void State::StateIdle::Update() {
-	// ‹ó’†‚Ì‘«ê‚ÆÚ‚µ‚Ä‚¢‚é‚©
+	// ‘«ê‚ÆÚ‚µ‚Ä‚¢‚é‚©
 	if (_owner.GetCollision().Mcrp().HitFlag == 1) {
 	    _owner.SetPosition(_owner.GetCollision().CheckHitFloor(_owner.GetPosition(), { 0, 3, 0 }));
 	}

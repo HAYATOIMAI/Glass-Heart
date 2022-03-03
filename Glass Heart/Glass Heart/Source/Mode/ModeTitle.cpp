@@ -38,9 +38,20 @@ void Mode::ModeTitle::Init() {
 void Mode::ModeTitle::Enter() {}
 // “ü—Íˆ—
 void Mode::ModeTitle::Input(AppFrame::InputManager& input) {
+
+    auto [handle, no] = GetGame().GetResourceServer().GetModles("Stage");
+    
     if (input.GetJoyPad().GetXinputButtonB()) {
-        GetModeServer().GoToMode("InGame");
+            GetModeServer().GoToMode("Loading");
     }
+    /* if (input.GetJoyPad().GetXinputButtonB()) {
+        if (CheckHandleASyncLoad(handle) == TRUE) {
+            GetModeServer().GoToMode("Loading");
+        }
+        else if (CheckHandleASyncLoad(handle) == FALSE) {
+            GetModeServer().GoToMode("InGame");
+        }
+    }*/
 }
 // XVˆ—
 void Mode::ModeTitle::Process() {}

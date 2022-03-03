@@ -51,11 +51,12 @@ void State::StateJumpFall::Update() {
     if (_owner.GetCollision().GetDeathMesh().HitNum >= 1) {
 
         if (_owner.GetColourState() == Player::Player::ColourState::White) {
-            _owner.ResetPos();
+            _owner.SetPosition(VGet(pos.x, pos.y, pos.z));
+            
             // _owner.GetStateManage().PushBack("Dead");
         }
         if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-            _owner.SetPosition(VGet(pos.x, pos.y, pos.z));
+            _owner.ResetPos();
         }
     }
 }

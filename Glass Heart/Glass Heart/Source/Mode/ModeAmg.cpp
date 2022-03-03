@@ -36,11 +36,12 @@ void Mode::ModeAmg::Init() {
     };
     //!< モデルの読み込み
     GetResourceServer().LoadModels(usemap);
+    // 非同期読み込み開始
+    SetUseASyncLoadFlag(TRUE);
 }
 /** 入り口処理 */
 void Mode::ModeAmg::Enter() {
-    // 非同期読み込み開始
-    SetUseASyncLoadFlag(TRUE);
+    
 }
 /** 入力処理 */
 void Mode::ModeAmg::Input(AppFrame::InputManager& input) {

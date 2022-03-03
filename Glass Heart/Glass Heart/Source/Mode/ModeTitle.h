@@ -11,7 +11,7 @@
 #include <AppFrame.h>
 
 namespace GlassHeart {
-    /** ‘O•ûéŒ¾ */
+   
     class GameMain;
 
     namespace Mode {

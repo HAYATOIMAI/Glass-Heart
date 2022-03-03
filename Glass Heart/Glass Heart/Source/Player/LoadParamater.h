@@ -20,12 +20,16 @@ namespace GlassHeart {
 			LoadParamater();
 			~LoadParamater();
 
+			using ParamMap = std::unordered_map<std::string, float>;
+
+			//void LoadPlayerParameter(std::string_view key);
+
+			void LoadPlayerParams(const ParamMap& para);
+
 		private:
 			std::unordered_map<std::string, float> _playerParam;
 		};
-
 	}
-
 }
 
 

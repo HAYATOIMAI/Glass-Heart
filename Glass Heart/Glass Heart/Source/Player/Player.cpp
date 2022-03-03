@@ -48,10 +48,12 @@ void Player::Player::Input(AppFrame::InputManager& input) {
             _checkPointFlag = true;
         }
     }
-    if (input.GetJoyPad().GetXTriggerRightThumb()) {
-        ResetPos();
+#ifdef _DEBUG
+    if (input.GetJoyPad().GetXinputRightShoulder()) {
+        _rotation = VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f);
+        _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
     }
-
+#endif // _DEBUG
 }
 /** 更新処理 */
 void Player::Player::Process() {
@@ -86,6 +88,12 @@ void Player::Player::Process() {
             }
         }
     }
+#ifdef _DEBUG
+    if (_position.y < -600.0f) {
+        _rotation = VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f);
+        _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
+}
+#endif // DEBUG
 }
 /** 描画処理 */
 void Player::Player::Render() {
@@ -124,16 +132,18 @@ void Player::Player::Move(const VECTOR& forward) {
     // X成分のみ移動後位置から真下に線分判定
     pos = _collsionManage->CheckHitFloor(pos, { forward.x, forward.y, 0.f });
 
-    /*pos = _collsionManage->CheckFall(pos, { forward.x, forward.y, 0.f });
-
-    if (_collsionManage->GetFall().HitFlag == 0) {
-        GetStateManage().PushBack("Fall");
-    }*/
-
     pos = _collsionManage->CheckHitWall(pos, { forward.x, forward.y, 0.f });
 
     pos = _collsionManage->CheckHitDeathMesh(pos, { forward.x, forward.y, 0.f });
 
+    pos = _collsionManage->CheckFall(pos, { forward.x, forward.y, 0.f });
+
+    if (_collsionManage->GetFall().HitFlag == 0) {
+        if (_collsionManage->GetBThrough().HitFlag == 0 || _collsionManage->GetWThrough().HitFlag == 0) {
+            GetStateManage().PushBack("Fall");
+        }
+        GetStateManage().PushBack("Fall");
+    }
     // 色状態が白のときのみ黒のメッシュと判定を行う
     if (_crState == ColourState::White ) {
 
@@ -146,6 +156,17 @@ void Player::Player::Move(const VECTOR& forward) {
         //if (_collsionManage->GetBFall().HitFlag == 0) {
         //    //_stateManage->PushBack("Fall");
         //}
+        pos = _collsionManage->CheckFall(pos, { forward.x, forward.y, 0.f });
+
+        if (_collsionManage->GetFall().HitFlag == 0) {
+
+            if (_collsionManage->GetBThrough().HitFlag == 1 /*|| _collsionManage->Mcrp().HitFlag*/) {
+                
+            }
+            else if (_collsionManage->Mcrp().HitFlag) {
+                //GetStateManage().PushBack("Fall");
+            }
+        }
     }
     // 色状態が黒のときのみ白のメッシュと判定を行う
     if (_crState == ColourState::Black) {
@@ -158,6 +179,16 @@ void Player::Player::Move(const VECTOR& forward) {
 
         //if (_collsionManage->GetWFall().HitFlag == 0) {
         // //   _stateManage->PushBack("Fall");
+        //}
+
+        //if (_collsionManage->GetFall().HitFlag == 0) {
+
+        //    if (_collsionManage->GetWThrough().HitFlag == 0 /*|| _collsionManage->Mcrp().HitFlag*/) {
+        //        GetStateManage().PushBack("Fall");
+        //    }
+        //    else if (_collsionManage->Mcrp().HitFlag) {
+        //        //GetStateManage().PushBack("Fall");
+        //    }
         //}
     }
     // 座標更新

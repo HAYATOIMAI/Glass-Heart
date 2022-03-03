@@ -68,7 +68,7 @@ namespace GlassHeart {
              *
              * @return オブジェクトの一覧の参照
              */
-            std::vector<std::unique_ptr<ObjectBase>>& GetObjectLists() { return _objects; }
+            inline std::vector<std::unique_ptr<ObjectBase>>& GetObjectLists() { return _objects; }
             /**
              * @brief 登録したオブジェクトの位置を得る
              *

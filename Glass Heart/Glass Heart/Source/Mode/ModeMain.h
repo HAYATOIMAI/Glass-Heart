@@ -67,7 +67,7 @@ namespace GlassHeart {
              */
             void Exit() override {};
 
-            GameMain& GetGameMain() const { return _gameMain; }
+            inline GameMain& GetGameMain() const { return _gameMain; }
 
             Object::ObjectFactory& GetObjectFactory();
 

@@ -8,10 +8,16 @@
  *********************************************************************/
 #include "LoadParamater.h"
 
-GlassHeart::Param::LoadParamater::LoadParamater() {
+using namespace GlassHeart;
+
+Param::LoadParamater::LoadParamater() {
 	_playerParam.clear();
 }
 
-GlassHeart::Param::LoadParamater::~LoadParamater() {
+Param::LoadParamater::~LoadParamater() {
 	_playerParam.clear();
+}
+
+void Param::LoadParamater::LoadPlayerParams(const ParamMap& para) {
+
 }

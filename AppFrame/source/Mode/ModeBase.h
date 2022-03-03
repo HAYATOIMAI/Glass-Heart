@@ -61,7 +61,7 @@ namespace AppFrame {
          */
         virtual void Exit() {};
 
-        GameBase& GetGame() const { return _game; };
+        inline GameBase& GetGame() const { return _game; };
 
         ResourceServer& GetResourceServer();
 

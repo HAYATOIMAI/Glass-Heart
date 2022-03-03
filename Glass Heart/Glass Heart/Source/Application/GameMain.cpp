@@ -12,6 +12,7 @@
 #include "../Mode/ModeTitle.h"
 #include "../Mode/ModeTeamLogo.h"
 #include "../Mode/ModeClear.h"
+#include "../Mode/ModeLoading.h"
 #include "../Object/ObjectFactory.h"
 #include "../Object/ObjectServer.h"
 
@@ -76,18 +77,12 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     _modeServer->Register("TeamLogo", std::make_shared<Mode::ModeTeamLogo>(*this));
     // ƒ^ƒCƒgƒ‹ƒ‚[ƒh‚ð“o˜^
     _modeServer->Register("Title", std::make_shared<Mode::ModeTitle>(*this));
+    //@ƒ[ƒfƒBƒ“ƒOƒ‚[ƒh‚ð“o˜^
+    _modeServer->Register("Loading", std::make_shared<Mode::ModeLoading>(*this));
     // ƒCƒ“ƒQ[ƒ€ƒ‚[ƒh‚ð“o˜^
     _modeServer->Register("InGame", std::make_shared<Mode::ModeGame>(*this));
     // ƒQ[ƒ€ƒNƒŠƒAƒ‚[ƒh‚ð“o˜^
     _modeServer->Register("GameClear", std::make_shared<GlassHeart::Mode::ModeClear>(*this));
-
-//#ifdef _DEBUG
-//    _modeServer = std::make_unique<AppFrame::ModeServer>("InGame", std::make_shared<Mode::ModeGame>(*this));
-//    // ƒ^ƒCƒgƒ‹ƒ‚[ƒh‚ð“o˜^
-//    _modeServer->Register("Title", std::make_shared<Mode::ModeTitle>(*this));
-//    // ƒQ[ƒ€ƒNƒŠƒAƒ‚[ƒh‚ð“o˜^
-//    _modeServer->Register("GameClear", std::make_shared<GlassHeart::Mode::ModeClear>(*this));
-//#endif // _DEBUG
 
     return true;
 }

@@ -10,9 +10,9 @@
 #include <memory>
 #include <string>
 #include <unordered_map>
+#include <AppFrame.h>
 
 namespace AppFrame {
-    /** 二重インクルード防止 */
     class InputManager;
 }
 

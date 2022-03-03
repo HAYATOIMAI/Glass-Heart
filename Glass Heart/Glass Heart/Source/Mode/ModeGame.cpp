@@ -20,12 +20,11 @@ using namespace GlassHeart;
 //int Mode::ModeMain::_countSeconds;
 //int Mode::ModeMain::_countMinutes;
 
-//!< コンストラクタ
+/** コンストラクタ */
 Mode::ModeGame::ModeGame(GameMain& game) : ModeMain{ game } {}
-//!< 初期化処理
-void Mode::ModeGame::Init() {  
-}
-//!< 入り口処理
+/** 初期化処理 */
+void Mode::ModeGame::Init() {}
+/** 入り口処理 */
 void Mode::ModeGame::Enter() {
     // ファクトリの生成とクリエイターの登録
     auto& of = GetObjectFactory();
@@ -65,20 +64,17 @@ void Mode::ModeGame::Enter() {
     _countMinutes = 0;
 
     // 非同期読み込み終了
-    SetUseASyncLoadFlag(FALSE);
+   // SetUseASyncLoadFlag(FALSE);
 
     Process();
 }
-//!< 入力処理
+/** 入力処理 */
 void Mode::ModeGame::Input(AppFrame::InputManager& input) {
-    if (input.GetJoyPad().GetXinputStart()) {
-        //GetModeServer().GoToMode("Title");
-    }
     GetObjectServer().Input(input);
 }
-//!< 更新処理
+/** 更新処理 */
 void Mode::ModeGame::Process() {
-    GetObjectFactory().UpdateSpawn();
+    //GetObjectFactory().UpdateSpawn();
     GetObjectServer().Process();
 
     if (_count < 60) {
@@ -93,7 +89,7 @@ void Mode::ModeGame::Process() {
         ++_countMinutes;
     }
 }
-//!< 描画処理
+/** 描画処理 */
 void Mode::ModeGame::Render() {
     GetObjectServer().Render();
 
@@ -107,16 +103,16 @@ void Mode::ModeGame::Render() {
     DrawFormatString(x, y, white, "現在の時間: %d分 ", _countMinutes); y += size;
 #endif // DEBUG
 }
-//!< 終了処理
+/** 終了処理 */
 void Mode::ModeGame::Exit() {
 
     auto& sm = GetSoundManager();
     sm.StopSound("bgm");
 
-    ////!< オブジェクトを消去
+    //// オブジェクトを消去
     //GetObjectServer().AllClear();
-    ////!< リソースの消去
+    //// リソースの消去
     //GetResourceServer().AllClear();
-    ////!< クリエイターを削除
+    //// クリエイターを削除
     //GetObjectFactory().Clear();
 }

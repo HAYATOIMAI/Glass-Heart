@@ -17,7 +17,7 @@ Mode::ModeTeamLogo::ModeTeamLogo(GameMain& game) : Mode::ModeMain{ game }{}
 void Mode::ModeTeamLogo::Init() {
     // 使用する画像のテーブル
     const AppFrame::ResourceServer::GraphMap useGraph{
-    {"TitleBg",          {"TeamLogo/TeamLogo.png",          1, 1, 1920, 1080}} };
+    {"TitleBg",          {"TeamLogo/kane.png",          1, 1, 1920, 1080}} };
     // リソースサーバーを取得
     auto& res = GetResourceServer();
     // 画像の読み込み

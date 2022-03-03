@@ -165,6 +165,12 @@
     <ClInclude Include="Source\CheckPoint\GoalPoint.h">
       <Filter>ヘッダー ファイル\CheckPoint</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Player\LoadParamater.h">
+      <Filter>ヘッダー ファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mode\ModeLoading.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Camera\CameraManager.cpp">
@@ -250,6 +256,12 @@
     </ClCompile>
     <ClCompile Include="Source\CheckPoint\GoalPoint.cpp">
       <Filter>ソース ファイル\CheckPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Player\LoadParamater.cpp">
+      <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mode\ModeLoading.cpp">
+      <Filter>ソース ファイル\Mode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

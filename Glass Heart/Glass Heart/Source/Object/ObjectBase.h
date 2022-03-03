@@ -102,56 +102,56 @@ namespace GlassHeart {
              *
              * @return オブジェクトの状態
              */
-            bool IsDead() { return (_objectState == ObjectState::Dead); }
+            inline bool IsDead() { return (_objectState == ObjectState::Dead); }
             /**
              * @brief 生存状態になっているか
              *
              * @return  オブジェクトの状態
              */
-            bool IsActive() { return (_objectState == ObjectState::Active); }
+            inline bool IsActive() { return (_objectState == ObjectState::Active); }
 
-            GameMain& GetGame() { return _game; }
+            inline GameMain& GetGame() { return _game; }
             /**
              * @brief ワールド座標変換
              *
              */
             virtual void ComputeWorldTransform();
-            const MATRIX& GetWorldTransform() const { return _worldTransform; }
-            VECTOR GetForward() const { return VTransform({ 0, 0, 1 }, MGetRotY(_rotation.y)); }
+            inline const MATRIX& GetWorldTransform() const { return _worldTransform; }
+            inline VECTOR GetForward() const { return VTransform({ 0, 0, 1 }, MGetRotY(_rotation.y)); }
 
-            void SetPosition(const VECTOR& position) { _position = position; }
-            VECTOR GetPosition() const { return _position; }
-            void SetRotation(const VECTOR& rotation) { _rotation = rotation; }
-            VECTOR GetRotation() const { return _rotation; }
-            void SetScale(const VECTOR& scale) { _scale = scale; }
-            VECTOR GetScale() const { return _scale; }
+            inline void SetPosition(const VECTOR& position) { _position = position; }
+            inline VECTOR GetPosition() const { return _position; }
+            inline void SetRotation(const VECTOR& rotation) { _rotation = rotation; }
+            inline VECTOR GetRotation() const { return _rotation; }
+            inline void SetScale(const VECTOR& scale) { _scale = scale; }
+            inline VECTOR GetScale() const { return _scale; }
 
-            void SetRadius(const float radius) { _radius = radius; }
-            float GetRadius() const { return _radius; }
+            inline void SetRadius(const float radius) { _radius = radius; }
+            inline float GetRadius() const { return _radius; }
 
-            void SetHitFlag(const bool hitFlag) { _hitFlag = hitFlag; }
-            bool GetHitFlag() const { return _hitFlag; }
+            inline void SetHitFlag(const bool hitFlag) { _hitFlag = hitFlag; }
+            inline bool GetHitFlag() const { return _hitFlag; }
 
-            void SetStateManage(std::unique_ptr<GlassHeart::State::StateManager> state);
-            void SetModelManage(std::unique_ptr<GlassHeart::Model::ModelAnimeManager> model);
-            void SetCameraManage(std::shared_ptr<GlassHeart::Camera::CameraManager> camera);
+            void SetStateManage(std::unique_ptr<State::StateManager> state);
+            void SetModelManage(std::unique_ptr<Model::ModelAnimeManager> model);
+            void SetCameraManage(std::shared_ptr<Camera::CameraManager> camera);
 
-            GlassHeart::State::StateManager& GetStateManage() { return *_stateManage; }
-            GlassHeart::Collision::CollisionManager& GetCollision() { return *_collsionManage; }
-            GlassHeart::Camera::CameraManager& GetCamera() { return *_cameraManage; }
-            GlassHeart::Model::ModelAnimeManager& GetModelAnime() { return *_modelAnimeManage; }
+            inline State::StateManager& GetStateManage() { return *_stateManage; }
+            inline Collision::CollisionManager& GetCollision() { return *_collsionManage; }
+            inline Camera::CameraManager& GetCamera() { return *_cameraManage; }
+            inline Model::ModelAnimeManager& GetModelAnime() { return *_modelAnimeManage; }
             ObjectServer& GetObjectServer();
         protected:
             GameMain& _game; //!< ゲームメインクラスの参照
 
-            ObjectState GetObjectState() const { return _objectState; }
-            void SetObjectState(ObjectState objstate) { _objectState = objstate; }
+            inline ObjectState GetObjectState() const { return _objectState; }
+            inline void SetObjectState(ObjectState objstate) { _objectState = objstate; }
             ObjectState _objectState{ ObjectState::Active };
 
-            std::unique_ptr<GlassHeart::State::StateManager> _stateManage;  //!< ステートマネージャーのユニークポインタ
-            std::shared_ptr<GlassHeart::Collision::CollisionManager> _collsionManage;  //!< コリジョンのシェアードポインタ
-            std::shared_ptr<GlassHeart::Camera::CameraManager> _cameraManage;  //!< カメラのシェアードポインタ
-            std::unique_ptr<GlassHeart::Model::ModelAnimeManager> _modelAnimeManage; //!< モデルアニメマネージャーのユニークポインタ
+            std::unique_ptr<State::StateManager> _stateManage;  //!< ステートマネージャーのユニークポインタ
+            std::shared_ptr<Collision::CollisionManager> _collsionManage;  //!< コリジョンのシェアードポインタ
+            std::shared_ptr<Camera::CameraManager> _cameraManage;  //!< カメラのシェアードポインタ
+            std::unique_ptr<Model::ModelAnimeManager> _modelAnimeManage; //!< モデルアニメマネージャーのユニークポインタ
 
             MATRIX _worldTransform{ MGetIdent() }; //!< ワールド座標変換
             VECTOR _position{ 0, 0, 0 };  //!< 位置情報
