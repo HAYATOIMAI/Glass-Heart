@@ -7,7 +7,16 @@ namespace GlassHeart {
 
         class ModeLoading : public ModeMain {
         public:
+            /**
+             * @brief コンストラクタ
+             * 
+             * @param[in] game
+             */
             ModeLoading(GameMain& game);
+            /**
+             * @brief デストラクタ
+             * 
+             */
             ~ModeLoading() = default;
             /**
              * @brief 初期化処理
@@ -22,7 +31,7 @@ namespace GlassHeart {
             /**
              * @brief 入力処理
              *
-             * @param input インプットマネージャークラスへの参照
+             * @param[in] input インプットマネージャークラスへの参照
              */
             void Input(AppFrame::InputManager& input) override;
             /**
@@ -37,10 +46,8 @@ namespace GlassHeart {
             void Render() override;
         private:
             int _loadHandle{ -1 };
+            int _nowLoading{ -1 };
             int _cnt{ 0 };
         };
     }
 }
-
-
-

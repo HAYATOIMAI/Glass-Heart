@@ -17,7 +17,7 @@ namespace AppFrame {
 
     class GameBase;
     /**
-     * @class DivGraph
+     * @struct DivGraph
      * @brief 画像ファイル用構造体
      */
     struct DivGraph {

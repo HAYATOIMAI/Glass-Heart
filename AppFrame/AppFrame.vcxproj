@@ -177,7 +177,6 @@
     <ClInclude Include="source\Mode\ModeBase.h" />
     <ClInclude Include="source\Mode\ModeFade.h" />
     <ClInclude Include="source\Mode\ModeServer.h" />
-    <ClInclude Include="source\Resource\PathServer.h" />
     <ClInclude Include="source\Resource\ResourceServer.h" />
     <ClInclude Include="source\Sound\SoundManager.h" />
   </ItemGroup>
@@ -192,7 +191,6 @@
     <ClCompile Include="source\Mode\ModeBase.cpp" />
     <ClCompile Include="source\Mode\ModeFade.cpp" />
     <ClCompile Include="source\Mode\ModeServer.cpp" />
-    <ClCompile Include="source\Resource\PathServer.cpp" />
     <ClCompile Include="source\Resource\ResourceServer.cpp" />
     <ClCompile Include="source\Sound\SoundManager.cpp" />
   </ItemGroup>

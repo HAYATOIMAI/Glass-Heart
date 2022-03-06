@@ -1,22 +1,42 @@
+
+/*********************************************************************
+ * @file   ModeLoading.cpp
+ * @brief  
+ * 
+ * @author Hayato Imai
+ * @date   March 2022
+ *********************************************************************/
 #include "ModeLoading.h"
+#include <AppFrame.h>
 
 using namespace GlassHeart;
 
 Mode::ModeLoading::ModeLoading(GameMain& game) : ModeMain(game){}
 
 void Mode::ModeLoading::Init() {
+    // 使用する画像のテーブル
+    const AppFrame::ResourceServer::GraphMap useMap{
+    {"NowLoading",   {"Loading/Loading.png", 1, 1, 2150, 186}},
+   // {"LoadGif",      {"Loading/LoadGraphHeart.gif", 1, 1, 88, 88}}
+    };
+    // リソースサーバーを取得
+    auto& res = GetResourceServer();
+    // 画像の読み込み
+    res.LoadGraphics(useMap);
+
+    _nowLoading = res.GetGraph("NowLoading");
+    //_loadHandle = res.GetGraph("LoadGif");
+
     _loadHandle = LoadGraph("resource/Loading/LoadGraphHeart.gif");
     _cnt = 180;
 }
 
-void Mode::ModeLoading::Enter() {
-}
+void Mode::ModeLoading::Enter() {}
 
-void Mode::ModeLoading::Input(AppFrame::InputManager& input) {   
-}
+void Mode::ModeLoading::Input(AppFrame::InputManager& input) {}
 
 void Mode::ModeLoading::Process() {
-    // ロードの為カウンタを減少
+    // ロードのためのカウンタを減少
     if (_cnt > 0) {
         --_cnt;
     }
@@ -39,6 +59,6 @@ void Mode::ModeLoading::Process() {
 
 void Mode::ModeLoading::Render() {
     PlayMovieToGraph(_loadHandle);
-
+    DrawGraph(0, 850, _nowLoading, FALSE);
     DrawGraph(1700, 900, _loadHandle, FALSE);
 }

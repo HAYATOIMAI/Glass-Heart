@@ -16,7 +16,7 @@ using namespace GlassHeart::CheckPoint;
 GoalPoint::GoalPoint(GameMain& game) : ObjectBase{ game } {
 
     _goalPoint = LoadGraph("resource/Test/2dMaterial/light3.png");
-    _position = VGet(556.0f, 2555.0f, -55.0f);
+    _position = VGet(-8191.494f, 705.000f, -55.0f);
     _radius = 100.0f;
     _hitFlag = false;
 }

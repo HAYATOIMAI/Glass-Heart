@@ -15,6 +15,8 @@
 namespace {
     constexpr auto DownVector = 13.5f; // Y軸の移動量ベクトル下降量
     constexpr auto StraifVector = 10.0f; // ストレイフ用X軸移動量
+    constexpr auto RightRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f); //!< 右方向の角度
+    constexpr auto LeftRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 左方向の角度
 }
 
 using namespace GlassHeart;
@@ -28,19 +30,30 @@ void State::StateJumpFall::Enter() {
 void State::StateJumpFall::Input(AppFrame::InputManager& input) {
     if (input.GetJoyPad().GetAnalogStickLX() >= 5000 && input.GetJoyPad().GetAnalogStickLX() > 1) {
         // 右方向に向きを変更
-        _owner.SetRotation(VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
+        _owner.SetRotation(VGet(0.0f, RightRotation, 0.0f));
         _subVx = -StraifVector;
         input.GetJoyPad().InputReject();
     }
     if (input.GetJoyPad().GetAnalogStickLX() <= -5000 && input.GetJoyPad().GetAnalogStickLX() < 1) {
         // 左方向に向きを変更
-        _owner.SetRotation(VGet(0.0f, 90.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
+        _owner.SetRotation(VGet(0.0f, LeftRotation, 0.0f));
         _addVx = StraifVector;
         input.GetJoyPad().InputReject();
     }
+#ifdef _DEBUG
+    // Aボタンが押されたらジャンプ状態へ移行
+    if (input.GetJoyPad().GetXTriggerButtonA() && _cnt == 0) {
+        _cnt = 54;
+        _owner.GetStateManage().PushBack("Jump");
+    }
+#endif // _DEBUG
 }
 /** 更新処理 */
 void State::StateJumpFall::Update() {
+    // 入力制限の為カウンタを減少
+    if (_cnt > 0) {
+        --_cnt;
+    }
 
     // 足場と接しているか
     Landing();
@@ -48,7 +61,7 @@ void State::StateJumpFall::Update() {
     auto pos = _owner.GetPosition();
 
     // リスポーン処理
-    if (_owner.GetCollision().GetDeathMesh().HitNum >= 1) {
+    if (_owner.GetCollision().GetWDeathMesh().HitNum >= 1) {
 
         if (_owner.GetColourState() == Player::Player::ColourState::White) {
             _owner.SetPosition(VGet(pos.x, pos.y, pos.z));
@@ -59,11 +72,21 @@ void State::StateJumpFall::Update() {
             _owner.ResetPos();
         }
     }
+    if (_owner.GetCollision().GetBDeathMesh().HitNum >= 1)  {
+        if (_owner.GetColourState() == Player::Player::ColourState::White) {
+            _owner.ResetPos();
+            // _owner.GetStateManage().PushBack("Dead");
+        }
+        if (_owner.GetColourState() == Player::Player::ColourState::Black) {           
+            _owner.SetPosition(VGet(pos.x, pos.y, pos.z));
+        }
+    }
 }
 void State::StateJumpFall::Landing() {
 
      _owner.GetCollision().CheckJumpStand(_owner.GetPosition(), { 0, 3, 0 });
-     _owner.GetCollision().CheckHitDeathMesh(_owner.GetPosition(), { 0, 3, 0 });
+     _owner.GetCollision().CheckHitWDeathMesh(_owner.GetPosition(), { 0, 3, 0 });
+     _owner.GetCollision().CheckHitBDeathMesh(_owner.GetPosition(), { 0, 3, 0 });
      _owner.GetCollision().CheckThroughBMesh(_owner.GetPosition(), { 0, 3, 0 });
      _owner.GetCollision().CheckThroughWMesh(_owner.GetPosition(), { 0, 3, 0 });
      _owner.GetCollision().CheckHitWall(_owner.GetPosition(), { 0, 3, 0 });
@@ -80,12 +103,12 @@ void State::StateJumpFall::Landing() {
                 _subVx = 0;
             }
         if (_owner.GetCollision().CollPol().HitNum >= 1) {
-            if (_owner.GetRotation().y == 270.0f * (std::numbers::pi_v<float> / 180.0f)) {
-                _owner.SetRotation(VGet(0.0f, 90.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
+            if (_owner.GetRotation().y == RightRotation) {
+                _owner.SetRotation(VGet(0.0f, LeftRotation, 0.0f));
                 _reVx += 80.0f;
             }
-            else if (_owner.GetRotation().y == 90.0f * (std::numbers::pi_v<float> / 180.0f)) {
-                _owner.SetRotation(VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
+            else if (_owner.GetRotation().y == LeftRotation) {
+                _owner.SetRotation(VGet(0.0f, RightRotation, 0.0f));
                 _reVx -= 80.0f;
             }
             _owner.SetPosition(VGet(_owner.GetPosition().x + _reVx, _owner.GetPosition().y, _owner.GetPosition().z));
@@ -111,7 +134,6 @@ void State::StateJumpFall::Landing() {
             _owner.GetStateManage().PushBack("Idle");
         }
     }
-  
     // 黒色のみ透ける足場に接しているか
     if (_owner.GetCollision().GetWThrough().HitFlag == 1) {
         // 接している足場と異なる色の場合のみとどまる

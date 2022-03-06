@@ -22,12 +22,7 @@ Stage::Stage::Stage(GameMain& game) : Object::ObjectBase{ game } {
     //_ground = std::make_unique<Model::ModelManager>(*this);
     //_ground->handle("Terrain");
     //_ground->SetScale({ 30.f, 10.f, 30.f });
-
-    //_test = std::make_unique<Model::ModelManager>(*this);
-    //_test->handle("Test");
-    //_test->SetRotation(VGet(0.0f, 180.0f * std::numbers::pi_v<float> / 180.0f, 0.0f));
-    //_test->SetScale({ 500.f,  80.f, 80.f });
-    // 仮ステージのモデル
+    // ステージのモデル
     _testStage = std::make_unique<Model::ModelManager>(*this);
     _testStage->handle("Stage");
     _testStage->SetPosition(VGet(0.0f, 0.0f, 10.0f));
@@ -43,6 +38,7 @@ Stage::Stage::Stage(GameMain& game) : Object::ObjectBase{ game } {
     MV1SetFrameVisible(_testStage->GetHandle(), 7, FALSE);
     MV1SetFrameVisible(_testStage->GetHandle(), 8, FALSE);
     MV1SetFrameVisible(_testStage->GetHandle(), 9, FALSE);
+    MV1SetFrameVisible(_testStage->GetHandle(), 10, FALSE);
     //以下のフレームをナビメッシュとして使用
     MV1SetupCollInfo(_testStage->GetHandle(), 2, 8, 8, 8);
     MV1SetupCollInfo(_testStage->GetHandle(), 3, 8, 8, 8);
@@ -51,11 +47,12 @@ Stage::Stage::Stage(GameMain& game) : Object::ObjectBase{ game } {
     MV1SetupCollInfo(_testStage->GetHandle(), 6, 8, 8, 8);
     MV1SetupCollInfo(_testStage->GetHandle(), 7, 8, 8, 8);
     MV1SetupCollInfo(_testStage->GetHandle(), 8, 8, 8, 8);
+    MV1SetupCollInfo(_testStage->GetHandle(), 9, 8, 8, 8);
 
     // フォグの設定
-    SetFogEnable(TRUE);
+  /*  SetFogEnable(TRUE);
     SetFogColor(247, 188, 101);
-    SetFogStartEnd(50.0f, 15000.0f);
+    SetFogStartEnd(50.0f, 15000.0f);*/
 }
 
 void Stage::Stage::Process() {
@@ -65,9 +62,6 @@ void Stage::Stage::Process() {
 
 void Stage::Stage::Render() {
     //_skySphere->Draw();
-    //_ground->Draw();
-   // _test->Draw();
-   // _testWhiteAndBlack->Draw();
     _testStage->Draw();
 #ifdef _DEBUG
     auto linelength = 10000.f;

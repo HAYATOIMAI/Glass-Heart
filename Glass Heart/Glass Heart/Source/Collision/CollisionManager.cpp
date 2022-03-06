@@ -17,24 +17,22 @@
 using namespace GlassHeart;
 
 /** コンストラクタ */
-Collision::CollisionManager::CollisionManager(GlassHeart::Object::ObjectBase& owner) : _owner{ owner } {
-    _report = std::make_unique<Report>();
-}
+Collision::CollisionManager::CollisionManager(Object::ObjectBase& owner) : _owner{ owner } {}
 /** 床との当たり判定 */
 VECTOR Collision::CollisionManager::CheckHitFloor(const VECTOR& pos, const VECTOR& forward) {
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
     auto start = VAdd(newPos, { 0.f, 10.f, 0.f });
     auto end = VAdd(newPos, { 0.f, -100.f, 0.f });
-    _mcrp = MV1CollCheck_Line(handle, MV1SearchFrame(handle, "Floor_NavMesh"), start, end);
+    _floor = MV1CollCheck_Line(handle, MV1SearchFrame(handle, "Floor_NavMesh"), start, end);
 
-    if (_mcrp.HitFlag == 0) {
+    if (_floor.HitFlag == 0) {
         // 衝突なし移動しない
         return pos;
     }
-    else if (_mcrp.HitFlag == 1) {
+    else if (_floor.HitFlag == 1) {
         // 衝突あれば移動する
-        newPos = _mcrp.HitPosition;
+        newPos = _floor.HitPosition;
     }
    
     return  newPos;
@@ -121,25 +119,46 @@ VECTOR Collision::CollisionManager::CheckThroughWMesh(const VECTOR& pos, const V
     return newPos;
 }
 
-VECTOR Collision::CollisionManager::CheckHitDeathMesh(const VECTOR& pos, const VECTOR& forward) {
+VECTOR Collision::CollisionManager::CheckHitWDeathMesh(const VECTOR& pos, const VECTOR& forward) {
 
-    auto round = 6.5f;
+    auto round = 13.0f;
 
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
-    auto c1 = VAdd(newPos, { -8.f, 10.f, 0.f });
-    auto c2 = VAdd(newPos, { -18.f, 20.f, 0.f });
-    _death = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "Death_NavMesh"), c1, c2,round);
+    auto c1 = VAdd(newPos, { -18.f, 15.f, 0.f });
+    auto c2 = VAdd(newPos, { -18.f, 42.f, 0.f });
+    _wDeath = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "WDeath_NavMesh"), c1, c2,round);
 
-    if (_death.HitNum == 0) {
+    if (_wDeath.HitNum == 0) {
         // 衝突なし移動しない
         return pos;
 }
-    else if (_death.HitNum >= 1) {
+    else if (_wDeath.HitNum >= 1) {
         // 衝突あれば移動する
-        newPos = VAdd(pos, forward);
+        newPos = VSub(pos, forward);
     }
     return  newPos;
+}
+VECTOR Collision::CollisionManager::CheckHitBDeathMesh(const VECTOR& pos, const VECTOR& forward) {
+
+    auto round = 13.0f;
+
+    auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
+    auto newPos = VAdd(pos, forward);
+    auto c1 = VAdd(newPos, { -18.f, 42.f, 0.f });
+    auto c2 = VAdd(newPos, { -18.f, 42.f, 0.f });
+    /*auto c1 = VAdd(newPos, { -8.f, 10.f, 0.f });
+    auto c2 = VAdd(newPos, { -18.f, 20.f, 0.f });*/
+    _bDeath = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "BDeath_NavMesh"), c1, c2, round);
+
+    if (_bDeath.HitNum == 0) {
+        return pos;
+    }
+    else if (_bDeath.HitNum >= 1) {
+        // 衝突あれば移動する
+        newPos = VSub(pos, forward);
+    }
+    return newPos;
 }
 VECTOR Collision::CollisionManager::CheckThroughBMesh(const VECTOR& pos, const VECTOR& forward) {
 
