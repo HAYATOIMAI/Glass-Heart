@@ -16,12 +16,15 @@
 #include <numbers>
 
 namespace {
-    constexpr auto StartPositionX = -150.0f;  //!< プレイヤーの初期位置X
-    constexpr auto StartPositionY = 35.0f;    //!< プレイヤーの初期位置Y
-    constexpr auto StartPositionZ = -55.0f;  //!< プレイヤーの初期位置Z
+    constexpr auto StartPositionX = 8790.0f;  //!< テスト用プレイヤーの初期位置X
+    constexpr auto StartPositionY = 5705.000f;    //!< テスト用プレイヤーの初期位置Y
+    constexpr auto StartPositionZ = -55.0f;  //!< テスト用プレイヤーの初期位置Z
+    //constexpr auto StartPositionX = -150.0f;  //!< プレイヤーの初期位置X
+    //constexpr auto StartPositionY = 35.0f;    //!< プレイヤーの初期位置Y
+    //constexpr auto StartPositionZ = -55.0f;  //!< プレイヤーの初期位置Z
     constexpr auto Recast = 20;  //!<　色変更リキャストタイム 
-    constexpr auto RightRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f); //!< 右方向の角度
-    constexpr auto LeftRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 左方向の角度
+    constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f); //!< 右方向の角度
+    constexpr auto LeftRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 左方向の角度
 }
 
 using namespace GlassHeart;
@@ -108,10 +111,8 @@ void Player::Player::Render() {
     // 色状態を表示
     DrawFormatString(i, o, GetColor(255, 255, 255), _stateName.c_str(), _crState); y += size;
     //カメラの位置を表示
-   // _cameraManage->Render();
+    //_cameraManage->Render();
     //DrawLine3D(VGet(_lastPosition.x, _lastPosition.y, _lastPosition.z), VGet(_position.x, _position.y / 200.0f, _position.z), GetColor(255, 0, 0));
-    // コリジョン情報を表示
-    _collsionManage->Render();
 #endif // _DEBUG
     _stateManage->Draw();
 }
@@ -120,27 +121,31 @@ void Player::Player::ComputeWorldTransform() {
     auto world = MGetScale(_scale);
     world = MMult(world, MGetRotZ(_rotation.z));
     world = MMult(world, MGetRotX(_rotation.x));
-    world = MMult(world, MGetRotY(_rotation.y + std::numbers::pi_v<float>));
+    world = MMult(world, MGetRotY(_rotation.y + std::numbers::pi_v<float>)); // モデルの向きはここで調整
     _worldTransform = MMult(world, MGetTranslate(_position));
 }
 /** 移動処理 */
 void Player::Player::Move(const VECTOR& forward) {
     auto pos = _position;
 
-    // X成分のみ移動後位置から真下に線分判定
     pos = _collsionManage->CheckHitFloor(pos, { forward.x, forward.y, 0.f });
 
-    pos = _collsionManage->CheckHitWall(pos, { forward.x, forward.y, 0.f });
+    pos = _collsionManage->CheckHitSecondFloor(pos, { forward.x, forward.y, 0.f });
 
-    pos = _collsionManage->CheckHitWDeathMesh(pos, { forward.x, forward.y, 0.f });
+    pos = _collsionManage->CheckHitSideAndBottom(pos, { forward.x, forward.y, 0.f });
 
-    //pos = _collsionManage->CheckFall(pos, { forward.x, 0, 0.f });
+    if (_collsionManage->GetFall().HitFlag == 0 ) {
 
-    if (_collsionManage->GetFall().HitFlag == 0) {
-        if (_collsionManage->GetBThrough().HitFlag == 0 || _collsionManage->GetWThrough().HitFlag == 0) {
-            GetStateManage().PushBack("Fall");
+        if (_collsionManage->GetSecondFall().HitFlag == 1) {
+        }
+        else if (_collsionManage->GetSecondFall().HitFlag == 0) {
+
+            if (_collsionManage->GetBThrough().HitFlag == 0 || _collsionManage->GetWThrough().HitFlag == 0) {
+                _stateManage->PushBack("Fall");
+            }
         }
     }
+
     // 色状態が白のときのみ黒のメッシュと判定を行う
     if (_crState == ColourState::White ) {
 
@@ -149,6 +154,12 @@ void Player::Player::Move(const VECTOR& forward) {
         pos = _collsionManage->CheckThroughBWallMesh(pos, { forward.x, forward.y, 0.f });
 
         pos = _collsionManage->CheckFall(pos, { forward.x, forward.y, 0.f });
+
+        pos = _collsionManage->CheckHitSecondFall(pos, { forward.x, forward.y, 0.f });
+
+        pos = _collsionManage->CheckHitBDeathMesh(pos, { forward.x, forward.y, 0.f });
+
+        pos = _collsionManage->CheckHitSecondThroughBMesh(pos, { forward.x, forward.y, 0.f });
     }
     // 色状態が黒のときのみ白のメッシュと判定を行う
     if (_crState == ColourState::Black) {
@@ -158,6 +169,12 @@ void Player::Player::Move(const VECTOR& forward) {
         pos = _collsionManage->CheckThroughWWallMesh(pos, { forward.x, forward.y, 0.f });
 
         pos = _collsionManage->CheckFall(pos, { forward.x, forward.y, 0.f });
+
+        pos = _collsionManage->CheckHitSecondFall(pos, { forward.x, forward.y, 0.f });
+
+        pos = _collsionManage->CheckHitWDeathMesh(pos, { forward.x, forward.y, 0.f });
+
+        pos = _collsionManage->CheckHitSecondThroughWMesh(pos, { forward.x, forward.y, 0.f });
     }
     // 座標更新
     _position = pos;

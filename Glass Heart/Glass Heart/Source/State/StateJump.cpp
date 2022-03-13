@@ -27,19 +27,7 @@ void State::StateJump::Enter() {
     _owner.GetModelAnime().ChangeAnime("Jump_start", true);
 }
 /** 入力処理 */
-void State::StateJump::Input(AppFrame::InputManager& input) {
-    if (input.GetJoyPad().GetXinputThumbLX()) {
-        //_owner.GetStateManage().PushBack("Run");
-    }
-    //if (input.GetJoyPad().GetAnalogStickLX() >= 5000) {
-    //    // 右方向に向きを変更
-    //    _owner.SetRotation(VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
-    //}
-    //if (input.GetJoyPad().GetAnalogStickLX() <= -5000) {
-    //    // 左方向に向きを変更
-    //    _owner.SetRotation(VGet(0.0f, 90.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
-    //}
-}
+void State::StateJump::Input(AppFrame::InputManager& input) {}
 /** 更新処理 */
 void State::StateJump::Update() {
     // 対応するボタンが押されたらジャンプ処理実行

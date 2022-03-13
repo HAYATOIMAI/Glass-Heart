@@ -66,7 +66,7 @@ namespace GlassHeart {
             void Exit() override;
 
         private:
-            int _bgHandle{ -1 };   //!< ”wŒi‰æ‘œ
+            int _result{ -1 };   //!< ”wŒi‰æ‘œ
         };
     }
 }

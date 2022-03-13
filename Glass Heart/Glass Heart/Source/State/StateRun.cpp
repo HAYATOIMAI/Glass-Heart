@@ -17,8 +17,8 @@ using namespace GlassHeart;
 
 namespace {
     constexpr auto DefaultSpeed = 3.5f; //!< 歩行スピード
-    constexpr auto RightRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f); //!< 右方向の角度
-    constexpr auto LeftRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 左方向の角度
+    constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f); //!< 右方向の角度
+    constexpr auto LeftRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 左方向の角度
 }
 
 void State::StateRun::Enter() {
@@ -34,16 +34,10 @@ void State::StateRun::Input(AppFrame::InputManager& input) {
     if (input.GetJoyPad().GetAnalogStickLX() >= 3000) {
         // 右方向に向きを変更
         _owner.SetRotation(VGet(0.0f, RightRotation, 0.0f));
-        if (input.GetJoyPad().GetAnalogStickLX() >= 30000) {
-            _owner.SetForwardSpeed(DefaultSpeed * 1.0f);
-        }
     }
     else if (input.GetJoyPad().GetAnalogStickLX() <= -3000) {
         // 左方向に向きを変更
         _owner.SetRotation(VGet(0.0f, LeftRotation, 0.0f));
-        if (input.GetJoyPad().GetAnalogStickLX() <= -30000) {
-            _owner.SetForwardSpeed(DefaultSpeed * 1.0f);
-        }
     }
     else {
         _owner.GetStateManage().PopBack();
@@ -57,8 +51,8 @@ void State::StateRun::Update() {
     _owner.Move(VScale(_owner.GetForward(), _owner.GetForwardSpeed()));
 
 
-    _owner.GetCollision().CheckHitBDeathMesh(pos, { 0.f, 3.f, 0.f });
-    _owner.GetCollision().CheckHitWDeathMesh(pos, { 0.f, 3.f, 0.f });
+    _owner.GetCollision().CheckHitBDeathMesh(pos, _owner.GetForward());
+    _owner.GetCollision().CheckHitWDeathMesh(pos, _owner.GetForward());
 
     // リスポーン処理
     if (_owner.GetCollision().GetWDeathMesh().HitNum >= 1) {
@@ -80,4 +74,5 @@ void State::StateRun::Update() {
            // _owner.SetPosition();
         }
     }
+   
 }

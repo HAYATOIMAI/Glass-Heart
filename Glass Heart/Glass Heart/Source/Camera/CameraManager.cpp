@@ -16,7 +16,7 @@ using namespace GlassHeart::Camera;
 namespace {
      constexpr auto CameraDisX = 0;  //!< XŽ²‚Ì”{—¦
      constexpr auto CameraDisY = 1;   //!< YŽ²‚Ì”{—¦
-     constexpr auto CameraDisZ = 7;  //!< ZŽ²‚Ì”{—¦
+     constexpr auto CameraDisZ = -7;  //!< ZŽ²‚Ì”{—¦
 }
 
 CameraManager::CameraManager() {

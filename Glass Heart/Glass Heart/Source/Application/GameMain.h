@@ -8,6 +8,7 @@
  *********************************************************************/
 #pragma once
 #include "AppFrame.h"
+#include <memory>
 
 namespace GlassHeart {
 
@@ -15,6 +16,12 @@ namespace GlassHeart {
 		/** 二重インクルード防止 */
 		class ObjectServer;
 		class ObjectFactory;
+	}
+	namespace Effect {
+		class EffectServer;
+	}
+	namespace UI {
+		class UI;
 	}
 	/**
 	 * @class GameMain
@@ -56,8 +63,13 @@ namespace GlassHeart {
 
 		inline Object::ObjectFactory& GetObjectFactory() const { return *_objFactory; }
 
+		inline UI::UI& GetUI() const { return *_ui; }
+
+		inline Effect::EffectServer& GetEffectServer() const { return *_effectServer; }
 	private:
 		std::unique_ptr<Object::ObjectServer> _objServer;  //!< オブジェクトサーバーのユニークポインタ
 		std::unique_ptr<Object::ObjectFactory> _objFactory;	 //!< オブジェクトファクトリーのユニークポインタ
+		std::unique_ptr<GlassHeart::UI::UI> _ui;
+		std::unique_ptr<GlassHeart::Effect::EffectServer> _effectServer;
 	};
 }

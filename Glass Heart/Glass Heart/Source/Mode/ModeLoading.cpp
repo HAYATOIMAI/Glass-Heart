@@ -17,7 +17,6 @@ void Mode::ModeLoading::Init() {
     // 使用する画像のテーブル
     const AppFrame::ResourceServer::GraphMap useMap{
     {"NowLoading",   {"Loading/Loading.png", 1, 1, 2150, 186}},
-   // {"LoadGif",      {"Loading/LoadGraphHeart.gif", 1, 1, 88, 88}}
     };
     // リソースサーバーを取得
     auto& res = GetResourceServer();
@@ -42,10 +41,11 @@ void Mode::ModeLoading::Process() {
     }
     
     auto [handle, no] = GetGame().GetResourceServer().GetModles("Stage");
+    auto [model, num] = GetGame().GetResourceServer().GetModles("Stage2");
     if (_cnt == 0) {
         // 非同期読み込みが終了しているか
         // FALSEなら終了、それ以外なら読み込みを再開
-        if (CheckHandleASyncLoad(handle) == FALSE) {
+        if (CheckHandleASyncLoad(handle) == FALSE && CheckHandleASyncLoad(model) == FALSE) {
             // 非同期読み込み終了
             SetUseASyncLoadFlag(FALSE);
             // ゲーム本編へ移動

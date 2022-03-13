@@ -52,10 +52,22 @@ namespace AppFrame {
         ChangeWindowMode(true);
 #endif // DEBUG
 
+        //! Effekseerを使用するためDirect11を指定
+        SetUseDirect3DVersion(DX_DIRECT3D_11);
+
         // Dxライブラリ初期化
         if (DxLib_Init() == -1) {
             return false;
         }
+
+        if (Effekseer_Init(8000) == -1) {
+            DxLib_End();
+            return false;
+        }
+
+        SetChangeScreenModeGraphicsSystemResetFlag(FALSE);
+        Effekseer_SetGraphicsDeviceLostCallbackFunctions();
+
 
         // 描画先画面を裏にする
         SetDrawScreen(DX_SCREEN_BACK);
@@ -80,6 +92,7 @@ namespace AppFrame {
     void GameBase::Terminate() {
         // Dxライブラリ終了
         DxLib_End();
+        Effkseer_End();
     }
 
     void GameBase::Process() {

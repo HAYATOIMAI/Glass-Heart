@@ -33,17 +33,21 @@ void State::StateIdle::Input(AppFrame::InputManager& input) {
 void State::StateIdle::Update() {
 	// ë´èÍÇ∆ê⁄ÇµÇƒÇ¢ÇÈÇ©
 	if (_owner.GetCollision().GetHitFloor().HitFlag == 1) {
-	    _owner.SetPosition(_owner.GetCollision().CheckHitFloor(_owner.GetPosition(), { 0, 3, 0 }));
+	    _owner.SetPosition(_owner.GetCollision().GetHitFloor().HitPosition);
+	}
+
+	if (_owner.GetCollision().GetHitSecondFloor().HitFlag == 1) {
+		_owner.SetPosition(_owner.GetCollision().GetHitSecondFloor().HitPosition);
 	}
 
 	if (_owner.GetCollision().GetBThrough().HitFlag == 1) {
 		if (_owner.GetColourState() == Player::Player::ColourState::White) {
-			_owner.SetPosition(_owner.GetCollision().CheckThroughBMesh(_owner.GetPosition(), { 0, 3, 0 }));
+			_owner.SetPosition(_owner.GetCollision().GetBThrough().HitPosition);
 		}
 	}
 	if (_owner.GetCollision().GetWThrough().HitFlag == 1) {
 		if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-			_owner.SetPosition(_owner.GetCollision().CheckThroughWMesh(_owner.GetPosition(), { 0, 3, 0 }));
+			_owner.SetPosition(_owner.GetCollision().GetWThrough().HitPosition);
 		}	
 	}
 	// ì¸óÕêßå¿ÇÃà◊ÉJÉEÉìÉ^Çå∏è≠

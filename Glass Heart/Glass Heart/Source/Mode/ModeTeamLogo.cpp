@@ -17,28 +17,31 @@ Mode::ModeTeamLogo::ModeTeamLogo(GameMain& game) : Mode::ModeMain{ game }{}
 void Mode::ModeTeamLogo::Init() {
     // 使用する画像のテーブル
     const AppFrame::ResourceServer::GraphMap useGraph{
-    {"TitleBg",          {"TeamLogo/kane.png",          1, 1, 1920, 1080}} };
+    {"TeamLogo",          {"TeamLogo/TeamLogo.png",          1, 1, 1920, 1080}} };
     // リソースサーバーを取得
     auto& res = GetResourceServer();
     // 画像の読み込み
     res.LoadGraphics(useGraph);
     // 画像のハンドルの取得
-    _titleBgHandle = res.GetGraph("TitleBg");
+    _teamLogo = res.GetGraph("TeamLogo");
+    _fadeCount = 30;
 }
 /** 入り口処理 */
 void Mode::ModeTeamLogo::Enter() {
 }
 /** 入力処理 */
 void Mode::ModeTeamLogo::Input(AppFrame::InputManager& input) {
-    if (input.GetJoyPad().GetXinputButtonB()) {
+    if (input.GetJoyPad().GetXinputButtonB() || _fadeCount == 0) {
         GetModeServer().GoToMode("Title");
     }
 }
 /** 更新処理 */
 void Mode::ModeTeamLogo::Process() {
-    //_alpha = (_alpha + 8) % 255;
+    if (_fadeCount > 0) {
+        --_fadeCount;
+    }
 }
 /** 描画処理 */
 void Mode::ModeTeamLogo::Render() {
-    DrawGraph(0, 0, _titleBgHandle, FALSE);
+    DrawGraph(0, 0, _teamLogo, FALSE);
 }

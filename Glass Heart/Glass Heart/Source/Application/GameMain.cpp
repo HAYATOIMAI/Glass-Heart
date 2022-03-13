@@ -15,6 +15,8 @@
 #include "../Mode/ModeLoading.h"
 #include "../Object/ObjectFactory.h"
 #include "../Object/ObjectServer.h"
+#include "../Effect/EffectServer.h"
+#include "../UI/UI.h"
 
 using namespace GlassHeart;
 
@@ -34,6 +36,18 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     /** リソースのカレントフォルダ設定 */
     res.ChangeCurrentFile("resource");
      
+    /** エフェクトサーバーの生成 */
+    /*_effectServer = std::make_unique<GlassHeart::Effect::EffectServer>(*this);
+
+    _effectServer->ChangeCurrentFile("resource");
+
+    const Effect::EffectServer::EffectMap useefc{
+        {"death",{"Effect/EF_Death.efkefc",10.0f}},
+        {"run",{"Effect/EF_Dash.efkefc",10.0f}}
+    };
+
+    _effectServer->LoadEfeects(useefc);*/
+
     /** マテリアルの自己発光色を暗い青色にする */
 #ifdef _DEBUG
     MATERIALPARAM material;
@@ -45,17 +59,17 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     SetMaterialParam(material);
 #endif
     /** 使用する音のテーブル */
-    const AppFrame::ResourceServer::SoundMap usesound {
-    {"cancel",  {"Sound/SE/SE_Cancel.mp3",true}},
-    {"cursor",  {"Sound/SE/SE_Cursor.mp3",true}},
-    {"death",   {"Sound/SE/SE_Death.mp3",true}},
-    {"jump",    {"Sound/SE/SE_Jump.mp3",true}},
-    {"landing", {"Sound/SE/SE_Landing.mp3",true}},
-    {"pick",    {"Sound/SE/SE_Pick.mp3",true}},
-    {"run",     {"Sound/SE/SE_Run.mp3",true}},
-    {"select",  {"Sound/SE/SE_Select.mp3",true}},
-    {"walk",    {"Sound/SE/SE_Walk.mp3",true}},
-    {"bgm", {"Sound/BGM01_Ver2.mp3, ", true}}
+    const AppFrame::ResourceServer::SoundMap usesound{
+        // BGM
+        {"bgm",     {"Sound/BGM/BGM01_Ver2.mp3",false}},
+         {"titleBgm",    {"Sound/BGM/titleBGM.mp3",false}},
+        // SE
+        {"walk",    {"Sound/SE/SE_Walk.wav",true}},
+        {"run",     {"Sound/SE/SE_Run.wav",true}},
+        {"jump",    {"Sound/SE/SE_Jump.wav",true}},
+        {"landing", {"Sound/SE/SE_Landing.wav",true}},
+        {"death",   {"Sound/SE/SE_Death.wav",true}},
+        {"select",  {"Sound/SE/SE_Select.mp3",true}}
     };
     /** 音を読み込み */
     res.LoadSounds(usesound);
@@ -63,13 +77,22 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     // サウンドコンポーネントの取得
     auto& sm = GetSoundManager();
     sm.SetVolume("bgm", 128);
+    sm.SetVolume("titleBgm", 128);
+    sm.SetVolume("walk", 128);
+    sm.SetVolume("run", 255);
+    sm.SetVolume("jump", 255);
+    sm.SetVolume("landing", 255);
+    sm.SetVolume("death", 128);
+    sm.SetVolume("select", 255);
 
-    sm.SetMute(false);
+    sm.SetMute(true);
 
     // オブジェクトサーバーの生成
     _objServer = std::make_unique<Object::ObjectServer>();
     // オブジェクトファクトリーの生成
     _objFactory = std::make_unique<Object::ObjectFactory>(*this);
+    // ユーザーインターフェース生成
+    _ui = std::make_unique<GlassHeart::UI::UI>(*this);
 
     // モードサーバーを生成し、AMGモードを登録
     _modeServer = std::make_unique<AppFrame::ModeServer>("Amg", std::make_shared<Mode::ModeAmg>(*this));

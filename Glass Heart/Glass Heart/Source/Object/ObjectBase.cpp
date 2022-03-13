@@ -13,6 +13,7 @@
 #include "../Collision/CollisionManager.h"
 #include "../Camera/CameraManager.h"
 #include "../State/StateManager.h"
+#include "../Effect/EffectManager.h"
 #include "../Application/GameMain.h"
 #include <AppFrame.h>
 
@@ -43,6 +44,10 @@ void Object::ObjectBase::SetModelManage(std::unique_ptr<Model::ModelAnimeManager
 
 void Object::ObjectBase::SetCameraManage(std::shared_ptr<Camera::CameraManager> camera) {
     _cameraManage = std::move(camera);
+}
+
+void Object::ObjectBase::SetEffectManage(std::unique_ptr<Effect::EffectManager> effect) {
+    _effectManage = std::move(effect);
 }
 
 Object::ObjectServer& Object::ObjectBase::GetObjectServer() {

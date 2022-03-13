@@ -9,6 +9,7 @@
 #pragma once
 #include <memory>
 #include <DxLib.h>
+#include <EffekseerForDXLib.h>
 
 namespace AppFrame {
     /** 二重インクルード防止 */

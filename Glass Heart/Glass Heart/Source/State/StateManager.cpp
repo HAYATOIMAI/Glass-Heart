@@ -46,7 +46,6 @@ void State::StateManager::PopBack() {
 void State::StateManager::GoToState(std::string_view key) {
     PopBack();
     PushBack(key.data());
-
 }
 
 void State::StateManager::Input(AppFrame::InputManager& input) {

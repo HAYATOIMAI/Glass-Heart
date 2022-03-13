@@ -32,6 +32,12 @@ namespace GlassHeart {
     namespace State {
         class StateManager;
     }
+    namespace UI {
+        class UI;
+    }
+    namespace Effect {
+        class EffectManager;
+    }
 
     namespace Object {
         class ObjectServer;
@@ -48,11 +54,11 @@ namespace GlassHeart {
             enum class ObjectType {
                 Object = 0,
                 Player,
-                Enemy,
+                Girl,
                 Camera,
                 Stage,
                 CheckPoint,
-                GoalPoint
+                GoalPoint,
             };
             /**
              * @brief オブジェクトの状態
@@ -135,6 +141,7 @@ namespace GlassHeart {
             void SetStateManage(std::unique_ptr<State::StateManager> state);
             void SetModelManage(std::unique_ptr<Model::ModelAnimeManager> model);
             void SetCameraManage(std::shared_ptr<Camera::CameraManager> camera);
+            void SetEffectManage(std::unique_ptr<GlassHeart::Effect::EffectManager> effect);
 
             inline State::StateManager& GetStateManage() { return *_stateManage; }
             inline Collision::CollisionManager& GetCollision() { return *_collsionManage; }
@@ -152,6 +159,7 @@ namespace GlassHeart {
             std::shared_ptr<Collision::CollisionManager> _collsionManage;  //!< コリジョンのシェアードポインタ
             std::shared_ptr<Camera::CameraManager> _cameraManage;  //!< カメラのシェアードポインタ
             std::unique_ptr<Model::ModelAnimeManager> _modelAnimeManage; //!< モデルアニメマネージャーのユニークポインタ
+            std::unique_ptr<Effect::EffectManager> _effectManage;  //!< エフェクト管理クラスのユニークポインタ
 
             MATRIX _worldTransform{ MGetIdent() }; //!< ワールド座標変換
             VECTOR _position{ 0, 0, 0 };  //!< 位置情報

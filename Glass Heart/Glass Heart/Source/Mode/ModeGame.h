@@ -21,6 +21,9 @@ namespace GlassHeart {
     namespace Object {
         class ObjectFactory;
     }
+    namespace UI {
+        class UI;
+    }
     namespace Mode {
         /**
          * @class ModeGame 
@@ -69,9 +72,7 @@ namespace GlassHeart {
              * @brief èIóπèàóù
              * 
              */
-            void Exit() override;
-        private:
-            
+            void Exit() override;          
         };
     }
 }

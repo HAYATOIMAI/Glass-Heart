@@ -15,6 +15,10 @@
 using namespace GlassHeart::CheckPoint;
 
 CheckPoint::CheckPoint(GameMain& game) : ObjectBase{ game } {
+    //_light = std::make_unique<Model::ModelManager>(*this);
+   //_light->handle("Light");
+   //_light->SetPosition(VGet(100.0f, 100.0f, 0.0f));
+   //_light->SetScale({ 1.f, 1.f, 1.f });
 
     _checkPoint = LoadGraph("resource/Test/2dMaterial/light3.png");
     _position = VGet(-150.0f, 35.0f, -140.0f);

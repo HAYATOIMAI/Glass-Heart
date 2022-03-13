@@ -59,7 +59,7 @@ namespace GlassHeart {
              */
             void Render() override;
         private:
-            int _titleBgHandle{ -1 };   //!< ”wŒi‰æ‘œ    
+            int _teamLogo{ -1 };   //!< ”wŒi‰æ‘œ    
         };
     }
 }

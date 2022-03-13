@@ -13,9 +13,9 @@
 #include <numbers>
 
 namespace {
-    constexpr auto StartPositionX = -150.0f;     //!< プレイヤーの初期位置X
-    constexpr auto StartPositionY = 35.0f;    //!< プレイヤーの初期位置Y
-    constexpr auto StartPositionZ = -140.0f;  //!< プレイヤーの初期位置Z
+    constexpr auto StartPositionX = -150.0f;     //!< 初期位置X
+    constexpr auto StartPositionY = 35.0f;    //!< 初期位置Y
+    constexpr auto StartPositionZ = -140.0f;  //!< 初期位置Z
 }
 
 using namespace GlassHeart::Camera;

@@ -14,6 +14,12 @@
 
 namespace GlassHeart {
 
+    namespace Model {
+        class ModelManager;
+    }
+
+    class GameMain;
+
     namespace CheckPoint {
 
         class CheckPoint : public Object::ObjectBase {

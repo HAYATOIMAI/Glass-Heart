@@ -2,7 +2,7 @@
 /*****************************************************************//**
  * @file   ModeTitle.h
  * @brief  タイトル画面クラスの宣言
- * 
+ *
  * @author Hayato Imai
  * @date   December 2021
  *********************************************************************/
@@ -11,19 +11,19 @@
 #include <AppFrame.h>
 
 namespace GlassHeart {
-   
+
     class GameMain;
 
     namespace Mode {
         /**
-         * @class 
-         * @brief 
+         * @class
+         * @brief
          */
-        class ModeTitle :  public ModeMain {
+        class ModeTitle : public ModeMain {
         public:
             /**
              * @brief コンストラクタ
-             * 
+             *
              * @param game　ゲームベースクラス
              */
             ModeTitle(GameMain& game);
@@ -58,11 +58,23 @@ namespace GlassHeart {
              *
              */
             void Render() override;
+            /**
+             * @brief 終了処理
+             *
+             */
+            void Exit() override;
         private:
             int _title{ -1 };               //!< タイトル画像
-            int _titleBgHandle{ -1 };       //!< ゲームタイトル画像
-            int _titleButtonHandle{ -1 };   //!< Press Any Button画像
-            int _titleLogo{ -1 };           //!< 背景画像
+            int _titlePlate{ -1 };          //!< 操作説明画像
+            int _titlePlate2{ -1 };         //!< 操作説明画像
+            int _titleButton{ -1 };         //!< タイトルボタン画像
+            int _titleLogo{ -1 };           //!< タイトルロゴ
+            int _titleBg{ -1 };             //!< タイトル背景
+            int _titleExit{ -1 };           //!< Exitボタン画像
+            int _alpha{ 0 };
+
+            int _x{ 0 };
+            int _x2{ 0 };
         };
     }
 }

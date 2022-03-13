@@ -17,6 +17,9 @@ namespace GlassHeart {
         class ObjectServer;
         class ObjectFactory;
     }
+    namespace UI {
+        class UI;
+    }
 
     namespace Mode {
         /**
@@ -72,11 +75,13 @@ namespace GlassHeart {
             Object::ObjectFactory& GetObjectFactory();
 
             Object::ObjectServer& GetObjectServer();
+
+            UI::UI& GetUI();
         protected:
             GameMain& _gameMain;
             static int _count;         //!< フレームカウント
-            static int _countSeconds;  //!< 秒
-            static int _countMinutes;  //!< 分
+            static int _countSeconds;  //!< 
+            int _fadeCount;
         };
     }
 }

@@ -14,6 +14,7 @@
 
 namespace AppFrame {
     class InputManager;
+    class SoundManager;
 }
 
 namespace GlassHeart {

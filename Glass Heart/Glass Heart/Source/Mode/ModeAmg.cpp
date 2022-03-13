@@ -32,26 +32,31 @@ void Mode::ModeAmg::Init() {
     //!< 使用するモデル
     AppFrame::ResourceServer::ModelMap usemap{
     {"Player",    "Boy/PC2_motion.mv1"},
-    {"Stage", "Stage/Zenhan01.mv1"},
+    {"Girl",    "Girl/Girl.mv1"},
+    {"Stage", "Stage/Zenhan02.mv1"},
+    {"Stage2", "Stage/Kouhan01.mv1"},
     };
     //!< モデルの読み込み
     GetResourceServer().LoadModels(usemap);
     // 非同期読み込み開始
     SetUseASyncLoadFlag(TRUE);
+    _fadeCount = 30;
 }
 /** 入り口処理 */
 void Mode::ModeAmg::Enter() {
-    
+  
 }
 /** 入力処理 */
 void Mode::ModeAmg::Input(AppFrame::InputManager& input) {
-    if (input.GetJoyPad().GetXinputButtonB()) {
+    if (input.GetJoyPad().GetXinputButtonB() || _fadeCount == 0) {
         GetModeServer().GoToMode("TeamLogo");
     }
 }
 /** 更新処理 */ 
 void Mode::ModeAmg::Process() {
-    //_alpha = (_alpha + 8) % 255;
+    if (_fadeCount > 0) {
+        --_fadeCount;
+    }
 }
 /** 描画処理 */
 void Mode::ModeAmg::Render() {

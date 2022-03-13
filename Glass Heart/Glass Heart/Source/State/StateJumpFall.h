@@ -54,6 +54,7 @@ namespace GlassHeart {
             float _subVx{ 0.0f };
             float _reVx{ 0.0f };
             int _cnt{ 0 };
+            VECTOR  _jumpVelocity{ 0.0f, 0.0f, 0.0f }; //!< 
         };
     }
 }
