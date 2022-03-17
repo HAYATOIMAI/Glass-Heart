@@ -30,31 +30,31 @@ namespace GlassHeart {
              */
             CollisionManager(GlassHeart::Object::ObjectBase& owner);
             /**
-             * @brief 床との当たり判定
+             * @brief 前半ステージ:床との当たり判定
              * 
              * @param[in] pos 位置ベクトル
              * @param[in] forward 移動量ベクトル
              * @return 位置ベクトル
              */
-            VECTOR CheckHitFloor(const VECTOR& pos, const VECTOR& forward);
+            VECTOR CheckHitFloor(const VECTOR& pos, const VECTOR& forward, int state);
             /**
-             * @brief 空中の足場との当たり判定
+             * @brief  前半ステージ:空中の足場との当たり判定
              * 
              * @param[in] pos 位置ベクトル
              * @param[in] forward  移動量ベクトル
              * @return  位置ベクトル
              */
-            VECTOR CheckJumpStand(const VECTOR& pos, const VECTOR& forward);
+            VECTOR CheckJumpStand(const VECTOR& pos, const VECTOR& forward, int state);
             /**
-             * @brief 空中の足場の底面や側面との当たり判定
+             * @brief  前半ステージ: 空中の足場の底面や側面との当たり判定
              * 
              * @param[in] pos 位置ベクトル
              * @param[in] forward 移動量ベクトル
              * @return 位置ベクトル
              */
-            VECTOR CheckHitSideAndBottom(const VECTOR& pos, const VECTOR& forward);
+            VECTOR CheckHitSideAndBottom(const VECTOR& pos, const VECTOR& forward, int state);
             /**
-             * @brief
+             * @brief 前半ステージ: 
              * 
              * @param[in] pos 位置ベクトル
              * @param[in] forward 移動量ベクトル
@@ -62,7 +62,7 @@ namespace GlassHeart {
              */
             VECTOR CheckThroughWMesh(const VECTOR& pos, const VECTOR& forward);
             /**
-             * @brief
+             * @brief 前半ステージ: 
              * 
              * @param[in] pos
              * @param[in] forward
@@ -70,7 +70,7 @@ namespace GlassHeart {
              */
             VECTOR CheckHitWDeathMesh(const VECTOR& pos, const VECTOR& forward);
             /**
-             * @brief
+             * @brief 前半ステージ: 
              * 
              * @param[in] pos
              * @param[in] forward
@@ -78,7 +78,7 @@ namespace GlassHeart {
              */
             VECTOR CheckHitBDeathMesh(const VECTOR& pos, const VECTOR& forward);
             /**
-             * @brief 
+             * @brief 前半ステージ: 
              * 
              * @param[in] pos
              * @param[in] forward
@@ -86,7 +86,7 @@ namespace GlassHeart {
              */
             VECTOR CheckThroughBMesh(const VECTOR& pos, const VECTOR& forward);
             /**
-             * @brief
+             * @brief 前半ステージ: 
              * 
              * @param[in] pos
              * @param[in] forward
@@ -94,7 +94,7 @@ namespace GlassHeart {
              */
             VECTOR CheckThroughWWallMesh(const VECTOR& pos, const VECTOR& forward);
             /**
-             * @brief 
+             * @brief 前半ステージ: 
              * 
              * @param[in] pos
              * @param[in] forward
@@ -102,7 +102,7 @@ namespace GlassHeart {
              */
             VECTOR CheckThroughBWallMesh(const VECTOR& pos, const VECTOR& forward);
             /**
-             * @brief
+             * @brief 前半ステージ: 空中の足場の落下処理
              * 
              * @param[in] pos
              * @param[in] forward
@@ -126,16 +126,6 @@ namespace GlassHeart {
              */
             bool CheckCircleToCircle(const GlassHeart::Object::ObjectBase& owner, const GlassHeart::Object::ObjectBase& target);
 
-            VECTOR CheckHitSecondFloor(const VECTOR& pos, const VECTOR& forward);
-
-            VECTOR CheckHitSecondJumpStand(const VECTOR& pos, const VECTOR& forward);
-
-            VECTOR CheckHitSecondFall(const VECTOR& pos, const VECTOR& forward);
-
-            VECTOR CheckHitSecondThroughWMesh(const VECTOR& pos, const VECTOR& forward);
-
-            VECTOR CheckHitSecondThroughBMesh(const VECTOR& pos, const VECTOR& forward);
-
            // 各種ゲッター
            inline MV1_COLL_RESULT_POLY GetHitFloor() { return _floor; }
            inline MV1_COLL_RESULT_POLY_DIM GetHitwall() { return _collpol; }
@@ -148,11 +138,6 @@ namespace GlassHeart {
            inline MV1_COLL_RESULT_POLY_DIM GetBWallThroughMesh() { return _bWallThrough; }
            inline MV1_COLL_RESULT_POLY_DIM GetWWallThroughMesh() { return _wWallThrough; }
            inline MV1_COLL_RESULT_POLY GetFall() { return _fall; }
-           inline MV1_COLL_RESULT_POLY GetHitSecondFloor() { return _secondFloor; }
-           inline MV1_COLL_RESULT_POLY GetSecondJumpStand() { return _seconsdStand; }
-           inline MV1_COLL_RESULT_POLY GetSecondFall() { return _secondFall; }
-           inline MV1_COLL_RESULT_POLY GetSecondWThroughMesh() { return _secondWThrough;}
-           inline MV1_COLL_RESULT_POLY GetSecondBThroughMesh() { return _secondBThrough; }
         private:
             Object::ObjectBase& _owner;
             MV1_COLL_RESULT_POLY _floor;
@@ -166,12 +151,7 @@ namespace GlassHeart {
             MV1_COLL_RESULT_POLY_DIM _bWallThrough;
             MV1_COLL_RESULT_POLY_DIM _wWallThrough;
             MV1_COLL_RESULT_POLY _fall;
-            MV1_COLL_RESULT_POLY _secondFloor;
-            MV1_COLL_RESULT_POLY _seconsdStand;
-            MV1_COLL_RESULT_POLY _secondFall;
-            MV1_COLL_RESULT_POLY _secondWThrough;
-            MV1_COLL_RESULT_POLY _secondBThrough;
-
+        
             float _radius1{ 0.0f };
             float _radius2{ 0.0f };
         };

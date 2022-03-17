@@ -9,6 +9,7 @@
 #include "ModeClear.h"
 #include "../Object/ObjectFactory.h"
 #include "../Object/ObjectServer.h"
+#include "../UI/UI.h"
 #include "../Application/GameMain.h"
 
 using namespace GlassHeart::Mode;
@@ -23,8 +24,10 @@ ModeClear::ModeClear(GameMain& game) : ModeMain{ game } {
 void ModeClear::Init() {
     // 使用する画像のテーブル
     const AppFrame::ResourceServer::GraphMap useGraph{
-    {"TitleBG",       {"Title/TitleBG.png",     1, 1, 1920, 1080}},
-     {"Result",        {"Result/result4.png",     1, 1, 1920, 1080}},
+   {"TitleBG",       {"Title/TitleBG.png",     1, 1, 1920, 1080}},
+   {"Result",        {"Result/result4.png",    1, 1, 1920, 1080}},
+   {"GameClear",     {"Result/GameClear.png",  1, 1, 1920, 1080}},
+   {"GameOver",      {"Result/GameOver.png",   1, 1, 1920, 1080}},
     };
 
     // リソースサーバーを取得
@@ -32,7 +35,8 @@ void ModeClear::Init() {
     // 画像の読み込み
     res.LoadGraphics(useGraph);
     // 画像のハンドルの取得
-    _result = res.GetGraph("Result");
+    _gameClear = res.GetGraph("GameClear");
+    _gameOver = res.GetGraph("GameOver");
 
     // サウンドマネージャーを取得
     /*auto& sm = GetSoundManager();
@@ -53,7 +57,13 @@ void ModeClear::Process() {
 /** 描画処理 */
 void ModeClear::Render() {
 
-    DrawGraph(0, 0, _result, FALSE);
+    if (_countSeconds == 0) {
+        DrawGraph(0, 0, _gameOver, FALSE);
+    }
+    else {
+        DrawGraph(0, 0, _gameClear, FALSE);
+    }
+    GetUI().NumberRender(1650, 700, 200, 2.0);
 
     auto x = 0; auto y = 0; auto size = 32;
     auto black = GetColor(0, 0, 0);

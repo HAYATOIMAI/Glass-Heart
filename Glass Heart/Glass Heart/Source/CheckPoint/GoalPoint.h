@@ -33,8 +33,8 @@ namespace GlassHeart {
 
         private:
 
-            int _goalPoint;
-            VECTOR _goalDrawPos{ -1500.0f, 70.0f, -300.0f };
+            int _goalPoint{ -1 };
+            VECTOR _goalDrawPos{ 25800.0f, 12580.0f, -80.0f };
             VECTOR _goalPos{ -1500.0f, 70.0f, -140.0f };
         };
     }

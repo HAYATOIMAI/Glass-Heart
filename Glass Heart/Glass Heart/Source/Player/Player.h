@@ -105,6 +105,9 @@ namespace GlassHeart {
             VECTOR GetLastPosition() { return _lastPosition; }
 
             ColourState& GetColourState() { return _crState; }
+
+            VECTOR GetJumpVelocity() { return _jumpVelocity; }
+            void SetJumpVelocity(VECTOR jump) { _jumpVelocity = jump; }
         protected:
 
             ColourState _crState{ ColourState::White }; //!< 色状態を管理する変数
@@ -113,7 +116,9 @@ namespace GlassHeart {
             VECTOR _lastPosition{ 0.0f, 0.0f, 0.0f };
             std::string _stateName{ "White" }; //!< 状態名変数
             int _colourCount{ 0 };  //!< 色変更クールタイム用カウンター
+            int _deathCoolCount{ 0 };  //!<死亡した時の復活クールタイム
             bool _checkPointFlag{ false };
+            VECTOR _jumpVelocity{ 0.f, 0.f, 0.f };
         };
     }
 }

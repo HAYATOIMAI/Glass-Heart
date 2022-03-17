@@ -16,8 +16,8 @@
 #include <numbers>
 
 namespace {
-    constexpr auto StartPositionX = 8790.0f;  //!< テスト用プレイヤーの初期位置X
-    constexpr auto StartPositionY = 5705.000f;    //!< テスト用プレイヤーの初期位置Y
+    constexpr auto StartPositionX = 25600.0f;  //!< テスト用プレイヤーの初期位置X
+    constexpr auto StartPositionY = 12420.0f;    //!< テスト用プレイヤーの初期位置Y
     constexpr auto StartPositionZ = -55.0f;  //!< テスト用プレイヤーの初期位置Z
     //constexpr auto StartPositionX = -150.0f;  //!< プレイヤーの初期位置X
     //constexpr auto StartPositionY = 35.0f;    //!< プレイヤーの初期位置Y
@@ -37,9 +37,10 @@ Player::Player::Player(GameMain& game) : GlassHeart::Object::ObjectBase{ game } 
 }
 /** 入力処理 */
 void Player::Player::Input(AppFrame::InputManager& input) {
-    _cameraManage->Input(input);
-    _angularSpeed = 0;
-    _stateManage->Input(input);
+    if (_deadFlag == false) {
+        _cameraManage->Input(input);
+        _stateManage->Input(input);
+    }
     //LBボタンを押すと色変更
     if (input.GetJoyPad().GetXinputLeftShoulder() && _colourCount == 0) {
         //連打防止のため0.5秒(30フレーム)間入力を制限
@@ -66,12 +67,40 @@ void Player::Player::Process() {
     if (_colourCount > 0) {
         --_colourCount;
     }
-    // 状態の更新
-    _stateManage->Update();
-    // ワールド行列の更新
-    ComputeWorldTransform();
-    // モデルの更新
-    _modelAnimeManage->Update();
+    if (_deathCoolCount > 0) {
+        --_deathCoolCount;
+    }
+    // 角度の更新
+   /* auto angle = GetRotation();
+    angle.y += _angularSpeed;
+    SetRotation(angle);*/
+
+    if (_deadFlag == false) {
+        // 状態の更新
+        _stateManage->Update();
+        // ワールド行列の更新
+        ComputeWorldTransform();
+        // モデルの更新
+        _modelAnimeManage->Update();
+    }
+    //if (_collsionManage->GetDeathBMesh().HitNum >= 1) {
+    //    if (GetColourState() == Player::Player::ColourState::White) {
+    //        SetPosition(VGet(_position.x, _position.y, _position.z));
+    //        // _owner.GetStateManage().PushBack("Dead");
+    //    }
+    //    if (GetColourState() == Player::Player::ColourState::Black) {
+    //        ResetPos();
+    //    }
+    //}
+    //if (_collsionManage->GetDeathWMesh().HitNum >= 1) {
+    //    if (GetColourState() == Player::Player::ColourState::White) {
+    //        SetPosition(VGet(_position.x, _position.y, _position.z));
+    //        // _owner.GetStateManage().PushBack("Dead");
+    //    }
+    //    if (GetColourState() == Player::Player::ColourState::Black) {
+    //        ResetPos();
+    //    }
+    //}
     // オブジェクトサーバーに位置を送信
     GetObjectServer().Register("Player", _position);
     // チェックポイントとの当たり判定
@@ -90,10 +119,17 @@ void Player::Player::Process() {
         }
     }
 #ifdef _DEBUG
-    if (_position.y < -600.0f) {
-        _rotation = VGet(0.0f, RightRotation, 0.0f);
-        _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
-}
+    if (_position.y < -100.0f) {
+        if (_checkPointFlag == true) {
+            // オブジェクトサーバーからチェックポイントの座標を取得
+            auto checkPos = GetObjectServer().GetPosition("CheckPoint");
+            // プレイヤーの座標をチェックポイントにする
+            _position = checkPos;
+        }
+        else {
+            _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
+        }
+    }
 #endif // DEBUG
 }
 /** 描画処理 */
@@ -128,54 +164,26 @@ void Player::Player::ComputeWorldTransform() {
 void Player::Player::Move(const VECTOR& forward) {
     auto pos = _position;
 
-    pos = _collsionManage->CheckHitFloor(pos, { forward.x, forward.y, 0.f });
+    int state = static_cast<int> (_crState);
+    pos = _collsionManage->CheckHitSideAndBottom(pos, { forward.x, 0, 0.f }, state);
 
-    pos = _collsionManage->CheckHitSecondFloor(pos, { forward.x, forward.y, 0.f });
+    /* if (_crState == Player::ColourState::Black) {
+         pos = _collsionManage->CheckThroughWWallMesh(pos, { forward.x, 0, 0.f });
+     }*/
 
-    pos = _collsionManage->CheckHitSideAndBottom(pos, { forward.x, forward.y, 0.f });
+     // X成分のみ移動後位置から真下に線分判定
+    pos = _collsionManage->CheckHitFloor(pos, { 0, -10, 0.f }, state);
 
-    if (_collsionManage->GetFall().HitFlag == 0 ) {
-
-        if (_collsionManage->GetSecondFall().HitFlag == 1) {
+    if (_collsionManage->GetHitFloor().HitFlag == 0) {
+        GetStateManage().PushBack("Fall");
+    }
+    if (_crState == Player::ColourState::Black) {
+        if (_collsionManage->GetWThrough().HitFlag == 0) {
+            //GetStateManage().PushBack("Fall");
         }
-        else if (_collsionManage->GetSecondFall().HitFlag == 0) {
-
-            if (_collsionManage->GetBThrough().HitFlag == 0 || _collsionManage->GetWThrough().HitFlag == 0) {
-                _stateManage->PushBack("Fall");
-            }
-        }
     }
 
-    // 色状態が白のときのみ黒のメッシュと判定を行う
-    if (_crState == ColourState::White ) {
-
-        pos = _collsionManage->CheckThroughBMesh(pos, { forward.x, forward.y, 0.f });
-
-        pos = _collsionManage->CheckThroughBWallMesh(pos, { forward.x, forward.y, 0.f });
-
-        pos = _collsionManage->CheckFall(pos, { forward.x, forward.y, 0.f });
-
-        pos = _collsionManage->CheckHitSecondFall(pos, { forward.x, forward.y, 0.f });
-
-        pos = _collsionManage->CheckHitBDeathMesh(pos, { forward.x, forward.y, 0.f });
-
-        pos = _collsionManage->CheckHitSecondThroughBMesh(pos, { forward.x, forward.y, 0.f });
-    }
-    // 色状態が黒のときのみ白のメッシュと判定を行う
-    if (_crState == ColourState::Black) {
-        // X成分
-        pos = _collsionManage->CheckThroughWMesh(pos, { forward.x, forward.y, 0.f });
-
-        pos = _collsionManage->CheckThroughWWallMesh(pos, { forward.x, forward.y, 0.f });
-
-        pos = _collsionManage->CheckFall(pos, { forward.x, forward.y, 0.f });
-
-        pos = _collsionManage->CheckHitSecondFall(pos, { forward.x, forward.y, 0.f });
-
-        pos = _collsionManage->CheckHitWDeathMesh(pos, { forward.x, forward.y, 0.f });
-
-        pos = _collsionManage->CheckHitSecondThroughWMesh(pos, { forward.x, forward.y, 0.f });
-    }
+   
     // 座標更新
     _position = pos;
 }

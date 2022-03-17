@@ -19,13 +19,13 @@ namespace {
 
 Stage::Stage::Stage(GameMain& game) : Object::ObjectBase{ game } {
     // スカイスフィアのモデル
-    _skySphere = std::make_unique<Model::ModelManager>(*this);
+    _backGround = std::make_unique<Model::ModelManager>(*this);
+    _backGround->handle("BackGround");
+    _backGround->SetScale({ 1.f, 1.f, 1.f });
+   /* _skySphere = std::make_unique<Model::ModelManager>(*this);
     _skySphere->handle("SkySphere");
-    _skySphere->SetScale({ 80.f,  80.f, 80.f });
-    //// 地面のモデル
-    //_ground = std::make_unique<Model::ModelManager>(*this);
-    //_ground->handle("Terrain");
-    //_ground->SetScale({ 30.f, 10.f, 30.f });
+    _skySphere->SetScale({ 80.f,  80.f, 80.f });*/
+   
     // ステージのモデル
     _testStage = std::make_unique<Model::ModelManager>(*this);
     _testStage->handle("Stage");
@@ -82,11 +82,11 @@ Stage::Stage::Stage(GameMain& game) : Object::ObjectBase{ game } {
 
 void Stage::Stage::Process() {
     // スカイスフィアをプレイヤと同じ位置にする
-    //_skySphere->SetPosition(GetObjectServer().GetPosition("Player"));
+    _backGround->SetPosition(GetObjectServer().GetPosition("Camera"));
 }
 
 void Stage::Stage::Render() {
-    //_skySphere->Draw();
+    _backGround->Draw();
     _testStage->Draw();
     _secondStage->Draw();
 #ifdef _DEBUG

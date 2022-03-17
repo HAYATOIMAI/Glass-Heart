@@ -1,7 +1,7 @@
 /*****************************************************************//**
  * @file   UI.cpp
  * @brief  ユーザーインターフェースクラスの処理
- * 
+ *
  * @author Haruki Ikeda
  * @date   February 2022
  *********************************************************************/
@@ -11,13 +11,14 @@
 
 using namespace GlassHeart;
 
-UI::UI::UI(GameMain& game) : _game(game){}
+UI::UI::UI(GameMain& game) : _game(game) {}
 
 UI::UI::~UI() {}
 //初期化
 void UI::UI::Init() {}
 //入口処理
 void UI::UI::Enter() {
+	_timerhandle = _game.GetResourceServer().GetGraph("timer");
 }
 //入力処理
 void UI::UI::Input() {}
@@ -73,11 +74,15 @@ void UI::UI::Process(int counttime) {
 	}
 }
 //描画処理
-void UI::UI::Render(int x, int y, int interval) {
+void UI::UI::Render(int x, int y, double exrate) {
+	DrawRotaGraph(x, y, exrate, 0.0, _timerhandle, TRUE);
+}
+
+void UI::UI::NumberRender(int x, int y, int interval, double exrate) {
 	int gx = x;
 	int gy = y;
 	for (int i = 0; i < digit; i++) {
-		DrawRotaGraph(gx, gy, 1.0, 0.0, _numberhandle[i], TRUE);
+		DrawRotaGraph(gx, gy, exrate, 0.0, _numberhandle[i], TRUE);
 		gx -= interval;
 	}
 }
@@ -89,7 +94,7 @@ int UI::UI::GetNumberPlace(int dismantvalue) {
 
 int UI::UI::GetDigit(int value) {
 	int getdigit = 0;
-	while (value!=0) {
+	while (value != 0) {
 		value /= 10;
 		getdigit++;
 	}

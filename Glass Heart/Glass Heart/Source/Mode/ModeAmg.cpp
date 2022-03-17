@@ -29,12 +29,29 @@ void Mode::ModeAmg::Init() {
     // 画像のハンドルの取得
     _titleBgHandle = res.GetGraph("AMGBg");
 
+    AppFrame::ResourceServer::GraphMap usegramap{
+        {"0", {"Numberplate/0.png",1,1,75,120} },
+        {"1", {"Numberplate/1.png",1,1,75,120} },
+        {"2", {"Numberplate/2.png",1,1,75,120} },
+        {"3", {"Numberplate/3.png",1,1,75,120} },
+        {"4", {"Numberplate/4.png",1,1,75,120} },
+        {"5", {"Numberplate/5.png",1,1,75,120} },
+        {"6", {"Numberplate/6.png",1,1,75,120} },
+        {"7", {"Numberplate/7.png",1,1,75,120} },
+        {"8", {"Numberplate/8.png",1,1,75,120} },
+        {"9", {"Numberplate/9.png",1,1,75,120} },
+        {"timer",{"Numberplate/Timer.png",1,1,2377,2361}},
+        {"Death",{"BackGround/break.png",1,1,1920,1080}}
+    };
+    GetResourceServer().LoadGraphics(usegramap);
+
     //!< 使用するモデル
     AppFrame::ResourceServer::ModelMap usemap{
     {"Player",    "Boy/PC2_motion.mv1"},
     {"Girl",    "Girl/Girl.mv1"},
-    {"Stage", "Stage/Zenhan02.mv1"},
-    {"Stage2", "Stage/Kouhan01.mv1"},
+    {"Stage", "Stage/Stage02.mv1"},
+    {"BackGround",  "BackGround/bg.mv1"},
+    //{"Light",       "Light/light.mv1"},
     };
     //!< モデルの読み込み
     GetResourceServer().LoadModels(usemap);
@@ -43,9 +60,7 @@ void Mode::ModeAmg::Init() {
     _fadeCount = 30;
 }
 /** 入り口処理 */
-void Mode::ModeAmg::Enter() {
-  
-}
+void Mode::ModeAmg::Enter() {}
 /** 入力処理 */
 void Mode::ModeAmg::Input(AppFrame::InputManager& input) {
     if (input.GetJoyPad().GetXinputButtonB() || _fadeCount == 0) {

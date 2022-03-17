@@ -11,12 +11,19 @@
 #include "../Object/ObjectServer.h"
 #include "../Player/Player.h"
 
+namespace {
+    constexpr auto GoalPositionX = 25830.0f;    //!< ゴールの位置X
+    constexpr auto GoalPositionY = 12420.0f;     //!< ゴールの位置Y
+    constexpr auto GoalPositionZ = -30.0f;      //!< ゴールの位置Z
+}
+
+
 using namespace GlassHeart::CheckPoint;
 
 GoalPoint::GoalPoint(GameMain& game) : ObjectBase{ game } {
 
     _goalPoint = LoadGraph("resource/Test/2dMaterial/light3.png");
-    _position = VGet(8191.494f, 5705.000f, -55.0f);
+    _position = VGet(GoalPositionX, GoalPositionY, GoalPositionZ);
     //_position = VGet(0.f, 0.f, 0.f);
     _radius = 100.0f;
     _hitFlag = false;
@@ -26,7 +33,7 @@ GoalPoint::~GoalPoint() {}
 
 void GoalPoint::Process() {
 
-    GetObjectServer().Register("CheckPoint", _position);
+    GetObjectServer().Register("GoalPoint", _position);
 
     // チェックポイントとプレイヤーの当たり判定
     for (auto ite = GetObjectServer().GetObjectLists().begin(); ite != GetObjectServer().GetObjectLists().end(); ite++) {

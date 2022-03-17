@@ -27,7 +27,7 @@ void Mode::ModeLoading::Init() {
     //_loadHandle = res.GetGraph("LoadGif");
 
     _loadHandle = LoadGraph("resource/Loading/LoadGraphHeart.gif");
-    _cnt = 180;
+    _cnt = 80;
 }
 
 void Mode::ModeLoading::Enter() {}

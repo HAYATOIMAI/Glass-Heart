@@ -7,10 +7,16 @@
  * @date   December 2021
  *********************************************************************/
 #include "CheckPoint.h"
-
 #include "../Application/GameMain.h"
+#include "../Model/ModelManager.h"
 #include "../Object/ObjectServer.h"
 #include "../Player/Player.h"
+
+namespace {
+    constexpr auto CheckPositionX = 8220.0f;    //!< ƒS[ƒ‹‚ÌˆÊ’uX
+    constexpr auto CheckPositionY = 5705.0f;     //!< ƒS[ƒ‹‚ÌˆÊ’uY
+    constexpr auto CheckPositionZ = -30.0f;      //!< ƒS[ƒ‹‚ÌˆÊ’uZ
+}
 
 using namespace GlassHeart::CheckPoint;
 
@@ -21,9 +27,10 @@ CheckPoint::CheckPoint(GameMain& game) : ObjectBase{ game } {
    //_light->SetScale({ 1.f, 1.f, 1.f });
 
     _checkPoint = LoadGraph("resource/Test/2dMaterial/light3.png");
-    _position = VGet(-150.0f, 35.0f, -140.0f);
+    _position = VGet(CheckPositionX, CheckPositionY, CheckPositionZ);
     _radius = 100.0f;
     _hitFlag = false;
+    //MV1SetPosition(_checkPoint, VGet(0.0f, 0.0f, -0.0f));
 }
 
 CheckPoint::~CheckPoint() {}
@@ -55,6 +62,8 @@ void CheckPoint::Process() {
 
 void CheckPoint::Render() {
 
+    //_light->Draw();
+  //MV1DrawModel(_checkPoint);
     auto cr = GetColor(0, 0, 255);
 
     DrawBillboard3D(_checkDrawPos, 0.5f, 0.5f, 120.0f, 0.0f, _checkPoint, TRUE);

@@ -20,7 +20,13 @@ using namespace GlassHeart;
 /** コンストラクタ */
 Mode::ModeGame::ModeGame(GameMain& game) : ModeMain{ game } {}
 /** 初期化処理 */
-void Mode::ModeGame::Init() {}
+void Mode::ModeGame::Init() {
+    // リソースサーバーを取得
+    auto& res = GetResourceServer();
+    // 画像のハンドルの取得
+    _teamLogo = res.GetGraph("TeamLogo");
+    _titleLogo = res.GetGraph("TitleLogo");
+}
 /** 入り口処理 */
 void Mode::ModeGame::Enter() {
     // ファクトリの生成とクリエイターの登録
@@ -61,10 +67,14 @@ void Mode::ModeGame::Enter() {
     sm.PlayLoop("bgm");
 
     _count = 60;
-    _countSeconds = 150;
+    _countSeconds = 350;
+    //_countSeconds = 100;
+
 
     auto& ui = GetUI();
     ui.Enter();
+    
+    _deathDrawHundle = _game.GetResourceServer().GetGraph("Death");
 
     Process();
 }
@@ -74,9 +84,8 @@ void Mode::ModeGame::Input(AppFrame::InputManager& input) {
 }
 /** 更新処理 */
 void Mode::ModeGame::Process() {
-    //GetObjectFactory().UpdateSpawn();
     GetObjectServer().Process();
-
+   
     if (_count <= 60) {
         --_count;
     }
@@ -90,12 +99,22 @@ void Mode::ModeGame::Process() {
     if (_countSeconds == 0) {
         GetModeServer().GoToMode("GameClear");
     }
+    GetUI().Process(_countSeconds);
 }
 /** 描画処理 */
 void Mode::ModeGame::Render() {
     GetObjectServer().Render();
-    GetUI().Render(300, 100, 80);
-
+    GetUI().Render(100, 100, 0.05);
+    GetUI().NumberRender(400, 100, 80, 1.0);
+    for (auto& itr : GetObjectServer().GetObjectLists()) {
+        if (itr->GetObjectType() == Object::ObjectBase::ObjectType::Player) {
+            if (itr->GetDeadFlag()) {
+                DrawRotaGraph(960, 540, 1.0, 0.0, _deathDrawHundle, TRUE);
+            }
+        }
+    }
+    DrawBillboard3D(VGet(22500.0f, 12600.0f, -200.0f), 0.5f, 0.5f, 800.0f, 0.0f, _teamLogo, TRUE);
+    DrawBillboard3D(VGet(25450.0f, 12400.0f, -200.0f), 0.5f, 0.5f, 1200.0f, 0.0f, _titleLogo, TRUE);
 #ifdef _DEBUG
     auto x = 1000; auto y = 0; auto size = 32;
     auto white = GetColor(255, 255, 255);

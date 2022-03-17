@@ -137,6 +137,7 @@ namespace GlassHeart {
 
             inline void SetHitFlag(const bool hitFlag) { _hitFlag = hitFlag; }
             inline bool GetHitFlag() const { return _hitFlag; }
+            bool GetDeadFlag() { return _deadFlag; }
 
             void SetStateManage(std::unique_ptr<State::StateManager> state);
             void SetModelManage(std::unique_ptr<Model::ModelAnimeManager> model);
@@ -168,6 +169,7 @@ namespace GlassHeart {
 
             float _radius{ 0.0f };  //!< コリジョン用半径
             bool _hitFlag{ false }; //!< コリジョン用フラグ
+            bool _deadFlag{ false };    //!<死亡したかのフラグ
         };
     }
 }

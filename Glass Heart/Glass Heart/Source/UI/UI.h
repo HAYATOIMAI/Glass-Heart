@@ -1,7 +1,7 @@
 /*****************************************************************//**
  * @file   UI.h
  * @brief  ユーザーインターフェースクラスの宣言
- * 
+ *
  * @author Haruki Ikeda
  * @date   February 2022
  *********************************************************************/
@@ -36,7 +36,7 @@ namespace GlassHeart {
 			virtual void Init();
 			/**
 			 * @brief 入口処理
-			 * 
+			 *
 			 */
 			virtual void Enter();
 			/**
@@ -49,15 +49,16 @@ namespace GlassHeart {
 			virtual void Process(int counttime);
 			/**
 			 * @brief 描画処理
-			 * 
+			 *
 			 * @param x
 			 * @param y
 			 * @param interval 間隔
 			 */
-			virtual void Render(int x, int y, int interval);
+			virtual void Render(int x, int y, double exrate);
+			void NumberRender(int x, int y, int interval, double exrate);
 			/**
 			 * @brief 一の位の値を抽出する処理
-			 * 
+			 *
 			 * @param dismantvalue 一の位の値を抽出する処理
 			 * @return 一の位の値
 			 */
@@ -68,11 +69,9 @@ namespace GlassHeart {
 			GameMain& GetGame() { return _game; }
 		private:
 			GameMain& _game;
-			int _numberhandle[3];
+			int _timerhandle{ 0 };
+			int _numberhandle[3]{ 0,0,0 };//数字の画像ハンド
 			int digit{ -1 };
-			int _onehandle{ -1 };     //一の位の数字画像
-			int _tenhandle{ -1 };  //十の位の数字画像
-			int _hundhandle{ -1 }; //百の位の数字画像
 			int _interval{ 100 };  //数字同士の間隔
 			int _second{ 0 };
 		};
