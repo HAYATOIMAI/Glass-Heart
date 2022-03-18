@@ -62,7 +62,7 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     const AppFrame::ResourceServer::SoundMap usesound{
         // BGM
         {"bgm",     {"Sound/BGM/BGM01_Ver2.mp3",false}},
-         {"titleBgm",    {"Sound/BGM/titleBGM.mp3",false}},
+        {"titleBgm",  {"Sound/BGM/titleBGM.mp3",false}},
         // SE
         {"walk",    {"Sound/SE/SE_Walk.wav",true}},
         {"run",     {"Sound/SE/SE_Run.wav",true}},

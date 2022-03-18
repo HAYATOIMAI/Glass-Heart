@@ -33,12 +33,6 @@ Stage::Stage::Stage(GameMain& game) : Object::ObjectBase{ game } {
     _testStage->SetRotation(VGet(0.0f, RightRotation, 0.0f));
     _testStage->SetScale({ 1.f, 1.f, 1.f });
 
-    _secondStage = std::make_unique<Model::ModelManager>(*this);
-    _secondStage->handle("Stage2");
-    _secondStage->SetPosition(VGet(8868.0f, 5670.f, 10.0f));
-    _secondStage->SetRotation(VGet(0.0f, RightRotation, 0.0f));
-    _secondStage->SetScale({ 1.f, 1.f, 1.f });
-
     // ナビメッシュを非表示
     MV1SetFrameVisible(_testStage->GetHandle(), 2, FALSE);
     MV1SetFrameVisible(_testStage->GetHandle(), 3, FALSE);
@@ -49,14 +43,6 @@ Stage::Stage::Stage(GameMain& game) : Object::ObjectBase{ game } {
     MV1SetFrameVisible(_testStage->GetHandle(), 8, FALSE);
     MV1SetFrameVisible(_testStage->GetHandle(), 9, FALSE);
     MV1SetFrameVisible(_testStage->GetHandle(), 10, FALSE);
-    MV1SetFrameVisible(_secondStage->GetHandle(), 2, FALSE);
-    MV1SetFrameVisible(_secondStage->GetHandle(), 3, FALSE);
-    MV1SetFrameVisible(_secondStage->GetHandle(), 4, FALSE);
-    MV1SetFrameVisible(_secondStage->GetHandle(), 5, FALSE);
-    MV1SetFrameVisible(_secondStage->GetHandle(), 6, FALSE);
-    MV1SetFrameVisible(_secondStage->GetHandle(), 7, FALSE);
-    MV1SetFrameVisible(_secondStage->GetHandle(), 8, FALSE);
-    MV1SetFrameVisible(_secondStage->GetHandle(), 9, FALSE);
     //以下のフレームをナビメッシュとして使用
     MV1SetupCollInfo(_testStage->GetHandle(), 2, 8, 8, 8);
     MV1SetupCollInfo(_testStage->GetHandle(), 3, 8, 8, 8);
@@ -66,14 +52,6 @@ Stage::Stage::Stage(GameMain& game) : Object::ObjectBase{ game } {
     MV1SetupCollInfo(_testStage->GetHandle(), 7, 8, 8, 8);
     MV1SetupCollInfo(_testStage->GetHandle(), 8, 8, 8, 8);
     MV1SetupCollInfo(_testStage->GetHandle(), 9, 8, 8, 8);
-    MV1SetupCollInfo(_secondStage->GetHandle(), 2, 8, 8, 8);
-    MV1SetupCollInfo(_secondStage->GetHandle(), 3, 8, 8, 8);
-    MV1SetupCollInfo(_secondStage->GetHandle(), 4, 8, 8, 8);
-    MV1SetupCollInfo(_secondStage->GetHandle(), 5, 8, 8, 8);
-    MV1SetupCollInfo(_secondStage->GetHandle(), 6, 8, 8, 8);
-    MV1SetupCollInfo(_secondStage->GetHandle(), 7, 8, 8, 8);
-    MV1SetupCollInfo(_secondStage->GetHandle(), 8, 8, 8, 8);
-    MV1SetupCollInfo(_secondStage->GetHandle(), 9, 8, 8, 8);
     // フォグの設定
     SetFogEnable(TRUE);
     SetFogColor(247, 188, 101);
@@ -88,7 +66,6 @@ void Stage::Stage::Process() {
 void Stage::Stage::Render() {
     _backGround->Draw();
     _testStage->Draw();
-    _secondStage->Draw();
 #ifdef _DEBUG
     auto linelength = 10000.f;
     VECTOR v = { 0, 0, 0 };

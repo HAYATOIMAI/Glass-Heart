@@ -113,8 +113,8 @@ void Mode::ModeGame::Render() {
             }
         }
     }
-    DrawBillboard3D(VGet(22500.0f, 12600.0f, -200.0f), 0.5f, 0.5f, 800.0f, 0.0f, _teamLogo, TRUE);
-    DrawBillboard3D(VGet(25450.0f, 12400.0f, -200.0f), 0.5f, 0.5f, 1200.0f, 0.0f, _titleLogo, TRUE);
+    DrawBillboard3D(VGet(22500.0f, 12600.0f, 200.0f), 0.5f, 0.5f, 800.0f, 0.0f, _teamLogo, TRUE);
+    DrawBillboard3D(VGet(25450.0f, 12400.0f, 200.0f), 0.5f, 0.5f, 1200.0f, 0.0f, _titleLogo, TRUE);
 #ifdef _DEBUG
     auto x = 1000; auto y = 0; auto size = 32;
     auto white = GetColor(255, 255, 255);

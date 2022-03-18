@@ -18,7 +18,7 @@ State::StateDead::StateDead(Player::Player& owner) : StateBase{owner} {
 }
 
 void State::StateDead::Enter() {
-    _position = VGet(-150.0f, 20.0f, -55.0f);
+    _position = VGet(-150.0f, 35.0f, -55.0f);
 }
 
 void State::StateDead::Update() {

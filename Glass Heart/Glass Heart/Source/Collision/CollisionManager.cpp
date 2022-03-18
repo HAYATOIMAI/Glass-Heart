@@ -66,20 +66,19 @@ VECTOR Collision::CollisionManager::CheckJumpStand(const VECTOR& pos, const VECT
 
         if (_bThrough.HitFlag == 0) {
             // Õ“Ë‚È‚µˆÚ“®‚µ‚È‚¢
-            return newPos;
+            //return newPos;
         }
         else if (_bThrough.HitFlag == 1) {
             // Õ“Ë‚ ‚ê‚ÎˆÚ“®‚·‚é
             newPos = _bThrough.HitPosition;
         }
-
         _stand = MV1CollCheck_Line(handle, MV1SearchFrame(handle, "Floor_NavMesh"), start, end);
         break;
     case 1:
         _wThrough = MV1CollCheck_Line(handle, MV1SearchFrame(handle, "WThroughFloor_NavMesh"), start, end);
         if (_wThrough.HitFlag == 0) {
             // Õ“Ë‚È‚µˆÚ“®‚µ‚È‚¢
-            return newPos;
+            //return newPos;
         }
         else if (_wThrough.HitFlag == 1) {
             // Õ“Ë‚ ‚ê‚ÎˆÚ“®‚·‚é

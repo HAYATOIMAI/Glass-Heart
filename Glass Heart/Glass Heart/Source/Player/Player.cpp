@@ -16,12 +16,12 @@
 #include <numbers>
 
 namespace {
-    constexpr auto StartPositionX = 25600.0f;  //!< テスト用プレイヤーの初期位置X
-    constexpr auto StartPositionY = 12420.0f;    //!< テスト用プレイヤーの初期位置Y
-    constexpr auto StartPositionZ = -55.0f;  //!< テスト用プレイヤーの初期位置Z
-    //constexpr auto StartPositionX = -150.0f;  //!< プレイヤーの初期位置X
-    //constexpr auto StartPositionY = 35.0f;    //!< プレイヤーの初期位置Y
-    //constexpr auto StartPositionZ = -55.0f;  //!< プレイヤーの初期位置Z
+    //constexpr auto StartPositionX = 25600.0f;  //!< テスト用プレイヤーの初期位置X
+    //constexpr auto StartPositionY = 12420.0f;    //!< テスト用プレイヤーの初期位置Y
+    //constexpr auto StartPositionZ = -55.0f;  //!< テスト用プレイヤーの初期位置Z
+    constexpr auto StartPositionX = -150.0f;  //!< プレイヤーの初期位置X
+    constexpr auto StartPositionY = 35.0f;    //!< プレイヤーの初期位置Y
+    constexpr auto StartPositionZ = -55.0f;  //!< プレイヤーの初期位置Z
     constexpr auto Recast = 20;  //!<　色変更リキャストタイム 
     constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f); //!< 右方向の角度
     constexpr auto LeftRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 左方向の角度
@@ -57,7 +57,7 @@ void Player::Player::Input(AppFrame::InputManager& input) {
 #ifdef _DEBUG
     if (input.GetJoyPad().GetXinputRightShoulder()) {
         _rotation = VGet(0.0f, RightRotation, 0.0f);
-        _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
+        _position = VGet(StartPositionX, StartPositionY + 20, StartPositionZ);
     }
 #endif // _DEBUG
 }
@@ -70,10 +70,6 @@ void Player::Player::Process() {
     if (_deathCoolCount > 0) {
         --_deathCoolCount;
     }
-    // 角度の更新
-   /* auto angle = GetRotation();
-    angle.y += _angularSpeed;
-    SetRotation(angle);*/
 
     if (_deadFlag == false) {
         // 状態の更新
@@ -165,14 +161,8 @@ void Player::Player::Move(const VECTOR& forward) {
     auto pos = _position;
 
     int state = static_cast<int> (_crState);
-    pos = _collsionManage->CheckHitSideAndBottom(pos, { forward.x, 0, 0.f }, state);
-
-    /* if (_crState == Player::ColourState::Black) {
-         pos = _collsionManage->CheckThroughWWallMesh(pos, { forward.x, 0, 0.f });
-     }*/
-
-     // X成分のみ移動後位置から真下に線分判定
-    pos = _collsionManage->CheckHitFloor(pos, { 0, -10, 0.f }, state);
+    pos = _collsionManage->CheckHitSideAndBottom(pos, { forward.x, 0.f, 0.f }, state);
+    pos = _collsionManage->CheckHitFloor(pos, { 0.f, -10.f, 0.f }, state);
 
     if (_collsionManage->GetHitFloor().HitFlag == 0) {
         GetStateManage().PushBack("Fall");
@@ -180,6 +170,11 @@ void Player::Player::Move(const VECTOR& forward) {
     if (_crState == Player::ColourState::Black) {
         if (_collsionManage->GetWThrough().HitFlag == 0) {
             //GetStateManage().PushBack("Fall");
+        }
+    }
+    if (_crState == Player::Player::ColourState::White) {
+        if (_collsionManage->GetBThrough().HitFlag == 0) {
+            //GetStateManage().GoToState("Fall");
         }
     }
 

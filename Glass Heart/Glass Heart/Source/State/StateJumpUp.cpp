@@ -16,7 +16,7 @@
 namespace {
     constexpr auto StraifVector = 3.0f; // ストレイフ用X軸移動量
     constexpr auto JumpVecY = 18.0f;  //!< ジャンプ用Y軸移動量ベクトル
-    constexpr auto Gravity = -0.2f;
+    constexpr auto Gravity = -0.2f;  //!< 重力加速度
     constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f); //!< 右方向の角度
     constexpr auto LeftRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 左方向の角度
 }
@@ -37,13 +37,12 @@ void State::StateJumpUp::Input(AppFrame::InputManager& input) {
     _owner.SetForwardSpeed(0.f);
     if (input.GetJoyPad().GetAnalogStickLX() >= 5000 && input.GetJoyPad().GetAnalogStickLX() > 1) {
         // 右方向に向きを変更
-        _owner.SetRotation(VGet(0.0f, LeftRotation, 0.0f));
+        _owner.SetRotation(VGet(0.0f, RightRotation, 0.0f));
         _owner.SetForwardSpeed(StraifVector);
     }
     if (input.GetJoyPad().GetAnalogStickLX() <= -5000 && input.GetJoyPad().GetAnalogStickLX() < 1) {
         // 左方向に向きを変更
-        _owner.SetRotation(VGet(0.0f, RightRotation, 0.0f));
-        //_addVx = StraifVector;
+        _owner.SetRotation(VGet(0.0f, LeftRotation, 0.0f));
         _owner.SetForwardSpeed(StraifVector);
     }
 }
@@ -62,19 +61,16 @@ void State::StateJumpUp::Update() {
     int state = static_cast<int> (_owner.GetColourState());
     pos = _owner.GetCollision().CheckHitSideAndBottom(pos, { forward.x, 0, 0 }, state);
 
-
-    //pos = _owner.GetCollision().CheckThroughWWallMesh(pos, { forward.x, 0, 0 });
-
     pos = _owner.GetCollision().CheckHitSideAndBottom(pos, { 0, forward.y, 0 }, state);
     if (_owner.GetCollision().GetSideAndBottom().HitNum > 0) {
         jumpVelocity.y = 0;
 
     }
     if (_owner.GetCollision().GetWWallThroughMesh().HitNum > 0) {
-        jumpVelocity.y = 0;
+        //jumpVelocity.y = 0;
     }
     if (_owner.GetCollision().GetBWallThroughMesh().HitNum > 0) {
-        jumpVelocity.y = 0;
+        //jumpVelocity.y = 0;
     }
 
     _owner.SetPosition(pos);

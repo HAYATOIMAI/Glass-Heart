@@ -41,11 +41,10 @@ void Mode::ModeLoading::Process() {
     }
     
     auto [handle, no] = GetGame().GetResourceServer().GetModles("Stage");
-    auto [model, num] = GetGame().GetResourceServer().GetModles("Stage2");
     if (_cnt == 0) {
         // 非同期読み込みが終了しているか
         // FALSEなら終了、それ以外なら読み込みを再開
-        if (CheckHandleASyncLoad(handle) == FALSE && CheckHandleASyncLoad(model) == FALSE) {
+        if (CheckHandleASyncLoad(handle) == FALSE) {
             // 非同期読み込み終了
             SetUseASyncLoadFlag(FALSE);
             // ゲーム本編へ移動
