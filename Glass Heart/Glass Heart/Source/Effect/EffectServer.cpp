@@ -26,12 +26,12 @@ void Effect::EffectServer::Clear() {
 }
 
 void Effect::EffectServer::LoadEffect(std::string_view key, std::string_view filename, float magnification) {
-	if (_effects.contains(key.data())) {
+	/*if (_effects.contains(key.data())) {
 		return;
 	}
 	std::string loadfilename = (_currentdirectory / filename.data()).generic_string();
 	auto handle = LoadEffekseerEffect(loadfilename.data(), magnification);
-	_effects.emplace(key, handle);
+	_effects.emplace(key, handle);*/
 }
 
 void Effect::EffectServer::LoadEfeects(const EffectMap& effectmap) {

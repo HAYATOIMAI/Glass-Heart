@@ -16,11 +16,12 @@
 #include <numbers>
 
 namespace {
+
     //constexpr auto StartPositionX = 25600.0f;  //!< テスト用プレイヤーの初期位置X
     //constexpr auto StartPositionY = 12420.0f;  //!< テスト用プレイヤーの初期位置Y
     //constexpr auto StartPositionZ = -55.0f;  //!< テスト用プレイヤーの初期位置Z
     constexpr auto StartPositionX = -150.0f;  //!< プレイヤーの初期位置X
-    constexpr auto StartPositionY = 35.0f;    //!< プレイヤーの初期位置Y
+    constexpr auto StartPositionY = 40.0f;    //!< プレイヤーの初期位置Y
     constexpr auto StartPositionZ = -55.0f;  //!< プレイヤーの初期位置Z
     constexpr auto Recast = 20;  //!<　色変更リキャストタイム 
     constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f); //!< 右方向の角度
@@ -217,7 +218,7 @@ void Player::Player::ResetPos() {
         }
         else {
             if (_deadFlag == true && _deathCoolCount == 0) {
-                _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
+                _position = VGet(StartPositionX, StartPositionY + 20.f, StartPositionZ);
                 _deadFlag = false;
             }
         }
@@ -240,7 +241,7 @@ void Player::Player::ResetPos() {
         }
         else {
             if (_deadFlag == true && _deathCoolCount == 0) {
-                _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
+                _position = VGet(StartPositionX, StartPositionY + 20.f, StartPositionZ);
                 _deadFlag = false;
             }
         }

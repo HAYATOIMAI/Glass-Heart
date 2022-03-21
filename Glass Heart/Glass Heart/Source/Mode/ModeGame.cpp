@@ -77,10 +77,12 @@ void Mode::ModeGame::Enter() {
 }
 /** 入力処理 */
 void Mode::ModeGame::Input(AppFrame::InputManager& input) {
+    // オブジェクトの入力処理
     GetObjectServer().Input(input);
 }
 /** 更新処理 */
 void Mode::ModeGame::Process() {
+    // オブジェクトの更新処理
     GetObjectServer().Process();
    // タイマー処理
     if (_count <= 60) {
@@ -100,8 +102,11 @@ void Mode::ModeGame::Process() {
 }
 /** 描画処理 */
 void Mode::ModeGame::Render() {
+    // オブジェクトを描画
     GetObjectServer().Render();
+    // UIを描画
     GetUI().Render(100, 100, 0.05);
+    // 秒数描画
     GetUI().NumberRender(400, 100, 80, 1.0);
     for (auto& itr : GetObjectServer().GetObjectLists()) {
         if (itr->GetObjectType() == Object::ObjectBase::ObjectType::Player) {
@@ -110,6 +115,7 @@ void Mode::ModeGame::Render() {
             }
         }
     }
+    // チームロゴとタイトル画像描画
     DrawBillboard3D(VGet(22500.0f, 12600.0f, 200.0f), 0.5f, 0.5f, 800.0f, 0.0f, _teamLogo, TRUE);
     DrawBillboard3D(VGet(25450.0f, 12400.0f, 200.0f), 0.5f, 0.5f, 1200.0f, 0.0f, _titleLogo, TRUE);
 #ifdef _DEBUG
@@ -122,15 +128,8 @@ void Mode::ModeGame::Render() {
 }
 /** 終了処理 */
 void Mode::ModeGame::Exit() {
-
+    // BGMとSEを停止
     auto& sm = GetSoundManager();
     sm.StopSound("bgm");
     sm.StopSound("run");
-
-    //// オブジェクトを消去
-    //GetObjectServer().AllClear();
-    //// リソースの消去
-    //GetResourceServer().AllClear();
-    //// クリエイターを削除
-    //GetObjectFactory().Clear();
 }

@@ -11,7 +11,7 @@
 #include "../Model/ModelAnimeManager.h"
 
 using namespace GlassHeart;
-
+/** •`‰æˆ— */
 void State::StateBase::Draw() {
     MV1SetFrameVisible(_owner.GetModelAnime().GetHandle(), 4, FALSE);
     MV1SetFrameVisible(_owner.GetModelAnime().GetHandle(), 5, FALSE);

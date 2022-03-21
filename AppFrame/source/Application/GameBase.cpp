@@ -58,14 +58,6 @@ namespace AppFrame {
             return false;
         }
 
-        if (Effekseer_Init(8000) == -1) {
-            DxLib_End();
-            return false;
-        }
-
-        SetChangeScreenModeGraphicsSystemResetFlag(FALSE);
-        Effekseer_SetGraphicsDeviceLostCallbackFunctions();
-
         // 描画先画面を裏にする
         SetDrawScreen(DX_SCREEN_BACK);
 
@@ -90,7 +82,6 @@ namespace AppFrame {
     void GameBase::Terminate() {
         // Dxライブラリ終了
         DxLib_End();
-        Effkseer_End();
     }
     /** 更新処理 */
     void GameBase::Process() {

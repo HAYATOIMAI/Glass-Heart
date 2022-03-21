@@ -14,7 +14,7 @@
 namespace {
     constexpr auto GoalPositionX = 25830.0f;    //!< ゴールの位置X
     constexpr auto GoalPositionY = 12420.0f;     //!< ゴールの位置Y
-    constexpr auto GoalPositionZ = -30.0f;      //!< ゴールの位置Z
+    constexpr auto GoalPositionZ = 30.0f;      //!< ゴールの位置Z
 }
 
 using namespace GlassHeart::CheckPoint;
@@ -32,7 +32,7 @@ void GoalPoint::Process() {
 
     GetObjectServer().Register("GoalPoint", _position);
 
-    // チェックポイントとプレイヤーの当たり判定
+    // ゴールポイントとプレイヤーの当たり判定
     for (auto ite = GetObjectServer().GetObjectLists().begin(); ite != GetObjectServer().GetObjectLists().end(); ite++) {
 
         if ((*ite)->GetObjectType() == ObjectBase::ObjectType::Player) {

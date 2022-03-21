@@ -15,7 +15,7 @@
 namespace {
     constexpr auto CheckPositionX = 8220.0f;    //!< ƒS[ƒ‹‚ÌˆÊ’uX
     constexpr auto CheckPositionY = 5705.0f;     //!< ƒS[ƒ‹‚ÌˆÊ’uY
-    constexpr auto CheckPositionZ = -30.0f;      //!< ƒS[ƒ‹‚ÌˆÊ’uZ
+    constexpr auto CheckPositionZ = 30.0f;      //!< ƒS[ƒ‹‚ÌˆÊ’uZ
 }
 
 using namespace GlassHeart::CheckPoint;

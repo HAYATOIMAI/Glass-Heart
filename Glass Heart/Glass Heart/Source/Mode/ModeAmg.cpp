@@ -47,7 +47,7 @@ void Mode::ModeAmg::Init() {
 
     //!< 使用するモデル
     AppFrame::ResourceServer::ModelMap usemap{
-    {"Stage", "Stage/Stage03.mv1"},
+    {"Stage", "Stage/Stage04.mv1"},
     {"BackGround", "BackGround/bg.mv1"},
     };
     // モデルの読み込み

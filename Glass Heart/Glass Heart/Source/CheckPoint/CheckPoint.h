@@ -50,7 +50,7 @@ namespace GlassHeart {
 
         private:
             int _checkPoint{ -1 };
-            VECTOR _checkDrawPos{ 8190.0f, 5880.0f, -80.0f };
+            VECTOR _checkDrawPos{ 8190.0f, 5880.0f, 30.0f };
             VECTOR _checkPos{ 0.0f, 0.0f, 0.0f };
         };
     }

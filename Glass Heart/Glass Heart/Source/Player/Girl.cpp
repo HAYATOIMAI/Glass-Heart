@@ -15,14 +15,14 @@
 namespace {
     constexpr auto GirlPositionX = 25830.0f;  //!< ガールの位置X
     constexpr auto GirlPositionY = 12410.0f;   //!< ガールの位置Y
-    constexpr auto GirlPositionZ = -30.0f;     //!< ガールの位置Z
+    constexpr auto GirlPositionZ = 30.0f;     //!< ガールの位置Z
 }
 
 using namespace GlassHeart::Player;
 
 /** コンストラクタ */
 Girl::Girl(GameMain& game) : GlassHeart::Object::ObjectBase{ game } {
-    _rotation = VGet(0.0f, 0.0f, 0.0f);
+    _rotation = VGet(0.0f, 180.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f);
     _position = VGet(GirlPositionX, GirlPositionY, GirlPositionZ);
 }
 /** 入力処理 */

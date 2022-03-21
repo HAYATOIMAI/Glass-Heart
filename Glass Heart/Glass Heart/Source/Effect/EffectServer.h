@@ -6,7 +6,7 @@
  * @date   February 2022
  *********************************************************************/
 #pragma once
-#include <EffekseerForDXLib.h>
+//#include <EffekseerForDXLib.h>
 #include <filesystem>
 #include <memory>
 #include <unordered_map>

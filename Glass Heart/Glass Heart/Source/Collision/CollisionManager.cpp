@@ -113,7 +113,7 @@ VECTOR Collision::CollisionManager::CheckHitSideAndBottom(const VECTOR& pos, con
     switch (state) {
     case 0:
         _bWallThrough = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "BThroughWall_NavMesh"), c1, c2, round);
-        // 当たっていたら位置ベクトルを返す
+        // 当たっていたら現在の位置を返す
         if (_bWallThrough.HitNum > 0) {
             return pos;
         }
@@ -122,11 +122,10 @@ VECTOR Collision::CollisionManager::CheckHitSideAndBottom(const VECTOR& pos, con
         break;
     case 1:
         _wWallThrough = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "WThroughWall_NavMesh"), c1, c2, round);
-        // 当たっていたら位置ベクトルを返す
+        // 当たっていたら現在の位置を返す
         if (_wWallThrough.HitNum > 0) {
             return pos;
         }
-
         _sideBottom = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "Wall_NavMesh"), c1, c2, round);
         break;
     default:
