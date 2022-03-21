@@ -82,7 +82,6 @@ void Player::Player::Process() {
     if (GetCollision().GetWDeathMesh().HitNum >= 1) {
         if (GetColourState() == Player::Player::ColourState::White) {
             SetPosition(_position);
-            // _owner.GetStateManage().PushBack("Dead");
         }
         if (GetColourState() == Player::Player::ColourState::Black) {
             ResetPos();
@@ -167,7 +166,7 @@ void Player::Player::Move(const VECTOR& forward) {
 
     pos = _collsionManage->CheckHitWDeathMesh(pos, { 0.f, forward.y, 0.f });
 
-    if (_collsionManage->GetHitFloor().HitFlag == 0) {
+    if (_collsionManage->GetHitFloor().HitFlag == 0 && _collsionManage->GetSideAndBottom().HitNum == 0) {
         GetStateManage().PushBack("Fall");
     }
     if (_crState == Player::ColourState::Black) {
@@ -180,24 +179,6 @@ void Player::Player::Move(const VECTOR& forward) {
             //GetStateManage().GoToState("Fall");
         }
     }
-    //if (_collsionManage->GetBDeathMesh().HitNum >= 1) {
-    //    if (GetColourState() == Player::Player::ColourState::White) {
-    //        //SetPosition(VGet(_position.x, _position.y, _position.z));
-    //       GetStateManage().PushBack("Dead");
-    //    }
-    //    if (GetColourState() == Player::Player::ColourState::Black) {
-    //        ResetPos();
-    //    }
-    //}
-    //if (_collsionManage->GetWDeathMesh().HitNum >= 1) {
-    //    if (GetColourState() == Player::Player::ColourState::White) {
-    //        //SetPosition(VGet(_position.x, _position.y, _position.z));
-    //         GetStateManage().PushBack("Dead");
-    //    }
-    //    if (GetColourState() == Player::Player::ColourState::Black) {
-    //        ResetPos();
-    //    }
-    //}
     // 座標更新
     _position = pos;
 }
@@ -235,6 +216,7 @@ void Player::Player::ResetPos() {
     // デスメッシュと当たっていたら
     if (_collsionManage->GetWDeathMesh().HitNum >= 1) {
         if (_deadFlag == false) {
+            GetGame().GetSoundManager().Play("death");
             _deadFlag = true;
             _deathCoolCount = 120;
         }
@@ -256,6 +238,7 @@ void Player::Player::ResetPos() {
     }
     if (_collsionManage->GetBDeathMesh().HitNum >= 1) {
         if (_deadFlag == false) {
+            GetGame().GetSoundManager().Play("death");
             _deadFlag = true;
             _deathCoolCount = 120;
         }

@@ -38,7 +38,7 @@ namespace GlassHeart {
         private:
             int _checkPoint{ -1 };
             //VECTOR _checkDrawPos{ -4510.0f, 5660.0f, -80.0f };
-            VECTOR _checkDrawPos{ -8190.0f, 5880.0f, -80.0f };
+            VECTOR _checkDrawPos{ 8190.0f, 5880.0f, -80.0f };
             VECTOR _checkPos{ 0.0f, 0.0f, 0.0f };
             //std::unique_ptr<Model::ModelManager> _light;    //!< ライト用ユニークポインタ
         };

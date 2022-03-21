@@ -44,11 +44,6 @@ namespace GlassHeart {
              *
              */
             void Update() override;
-            /**
-             * @brief ’…’nˆ—
-             * 
-             */
-            void Landing();
         private:
             int _cnt{ 0 };
         };

@@ -39,6 +39,7 @@ VECTOR Collision::CollisionManager::CheckHitFloor(const VECTOR& pos, const VECTO
             return pos;
         }
         _floor = MV1CollCheck_Line(handle, MV1SearchFrame(handle, "Floor_NavMesh"), start, end);
+        break;
     default:
         break;
     }
@@ -109,8 +110,6 @@ VECTOR Collision::CollisionManager::CheckHitSideAndBottom(const VECTOR& pos, con
     auto newPos = VAdd(pos, forward);
     auto c1 = VAdd(newPos, { 0.f, 140.f - round,0.f });
     auto c2 = VAdd(newPos, { 0.f, 1.f + round, 0.f });
-    // _sideBottom = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "Wall_NavMesh"), c1, c2, round);
-     // ‚±‚±‚ÅF‚²‚Æ‚Ì’ê–Ê‚Ì
 
     switch (state) {
     case 0:
@@ -121,14 +120,16 @@ VECTOR Collision::CollisionManager::CheckHitSideAndBottom(const VECTOR& pos, con
         }
 
         _sideBottom = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "Wall_NavMesh"), c1, c2, round);
+        break;
     case 1:
         _wWallThrough = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "WThroughWall_NavMesh"), c1, c2, round);
-
+        
         if (_wWallThrough.HitNum > 0) {
             return pos;
         }
 
         _sideBottom = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "Wall_NavMesh"), c1, c2, round);
+        break;
     default:
         break;
     }
@@ -136,7 +137,6 @@ VECTOR Collision::CollisionManager::CheckHitSideAndBottom(const VECTOR& pos, con
     if (_sideBottom.HitNum == 0) {
         return newPos;
     }
-
     return pos;
 }
 

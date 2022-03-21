@@ -28,6 +28,7 @@ namespace GlassHeart {
             CameraManager();
             /// ‰Šú‰»
             void Init();
+            void Input(AppFrame::InputManager& input) {};
             /// XVˆ—
             void Update();
             /// •`‰æˆ—

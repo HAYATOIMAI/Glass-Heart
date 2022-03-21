@@ -14,9 +14,9 @@
 #include <numbers>
 
 namespace {
-    constexpr auto StraifVector = 5.0f; // ストレイフ用X軸移動量
-    constexpr auto JumpVecY = 18.0f;  //!< ジャンプ用Y軸移動量ベクトル
-    constexpr auto Gravity = -0.2f;  //!< 重力加速度
+    constexpr auto StraifVector = 6.5f; // ストレイフ用X軸移動量
+    constexpr auto JumpVecY = 24.5f;  //!< ジャンプ用Y軸移動量ベクトル
+    constexpr auto Gravity = -0.8f;  //!< 重力加速度
     constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f); //!< 右方向の角度
     constexpr auto LeftRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 左方向の角度
 }
@@ -68,18 +68,19 @@ void State::StateJumpUp::Update() {
         jumpVelocity.y = 0;
 
     }
-    // 空中の足場とプレイヤーの色が異なっていたら落下
     if (_owner.GetColourState() == Player::Player::ColourState::Black) {
+        // 空中の足場とプレイヤーの色が異なっていたら落下
         if (_owner.GetCollision().GetWWallThroughMesh().HitNum > 0) {
             jumpVelocity.y = 0;
         }
     }
-    // 空中の足場とプレイヤーの色が異なっていたら落下
+	// 空中の足場とプレイヤーの色が異なっていたら落下
     if (_owner.GetColourState() == Player::Player::ColourState::White) {
         if (_owner.GetCollision().GetBWallThroughMesh().HitNum > 0) {
             jumpVelocity.y = 0;
         }
     }
+	
     // 死亡判定を取るメッシュと当たり判定
     if (_owner.GetColourState() == Player::Player::ColourState::Black) {
         pos = _owner.GetCollision().CheckHitWDeathMesh(pos, { 0.f, forward.y, 0.f });

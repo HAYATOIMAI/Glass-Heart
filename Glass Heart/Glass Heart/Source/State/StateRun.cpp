@@ -17,7 +17,7 @@
 using namespace GlassHeart;
 
 namespace {
-    constexpr auto DefaultSpeed = 4.5f; //!< 歩行スピード
+    constexpr auto DefaultSpeed = 8.5f / 1.5f; //!< 歩行スピード
     constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f); //!< 右方向の角度
     constexpr auto LeftRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 左方向の角度
 }
