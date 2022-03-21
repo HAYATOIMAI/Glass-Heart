@@ -26,8 +26,16 @@ namespace GlassHeart {
          */
         class ModelAnimeManager : public ModelManager {
         public:
+            /**
+             * @brief　コンストラクタ
+             * 
+             * @param[in] owner オブジェクトベースクラスへの参照
+             */
             ModelAnimeManager(GlassHeart::Object::ObjectBase& owner);
-
+            /**
+             * @brief　デストラクタ
+             * 
+             */
             virtual ~ModelAnimeManager() override;
             /**
              * @brief 初期化
@@ -96,15 +104,15 @@ namespace GlassHeart {
             float GetTimeRate() { return _timeRate; }
         private:
             std::unordered_map<std::string, int> _registry;
-            int _animIndex{ -1 };
-            int _oldattachIndex{ -1 };
-            int _attachIndex{ -1 };
-            int _repeatedCount{ 0 };
-            float _playTime{ 0 };
-            float _totalTime{ 0 };
-            float _timeRate{ 1.f };
-            float _animrate{ 1.f };//!アニメーションブレンド率
-            bool _repeate{ false };
+            int _animIndex{ -1 };      //!< アニメーション番号
+            int _oldattachIndex{ -1 }; //!< 前のアタッチ番号
+            int _attachIndex{ -1 };    //!< アタッチする番号
+            int _repeatedCount{ 0 };   //!< アニメーションを繰り返した回数
+            float _playTime{ 0 };      //!< 総時間
+            float _totalTime{ 0 };     //!< アニメーションの総時間
+            float _timeRate{ 1.f };    //!< 再生時間掛率
+            float _animrate{ 1.f };    //!< アニメーションブレンド率
+            bool _repeate{ false };    //!< アニメーションのループ可否
         };
     } // Model
 } // GlassHeart

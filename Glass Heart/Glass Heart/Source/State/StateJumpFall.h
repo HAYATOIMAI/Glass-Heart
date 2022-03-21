@@ -1,7 +1,7 @@
 
 /*********************************************************************
  * @file   StateBaseFall.h
- * @brief  
+ * @brief  ジャンプ下降状態の宣言
  * 
  * @author Hayato Imai
  * @date   January 2022
@@ -18,16 +18,16 @@ namespace GlassHeart {
     namespace State {
         /**
          * @class StateJumpFall 
-         * @brief ジャンプ下降状態
+         * @brief ジャンプ下降状態の宣言
          */
         class StateJumpFall : public StateBase {
         public:
             /**
              * @brief コンストラクタ
              *
-             * @param owner プレイヤークラスへの参照
+             * @param[in] owner プレイヤークラスへの参照
              */
-            StateJumpFall(Player::Player& owner);
+            StateJumpFall(Player::Player& owner) : StateBase{ owner } {};
             /**
              * @brief 入り口処理
              *
@@ -36,7 +36,7 @@ namespace GlassHeart {
             /**
             * @brief 入力処理
             *
-            * @param input
+            * @param input インプットマネージャークラスの参照
             */
             void Input(AppFrame::InputManager& input) override;
             /**
@@ -44,8 +44,6 @@ namespace GlassHeart {
              *
              */
             void Update() override;
-        private:
-            int _cnt{ 0 };
         };
     }  //  State 
 } // GlassHeart

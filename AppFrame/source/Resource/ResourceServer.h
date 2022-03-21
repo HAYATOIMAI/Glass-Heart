@@ -29,7 +29,7 @@ namespace AppFrame {
     };
     /**
      * @class ResourceServer
-     * @brief リソース管理サーバ
+     * @brief リソース管理マネージャー
      */
     class ResourceServer {
     public:
@@ -70,8 +70,8 @@ namespace AppFrame {
         /**
          * @brief 画像の読み込み
          *
-         * @param[in] key キーとなる任意の文字列
-         * @param[in] divgraph
+         * @param[in] key      キーとなる任意の文字列
+         * @param[in] divgraph 画像ファイル用構造体への参照
          */
         virtual void LoadGraphic(std::string_view key, const DivGraph& divgraph);
         /**
@@ -105,7 +105,7 @@ namespace AppFrame {
         /**
          * @brief 画像情報の取得
          *
-         * @param[in] key 登録済みのキー
+         * @param[in] key   登録済みのキー
          * @return DivGraph 画像情報
          */
         virtual DivGraph GetGraphInfo(std::string_view& key);
@@ -117,7 +117,7 @@ namespace AppFrame {
         /**
          * @brief モデルの読み込み
          *
-         * @param key キーとなる任意の文字列
+         * @param key          キーとなる任意の文字列
          * @param[in] filename filename mv1ファイル名
          * @return モデルのハンドル
          */
@@ -125,7 +125,7 @@ namespace AppFrame {
         /**
          * @brief モデルの一括読み込み
          *
-         * @param modelmap モデルのテーブル
+         * @param[in] modelmap モデルのテーブル
          */
         virtual void LoadModels(const ModelMap& modelmap);
         /**
@@ -143,11 +143,11 @@ namespace AppFrame {
          */
         virtual void ClearModels();
         /**
-         * @brief 
+         * @brief モデルのアニメーション番号を取得
          * 
-         * @param key
-         * @param animName
-         * @return 
+         * @param[in] key      キーとなる任意の文字列
+         * @param[in] animName アニメーション番号
+         * @return アニメーション番号
          */
         virtual int GetModelAnimIndex(std::string_view key, std::string_view animName);
         /**
@@ -158,7 +158,7 @@ namespace AppFrame {
         /**
          * @brief 音ファイルの読み込み
          *
-         * @param[in] key キーとなる任意の文字列
+         * @param[in] key             キーとなる任意の文字列
          * @param[in] filename_isLoad ファイル名と事前読み込み有無のペア
          */
         virtual void LoadSound(std::string_view key, std::pair<std::string, bool> filename_isLoad);
@@ -171,15 +171,14 @@ namespace AppFrame {
         /**
          * @brief 音ファイル情報の取得
          *
-         * @param[in] key 登録済みのキー
+         * @param[in] key        登録済みのキー
          * @return 音ファイル名, ハンドル
          */
         virtual std::pair<std::string, int> GetSoundInfo(std::string_view key);
 
     private:
         GameBase& _game;  //!< ゲームベースクラスへの参照
-
-        std::filesystem::path _currrntPath;  //!< 格納フォルダへの相対パス
+        std::filesystem::path _currrntPath;  //!< 格納フォルダへのパス
         /**
          * @brief 任意の文字列をキーにしてDivGraphと画像ハンドルのペアを管理
          */
@@ -193,4 +192,4 @@ namespace AppFrame {
          */
         std::unordered_map<std::string, std::tuple<std::string, std::vector<int>, std::unordered_map<std::string, int>>> _models;
     };
-}
+} //AppFrame

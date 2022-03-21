@@ -10,7 +10,7 @@
 #include <unordered_map>
 #include <string>
 #include <DxLib.h>
-#include <EffekseerForDXLib.h>
+//#include <EffekseerForDXLib.h>
 
 namespace GlassHeart {
 

@@ -35,26 +35,20 @@ void State::StateRun::Input(AppFrame::InputManager& input) {
         game.GetSoundManager().Play("jump");
         _owner.GetStateManage().PushBack("Jump");
     }
+    // スティック入力があれば移動
     if (input.GetJoyPad().GetAnalogStickLX() >= 3000) {
         // 右方向に向きを変更
         _owner.SetRotation(VGet(0.0f, RightRotation, 0.0f));
-        if (input.GetJoyPad().GetAnalogStickLX() >= 30000) {
-            _owner.SetForwardSpeed(DefaultSpeed * 1.0f);
-        }
     }
     else if (input.GetJoyPad().GetAnalogStickLX() <= -3000) {
         // 左方向に向きを変更
         _owner.SetRotation(VGet(0.0f, LeftRotation, 0.0f));
-        if (input.GetJoyPad().GetAnalogStickLX() <= -30000) {
-            _owner.SetForwardSpeed(DefaultSpeed * 1.0f);
-        }
     }
     else {
         _owner.GetStateManage().PopBack();
     }
 }
-
-
+/** 更新処理 */
 void State::StateRun::Update() {
     _owner.Move(VScale(_owner.GetForward(), _owner.GetForwardSpeed()));
 }

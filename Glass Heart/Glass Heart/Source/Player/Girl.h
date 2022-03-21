@@ -3,14 +3,15 @@
  * @brief  ガールクラスの宣言
  *
  * @author Yoshihiro Takahashi
- * @date   December 2021
+ * @date   February 2022
  *********************************************************************/
 #pragma once
 
-#include "../Object/ObjectBase.h"
-#include "../State/StateManager.h"
 #include <string>
 #include <AppFrame.h>
+#include "../Object/ObjectBase.h"
+#include "../State/StateManager.h"
+
 
 namespace AppFrame {
     class InputManager;
@@ -42,7 +43,7 @@ namespace GlassHeart {
              * @brief デストラクタ
              *
              */
-            virtual~Girl() = default;
+            virtual~Girl() override = default;
             /**
              * @brief 入力処理
              *
@@ -60,14 +61,15 @@ namespace GlassHeart {
              */
             void Render() override;
             /**
-             * @brief
-             */
-            ObjectType GetObjectType() const  override { return ObjectType::Girl; };
-            /**
             * @brief ワールド座標変換
             *
             */
             void ComputeWorldTransform() override;
+            /**
+             * @brief タイプの取得
+             * @return タイプID
+             */
+            ObjectType GetObjectType() const  override { return ObjectType::Girl; };
 
         public:
             /**
@@ -81,13 +83,15 @@ namespace GlassHeart {
             protected:
                 Girl& _owner;
             };
+            /**
+            * @class StateWait
+            * @brief ガールの待機状態
+            */
             class StateWait :public StateBase {
             public:
                 StateWait(Girl& owner) :StateBase{ owner } {};
                 void Enter() override;
-            private:
-                int _cnt{ 0 };
             };
         };
-    } // Player
-} // GlassHeart
+    }
+}

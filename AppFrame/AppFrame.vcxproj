@@ -171,9 +171,6 @@
     <ClInclude Include="source\Application\GameBase.h" />
     <ClInclude Include="source\Input\InputJoypad.h" />
     <ClInclude Include="source\Input\InputManager.h" />
-    <ClInclude Include="source\Math\Matrix.h" />
-    <ClInclude Include="source\Math\Utility.h" />
-    <ClInclude Include="source\Math\Vector4.h" />
     <ClInclude Include="source\Mode\ModeBase.h" />
     <ClInclude Include="source\Mode\ModeFade.h" />
     <ClInclude Include="source\Mode\ModeServer.h" />
@@ -185,9 +182,6 @@
     <ClCompile Include="source\Application\WinMain.cpp" />
     <ClCompile Include="source\Input\InputJoypad.cpp" />
     <ClCompile Include="source\Input\InputManager.cpp" />
-    <ClCompile Include="source\Math\Matrix.cpp" />
-    <ClCompile Include="source\Math\Utility.cpp" />
-    <ClCompile Include="source\Math\Vector4.cpp" />
     <ClCompile Include="source\Mode\ModeBase.cpp" />
     <ClCompile Include="source\Mode\ModeFade.cpp" />
     <ClCompile Include="source\Mode\ModeServer.cpp" />

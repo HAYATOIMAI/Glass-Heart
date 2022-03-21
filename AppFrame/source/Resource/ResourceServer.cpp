@@ -152,6 +152,7 @@ namespace AppFrame {
         }
         _models.clear();
     }
+    /** モデルのアニメーション番号を取得 */
     int ResourceServer::GetModelAnimIndex(std::string_view key, std::string_view animName) {
         if (!_models.contains(key.data())) {
             // キーが未登録

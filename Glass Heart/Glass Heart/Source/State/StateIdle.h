@@ -21,15 +21,33 @@ namespace GlassHeart {
          */
         class StateIdle : public StateBase {
         public:
+            /**
+             * @brief コンストラクタ
+             * 
+             * @param[in] owner プレイヤークラスへの参照
+             */
             StateIdle(Player::Player& owner) : StateBase{ owner } {};
+            /**
+             * @brief 入り口処理
+             * 
+             */
             void Enter() override;
+            /**
+             * @brief　入力処理
+             * 
+             * @param[in] input インプットマネージャークラスの参照
+             */
             void Input(AppFrame::InputManager& input) override;
+            /**
+             * @brief　更新処理
+             * 
+             */
             void Update() override;
         private:
-            int _cnt{ 0 };
-            bool _resetFlag{ true };
+            int _cnt{ 0 }; //!< リキャスト用カウンター
+            bool _resetFlag{ false }; //!< 色をリセットするかのフラグ
         };
     }// State
-}// GlassHeart 
+}// GlassHeart   StateIdle(Player::Player& owner) : StateBase{ owner } {}
 
 

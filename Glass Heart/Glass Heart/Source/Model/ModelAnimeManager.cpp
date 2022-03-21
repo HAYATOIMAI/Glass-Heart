@@ -1,7 +1,7 @@
 
-/*****************************************************************//**
+/*********************************************************************
  * @file   ModelAnimeManager.cpp
- * @brief
+ * @brief モデルアニメーションマネージャークラスの処理
  *
  * @author Hayato Imai
  * @date   December 2021
@@ -12,30 +12,23 @@
 #include "../Application/GameMain.h"
 
 using namespace GlassHeart;
-
-Model::ModelAnimeManager::ModelAnimeManager(Object::ObjectBase& owner) : ModelManager{ owner }
-{
-}
-
-Model::ModelAnimeManager::~ModelAnimeManager()
-{
+/** コンストラクタ */
+Model::ModelAnimeManager::ModelAnimeManager(Object::ObjectBase& owner) : ModelManager{ owner }{}
+/** デストラクタ */
+Model::ModelAnimeManager::~ModelAnimeManager() {
     MV1DetachAnim(_handle, _attachIndex);
 }
+/** 初期化処理 */
+void Model::ModelAnimeManager::Init() {}
 
-void Model::ModelAnimeManager::Init()
-{
-}
-
-void Model::ModelAnimeManager::Register(std::string_view key, int animIndex)
-{
+void Model::ModelAnimeManager::Register(std::string_view key, int animIndex) {
     if (_registry.contains(key.data())) {
         _registry.erase(key.data());
     }
     _registry.emplace(key, animIndex);
 }
 
-void Model::ModelAnimeManager::Update()
-{
+void Model::ModelAnimeManager::Update(){
     //AnimeBlend();
     MV1SetAttachAnimTime(_handle, _attachIndex, _playTime);
 
@@ -60,13 +53,11 @@ void Model::ModelAnimeManager::Update()
     }
 }
 
-void Model::ModelAnimeManager::Draw()
-{
+void Model::ModelAnimeManager::Draw() {
     MV1DrawModel(_handle);
 }
 
-void Model::ModelAnimeManager::ChangeAnime(std::string_view key, bool repeate)
-{
+void Model::ModelAnimeManager::ChangeAnime(std::string_view key, bool repeate) {
     auto newAnimIndex = _owner.GetGame().GetResourceServer().GetModelAnimIndex(_key, key);
     if (_animIndex == newAnimIndex) {
         return;
@@ -89,17 +80,14 @@ void Model::ModelAnimeManager::ChangeAnime(std::string_view key, bool repeate)
     _repeate = repeate;
 }
 
-void Model::ModelAnimeManager::AnimeBlend()
-{
-    if (_animrate >= 1.0f) 
-    {
+void Model::ModelAnimeManager::AnimeBlend() {
+    if (_animrate >= 1.0f)  {
         MV1SetAttachAnimTime(_handle, _attachIndex, _playTime);
         _animrate = 1.0f;
         MV1DetachAnim(_handle, _oldattachIndex);
         _oldattachIndex = -1;
     }
-    else
-    {
+    else {
         MV1SetAttachAnimBlendRate(_handle, _oldattachIndex, 1.0f - _animrate);
         MV1SetAttachAnimBlendRate(_handle, _attachIndex, _animrate);
     }

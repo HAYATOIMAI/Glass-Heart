@@ -14,15 +14,15 @@ using namespace GlassHeart;
 UI::UI::UI(GameMain& game) : _game(game) {}
 
 UI::UI::~UI() {}
-//初期化
+/*初期化*/
 void UI::UI::Init() {}
-//入口処理
+/*入口処理*/
 void UI::UI::Enter() {
 	_timerhandle = _game.GetResourceServer().GetGraph("timer");
 }
-//入力処理
+/*入力処理*/
 void UI::UI::Input() {}
-//更新処理
+/*更新処理*/
 void UI::UI::Process(int counttime) {
 	int hundle = 0;
 	digit = GetDigit(counttime);
@@ -73,11 +73,11 @@ void UI::UI::Process(int counttime) {
 		}
 	}
 }
-//描画処理
+/*描画処理*/
 void UI::UI::Render(int x, int y, double exrate) {
 	DrawRotaGraph(x, y, exrate, 0.0, _timerhandle, TRUE);
 }
-
+/*数字用描画処理*/
 void UI::UI::NumberRender(int x, int y, int interval, double exrate) {
 	int gx = x;
 	int gy = y;
@@ -86,12 +86,12 @@ void UI::UI::NumberRender(int x, int y, int interval, double exrate) {
 		gx -= interval;
 	}
 }
-
+/*一の位を抽出する処理*/
 int UI::UI::GetNumberPlace(int dismantvalue) {
 	int placeone = dismantvalue % 10;
 	return placeone;
 }
-
+/*桁数取得処理*/
 int UI::UI::GetDigit(int value) {
 	int getdigit = 0;
 	while (value != 0) {
@@ -100,5 +100,3 @@ int UI::UI::GetDigit(int value) {
 	}
 	return getdigit;
 }
-
-

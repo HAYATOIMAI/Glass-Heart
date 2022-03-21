@@ -15,25 +15,17 @@
 namespace {
     constexpr auto CheckPositionX = 8220.0f;    //!< ƒS[ƒ‹‚ÌˆÊ’uX
     constexpr auto CheckPositionY = 5705.0f;     //!< ƒS[ƒ‹‚ÌˆÊ’uY
-    constexpr auto CheckPositionZ = -30.0f;      //!< ƒS[ƒ‹‚ÌˆÊ’uZ
+    constexpr auto CheckPositionZ = 30.0f;      //!< ƒS[ƒ‹‚ÌˆÊ’uZ
 }
 
 using namespace GlassHeart::CheckPoint;
 
 CheckPoint::CheckPoint(GameMain& game) : ObjectBase{ game } {
-    //_light = std::make_unique<Model::ModelManager>(*this);
-   //_light->handle("Light");
-   //_light->SetPosition(VGet(100.0f, 100.0f, 0.0f));
-   //_light->SetScale({ 1.f, 1.f, 1.f });
-
     _checkPoint = LoadGraph("resource/Test/2dMaterial/light3.png");
     _position = VGet(CheckPositionX, CheckPositionY, CheckPositionZ);
     _radius = 100.0f;
     _hitFlag = false;
-    //MV1SetPosition(_checkPoint, VGet(0.0f, 0.0f, -0.0f));
 }
-
-CheckPoint::~CheckPoint() {}
 
 void CheckPoint::Process() {
 
@@ -45,25 +37,17 @@ void CheckPoint::Process() {
         if ((*ite)->GetObjectType() == ObjectBase::ObjectType::Player) {
 
             if (_collsionManage->CheckCircleToCircle(*this, **ite) == true) {
-
                 _hitFlag = true;
-
             }
             else {
 
                 _hitFlag = false;
-
             }
-
         }
-
     }
 }
 
 void CheckPoint::Render() {
-
-    //_light->Draw();
-  //MV1DrawModel(_checkPoint);
     auto cr = GetColor(0, 0, 255);
 
     DrawBillboard3D(_checkDrawPos, 0.5f, 0.5f, 120.0f, 0.0f, _checkPoint, TRUE);
@@ -73,16 +57,10 @@ void CheckPoint::Render() {
     auto green = GetColor(0, 255, 0);
 
     if (_hitFlag == true) {
-
         _collsionManage->RenderCircle(_position, _radius, red);
-
     }
     else {
-
         _collsionManage->RenderCircle(_position, _radius, green);
-
     }
-
 #endif // _DEBUG
-
 }

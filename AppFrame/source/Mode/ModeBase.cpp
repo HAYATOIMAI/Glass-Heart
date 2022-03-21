@@ -10,12 +10,10 @@
 #include "../Application/GameBase.h"
 
 namespace AppFrame {
-
-	ModeBase::ModeBase(GameBase& game) : _game{ game } {
-	}
-
-	ModeBase::~ModeBase() {
-	}
+	/** コンストラクタ */
+	ModeBase::ModeBase(GameBase& game) : _game{ game } {}
+	/** デストラクタ */
+	ModeBase::~ModeBase() {}
 
 	ResourceServer& ModeBase::GetResourceServer() {
 		return _game.GetResourceServer();

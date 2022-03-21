@@ -12,6 +12,7 @@
 #include "../Collision/CollisionManager.h"
 #include "../State/StateManager.h"
 #include "../Application/GameMain.h"
+#include "../Object/ObjectServer.h"
 #include <numbers>
 #include <AppFrame.h>
 
@@ -24,7 +25,7 @@ namespace {
 }
 
 using namespace GlassHeart;
-
+/** 入り口処理 */
 void State::StateFall::Enter() {
 
     auto& game = _owner.GetGame();
@@ -32,7 +33,7 @@ void State::StateFall::Enter() {
 
     _owner.SetJumpVelocity({ 0.f,5.5f,0.f });
 }
-
+/** 入力処理 */
 void State::StateFall::Input(AppFrame::InputManager& input) {
     _owner.SetForwardSpeed(0.f);
     if (input.GetJoyPad().GetAnalogStickLX() >= 5000 && input.GetJoyPad().GetAnalogStickLX() > 1) {
@@ -46,28 +47,28 @@ void State::StateFall::Input(AppFrame::InputManager& input) {
         _owner.SetForwardSpeed(StraifVector);
     }
 }
-
+/** 更新処理 */
 void State::StateFall::Update() {
     
     auto pos = _owner.GetPosition();
-
+    // 移動量ベクトルを取得
     auto forward = VScale(_owner.GetForward(), _owner.GetForwardSpeed());
-
+    // 下降処理
     auto jumpVelocity = _owner.GetJumpVelocity();
     jumpVelocity.y += Gravity;
     _owner.SetJumpVelocity(jumpVelocity);
 
     forward.y = jumpVelocity.y;
-
+    // プレイヤーの色を取得
     int state = static_cast<int> (_owner.GetColourState());
+    // 空中の足場の底面と側面判定処理
     pos = _owner.GetCollision().CheckHitSideAndBottom(pos, { forward.x, 0.f, 0.f }, state);
-
+    // 床との当たり判定
     pos = _owner.GetCollision().CheckJumpStand(pos, { 0.f, forward.y, 0.f }, state);
-
+    // 当たっていたら待機状態へ移行
     if (_owner.GetCollision().GetStand().HitFlag == 1) {
         _owner.GetStateManage().GoToState("Idle");
     }
-
     if (_owner.GetColourState() == Player::Player::ColourState::Black) {
         if (_owner.GetCollision().GetWThrough().HitFlag == 1) {
             _owner.GetStateManage().GoToState("Idle");
@@ -78,33 +79,42 @@ void State::StateFall::Update() {
             _owner.GetStateManage().GoToState("Idle");
         }
     }
+    // 死亡判定を取るメッシュと当たり判定
     if (_owner.GetColourState() == Player::Player::ColourState::Black) {
         pos = _owner.GetCollision().CheckHitWDeathMesh(pos, { 0.f, forward.y, 0.f });
     }
-    
+    // プレイヤーの色が異なっていたらリスポーン処理
     if (_owner.GetCollision().GetWDeathMesh().HitNum >= 1) {
         if (_owner.GetColourState() == Player::Player::ColourState::White) {
         }
         if (_owner.GetColourState() == Player::Player::ColourState::Black) {
             _owner.ResetPos();
-           //_owner.GetStateManage().PushBack("Dead");
         }
     }
+    // 死亡判定を取るメッシュと当たり判定
     if (_owner.GetColourState() == Player::Player::ColourState::Black) {
         pos = _owner.GetCollision().CheckHitWDeathMesh(pos, { 0.f, forward.y, 0.f });
     }
-   
-
+    // プレイヤーの色が異なっていたらリスポーン処理
     if (_owner.GetCollision().GetBDeathMesh().HitNum >= 1) {
         if (_owner.GetColourState() == Player::Player::ColourState::White) {
             _owner.ResetPos();
-            //_owner.GetStateManage().PushBack("Dead");
         }
         if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-            // SetPosition(VGet(_position.x, _position.y, _position.z));
-
         }
     }
-
+    // リスポーン処理
+    if (pos.y < -300.0f) {
+        if (_owner.GetCheckPointFlag() == true) {
+            // オブジェクトサーバーからチェックポイントの座標を取得
+            auto checkPos = _owner.GetObjectServer().GetPosition("CheckPoint");
+            // プレイヤーの座標をチェックポイントにする
+            pos = checkPos;
+        }
+        else {
+            pos = VGet(-150.f, 40.f, -55.f);
+        }
+    }
+    // 座標更新
     _owner.SetPosition(pos);
 }

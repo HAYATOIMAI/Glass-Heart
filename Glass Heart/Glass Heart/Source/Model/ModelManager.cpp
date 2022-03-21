@@ -1,7 +1,7 @@
 
 /*****************************************************************//**
  * @file   ModelManager.cpp
- * @brief
+ * @brief  モデルマネージャークラスの処理
  *
  * @author Hayato Imai
  * @date   December 2021

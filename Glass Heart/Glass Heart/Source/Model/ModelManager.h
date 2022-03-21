@@ -1,7 +1,7 @@
 
 /*****************************************************************//**
  * @file   ModelManager.h
- * @brief  3Dモデル管理の基底クラス
+ * @brief  モデルマネージャークラスの宣言
  * 
  * @author Hayato Imai
  * @date   December 2021
@@ -17,7 +17,10 @@ namespace GlassHeart {
     }
 
     namespace Model {
-
+        /**
+         * @class ModelManager
+         * @brief モデルマネージャークラスの宣言
+         */
         class ModelManager {
         public:
             /**
@@ -51,7 +54,7 @@ namespace GlassHeart {
              * 
              * @param[in] key ResourceServerに登録済みのキー
              * @param[in] no  同一モデルの通し番号
-             * @return 
+             * @return モデルの情報
              */
             virtual int handle(std::string_view key, int no = 0);
             /**
@@ -59,7 +62,7 @@ namespace GlassHeart {
              *
              * @param[in] key ResourceServerに登録済みのキー
              * @param[in] no  同一モデルの通し番号
-             * @return    実際に登録し通し番号
+             * @return    実際に登録した通し番号
              */
             virtual int SetModel(std::string_view key, int no = 0);
             /**
@@ -83,7 +86,7 @@ namespace GlassHeart {
             /**
              * @brief ワールド行列の設定
              *
-             * @param[in] world
+             * @param[in] world ワールド座標
              */
             virtual void SetMatrix(MATRIX& world);
 
