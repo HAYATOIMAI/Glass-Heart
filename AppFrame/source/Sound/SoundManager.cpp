@@ -39,6 +39,20 @@ namespace AppFrame {
         }
     }
 
+    void SoundManager::StopSound(std::string_view key) {
+        auto res = _game.GetResourceServer();
+        auto&& [filename, handle] = res.GetSoundInfo(key);
+
+        if (handle != -1) {
+            // ì«Ç›çûÇ›óLÇË
+            StopSoundMem(handle);
+        }
+        else {
+            // ì«Ç›çûÇ›ñ≥Çµ
+            StopMusic();
+        }
+    }
+
     void SoundManager::Play(std::string_view key, int playType) {
         if (_isMute) {
             return;

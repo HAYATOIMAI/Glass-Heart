@@ -17,24 +17,12 @@ namespace GlassHeart {
     }
 
     namespace Collision {
-
-        struct Sphere {
-            Sphere(const VECTOR& center, float radius);
-            bool Contains(const VECTOR& point) const;
-
-            VECTOR center;
-            float radius;
-        };
-
-        bool Intersect(const Sphere& a, const Sphere& b);
-
+        /**
+         * @class CollisionManager
+         * @brief 衝突判定管理用クラス
+         */
         class CollisionManager {
         public:
-            enum class ReportId {
-                None,
-                HitFromPlayer,
-                HitFromEnemy,
-            };
             /**
              * @brief　コンストラクタ
              * 
@@ -42,72 +30,96 @@ namespace GlassHeart {
              */
             CollisionManager(GlassHeart::Object::ObjectBase& owner);
             /**
-             * @brief 床との当たり判定
+             * @brief 前半ステージ:床との当たり判定
              * 
-             * @param pos 位置ベクトル
-             * @param forward フォワードベクトル
+             * @param[in] pos 位置ベクトル
+             * @param[in] forward 移動量ベクトル
+             * @return 位置ベクトル
+             */
+            VECTOR CheckHitFloor(const VECTOR& pos, const VECTOR& forward, int state);
+            /**
+             * @brief  前半ステージ:空中の足場との当たり判定
+             * 
+             * @param[in] pos 位置ベクトル
+             * @param[in] forward  移動量ベクトル
+             * @return  位置ベクトル
+             */
+            VECTOR CheckJumpStand(const VECTOR& pos, const VECTOR& forward, int state);
+            /**
+             * @brief  前半ステージ: 空中の足場の底面や側面との当たり判定
+             * 
+             * @param[in] pos 位置ベクトル
+             * @param[in] forward 移動量ベクトル
+             * @return 位置ベクトル
+             */
+            VECTOR CheckHitSideAndBottom(const VECTOR& pos, const VECTOR& forward, int state);
+            /**
+             * @brief 前半ステージ: 
+             * 
+             * @param[in] pos
+             * @param[in] forward
              * @return 
              */
-            VECTOR CheckHitFloor(const VECTOR& pos, const VECTOR& forward);
-            VECTOR CheckJumpStand(const VECTOR& pos, const VECTOR& forward);
-            VECTOR CheckHitWall(const VECTOR& pos, const VECTOR& forward);
-            VECTOR CheckHitSideAndBottom(const VECTOR& pos, const VECTOR& forward);
-            VECTOR CheckThroughWMesh(const VECTOR& pos, const VECTOR& forward);
-            VECTOR CheckHitDeathMesh(const VECTOR& pos, const VECTOR& forward);
-            VECTOR CheckThroughBMesh(const VECTOR& pos, const VECTOR& forward);
-            VECTOR CheckThroughWWallMesh(const VECTOR& pos, const VECTOR& forward);
-            VECTOR CheckThroughBWallMesh(const VECTOR& pos, const VECTOR& forward);
-            VECTOR CheckPlayerCapsule(const VECTOR& pos, const VECTOR& forward);
+            VECTOR CheckHitWDeathMesh(const VECTOR& pos, const VECTOR& forward);
+            /**
+             * @brief 前半ステージ: 
+             * 
+             * @param[in] pos
+             * @param[in] forward
+             * @return 
+             */
+            VECTOR CheckHitBDeathMesh(const VECTOR& pos, const VECTOR& forward);
+            /**
+             * @brief 前半ステージ: 空中の足場の落下処理
+             * 
+             * @param[in] pos
+             * @param[in] forward
+             * @return 
+             */
             VECTOR CheckFall(const VECTOR& pos, const VECTOR& forward);
-            VECTOR CheckBFall(const VECTOR& pos, const VECTOR& forward);
-            VECTOR CheckWFall(const VECTOR& pos, const VECTOR& forward);
-            // 円の当たり判定描画
+            /**
+             * @brief 円の当たり判定描画
+             * 
+             * @param[in] circlePos 円の位置ベクトル
+             * @param[in] range 範囲
+             * @param[in] color 色情報
+             */
             void RenderCircle(const VECTOR circlePos, float range, unsigned int color);
-            // 円の当たり判定
+            /**
+             * @brief 円の当たり判定
+             * 
+             * @param[in] owner
+             * @param[in] target
+             * @return 
+             */
             bool CheckCircleToCircle(const GlassHeart::Object::ObjectBase& owner, const GlassHeart::Object::ObjectBase& target);
 
-            void Render();
-
-            struct Report {
-                ReportId id{ ReportId::None };
-                VECTOR position{ 0, 0, 0 };
-            };
-
-            void SetReport(Report report) { *_report = report; }
-            Report& GetReport() const { return *_report; }
-            MV1_COLL_RESULT_POLY Mcrp() { return _mcrp; }
-            MV1_COLL_RESULT_POLY_DIM CollPol() { return _collpol; }
-            MV1_COLL_RESULT_POLY_DIM GetSideAndBottom() { return _sideBottom; }
-            MV1_COLL_RESULT_POLY GetStand() { return _stand; }
-            MV1_COLL_RESULT_POLY GetWThrough() { return _wThrough; }
-            MV1_COLL_RESULT_POLY_DIM GetDeathMesh() { return _death; }
-            MV1_COLL_RESULT_POLY GetBThrough() { return _bThrough; }
-            MV1_COLL_RESULT_POLY_DIM GetBWallThroughMesh() { return _bWallThrough; }
-            MV1_COLL_RESULT_POLY_DIM GetWWallThroughMesh() { return _wWallThrough; }
-            MV1_COLL_RESULT_POLY_DIM GetPlayerCapsule() { return _playercap; }
-            MV1_COLL_RESULT_POLY GetFall() { return _fall; }
-            MV1_COLL_RESULT_POLY GetBFall() { return _bFall; }
-            MV1_COLL_RESULT_POLY GetWFall() { return _wFall; }
+           // 各種ゲッター
+           inline MV1_COLL_RESULT_POLY GetHitFloor() { return _floor; }
+           inline MV1_COLL_RESULT_POLY_DIM GetHitwall() { return _collpol; }
+           inline MV1_COLL_RESULT_POLY_DIM GetSideAndBottom() { return _sideBottom; }
+           inline MV1_COLL_RESULT_POLY GetStand() { return _stand; }
+           inline MV1_COLL_RESULT_POLY GetWThrough() { return _wThrough; }
+           inline MV1_COLL_RESULT_POLY_DIM GetWDeathMesh() { return _wDeath; }
+           inline MV1_COLL_RESULT_POLY_DIM GetBDeathMesh() { return _bDeath; }
+           inline MV1_COLL_RESULT_POLY GetBThrough() { return _bThrough; }
+           inline MV1_COLL_RESULT_POLY_DIM GetBWallThroughMesh() { return _bWallThrough; }
+           inline MV1_COLL_RESULT_POLY_DIM GetWWallThroughMesh() { return _wWallThrough; }
+           inline MV1_COLL_RESULT_POLY GetFall() { return _fall; }
         private:
             Object::ObjectBase& _owner;
-            std::unique_ptr<Report> _report;
-            MV1_COLL_RESULT_POLY _mcrp;
+            MV1_COLL_RESULT_POLY _floor;
             MV1_COLL_RESULT_POLY _stand;
             MV1_COLL_RESULT_POLY _wThrough;
             MV1_COLL_RESULT_POLY_DIM _collpol;
             MV1_COLL_RESULT_POLY_DIM _sideBottom;
-            MV1_COLL_RESULT_POLY_DIM _death;
+            MV1_COLL_RESULT_POLY_DIM _wDeath;
+            MV1_COLL_RESULT_POLY_DIM _bDeath;
             MV1_COLL_RESULT_POLY _bThrough;
             MV1_COLL_RESULT_POLY_DIM _bWallThrough;
             MV1_COLL_RESULT_POLY_DIM _wWallThrough;
-            MV1_COLL_RESULT_POLY_DIM _playercap;
             MV1_COLL_RESULT_POLY _fall;
-            MV1_COLL_RESULT_POLY _bFall;
-            MV1_COLL_RESULT_POLY _wFall;
-
-            VECTOR _debugNum1{ 0, 0, 0 };
-            VECTOR _debugNum2{ 0, 0, 0 };
-
+        
             float _radius1{ 0.0f };
             float _radius2{ 0.0f };
         };

@@ -13,23 +13,30 @@
 
 using namespace GlassHeart;
 
-Model::ModelAnimeManager::ModelAnimeManager(Object::ObjectBase& owner) : Model::ModelManager{ owner } {}
+Model::ModelAnimeManager::ModelAnimeManager(Object::ObjectBase& owner) : ModelManager{ owner }
+{
+}
 
-Model::ModelAnimeManager::~ModelAnimeManager() {
+Model::ModelAnimeManager::~ModelAnimeManager()
+{
     MV1DetachAnim(_handle, _attachIndex);
 }
 
-void Model::ModelAnimeManager::Init(){}
+void Model::ModelAnimeManager::Init()
+{
+}
 
-void Model::ModelAnimeManager::Register(std::string_view key, int animIndex) {
+void Model::ModelAnimeManager::Register(std::string_view key, int animIndex)
+{
     if (_registry.contains(key.data())) {
         _registry.erase(key.data());
     }
     _registry.emplace(key, animIndex);
 }
 
-void Model::ModelAnimeManager::Update() {
-    // 再生時間をセットする
+void Model::ModelAnimeManager::Update()
+{
+    //AnimeBlend();
     MV1SetAttachAnimTime(_handle, _attachIndex, _playTime);
 
     // ワールド行列更新
@@ -37,6 +44,7 @@ void Model::ModelAnimeManager::Update() {
 
     // 再生時間を進める
     _playTime += (1.f * _timeRate);
+    _animrate += 0.3f;
 
     if (_playTime >= _totalTime) {
         if (_repeate) {
@@ -52,17 +60,23 @@ void Model::ModelAnimeManager::Update() {
     }
 }
 
-void Model::ModelAnimeManager::Draw() {
+void Model::ModelAnimeManager::Draw()
+{
     MV1DrawModel(_handle);
 }
 
-void Model::ModelAnimeManager::ChangeAnime(std::string_view key, bool repeate) {
+void Model::ModelAnimeManager::ChangeAnime(std::string_view key, bool repeate)
+{
     auto newAnimIndex = _owner.GetGame().GetResourceServer().GetModelAnimIndex(_key, key);
     if (_animIndex == newAnimIndex) {
         return;
     }
     _animIndex = newAnimIndex;
-    // アニメーションをデタッチする
+    /*if (_oldattachIndex == _attachIndex) {
+
+    }
+    // 前のアタッチ番号を保持
+    _oldattachIndex = _attachIndex;*/
     MV1DetachAnim(_handle, _attachIndex);
     // 新しいアニメーションをアタッチする
     _attachIndex = MV1AttachAnim(_handle, newAnimIndex, -1, FALSE);
@@ -70,6 +84,23 @@ void Model::ModelAnimeManager::ChangeAnime(std::string_view key, bool repeate) {
     _totalTime = MV1GetAttachAnimTotalTime(_handle, _attachIndex);
 
     _playTime = 0.0f;
+    _animrate = 1.0f;
     _repeatedCount = 0;
     _repeate = repeate;
+}
+
+void Model::ModelAnimeManager::AnimeBlend()
+{
+    if (_animrate >= 1.0f) 
+    {
+        MV1SetAttachAnimTime(_handle, _attachIndex, _playTime);
+        _animrate = 1.0f;
+        MV1DetachAnim(_handle, _oldattachIndex);
+        _oldattachIndex = -1;
+    }
+    else
+    {
+        MV1SetAttachAnimBlendRate(_handle, _oldattachIndex, 1.0f - _animrate);
+        MV1SetAttachAnimBlendRate(_handle, _attachIndex, _animrate);
+    }
 }

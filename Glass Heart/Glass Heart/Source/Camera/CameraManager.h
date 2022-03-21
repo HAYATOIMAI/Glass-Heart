@@ -21,11 +21,14 @@ namespace GlassHeart {
 
         class CameraManager {
         public:
+            /**
+             * @brief コンストラクタ
+             * 
+             */
             CameraManager();
             /// 初期化
             void Init();
-            /// 入力処理
-            void Input(AppFrame::InputManager& input);
+            void Input(AppFrame::InputManager& input) {};
             /// 更新処理
             void Update();
             /// 描画処理

@@ -46,6 +46,8 @@ namespace AppFrame {
          */
         void SetVolume(std::string_view key, int volume);
 
+        void StopSound(std::string_view key);
+
         void SetMute(bool isMute) { _isMute = isMute; }
     private:
         void Play(std::string_view key, int playType);

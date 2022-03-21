@@ -58,6 +58,3 @@ namespace AppFrame::Math {
         _matrixArray _rowColumn;
     };
 }
-
-
-

@@ -44,16 +44,6 @@ namespace GlassHeart {
              */
             bool Register(std::string_view type, std::unique_ptr<CreateBase> creator);
             /**
-             * @brief
-             */
-            struct SpawnRecord {
-                unsigned int _progress{ 0 };
-                std::string _key;
-                VECTOR _position{ 0, 0, 0 };
-                VECTOR _rosition{ 0, 0, 0 };
-            };
-            using SpawnTable = std::vector<SpawnRecord>;
-            /**
              * @brief オブジェクトの生成
              *
              * @param type 文字列キー
@@ -61,30 +51,16 @@ namespace GlassHeart {
              */
             std::unique_ptr<ObjectBase> Create(std::string_view type);
             /**
-             * @brief
-             *
-             * @param spawnTable
-             */
-            void SetSpawnTable(SpawnTable spawnTable);
-            /**
-             * @brief
-             *
-             */
-            void UpdateSpawn();
-            /**
              * @brief 全オブジェクト消去
              *
              */
             void Clear();
-
         private:
             GameMain& _game;
             std::unordered_map<std::string, std::unique_ptr<CreateBase>> _creatorMap;
-            std::vector<SpawnRecord> _spawnTable;
             unsigned int _progress{ 0 };
             unsigned int _spawnProgress{ 0 };
         };
-
         /**
          * @class CreateBase
          * @brief ObjectFactoryに登録するクリエイターの基底クラス
@@ -94,6 +70,14 @@ namespace GlassHeart {
         public:
             virtual ~CreateBase() = default;
             virtual std::unique_ptr<ObjectBase> Create(GameMain& game) = 0;
+        };
+        /**
+        * @class GirlCreate
+        * @brief ガール用のクリエイター
+        */
+        class GirlCreate : public CreateBase {
+        public:
+            virtual std::unique_ptr<ObjectBase> Create(GameMain& game);
         };
         /**
         * @class GoalPointCreate
@@ -131,7 +115,7 @@ namespace GlassHeart {
         class FollowCameraCreate : public CreateBase {
             virtual std::unique_ptr<ObjectBase> Create(GameMain& game);
         };
-    }
-}
+    } // Object
+} // GlassHeart
 
 

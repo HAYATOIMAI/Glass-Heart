@@ -11,42 +11,45 @@
 
 using namespace GlassHeart;
 
-//!< コンストラクタ
+/** コンストラクタ */
 Mode::ModeTeamLogo::ModeTeamLogo(GameMain& game) : Mode::ModeMain{ game }{}
+/** 初期化処理 */
 void Mode::ModeTeamLogo::Init() {
-    //!< 使用する画像のテーブル
+    // 使用する画像のテーブル
     const AppFrame::ResourceServer::GraphMap useGraph{
-    {"TitleBg",          {"TeamLogo/TeamLogo.png",          1, 1, 1920, 1080}} };
-
-    //!< リソースサーバーを取得
+    {"TeamLogo",          {"TeamLogo/TeamLogo.png",          1, 1, 1920, 1080}} };
+    // リソースサーバーを取得
     auto& res = GetResourceServer();
-
-    //!< 画像の読み込み
+    // 画像の読み込み
     res.LoadGraphics(useGraph);
+    // 画像のハンドルの取得
+    _teamLogo = res.GetGraph("TeamLogo");
+    _fadeCount = 30;
 
-    //!< 画像のハンドルの取得
-    _titleBgHandle = res.GetGraph("TitleBg");
-
-    //!< サウンドマネージャーを取得
-    auto& sm = GetSoundManager();
-    sm.PlayLoop("bgm1");
-    sm.SetVolume("bgm1", 50);
+    //!< 使用するモデル
+    AppFrame::ResourceServer::ModelMap useModel{
+    {"Stage", "Stage/Stage02.mv1"},
+    {"BackGround",  "BackGround/bg.mv1"},
+    };
+    //!< モデルの読み込み
+    GetResourceServer().LoadModels(useModel);
 }
-//!< 入り口処理
+/** 入り口処理 */
 void Mode::ModeTeamLogo::Enter() {
 }
-//!< 入力処理
+/** 入力処理 */
 void Mode::ModeTeamLogo::Input(AppFrame::InputManager& input) {
-    if (input.GetJoyPad().GetXinputButtonB()) {
+    if (input.GetJoyPad().GetXinputButtonB() || _fadeCount == 0) {
         GetModeServer().GoToMode("Title");
     }
 }
-//!< 更新処理
+/** 更新処理 */
 void Mode::ModeTeamLogo::Process() {
-    //_alpha = (_alpha + 8) % 255;
+    if (_fadeCount > 0) {
+        --_fadeCount;
+    }
 }
-//!< 描画処理
+/** 描画処理 */
 void Mode::ModeTeamLogo::Render() {
-    DrawGraph(0, 0, _titleBgHandle, FALSE);
-    //SetDrawBlendMode(DX_BLENDMODE_ALPHA, _alpha);
+    DrawGraph(0, 0, _teamLogo, FALSE);
 }

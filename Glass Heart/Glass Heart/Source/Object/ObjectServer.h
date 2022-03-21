@@ -31,7 +31,7 @@ namespace GlassHeart {
             /**
              * @brief オブジェクトの追加
              *
-             * @param obj
+             * @param[in] obj ユニークポインタ
              */
             void Add(std::unique_ptr<ObjectBase> obj);
             /**
@@ -68,7 +68,7 @@ namespace GlassHeart {
              *
              * @return オブジェクトの一覧の参照
              */
-            std::vector<std::unique_ptr<ObjectBase>>& GetObjectLists() { return _objects; }
+            inline std::vector<std::unique_ptr<ObjectBase>>& GetObjectLists() { return _objects; }
             /**
              * @brief 登録したオブジェクトの位置を得る
              *
@@ -84,12 +84,12 @@ namespace GlassHeart {
              */
             VECTOR GetForward(std::string_view key);
         private:
-            bool 	_updating{ false }; //!< 
-            std::vector<std::unique_ptr<ObjectBase>> _objects;
-            std::vector<std::unique_ptr<ObjectBase>> _pendingObjects;
-            std::unordered_map<std::string, VECTOR> _registry;
+            bool _updating{ false };                                  //!< 更新中かを判断するフラグ
+            std::vector<std::unique_ptr<ObjectBase>> _objects;        //!< 登録リスト
+            std::vector<std::unique_ptr<ObjectBase>> _pendingObjects; //!< 保留リスト
+            std::unordered_map<std::string, VECTOR> _registry;        //!< レジストリ
         };
-    }
-}
+    } // Object
+} // GlassHeart
 
 

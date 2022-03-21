@@ -24,7 +24,7 @@ namespace AppFrame {
          */
         void Process();
 
-        InputJoypad& GetJoyPad() { return _inputjoy; }
+        inline InputJoypad& GetJoyPad() { return _inputjoy; }
 
     private:
         InputJoypad _inputjoy;  //!< インプットジョイパッドクラスの参照

@@ -23,10 +23,6 @@ namespace GlassHeart {
             void Enter() override;
             void Input(AppFrame::InputManager& input) override;
             void Update() override;
-
-            void Landing();
-        private:
-
         };
-    }
-}
+    }// State 
+}// GlassHeart

@@ -8,6 +8,7 @@
  *********************************************************************/
 #pragma once
 #include "StateManager.h"
+#include <AppFrame.h>
 
 namespace GlassHeart {
 
@@ -35,8 +36,8 @@ namespace GlassHeart {
         protected:
             Player::Player& _owner; //!< プレイヤークラスの参照
         };
-    }
-}
+    } // State 
+} // GlassHeart
 
 
 

@@ -44,15 +44,8 @@ namespace GlassHeart {
              *
              */
             void Update() override;
-            /**
-             * @brief 着地処理
-             * 
-             */
-            void Landing();
         private:
-            float _addVx{ 0.0f }; //!< ストレイフ用X軸移動量
-            float _subVx{ 0.0f };
-            float _reVx{ 0.0f };
+            int _cnt{ 0 };
         };
-    }
-}
+    }  //  State 
+} // GlassHeart

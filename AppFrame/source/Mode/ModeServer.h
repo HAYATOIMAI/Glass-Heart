@@ -13,7 +13,7 @@
 #include <list>
 
 namespace AppFrame {
-    /** 二重インクルード防止 */
+    /** 前方宣言 */
     class ModeBase;
     class InputManager;
     class GameBase;

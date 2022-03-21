@@ -7,7 +7,8 @@
  * @date   December 2021
  *********************************************************************/
 #pragma once
-#include "AppFrame.h"
+#include <AppFrame.h>
+#include <memory>
 
 namespace GlassHeart {
 
@@ -16,6 +17,12 @@ namespace GlassHeart {
 		class ObjectServer;
 		class ObjectFactory;
 	}
+	namespace Effect {
+		class EffectServer;
+	}
+	namespace UI {
+		class UI;
+	}
 	/**
 	 * @class GameMain
 	 * @brief このプロジェクトのメイン処理
@@ -23,7 +30,15 @@ namespace GlassHeart {
 	class GameMain : public AppFrame::GameBase {
 		using base = AppFrame::GameBase;
 	public:
+		/**
+		 * @brief コンストラクタ
+		 * 
+		 */
 		GameMain();
+		/**
+		 * @brief デストラクタ
+		 * 
+		 */
 		~GameMain() override;
 		/**
 		 * @brief  初期化処理
@@ -56,8 +71,13 @@ namespace GlassHeart {
 
 		inline Object::ObjectFactory& GetObjectFactory() const { return *_objFactory; }
 
+		inline UI::UI& GetUI() const { return *_ui; }
+
+		inline Effect::EffectServer& GetEffectServer() const { return *_effectServer; }
 	private:
-		std::unique_ptr<Object::ObjectServer> _objServer;  //!< オブジェクトサーバーのユニークポインタ
-		std::unique_ptr<Object::ObjectFactory> _objFactory;	 //!< オブジェクトファクトリーのユニークポインタ
+		std::unique_ptr<Object::ObjectServer> _objServer;                //!< オブジェクトサーバーのユニークポインタ
+		std::unique_ptr<Object::ObjectFactory> _objFactory;	             //!< オブジェクトファクトリーのユニークポインタ
+		std::unique_ptr<GlassHeart::UI::UI> _ui;                         //!< UIのユニークポインタ
+		std::unique_ptr<GlassHeart::Effect::EffectServer> _effectServer; //!< エフェクトサーバーのユニークポインタ
 	};
 }

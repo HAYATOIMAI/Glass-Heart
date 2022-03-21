@@ -8,6 +8,7 @@
  *********************************************************************/
 #include "StateIdle.h"
 #include <AppFrame.h>
+#include "../Application/GameMain.h"
 #include "../Player/Player.h"
 #include "../Model/ModelAnimeManager.h"
 #include "../Collision/CollisionManager.h"
@@ -15,37 +16,35 @@
 using namespace GlassHeart;
 
 void State::StateIdle::Enter() {
+
+	if (_resetFlag == false) {
+		_owner.SetWhite();
+		_resetFlag = true;
+	}
+
 	_owner.SetForwardSpeed(0.0f);
+	// 待機モーションを再生
 	_owner.GetModelAnime().ChangeAnime("idle", true);
 }
 
 void State::StateIdle::Input(AppFrame::InputManager& input) {
+	auto& game = _owner.GetGame();
+
 	if (input.GetJoyPad().GetXinputThumbLX()) {
+		game.GetSoundManager().PlayLoop("run");
 		_owner.GetStateManage().PushBack("Run");
 	}
+	else if (!input.GetJoyPad().GetXinputThumbLX()) {
+		game.GetSoundManager().StopSound("run");
+	}
 	if (input.GetJoyPad().GetXTriggerButtonA() && _cnt == 0) {
-		//連打防止のため5フレーム間入力を制限
+		game.GetSoundManager().Play("jump");
 		_cnt = 5;
 		_owner.GetStateManage().PushBack("Jump");
 	}
 }
 
 void State::StateIdle::Update() {
-	// 空中の足場と接しているか
-	if (_owner.GetCollision().Mcrp().HitFlag == 1) {
-	    _owner.SetPosition(_owner.GetCollision().CheckHitFloor(_owner.GetPosition(), { 0, 3, 0 }));
-	}
-
-	if (_owner.GetCollision().GetBThrough().HitFlag == 1) {
-		if (_owner.GetColourState() == Player::Player::ColourState::White) {
-			_owner.SetPosition(_owner.GetCollision().CheckThroughBMesh(_owner.GetPosition(), { 0, 3, 0 }));
-		}
-	}
-	if (_owner.GetCollision().GetWThrough().HitFlag == 1) {
-		if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-			_owner.SetPosition(_owner.GetCollision().CheckThroughWMesh(_owner.GetPosition(), { 0, 3, 0 }));
-		}	
-	}
 	// 入力制限の為カウンタを減少
 	if (_cnt > 0) {
 		--_cnt;

@@ -79,6 +79,18 @@
     <Filter Include="ソース ファイル\CheckPoint">
       <UniqueIdentifier>{9acbd6c9-cd2a-4c46-9b3f-688422b9ff06}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Effect">
+      <UniqueIdentifier>{cfef9fea-4b7b-4d1e-88f7-c4e0a848ac20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Effect">
+      <UniqueIdentifier>{0a178c0a-bdf1-4fbb-9a5c-1be69bde9ac6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\UI">
+      <UniqueIdentifier>{af741fef-1c41-483b-a8c4-9a2ac68697f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\UI">
+      <UniqueIdentifier>{0be92ad8-78f9-4299-a21c-74c951f6defb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Camera\CameraManager.h">
@@ -156,9 +168,6 @@
     <ClInclude Include="Source\State\StateFall.h">
       <Filter>ヘッダー ファイル\State</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Player\LoadParamater.h">
-      <Filter>ヘッダー ファイル\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Camera\FollowCamera.h">
       <Filter>ヘッダー ファイル\Camera</Filter>
     </ClInclude>
@@ -167,6 +176,21 @@
     </ClInclude>
     <ClInclude Include="Source\CheckPoint\GoalPoint.h">
       <Filter>ヘッダー ファイル\CheckPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mode\ModeLoading.h">
+      <Filter>ヘッダー ファイル\Mode</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Effect\EffectManager.h">
+      <Filter>ヘッダー ファイル\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Effect\EffectServer.h">
+      <Filter>ヘッダー ファイル\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\UI.h">
+      <Filter>ヘッダー ファイル\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Player\Girl.h">
+      <Filter>ヘッダー ファイル\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -245,9 +269,6 @@
     <ClCompile Include="Source\State\StateFall.cpp">
       <Filter>ソース ファイル\State</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Player\LoadParamater.cpp">
-      <Filter>ソース ファイル\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Camera\FollowCamera.cpp">
       <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
@@ -257,8 +278,20 @@
     <ClCompile Include="Source\CheckPoint\GoalPoint.cpp">
       <Filter>ソース ファイル\CheckPoint</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <ClCompile Include="Source\Mode\ModeLoading.cpp">
+      <Filter>ソース ファイル\Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Effect\EffectManager.cpp">
+      <Filter>ソース ファイル\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Effect\EffectServer.cpp">
+      <Filter>ソース ファイル\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\UI.cpp">
+      <Filter>ソース ファイル\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Player\Girl.cpp">
+      <Filter>ソース ファイル\Player</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

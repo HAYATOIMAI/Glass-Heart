@@ -78,9 +78,6 @@
     <ClInclude Include="source\Sound\SoundManager.h">
       <Filter>ヘッダー ファイル\Sound</Filter>
     </ClInclude>
-    <ClInclude Include="source\Resource\PathServer.h">
-      <Filter>ヘッダー ファイル\Resource</Filter>
-    </ClInclude>
     <ClInclude Include="source\Math\Vector4.h">
       <Filter>ヘッダー ファイル\Math</Filter>
     </ClInclude>
@@ -118,9 +115,6 @@
     </ClCompile>
     <ClCompile Include="source\Application\GameBase.cpp">
       <Filter>ソース ファイル\Application</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Resource\PathServer.cpp">
-      <Filter>ソース ファイル\Resource</Filter>
     </ClCompile>
     <ClCompile Include="source\Math\Vector4.cpp">
       <Filter>ソース ファイル\Math</Filter>

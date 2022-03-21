@@ -12,36 +12,29 @@
 #include "../Object/ObjectFactory.h"
 #include "../Object/ObjectServer.h"
 #include "../Player/Player.h"
+#include "../UI/UI.h"
 #include <AppFrame.h>
 
 using namespace GlassHeart;
 
-int Mode::ModeMain::_count;
-int Mode::ModeMain::_countSeconds;
-int Mode::ModeMain::_countMinutes;
-
-//!< コンストラクタ
+/** コンストラクタ */
 Mode::ModeGame::ModeGame(GameMain& game) : ModeMain{ game } {}
-//!< 初期化処理
+/** 初期化処理 */
 void Mode::ModeGame::Init() {
-    //!< 使用するモデル
-    AppFrame::ResourceServer::ModelMap usemap{
-    {"Player",    "Boy/PC2_motion.mv1"},
-    //{"SkySphere", "skysphere.mv1"},
-    /*{"Ground",    "ground.mv1"},
-    {"Terrain",   "Ground/Ground.mv1"},
-    {"Test",      "Test/ST_test.mv1"},*/
-    {"Stage", "Test/Zenhan.mv1"},
-    };
-    //!< モデルの読み込み
-    GetResourceServer().LoadModels(usemap);
+    // リソースサーバーを取得
+    auto& res = GetResourceServer();
+    // 画像のハンドルの取得
+    _teamLogo = res.GetGraph("TeamLogo");
+    _titleLogo = res.GetGraph("TitleLogo");
 }
-//!< 入り口処理
+/** 入り口処理 */
 void Mode::ModeGame::Enter() {
-    // ファクトリの生成とクリエイターの登録
+    // ファクトリーの生成とクリエイターの登録
     auto& of = GetObjectFactory();
+    auto& os = GetObjectServer();
 
     of.Register("Player", std::make_unique<Object::PlayerCreate>());
+    of.Register("Girl", std::make_unique<Object::GirlCreate>());
     of.Register("FollowCamera", std::make_unique<Object::FollowCameraCreate>());
     of.Register("Stage", std::make_unique<Object::StageCreate>());
     of.Register("CheckPoint", std::make_unique<Object::CheckPointCreate>());
@@ -49,10 +42,12 @@ void Mode::ModeGame::Enter() {
 
     auto player = of.Create("Player");
 
-    auto& os = GetObjectServer();
-
     os.Register("Player", player->GetPosition());
     os.Add(std::move(player));
+
+    auto girl = of.Create("Girl");
+    os.Register("Girl", girl->GetPosition());
+    os.Add(std::move(girl));
 
     auto followCamera = of.Create("FollowCamera");
     os.Register("FollowCamera", followCamera->GetPosition());
@@ -64,60 +59,78 @@ void Mode::ModeGame::Enter() {
     auto checkPoint = of.Create("CheckPoint");
     os.Add(std::move(checkPoint));
 
+    auto goalPoint = of.Create("GoalPoint");
+    os.Add(std::move(goalPoint));
+
     auto& sm = GetSoundManager();
+    sm.PlayLoop("bgm");
 
-    sm.PlayLoop("bgm3");
+    _count = 60;
+    _countSeconds = 350;
 
-    _count = 0;
-    _countSeconds = 0;
-    _countMinutes = 0;
+    auto& ui = GetUI();
+    ui.Enter();
+    
+    _deathDrawHundle = _game.GetResourceServer().GetGraph("Death");
 
     Process();
 }
-//!< 入力処理
+/** 入力処理 */
 void Mode::ModeGame::Input(AppFrame::InputManager& input) {
-    if (input.GetJoyPad().GetXinputStart()) {
-        GetModeServer().GoToMode("Title");
-    }
     GetObjectServer().Input(input);
 }
-//!< 更新処理
+/** 更新処理 */
 void Mode::ModeGame::Process() {
-    GetObjectFactory().UpdateSpawn();
     GetObjectServer().Process();
-
-    if (_count < 60) {
-        ++_count;
+   // タイマー処理
+    if (_count <= 60) {
+        --_count;
     }
-    if (_count == 60) {
-        _count = 0;
-        ++_countSeconds;
+    if (_count == 0) {
+        _count = 60;
+        --_countSeconds;
     }
-    if (_countSeconds == 60) {
+    if (_countSeconds < 0) {
         _countSeconds = 0;
-        ++_countMinutes;
     }
+    if (_countSeconds == 0) {
+        GetModeServer().GoToMode("GameClear");
+    }
+    GetUI().Process(_countSeconds);
 }
-//!< 描画処理
+/** 描画処理 */
 void Mode::ModeGame::Render() {
     GetObjectServer().Render();
-
+    GetUI().Render(100, 100, 0.05);
+    GetUI().NumberRender(400, 100, 80, 1.0);
+    for (auto& itr : GetObjectServer().GetObjectLists()) {
+        if (itr->GetObjectType() == Object::ObjectBase::ObjectType::Player) {
+            if (itr->GetDeadFlag()) {
+                DrawRotaGraph(960, 540, 1.0, 0.0, _deathDrawHundle, TRUE);
+            }
+        }
+    }
+    DrawBillboard3D(VGet(22500.0f, 12600.0f, 200.0f), 0.5f, 0.5f, 800.0f, 0.0f, _teamLogo, TRUE);
+    DrawBillboard3D(VGet(25450.0f, 12400.0f, 200.0f), 0.5f, 0.5f, 1200.0f, 0.0f, _titleLogo, TRUE);
 #ifdef _DEBUG
     auto x = 1000; auto y = 0; auto size = 32;
     auto white = GetColor(255, 255, 255);
 
-    // 現在の時間(仮)
-    DrawFormatString(x, y, white, "現在の時間: %d ", _count); y += size;
+    //DrawFormatString(x, y, white, "現在の時間: %d ", _count); y += size;
     DrawFormatString(x, y, white, "現在の時間: %d秒 ", _countSeconds); y += size;
-    DrawFormatString(x, y, white, "現在の時間: %d分 ", _countMinutes); y += size;
 #endif // DEBUG
 }
-//!< 終了処理
+/** 終了処理 */
 void Mode::ModeGame::Exit() {
-    ////!< オブジェクトを消去
+
+    auto& sm = GetSoundManager();
+    sm.StopSound("bgm");
+    sm.StopSound("run");
+
+    //// オブジェクトを消去
     //GetObjectServer().AllClear();
-    ////!< リソースの消去
+    //// リソースの消去
     //GetResourceServer().AllClear();
-    ////!< クリエイターを削除
+    //// クリエイターを削除
     //GetObjectFactory().Clear();
 }

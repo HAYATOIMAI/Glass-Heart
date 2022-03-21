@@ -10,11 +10,14 @@
 #include "../Player/Player.h"
 #include "../Collision/CollisionManager.h"
 #include "../Model/ModelAnimeManager.h"
+#include "../Application/GameMain.h"
 #include <numbers>
 
 namespace {
-    constexpr auto DownVector = 13.5f; // Y軸の移動量ベクトル下降量
-    constexpr auto StraifVector = 10.0f; // ストレイフ用X軸移動量
+    constexpr auto StraifVector = 6.5f; // ストレイフ用X軸移動量
+    constexpr auto Gravity = -0.6f;  //!< 重力加速度
+    constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f); //!< 右方向の角度
+    constexpr auto LeftRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 左方向の角度
 }
 
 using namespace GlassHeart;
@@ -23,103 +26,83 @@ State::StateJumpFall::StateJumpFall(Player::Player& owner) : StateBase{ owner } 
 
 void State::StateJumpFall::Enter() {
     _owner.GetModelAnime().ChangeAnime("Jump_End", true);
+    auto& game = _owner.GetGame();
+    game.GetSoundManager().StopSound("run");
 }
 
 void State::StateJumpFall::Input(AppFrame::InputManager& input) {
-   
-
+    _owner.SetForwardSpeed(0.f);
     if (input.GetJoyPad().GetAnalogStickLX() >= 5000 && input.GetJoyPad().GetAnalogStickLX() > 1) {
         // 右方向に向きを変更
-        _owner.SetRotation(VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
-        _subVx = -StraifVector;
-        input.GetJoyPad().InputReject();
+        _owner.SetRotation(VGet(0.0f, RightRotation, 0.0f));
+        _owner.SetForwardSpeed(StraifVector);
     }
     if (input.GetJoyPad().GetAnalogStickLX() <= -5000 && input.GetJoyPad().GetAnalogStickLX() < 1) {
         // 左方向に向きを変更
-        _owner.SetRotation(VGet(0.0f, 90.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
-        _addVx = StraifVector;
-        input.GetJoyPad().InputReject();
+        _owner.SetRotation(VGet(0.0f, LeftRotation, 0.0f));
+        _owner.SetForwardSpeed(StraifVector);
     }
 }
 /** 更新処理 */
 void State::StateJumpFall::Update() {
-
-    // 足場と接しているか
-    Landing();
+    // 入力制限の為カウンタを減少
+    if (_cnt > 0) {
+        --_cnt;
+    }
 
     auto pos = _owner.GetPosition();
 
-    // リスポーン処理
-    if (_owner.GetCollision().GetDeathMesh().HitNum >= 1) {
+    auto forward = VScale(_owner.GetForward(), _owner.GetForwardSpeed());
 
-        if (_owner.GetColourState() == Player::Player::ColourState::White) {
-            _owner.ResetPos();
-            // _owner.GetStateManage().PushBack("Dead");
-        }
-        if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-            _owner.SetPosition(VGet(pos.x, pos.y, pos.z));
-        }
-    }
-    //IsDeath();
-}
-void State::StateJumpFall::Landing() {
+    auto jumpVelocity = _owner.GetJumpVelocity();
+    jumpVelocity.y += Gravity;
+    _owner.SetJumpVelocity(jumpVelocity);
 
-     _owner.GetCollision().CheckJumpStand(_owner.GetPosition(), { 0, 3, 0 });
-     _owner.GetCollision().CheckHitDeathMesh(_owner.GetPosition(), { 0, 3, 0 });
-     _owner.GetCollision().CheckThroughBMesh(_owner.GetPosition(), { 0, 3, 0 });
-     _owner.GetCollision().CheckThroughWMesh(_owner.GetPosition(), { 0, 3, 0 });
-     _owner.GetCollision().CheckHitWall(_owner.GetPosition(), { 0, 3, 0 });
+    forward.y = jumpVelocity.y;
 
-    // 空中の足場と接していなかったらゆっくり落下させる
-    // 途中スティックの入力があった場合、入力に応じた角度に補正
-    if (_owner.GetCollision().GetStand().HitFlag == 0) {
-            if (_addVx > 0 )  {
-                _owner.SetPosition(VGet(_owner.GetPosition().x + _addVx, _owner.GetPosition().y - DownVector, _owner.GetPosition().z));
-                _addVx = 0;
-            }
-            else  {
-                _owner.SetPosition(VGet(_owner.GetPosition().x + _subVx, _owner.GetPosition().y - DownVector, _owner.GetPosition().z));
-                _subVx = 0;
-            }
-        if (_owner.GetCollision().CollPol().HitNum >= 1) {
-            if (_owner.GetRotation().y == 270.0f * (std::numbers::pi_v<float> / 180.0f)) {
-                _owner.SetRotation(VGet(0.0f, 90.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
-                _reVx += 80.0f;
-            }
-            else if (_owner.GetRotation().y == 90.0f * (std::numbers::pi_v<float> / 180.0f)) {
-                _owner.SetRotation(VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f));
-                _reVx -= 80.0f;
-            }
-            _owner.SetPosition(VGet(_owner.GetPosition().x + _reVx, _owner.GetPosition().y, _owner.GetPosition().z));
-        }
-    }
-    else {
-        // 着地したら状態を削除
-        _owner.GetStateManage().PushBack("Idle");
-        //_addVx = 0.f;
-    }
+    int state = static_cast<int> (_owner.GetColourState());
+    pos = _owner.GetCollision().CheckHitSideAndBottom(pos, { forward.x, 0.f, 0.f }, state);
 
-    // 空中の足場と接しているか
+    pos = _owner.GetCollision().CheckJumpStand(pos, { 0.f, forward.y, 0.f }, state);
+
     if (_owner.GetCollision().GetStand().HitFlag == 1) {
-            _owner.SetPosition(_owner.GetCollision().GetStand().HitPosition);
-            // 着地したら状態を削除
-            _owner.GetStateManage().PushBack("Idle");
+        _owner.GetStateManage().GoToState("Idle");
     }
-    // 白色のみ透ける足場に接しているか
-    if (_owner.GetCollision().GetBThrough().HitFlag == 1) {
-        // 接している足場と異なる色の場合のみとどまる
-        if (_owner.GetColourState() == Player::Player::ColourState::White) {
-            _owner.SetPosition(_owner.GetCollision().GetBThrough().HitPosition);
-            _owner.GetStateManage().PushBack("Idle");
+    if (_owner.GetColourState() == Player::Player::ColourState::Black) {
+
+        if (_owner.GetCollision().GetWThrough().HitFlag == 1) {
+            _owner.GetStateManage().GoToState("Idle");
         }
+    }
+    if (_owner.GetColourState() == Player::Player::ColourState::White) {
+        if (_owner.GetCollision().GetBThrough().HitFlag == 1) {
+           _owner.GetStateManage().GoToState("Idle");
+        }
+    }
+    if (_owner.GetColourState() == Player::Player::ColourState::Black) {
+        pos = _owner.GetCollision().CheckHitWDeathMesh(pos, { 0.f, forward.y, 0.f });
     }
   
-    // 黒色のみ透ける足場に接しているか
-    if (_owner.GetCollision().GetWThrough().HitFlag == 1) {
-        // 接している足場と異なる色の場合のみとどまる
+    if (_owner.GetCollision().GetWDeathMesh().HitNum >= 1) {
+        if (_owner.GetColourState() == Player::Player::ColourState::White) {
+        }
         if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-            _owner.SetPosition(_owner.GetCollision().GetWThrough().HitPosition);
-            _owner.GetStateManage().PushBack("Idle");
+            _owner.ResetPos();
         }
     }
+    if (_owner.GetColourState() == Player::Player::ColourState::White) {
+        pos = _owner.GetCollision().CheckHitBDeathMesh(pos, { 0.f, forward.y, 0.f });
+    }
+  
+    if (_owner.GetCollision().GetBDeathMesh().HitNum >= 1) {
+        if (_owner.GetColourState() == Player::Player::ColourState::White) {
+            _owner.ResetPos();
+        }
+        if (_owner.GetColourState() == Player::Player::ColourState::Black) {
+            // SetPosition(VGet(_position.x, _position.y, _position.z));
+
+        }
+    }
+
+    _owner.SetPosition(pos);
 }

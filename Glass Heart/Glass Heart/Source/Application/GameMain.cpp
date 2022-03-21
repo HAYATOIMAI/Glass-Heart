@@ -12,19 +12,20 @@
 #include "../Mode/ModeTitle.h"
 #include "../Mode/ModeTeamLogo.h"
 #include "../Mode/ModeClear.h"
+#include "../Mode/ModeLoading.h"
 #include "../Object/ObjectFactory.h"
 #include "../Object/ObjectServer.h"
+#include "../Effect/EffectServer.h"
+#include "../UI/UI.h"
 
 using namespace GlassHeart;
 
 /** 実体 */
 GameMain _gameMain;
 /** コンストラクタ */
-GameMain::GameMain() {
-}
+GameMain::GameMain() {}
 /** デストラクタ */
-GameMain::~GameMain() {
-}
+GameMain::~GameMain() {}
 /**  初期化処理 */
 bool GameMain::Initialize(HINSTANCE hInstance) {
     if (!base::Initialize(hInstance)) { return false; }
@@ -35,57 +36,77 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     /** リソースのカレントフォルダ設定 */
     res.ChangeCurrentFile("resource");
      
-    /** マテリアルの自己発光色を暗い青色にする */
+    /** エフェクトサーバーの生成 */
+    /*_effectServer = std::make_unique<GlassHeart::Effect::EffectServer>(*this);
+
+    _effectServer->ChangeCurrentFile("resource");
+
+    const Effect::EffectServer::EffectMap useefc{
+        {"death",{"Effect/EF_Death.efkefc",10.0f}},
+        {"run",{"Effect/EF_Dash.efkefc",10.0f}}
+    };
+
+    _effectServer->LoadEfeects(useefc);*/
+
+    
 #ifdef _DEBUG
-   /* MATERIALPARAM material;
+    /** マテリアルの自己発光色を暗い青色にする */
+    MATERIALPARAM material;
     material.Diffuse = GetColorF(0.0f, 0.0f, 0.0f, 1.0f);
     material.Specular = GetColorF(0.0f, 0.0f, 0.0f, 0.0f);
     material.Ambient = GetColorF(0.0f, 0.0f, 0.0f, 0.0f);
     material.Emissive = GetColorF(0.0f, 0.0f, 0.5f, 0.0f);
     material.Power = 20.0f;
-    SetMaterialParam(material);*/
+    SetMaterialParam(material);
 #endif
     /** 使用する音のテーブル */
-    const AppFrame::ResourceServer::SoundMap usesound {
-    {"cancel",  {"Sound/SE/SE_Cancel.mp3",true}},
-    {"cursor",  {"Sound/SE/SE_Cursor.mp3",true}},
-    {"death",   {"Sound/SE/SE_Death.mp3",true}},
-    {"jump",    {"Sound/SE/SE_Jump.mp3",true}},
-    {"landing", {"Sound/SE/SE_Landing.mp3",true}},
-    {"pick",    {"Sound/SE/SE_Pick.mp3",true}},
-    {"run",     {"Sound/SE/SE_Run.mp3",true}},
-    {"select",  {"Sound/SE/SE_Select.mp3",true}},
-    {"walk",    {"Sound/SE/SE_Walk.mp3",true}},
-    {"bgm3", {"Sound/BGM/BGM01_Ver2.mp3, ", true}}
+    const AppFrame::ResourceServer::SoundMap usesound{
+        // BGM
+        {"bgm",     {"Sound/BGM/BGM01_Ver2.mp3",false}},
+        {"titleBgm",  {"Sound/BGM/titleBGM.mp3",false}},
+        // SE
+        {"walk",    {"Sound/SE/SE_Walk.wav",true}},
+        {"run",     {"Sound/SE/SE_Run.wav",true}},
+        {"jump",    {"Sound/SE/SE_Jump.wav",true}},
+        {"landing", {"Sound/SE/SE_Landing.wav",true}},
+        {"death",   {"Sound/SE/SE_Death.wav",true}},
+        {"select",  {"Sound/SE/SE_Select.wav",true}}
     };
     /** 音を読み込み */
     res.LoadSounds(usesound);
 
-    //!< サウンドコンポーネントの取得
+    // サウンドマネージャーの取得
     auto& sm = GetSoundManager();
-    sm.SetVolume("damage", 128);
-    sm.SetVolume("bgm1", 128);
-    sm.SetVolume("bgm3", 128);
+    sm.SetVolume("bgm", 128);
+    sm.SetVolume("titleBgm", 128);
+    sm.SetVolume("walk", 128);
+    sm.SetVolume("run", 255);
+    sm.SetVolume("jump", 255);
+    sm.SetVolume("landing", 255);
+    sm.SetVolume("death", 128);
+    sm.SetVolume("select", 255);
 
     sm.SetMute(false);
 
-    //!< オブジェクトサーバーの生成
+    // オブジェクトサーバーの生成
     _objServer = std::make_unique<Object::ObjectServer>();
-    //!< オブジェクトファクトリーの生成
+    // オブジェクトファクトリーの生成
     _objFactory = std::make_unique<Object::ObjectFactory>(*this);
+    // ユーザーインターフェース生成
+    _ui = std::make_unique<GlassHeart::UI::UI>(*this);
 
-    ////!< モードサーバーを生成し、AMGモードを登録
-    //_modeServer = std::make_unique<AppFrame::ModeServer>("Amg", std::make_shared<Mode::ModeAmg>(*this));
-    ////// チームロゴモードを登録
-    //_modeServer->Register("TeamLogo", std::make_shared<Mode::ModeTeamLogo>(*this));
-    ////// タイトルモードを登録
-    //_modeServer->Register("Title", std::make_shared<Mode::ModeTitle>(*this));
-    //// インゲームモードを登録
-    //_modeServer->Register("InGame", std::make_shared<Mode::ModeGame>(*this));
-    //ゲームクリアモードを登録
-    //_modeServer->Register("GameClear", std::make_shared<GlassHeart::Mode::ModeClear>(*this));
-
-    _modeServer = std::make_unique<AppFrame::ModeServer>("InGame", std::make_shared<Mode::ModeGame>(*this));
+    // モードサーバーを生成し、AMGモードを登録
+    _modeServer = std::make_unique<AppFrame::ModeServer>("Amg", std::make_shared<Mode::ModeAmg>(*this));
+    // チームロゴモードを登録
+    _modeServer->Register("TeamLogo", std::make_shared<Mode::ModeTeamLogo>(*this));
+    // タイトルモードを登録
+    _modeServer->Register("Title", std::make_shared<Mode::ModeTitle>(*this));
+    //　ローディングモードを登録
+    _modeServer->Register("Loading", std::make_shared<Mode::ModeLoading>(*this));
+    // インゲームモードを登録
+    _modeServer->Register("InGame", std::make_shared<Mode::ModeGame>(*this));
+    // ゲームクリアモードを登録
+    _modeServer->Register("GameClear", std::make_shared<GlassHeart::Mode::ModeClear>(*this));
 
     return true;
 }
@@ -93,19 +114,19 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
 void GameMain::Terminate() {
     base::Terminate();
 }
-//!< 入力処理
+/** 入力処理 */
 void GameMain::Input() {
     base::Input();
 }
-//!< 更新処理
+/** 更新処理 */
 void GameMain::Process() {
     base::Process();
 }
-//!< 描画処理
+/** 描画処理 */
 void GameMain::Render() {
     base::Render();
 }
-//!< メインループ
+/** メインループ */
 void GameMain::Run() {
     base::Run();
 }

@@ -11,12 +11,20 @@
 #include "../Object/ObjectServer.h"
 #include "../Player/Player.h"
 
+namespace {
+    constexpr auto GoalPositionX = 25830.0f;    //!< ゴールの位置X
+    constexpr auto GoalPositionY = 12420.0f;     //!< ゴールの位置Y
+    constexpr auto GoalPositionZ = -30.0f;      //!< ゴールの位置Z
+}
+
+
 using namespace GlassHeart::CheckPoint;
 
 GoalPoint::GoalPoint(GameMain& game) : ObjectBase{ game } {
 
-    //_goalPoint = LoadGraph("resource/Test/2dMaterial/light3.png");
-    _position = VGet(-600.0f, 35.0f, -140.0f);
+    _goalPoint = LoadGraph("resource/Test/2dMaterial/light3.png");
+    _position = VGet(GoalPositionX, GoalPositionY, GoalPositionZ);
+    //_position = VGet(0.f, 0.f, 0.f);
     _radius = 100.0f;
     _hitFlag = false;
 }
@@ -25,7 +33,7 @@ GoalPoint::~GoalPoint() {}
 
 void GoalPoint::Process() {
 
-    GetObjectServer().Register("CheckPoint", _position);
+    GetObjectServer().Register("GoalPoint", _position);
 
     // チェックポイントとプレイヤーの当たり判定
     for (auto ite = GetObjectServer().GetObjectLists().begin(); ite != GetObjectServer().GetObjectLists().end(); ite++) {
@@ -40,11 +48,8 @@ void GoalPoint::Process() {
             else {
 
                 _hitFlag = false;
-
             }
-
         }
-
     }
 }
 
@@ -59,27 +64,18 @@ void GoalPoint::Render() {
     auto green = GetColor(0, 255, 0);
 
     if (_hitFlag == true) {
-
         _collsionManage->RenderCircle(_position, _radius, red);
-
     }
     else {
-
         _collsionManage->RenderCircle(_position, _radius, green);
-
     }
-
 #endif // _DEBUG
-
 }
 
 void GoalPoint::GoToGameClear() {
 
-    if (_hitFlag==true) {
-    
-        _game.GetModeServer().GoToMode("GameClear");
-    
-    }
-    
+    if (_hitFlag == true) {
 
+        _game.GetModeServer().GoToMode("GameClear");
+    }
 }
