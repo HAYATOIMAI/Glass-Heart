@@ -62,27 +62,22 @@ void State::StateRun::Update() {
     _owner.Move(VScale(_owner.GetForward(), _owner.GetForwardSpeed()));
 
 
-    //_owner.GetCollision().CheckHitBDeathMesh(pos, _owner.GetForward());
-    //_owner.GetCollision().CheckHitWDeathMesh(pos, _owner.GetForward());
-
-    //// ƒŠƒXƒ|[ƒ“ˆ—
-    //if (_owner.GetCollision().GetWDeathMesh().HitNum >= 1) {
-
-    //    if (_owner.GetColourState() == Player::Player::ColourState::White) {
-    //        //_owner.SetPosition();
-    //    }
-    //    if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-    //        _owner.ResetPos();
-    //        // _owner.GetStateManage().PushBack("Dead");
-    //    }
-    //} 
     //if (_owner.GetCollision().GetBDeathMesh().HitNum >= 1) {
     //    if (_owner.GetColourState() == Player::Player::ColourState::White) {
-    //        _owner.ResetPos();
-    //        // _owner.GetStateManage().PushBack("Dead");
+    //       // _owner.ResetPos();
+    //        _owner.GetStateManage().PushBack("Dead");
     //    }
     //    if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-    //       // _owner.SetPosition();
+    //        // SetPosition(VGet(_position.x, _position.y, _position.z));
+
+    //    }
+    //}
+    //if (_owner.GetCollision().GetWDeathMesh().HitNum >= 1) {
+    //    if (_owner.GetColourState() == Player::Player::ColourState::White) {
+    //    }
+    //    if (_owner.GetColourState() == Player::Player::ColourState::Black) {
+    //       // _owner.ResetPos();
+    //        _owner.GetStateManage().PushBack("Dead");
     //    }
     //}
    

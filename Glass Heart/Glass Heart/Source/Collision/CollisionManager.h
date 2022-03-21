@@ -56,14 +56,6 @@ namespace GlassHeart {
             /**
              * @brief 前半ステージ: 
              * 
-             * @param[in] pos 位置ベクトル
-             * @param[in] forward 移動量ベクトル
-             * @return 位置ベクトル
-             */
-            VECTOR CheckThroughWMesh(const VECTOR& pos, const VECTOR& forward);
-            /**
-             * @brief 前半ステージ: 
-             * 
              * @param[in] pos
              * @param[in] forward
              * @return 
@@ -77,30 +69,6 @@ namespace GlassHeart {
              * @return 
              */
             VECTOR CheckHitBDeathMesh(const VECTOR& pos, const VECTOR& forward);
-            /**
-             * @brief 前半ステージ: 
-             * 
-             * @param[in] pos
-             * @param[in] forward
-             * @return 
-             */
-            VECTOR CheckThroughBMesh(const VECTOR& pos, const VECTOR& forward);
-            /**
-             * @brief 前半ステージ: 
-             * 
-             * @param[in] pos
-             * @param[in] forward
-             * @return 
-             */
-            VECTOR CheckThroughWWallMesh(const VECTOR& pos, const VECTOR& forward);
-            /**
-             * @brief 前半ステージ: 
-             * 
-             * @param[in] pos
-             * @param[in] forward
-             * @return 
-             */
-            VECTOR CheckThroughBWallMesh(const VECTOR& pos, const VECTOR& forward);
             /**
              * @brief 前半ステージ: 空中の足場の落下処理
              * 

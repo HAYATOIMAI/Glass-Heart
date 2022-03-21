@@ -45,13 +45,30 @@ void State::StateFall::Input(AppFrame::InputManager& input) {
     if (input.GetJoyPad().GetAnalogStickLX() <= -5000 && input.GetJoyPad().GetAnalogStickLX() < 1) {
         // 左方向に向きを変更
         _owner.SetRotation(VGet(0.0f, LeftRotation, 0.0f));
-        //_addVx = StraifVector;
         _owner.SetForwardSpeed(StraifVector);
     }
 }
 
 void State::StateFall::Update() {
-    Landing();
+    //リスポーン処理
+    //if (_owner.GetCollision().GetBDeathMesh().HitNum >= 1) {
+    //    if (_owner.GetColourState() == Player::Player::ColourState::White) {
+    //        _owner.ResetPos();
+    //        _owner.GetStateManage().PushBack("Dead");
+    //    }
+    //    if (_owner.GetColourState() == Player::Player::ColourState::Black) {
+    //        // SetPosition(VGet(_position.x, _position.y, _position.z));
+
+    //    }
+    //}
+    //if (_owner.GetCollision().GetWDeathMesh().HitNum >= 1) {
+    //    if (_owner.GetColourState() == Player::Player::ColourState::White) {
+    //    }
+    //    if (_owner.GetColourState() == Player::Player::ColourState::Black) {
+    //        _owner.ResetPos();
+    //        _owner.GetStateManage().PushBack("Dead");
+    //    }
+    //}
     
     auto pos = _owner.GetPosition();
 
@@ -83,29 +100,32 @@ void State::StateFall::Update() {
         }
     }
 
+    pos = _owner.GetCollision().CheckHitWDeathMesh(pos, { 0.f, forward.y, 0 });
+
+
+    if (_owner.GetCollision().GetWDeathMesh().HitNum >= 1) {
+        if (_owner.GetColourState() == Player::Player::ColourState::White) {
+        }
+        if (_owner.GetColourState() == Player::Player::ColourState::Black) {
+           // _owner.ResetPos();
+           _owner.GetStateManage().PushBack("Dead");
+        }
+    }
+
+    pos = _owner.GetCollision().CheckHitBDeathMesh(pos, { 0.f, forward.y, 0 });
+
+    if (_owner.GetCollision().GetBDeathMesh().HitNum >= 1) {
+        if (_owner.GetColourState() == Player::Player::ColourState::White) {
+            _owner.ResetPos();
+            //_owner.GetStateManage().PushBack("Dead");
+        }
+        if (_owner.GetColourState() == Player::Player::ColourState::Black) {
+            // SetPosition(VGet(_position.x, _position.y, _position.z));
+
+        }
+    }
+
     _owner.SetPosition(pos);
-
-     //リスポーン処理
-    //if (_owner.GetCollision().GetWDeathMesh().HitNum >= 1) {
-
-    //    if (_owner.GetColourState() == Player::Player::ColourState::White) {
-    //        _owner.SetPosition(VGet(pos.x, pos.y, pos.z));
-
-    //        // _owner.GetStateManage().PushBack("Dead");
-    //    }
-    //    if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-    //        _owner.ResetPos();
-    //    }
-    //}
-    //if (_owner.GetCollision().GetBDeathMesh().HitNum >= 1) {
-    //    if (_owner.GetColourState() == Player::Player::ColourState::White) {
-    //        _owner.ResetPos();
-    //        // _owner.GetStateManage().PushBack("Dead");
-    //    }
-    //    if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-    //        _owner.SetPosition(VGet(pos.x, pos.y, pos.z));
-    //    }
-    //}
 }
 
 void State::StateFall::Landing() {

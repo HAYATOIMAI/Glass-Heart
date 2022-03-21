@@ -108,8 +108,10 @@ namespace GlassHeart {
 
             VECTOR GetJumpVelocity() { return _jumpVelocity; }
             void SetJumpVelocity(VECTOR jump) { _jumpVelocity = jump; }
-        protected:
 
+            bool GetCheckPointFlag() { return _checkPointFlag; }
+            void SetCheckPointFlag(bool flag) { _checkPointFlag = flag; }
+        protected:
             ColourState _crState{ ColourState::White }; //!< 色状態を管理する変数
             float _forwardSpeed{ 0.0f };  //!< 前進スピード
             float _angularSpeed{ 0.0f };  //!< 

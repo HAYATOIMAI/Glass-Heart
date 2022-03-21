@@ -39,24 +39,19 @@ void State::StateIdle::Input(AppFrame::InputManager& input) {
 
 void State::StateIdle::Update() {
 	//// ‘«ê‚ÆÚ‚µ‚Ä‚¢‚é‚©
-	//if (_owner.GetCollision().GetHitFloor().HitFlag == 1) {
-	//    _owner.SetPosition(_owner.GetCollision().GetHitFloor().HitPosition);
-	//}
-
-	//if (_owner.GetCollision().GetHitSecondFloor().HitFlag == 1) {
-	//	_owner.SetPosition(_owner.GetCollision().GetHitSecondFloor().HitPosition);
-	//}
-
-	//if (_owner.GetCollision().GetBThrough().HitFlag == 1) {
-	//	if (_owner.GetColourState() == Player::Player::ColourState::White) {
-	//		_owner.SetPosition(_owner.GetCollision().GetBThrough().HitPosition);
-	//	}
-	//}
-	//if (_owner.GetCollision().GetWThrough().HitFlag == 1) {
-	//	if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-	//		_owner.SetPosition(_owner.GetCollision().GetWThrough().HitPosition);
-	//	}	
-	//}
+	/*if (_owner.GetCollision().GetHitFloor().HitFlag == 1) {
+	    _owner.SetPosition(_owner.GetCollision().GetHitFloor().HitPosition);
+	}
+	if (_owner.GetCollision().GetBThrough().HitFlag == 1) {
+		if (_owner.GetColourState() == Player::Player::ColourState::White) {
+			_owner.SetPosition(_owner.GetCollision().GetBThrough().HitPosition);
+		}
+	}
+	if (_owner.GetCollision().GetWThrough().HitFlag == 1) {
+		if (_owner.GetColourState() == Player::Player::ColourState::Black) {
+			_owner.SetPosition(_owner.GetCollision().GetWThrough().HitPosition);
+		}	
+	}*/
 
 	// “ü—Í§ŒÀ‚Ìˆ×ƒJƒEƒ“ƒ^‚ðŒ¸­
 	if (_cnt > 0) {

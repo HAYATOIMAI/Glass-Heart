@@ -22,36 +22,32 @@ Stage::Stage::Stage(GameMain& game) : Object::ObjectBase{ game } {
     _backGround = std::make_unique<Model::ModelManager>(*this);
     _backGround->handle("BackGround");
     _backGround->SetScale({ 1.f, 1.f, 1.f });
-   /* _skySphere = std::make_unique<Model::ModelManager>(*this);
-    _skySphere->handle("SkySphere");
-    _skySphere->SetScale({ 80.f,  80.f, 80.f });*/
-   
     // ステージのモデル
-    _testStage = std::make_unique<Model::ModelManager>(*this);
-    _testStage->handle("Stage");
-    _testStage->SetPosition(VGet(0.0f, 0.0f, 10.0f));
-    _testStage->SetRotation(VGet(0.0f, RightRotation, 0.0f));
-    _testStage->SetScale({ 1.f, 1.f, 1.f });
+    _stage = std::make_unique<Model::ModelManager>(*this);
+    _stage->handle("Stage");
+    _stage->SetPosition(VGet(0.0f, 0.0f, 10.0f));
+    _stage->SetRotation(VGet(0.0f, RightRotation, 0.0f));
+    _stage->SetScale({ 1.f, 1.f, 1.f });
 
     // ナビメッシュを非表示
-    MV1SetFrameVisible(_testStage->GetHandle(), 2, FALSE);
-    MV1SetFrameVisible(_testStage->GetHandle(), 3, FALSE);
-    MV1SetFrameVisible(_testStage->GetHandle(), 4, FALSE);
-    MV1SetFrameVisible(_testStage->GetHandle(), 5, FALSE);
-    MV1SetFrameVisible(_testStage->GetHandle(), 6, FALSE);
-    MV1SetFrameVisible(_testStage->GetHandle(), 7, FALSE);
-    MV1SetFrameVisible(_testStage->GetHandle(), 8, FALSE);
-    MV1SetFrameVisible(_testStage->GetHandle(), 9, FALSE);
-    MV1SetFrameVisible(_testStage->GetHandle(), 10, FALSE);
+    MV1SetFrameVisible(_stage->GetHandle(), 2, FALSE);
+    MV1SetFrameVisible(_stage->GetHandle(), 3, FALSE);
+    MV1SetFrameVisible(_stage->GetHandle(), 4, FALSE);
+    MV1SetFrameVisible(_stage->GetHandle(), 5, FALSE);
+    MV1SetFrameVisible(_stage->GetHandle(), 6, FALSE);
+    MV1SetFrameVisible(_stage->GetHandle(), 7, FALSE);
+    MV1SetFrameVisible(_stage->GetHandle(), 8, FALSE);
+    MV1SetFrameVisible(_stage->GetHandle(), 9, FALSE);
+    MV1SetFrameVisible(_stage->GetHandle(), 10, FALSE);
     //以下のフレームをナビメッシュとして使用
-    MV1SetupCollInfo(_testStage->GetHandle(), 2, 8, 8, 8);
-    MV1SetupCollInfo(_testStage->GetHandle(), 3, 8, 8, 8);
-    MV1SetupCollInfo(_testStage->GetHandle(), 4, 8, 8, 8);
-    MV1SetupCollInfo(_testStage->GetHandle(), 5, 8, 8, 8);
-    MV1SetupCollInfo(_testStage->GetHandle(), 6, 8, 8, 8);
-    MV1SetupCollInfo(_testStage->GetHandle(), 7, 8, 8, 8);
-    MV1SetupCollInfo(_testStage->GetHandle(), 8, 8, 8, 8);
-    MV1SetupCollInfo(_testStage->GetHandle(), 9, 8, 8, 8);
+    MV1SetupCollInfo(_stage->GetHandle(), 2, 8, 8, 8);
+    MV1SetupCollInfo(_stage->GetHandle(), 3, 8, 8, 8);
+    MV1SetupCollInfo(_stage->GetHandle(), 4, 8, 8, 8);
+    MV1SetupCollInfo(_stage->GetHandle(), 5, 8, 8, 8);
+    MV1SetupCollInfo(_stage->GetHandle(), 6, 8, 8, 8);
+    MV1SetupCollInfo(_stage->GetHandle(), 7, 8, 8, 8);
+    MV1SetupCollInfo(_stage->GetHandle(), 8, 8, 8, 8);
+    MV1SetupCollInfo(_stage->GetHandle(), 9, 8, 8, 8);
     // フォグの設定
     SetFogEnable(TRUE);
     SetFogColor(247, 188, 101);
@@ -65,7 +61,7 @@ void Stage::Stage::Process() {
 
 void Stage::Stage::Render() {
     _backGround->Draw();
-    _testStage->Draw();
+    _stage->Draw();
 #ifdef _DEBUG
     auto linelength = 10000.f;
     VECTOR v = { 0, 0, 0 };

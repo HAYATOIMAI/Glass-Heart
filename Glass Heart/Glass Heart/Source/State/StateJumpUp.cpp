@@ -1,7 +1,7 @@
 
 /*********************************************************************
  * @file   StateJumpUp.cpp
- * @brief
+ * @brief  上昇状態の宣言
  *
  * @author Hayato Imai
  * @date   January 2022
@@ -14,7 +14,7 @@
 #include <numbers>
 
 namespace {
-    constexpr auto StraifVector = 3.0f; // ストレイフ用X軸移動量
+    constexpr auto StraifVector = 5.0f; // ストレイフ用X軸移動量
     constexpr auto JumpVecY = 18.0f;  //!< ジャンプ用Y軸移動量ベクトル
     constexpr auto Gravity = -0.2f;  //!< 重力加速度
     constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f); //!< 右方向の角度
@@ -49,6 +49,9 @@ void State::StateJumpUp::Input(AppFrame::InputManager& input) {
 /** 更新処理 */
 void State::StateJumpUp::Update() {
 
+
+    
+
     auto pos = _owner.GetPosition();
 
     auto forward = VScale(_owner.GetForward(), _owner.GetForwardSpeed());
@@ -66,12 +69,42 @@ void State::StateJumpUp::Update() {
         jumpVelocity.y = 0;
 
     }
-    if (_owner.GetCollision().GetWWallThroughMesh().HitNum > 0) {
-        //jumpVelocity.y = 0;
+    if (_owner.GetColourState() == Player::Player::ColourState::Black) {
+        if (_owner.GetCollision().GetWWallThroughMesh().HitNum > 0) {
+            jumpVelocity.y = 0;
+        }
     }
-    if (_owner.GetCollision().GetBWallThroughMesh().HitNum > 0) {
-        //jumpVelocity.y = 0;
+    if (_owner.GetColourState() == Player::Player::ColourState::White) {
+        if (_owner.GetCollision().GetBWallThroughMesh().HitNum > 0) {
+            jumpVelocity.y = 0;
+        }
     }
+
+    pos = _owner.GetCollision().CheckHitWDeathMesh(pos, { 0.f, forward.y, 0 });
+
+
+    if (_owner.GetCollision().GetWDeathMesh().HitNum >= 1) {
+        if (_owner.GetColourState() == Player::Player::ColourState::White) {
+        }
+        if (_owner.GetColourState() == Player::Player::ColourState::Black) {
+            //_owner.ResetPos();
+           _owner.GetStateManage().PushBack("Dead");
+        }
+    }
+
+    pos = _owner.GetCollision().CheckHitBDeathMesh(pos, { 0.f, forward.y, 0 });
+
+    if (_owner.GetCollision().GetBDeathMesh().HitNum >= 1) {
+        if (_owner.GetColourState() == Player::Player::ColourState::White) {
+            //_owner.ResetPos();
+            _owner.GetStateManage().PushBack("Dead");
+        }
+        if (_owner.GetColourState() == Player::Player::ColourState::Black) {
+            // SetPosition(VGet(_position.x, _position.y, _position.z));
+
+        }
+    }
+   
 
     _owner.SetPosition(pos);
 
@@ -81,4 +114,6 @@ void State::StateJumpUp::Update() {
     }
 
     _owner.SetJumpVelocity(jumpVelocity);
+
+   
 }

@@ -17,7 +17,7 @@
 
 namespace {
     //constexpr auto StartPositionX = 25600.0f;  //!< テスト用プレイヤーの初期位置X
-    //constexpr auto StartPositionY = 12420.0f;    //!< テスト用プレイヤーの初期位置Y
+    //constexpr auto StartPositionY = 12420.0f;  //!< テスト用プレイヤーの初期位置Y
     //constexpr auto StartPositionZ = -55.0f;  //!< テスト用プレイヤーの初期位置Z
     constexpr auto StartPositionX = -150.0f;  //!< プレイヤーの初期位置X
     constexpr auto StartPositionY = 35.0f;    //!< プレイヤーの初期位置Y
@@ -79,24 +79,7 @@ void Player::Player::Process() {
         // モデルの更新
         _modelAnimeManage->Update();
     }
-    //if (_collsionManage->GetDeathBMesh().HitNum >= 1) {
-    //    if (GetColourState() == Player::Player::ColourState::White) {
-    //        SetPosition(VGet(_position.x, _position.y, _position.z));
-    //        // _owner.GetStateManage().PushBack("Dead");
-    //    }
-    //    if (GetColourState() == Player::Player::ColourState::Black) {
-    //        ResetPos();
-    //    }
-    //}
-    //if (_collsionManage->GetDeathWMesh().HitNum >= 1) {
-    //    if (GetColourState() == Player::Player::ColourState::White) {
-    //        SetPosition(VGet(_position.x, _position.y, _position.z));
-    //        // _owner.GetStateManage().PushBack("Dead");
-    //    }
-    //    if (GetColourState() == Player::Player::ColourState::Black) {
-    //        ResetPos();
-    //    }
-    //}
+   
     // オブジェクトサーバーに位置を送信
     GetObjectServer().Register("Player", _position);
     // チェックポイントとの当たり判定
@@ -144,7 +127,6 @@ void Player::Player::Render() {
     DrawFormatString(i, o, GetColor(255, 255, 255), _stateName.c_str(), _crState); y += size;
     //カメラの位置を表示
     //_cameraManage->Render();
-    //DrawLine3D(VGet(_lastPosition.x, _lastPosition.y, _lastPosition.z), VGet(_position.x, _position.y / 200.0f, _position.z), GetColor(255, 0, 0));
 #endif // _DEBUG
     _stateManage->Draw();
 }
@@ -164,6 +146,10 @@ void Player::Player::Move(const VECTOR& forward) {
     pos = _collsionManage->CheckHitSideAndBottom(pos, { forward.x, 0.f, 0.f }, state);
     pos = _collsionManage->CheckHitFloor(pos, { 0.f, -10.f, 0.f }, state);
 
+    pos = _collsionManage->CheckHitBDeathMesh(pos, { 0.f, forward.y, 0 });
+
+    pos = _collsionManage->CheckHitWDeathMesh(pos, { 0.f, forward.y, 0 });
+
     if (_collsionManage->GetHitFloor().HitFlag == 0) {
         GetStateManage().PushBack("Fall");
     }
@@ -177,8 +163,24 @@ void Player::Player::Move(const VECTOR& forward) {
             //GetStateManage().GoToState("Fall");
         }
     }
-
-   
+    if (_collsionManage->GetBDeathMesh().HitNum >= 1) {
+        if (GetColourState() == Player::Player::ColourState::White) {
+            //SetPosition(VGet(_position.x, _position.y, _position.z));
+           GetStateManage().PushBack("Dead");
+        }
+        if (GetColourState() == Player::Player::ColourState::Black) {
+            ResetPos();
+        }
+    }
+    if (_collsionManage->GetWDeathMesh().HitNum >= 1) {
+        if (GetColourState() == Player::Player::ColourState::White) {
+            //SetPosition(VGet(_position.x, _position.y, _position.z));
+             GetStateManage().PushBack("Dead");
+        }
+        if (GetColourState() == Player::Player::ColourState::Black) {
+            ResetPos();
+        }
+    }
     // 座標更新
     _position = pos;
 }
@@ -206,31 +208,31 @@ void Player::Player::ColorCollisionDetectionSystem() {
 }
 
 void Player::Player::ResetPos() {
-    // デスメッシュと当たっていたら
-    if (_collsionManage->GetWDeathMesh().HitNum >= 1) {
-        // 
-        if (_checkPointFlag == true) {
-            // オブジェクトサーバーからチェックポイントの座標を取得
-            auto checkPos = GetObjectServer().GetPosition("CheckPoint");
-            // プレイヤーの座標をチェックポイントにする
-            _position = checkPos;
-        }
-        else {
-            _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
-        }
-    }
-    if (_collsionManage->GetBDeathMesh().HitNum >= 1) {
-        // 
-        if (_checkPointFlag == true) {
-            // オブジェクトサーバーからチェックポイントの座標を取得
-            auto checkPos = GetObjectServer().GetPosition("CheckPoint");
-            // プレイヤーの座標をチェックポイントにする
-            _position = checkPos;
-        }
-        else {
-            _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
-        }
-    }
+    //// デスメッシュと当たっていたら
+    //if (_collsionManage->GetWDeathMesh().HitNum >= 1) {
+    //    // 
+    //    if (_checkPointFlag == true) {
+    //        // オブジェクトサーバーからチェックポイントの座標を取得
+    //        auto checkPos = GetObjectServer().GetPosition("CheckPoint");
+    //        // プレイヤーの座標をチェックポイントにする
+    //        _position = checkPos;
+    //    }
+    //    else {
+    //        _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
+    //    }
+    //}
+    //if (_collsionManage->GetBDeathMesh().HitNum >= 1) {
+    //    // 
+    //    if (_checkPointFlag == true) {
+    //        // オブジェクトサーバーからチェックポイントの座標を取得
+    //        auto checkPos = GetObjectServer().GetPosition("CheckPoint");
+    //        // プレイヤーの座標をチェックポイントにする
+    //        _position = checkPos;
+    //    }
+    //    else {
+    //        _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
+    //    }
+    //}
 }
 
 void Player::Player::ReturnCheckPoint() {}

@@ -90,17 +90,8 @@ void Object::ObjectFactory::Clear() {
 
 
 std::unique_ptr<Object::ObjectBase> Object::PlayerCreate::Create(GameMain& game) {
-
-    // カメラの生成
-   // auto camera = std::make_shared<Camera::CameraManager>();
-   // camera->Init();
-   // camera->SetPosition({ 0, 50, -200 });
-   //// camera->SetPosition({ 180, 50, 200 });
-   // camera->SetTarget({ 0, 50, 0 });
-
     // プレイヤーの生成
     auto player = std::make_unique<Player::Player>(game);
-    //player->SetCameraManage(camera);
 
     // モデルの読み込みと生成
     auto model = std::make_unique<Model::ModelAnimeManager>(*player);
