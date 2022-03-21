@@ -33,16 +33,13 @@
 using namespace GlassHeart;
 
 namespace {
-
     constexpr auto FOLLOWSPEED = 5.0f;
-
 }
 
-//! コンストラクタ
+/** コンストラクタ */
 Object::ObjectFactory::ObjectFactory(GameMain& game) : _game{ game } {
 }
-
-//! クリエイターの登録
+/** クリエイターの登録 */
 bool Object::ObjectFactory::Register(std::string_view type, std::unique_ptr<CreateBase> creator) {
     if (_creatorMap.contains(type.data())) {
         return false;
@@ -50,7 +47,7 @@ bool Object::ObjectFactory::Register(std::string_view type, std::unique_ptr<Crea
     _creatorMap.emplace(type.data(), std::move(creator));
     return true;
 }
-
+/** オブジェクトの生成 */
 std::unique_ptr<Object::ObjectBase> Object::ObjectFactory::Create(std::string_view type) {
 
     if (!_creatorMap.contains(type.data())) {
@@ -59,36 +56,11 @@ std::unique_ptr<Object::ObjectBase> Object::ObjectFactory::Create(std::string_vi
     auto&& creator = _creatorMap[type.data()];
     return creator->Create(_game);
 }
-
-void Object::ObjectFactory::SetSpawnTable(SpawnTable spawnTable) {
-    _spawnProgress = 0;
-    _progress = 0;
-    _spawnTable = spawnTable;
-}
-
-void Object::ObjectFactory::UpdateSpawn() {
-    while (_spawnTable.size() > _spawnProgress) {
-        auto& spawnRecord = _spawnTable[_spawnProgress];
-        if (spawnRecord._progress > _progress) {
-            break;
-        }
-        else {
-
-            auto&& actor = Create(spawnRecord._key);
-            actor->SetPosition(spawnRecord._position);
-            actor->SetRotation(spawnRecord._rosition);
-            _game.GetObjectServer().Add(std::move(actor));
-            ++_spawnProgress;
-        }
-    }
-    ++_progress;
-}
-
+/** 全オブジェクト消去 */
 void Object::ObjectFactory::Clear() {
     _creatorMap.clear();
 }
-
-
+/** プレイヤーを生成 */
 std::unique_ptr<Object::ObjectBase> Object::PlayerCreate::Create(GameMain& game) {
     // プレイヤーの生成
     auto player = std::make_unique<Player::Player>(game);
@@ -110,7 +82,7 @@ std::unique_ptr<Object::ObjectBase> Object::PlayerCreate::Create(GameMain& game)
 
     return player;
 }
-
+/** ガールを生成 */
 std::unique_ptr<Object::ObjectBase> Object::GirlCreate::Create(GameMain& game) {
     // ガールの生成
     auto girl = std::make_unique<Player::Girl>(game);
@@ -125,19 +97,17 @@ std::unique_ptr<Object::ObjectBase> Object::GirlCreate::Create(GameMain& game) {
 
     return girl;
 }
-
+/** チェックポイントを生成 */
 std::unique_ptr<Object::ObjectBase> Object::CheckPointCreate::Create(GameMain& game) {
-
     auto checkPoint = std::make_unique<CheckPoint::CheckPoint>(game);
-
     return checkPoint;
 }
-
+/** ステージを生成 */
 std::unique_ptr<Object::ObjectBase> Object::StageCreate::Create(GameMain& game) {
     auto stage = std::make_unique<Stage::Stage>(game);
     return stage;
 }
-
+/** カメラを生成 */
 std::unique_ptr<Object::ObjectBase> GlassHeart::Object::FollowCameraCreate::Create(GameMain& game) {
     // カメラの生成
     auto camera = std::make_shared<GlassHeart::Camera::CameraManager>();
@@ -151,9 +121,8 @@ std::unique_ptr<Object::ObjectBase> GlassHeart::Object::FollowCameraCreate::Crea
 
     return followCamera;
 }
-
+/** ゴールポイントを生成 */
 std::unique_ptr<Object::ObjectBase> GlassHeart::Object::GoalPointCreate::Create(GameMain& game) {
     auto goalPoint = std::make_unique<CheckPoint::GoalPoint>(game);
-
     return goalPoint;
 }

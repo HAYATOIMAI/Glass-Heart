@@ -29,8 +29,6 @@ namespace GlassHeart {
             void Update() override;
         private:
             bool _isJump{ false };
-            bool _isfall{ false };
-            VECTOR _lastPosition;
         };
     } //  State 
 } // GlassHeart

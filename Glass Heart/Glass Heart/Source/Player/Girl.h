@@ -89,5 +89,5 @@ namespace GlassHeart {
                 int _cnt{ 0 };
             };
         };
-    }
-}
+    } // Player
+} // GlassHeart

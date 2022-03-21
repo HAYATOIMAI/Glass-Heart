@@ -27,8 +27,9 @@ namespace GlassHeart {
             void Update() override;
         private:
             int _cnt{ 0 };
+            bool _resetFlag{ true };
         };
-    }
-}
+    }// State
+}// GlassHeart 
 
 

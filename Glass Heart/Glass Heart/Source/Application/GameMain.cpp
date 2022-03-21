@@ -48,8 +48,9 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
 
     _effectServer->LoadEfeects(useefc);*/
 
-    /** マテリアルの自己発光色を暗い青色にする */
+    
 #ifdef _DEBUG
+    /** マテリアルの自己発光色を暗い青色にする */
     MATERIALPARAM material;
     material.Diffuse = GetColorF(0.0f, 0.0f, 0.0f, 1.0f);
     material.Specular = GetColorF(0.0f, 0.0f, 0.0f, 0.0f);
@@ -69,12 +70,12 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
         {"jump",    {"Sound/SE/SE_Jump.wav",true}},
         {"landing", {"Sound/SE/SE_Landing.wav",true}},
         {"death",   {"Sound/SE/SE_Death.wav",true}},
-        {"select",  {"Sound/SE/SE_Select.mp3",true}}
+        {"select",  {"Sound/SE/SE_Select.wav",true}}
     };
     /** 音を読み込み */
     res.LoadSounds(usesound);
 
-    // サウンドコンポーネントの取得
+    // サウンドマネージャーの取得
     auto& sm = GetSoundManager();
     sm.SetVolume("bgm", 128);
     sm.SetVolume("titleBgm", 128);
@@ -85,7 +86,7 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     sm.SetVolume("death", 128);
     sm.SetVolume("select", 255);
 
-    sm.SetMute(true);
+    sm.SetMute(false);
 
     // オブジェクトサーバーの生成
     _objServer = std::make_unique<Object::ObjectServer>();

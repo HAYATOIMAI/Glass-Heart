@@ -63,7 +63,12 @@ namespace GlassHeart {
 			 * @return ˆê‚ÌˆÊ‚Ì’l
 			 */
 			int GetNumberPlace(int dismantvalue);
-
+			/**
+			 * @brief Œ…”‚Ìæ“¾
+			 *
+			 * @param value Œ…”‚ğæ“¾‚·‚é’l
+			 * @return  Œ…”
+			 */
 			int GetDigit(int value);
 
 			GameMain& GetGame() { return _game; }

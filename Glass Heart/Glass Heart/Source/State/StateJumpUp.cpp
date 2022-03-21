@@ -29,7 +29,7 @@ void State::StateJumpUp::Enter() {
     // ジャンプ速度設定
     VECTOR jumpbase = VGet(0.0f, JumpVecY, 0.0f);
     _owner.SetJumpVelocity(jumpbase);
-
+    // ジャンプ中アニメーション再生
     _owner.GetModelAnime().ChangeAnime("Jump_Loop", true);
 }
 void State::StateJumpUp::Input(AppFrame::InputManager& input) {
@@ -49,63 +49,65 @@ void State::StateJumpUp::Input(AppFrame::InputManager& input) {
 /** 更新処理 */
 void State::StateJumpUp::Update() {
 
-
-    
-
     auto pos = _owner.GetPosition();
-
+    // 移動量ベクトルを取得
     auto forward = VScale(_owner.GetForward(), _owner.GetForwardSpeed());
-
+    // ジャンプ上昇処理
     auto jumpVelocity = _owner.GetJumpVelocity();
     jumpVelocity.y += Gravity;
 
     forward.y = jumpVelocity.y;
-
+    // プレイヤーの色を取得
     int state = static_cast<int> (_owner.GetColourState());
-    pos = _owner.GetCollision().CheckHitSideAndBottom(pos, { forward.x, 0, 0 }, state);
+    // 空中の足場の底面と側面判定処理
+    pos = _owner.GetCollision().CheckHitSideAndBottom(pos, { forward.x, 0.f, 0.f }, state);
 
-    pos = _owner.GetCollision().CheckHitSideAndBottom(pos, { 0, forward.y, 0 }, state);
+    pos = _owner.GetCollision().CheckHitSideAndBottom(pos, { 0.f, forward.y, 0.f }, state);
+    //　当たっていたら落下
     if (_owner.GetCollision().GetSideAndBottom().HitNum > 0) {
         jumpVelocity.y = 0;
 
     }
+    // 空中の足場とプレイヤーの色が異なっていたら落下
     if (_owner.GetColourState() == Player::Player::ColourState::Black) {
         if (_owner.GetCollision().GetWWallThroughMesh().HitNum > 0) {
             jumpVelocity.y = 0;
         }
     }
+    // 空中の足場とプレイヤーの色が異なっていたら落下
     if (_owner.GetColourState() == Player::Player::ColourState::White) {
         if (_owner.GetCollision().GetBWallThroughMesh().HitNum > 0) {
             jumpVelocity.y = 0;
         }
     }
-
-    pos = _owner.GetCollision().CheckHitWDeathMesh(pos, { 0.f, forward.y, 0 });
-
-
+    // 死亡判定を取るメッシュと当たり判定
+    if (_owner.GetColourState() == Player::Player::ColourState::Black) {
+        pos = _owner.GetCollision().CheckHitWDeathMesh(pos, { 0.f, forward.y, 0.f });
+    }
+    
     if (_owner.GetCollision().GetWDeathMesh().HitNum >= 1) {
         if (_owner.GetColourState() == Player::Player::ColourState::White) {
         }
         if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-            //_owner.ResetPos();
-           _owner.GetStateManage().PushBack("Dead");
+            _owner.ResetPos();
+           // _owner.GetStateManage().PushBack("Dead");
         }
     }
 
-    pos = _owner.GetCollision().CheckHitBDeathMesh(pos, { 0.f, forward.y, 0 });
-
+    if (_owner.GetColourState() == Player::Player::ColourState::White) {
+        pos = _owner.GetCollision().CheckHitBDeathMesh(pos, { 0.f, forward.y, 0.f });
+    }
+    
     if (_owner.GetCollision().GetBDeathMesh().HitNum >= 1) {
         if (_owner.GetColourState() == Player::Player::ColourState::White) {
-            //_owner.ResetPos();
-            _owner.GetStateManage().PushBack("Dead");
+            _owner.ResetPos();
+           // _owner.GetStateManage().PushBack("Dead");
         }
         if (_owner.GetColourState() == Player::Player::ColourState::Black) {
             // SetPosition(VGet(_position.x, _position.y, _position.z));
 
         }
     }
-   
-
     _owner.SetPosition(pos);
 
     //移動ベクトルがマイナスになったら下降状態に移行
@@ -114,6 +116,4 @@ void State::StateJumpUp::Update() {
     }
 
     _owner.SetJumpVelocity(jumpVelocity);
-
-   
 }

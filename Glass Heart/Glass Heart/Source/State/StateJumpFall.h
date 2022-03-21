@@ -52,5 +52,5 @@ namespace GlassHeart {
         private:
             int _cnt{ 0 };
         };
-    }
-}
+    }  //  State 
+} // GlassHeart

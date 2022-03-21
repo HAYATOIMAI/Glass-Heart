@@ -56,29 +56,5 @@ void State::StateRun::Input(AppFrame::InputManager& input) {
 
 
 void State::StateRun::Update() {
-
-    auto pos = _owner.GetPosition();
-
     _owner.Move(VScale(_owner.GetForward(), _owner.GetForwardSpeed()));
-
-
-    //if (_owner.GetCollision().GetBDeathMesh().HitNum >= 1) {
-    //    if (_owner.GetColourState() == Player::Player::ColourState::White) {
-    //       // _owner.ResetPos();
-    //        _owner.GetStateManage().PushBack("Dead");
-    //    }
-    //    if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-    //        // SetPosition(VGet(_position.x, _position.y, _position.z));
-
-    //    }
-    //}
-    //if (_owner.GetCollision().GetWDeathMesh().HitNum >= 1) {
-    //    if (_owner.GetColourState() == Player::Player::ColourState::White) {
-    //    }
-    //    if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-    //       // _owner.ResetPos();
-    //        _owner.GetStateManage().PushBack("Dead");
-    //    }
-    //}
-   
 }

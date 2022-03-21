@@ -42,10 +42,10 @@ void Player::Player::Input(AppFrame::InputManager& input) {
         _stateManage->Input(input);
     }
     //LBボタンを押すと色変更
-    if (input.GetJoyPad().GetXinputLeftShoulder() && _colourCount == 0) {
-        //連打防止のため0.5秒(30フレーム)間入力を制限
+    if (input.GetJoyPad().GetXinputLeftShoulder() && _recastCount == 0) {
+        //連打防止のため20フレーム間入力を制限
         ColorCollisionDetectionSystem();
-        _colourCount = Recast;
+        _recastCount = Recast;
     }
     // Bボタンを押すとチェックポイントに保存
     if (_hitFlag == true) {
@@ -64,8 +64,8 @@ void Player::Player::Input(AppFrame::InputManager& input) {
 /** 更新処理 */
 void Player::Player::Process() {
     // 入力制限の為カウンタを減少
-    if (_colourCount > 0) {
-        --_colourCount;
+    if (_recastCount > 0) {
+        --_recastCount;
     }
     if (_deathCoolCount > 0) {
         --_deathCoolCount;
@@ -79,7 +79,24 @@ void Player::Player::Process() {
         // モデルの更新
         _modelAnimeManage->Update();
     }
-   
+    if (GetCollision().GetWDeathMesh().HitNum >= 1) {
+        if (GetColourState() == Player::Player::ColourState::White) {
+            SetPosition(_position);
+            // _owner.GetStateManage().PushBack("Dead");
+        }
+        if (GetColourState() == Player::Player::ColourState::Black) {
+            ResetPos();
+        }
+    }
+    if (GetCollision().GetBDeathMesh().HitNum >= 1) {
+        if (GetColourState() == Player::Player::ColourState::White) {
+            ResetPos();
+            // _owner.GetStateManage().PushBack("Dead");
+        }
+        if (GetColourState() == Player::Player::ColourState::Black) {
+            SetPosition(_position);
+        }
+    }
     // オブジェクトサーバーに位置を送信
     GetObjectServer().Register("Player", _position);
     // チェックポイントとの当たり判定
@@ -146,9 +163,9 @@ void Player::Player::Move(const VECTOR& forward) {
     pos = _collsionManage->CheckHitSideAndBottom(pos, { forward.x, 0.f, 0.f }, state);
     pos = _collsionManage->CheckHitFloor(pos, { 0.f, -10.f, 0.f }, state);
 
-    pos = _collsionManage->CheckHitBDeathMesh(pos, { 0.f, forward.y, 0 });
+    pos = _collsionManage->CheckHitBDeathMesh(pos, { 0.f, forward.y, 0.f });
 
-    pos = _collsionManage->CheckHitWDeathMesh(pos, { 0.f, forward.y, 0 });
+    pos = _collsionManage->CheckHitWDeathMesh(pos, { 0.f, forward.y, 0.f });
 
     if (_collsionManage->GetHitFloor().HitFlag == 0) {
         GetStateManage().PushBack("Fall");
@@ -163,76 +180,99 @@ void Player::Player::Move(const VECTOR& forward) {
             //GetStateManage().GoToState("Fall");
         }
     }
-    if (_collsionManage->GetBDeathMesh().HitNum >= 1) {
-        if (GetColourState() == Player::Player::ColourState::White) {
-            //SetPosition(VGet(_position.x, _position.y, _position.z));
-           GetStateManage().PushBack("Dead");
-        }
-        if (GetColourState() == Player::Player::ColourState::Black) {
-            ResetPos();
-        }
-    }
-    if (_collsionManage->GetWDeathMesh().HitNum >= 1) {
-        if (GetColourState() == Player::Player::ColourState::White) {
-            //SetPosition(VGet(_position.x, _position.y, _position.z));
-             GetStateManage().PushBack("Dead");
-        }
-        if (GetColourState() == Player::Player::ColourState::Black) {
-            ResetPos();
-        }
-    }
+    //if (_collsionManage->GetBDeathMesh().HitNum >= 1) {
+    //    if (GetColourState() == Player::Player::ColourState::White) {
+    //        //SetPosition(VGet(_position.x, _position.y, _position.z));
+    //       GetStateManage().PushBack("Dead");
+    //    }
+    //    if (GetColourState() == Player::Player::ColourState::Black) {
+    //        ResetPos();
+    //    }
+    //}
+    //if (_collsionManage->GetWDeathMesh().HitNum >= 1) {
+    //    if (GetColourState() == Player::Player::ColourState::White) {
+    //        //SetPosition(VGet(_position.x, _position.y, _position.z));
+    //         GetStateManage().PushBack("Dead");
+    //    }
+    //    if (GetColourState() == Player::Player::ColourState::Black) {
+    //        ResetPos();
+    //    }
+    //}
     // 座標更新
     _position = pos;
 }
 /** 色判定処理 */
 void Player::Player::ColorCollisionDetectionSystem() {
-
-    auto animHandle = _modelAnimeManage->GetHandle();
-
     if (_crState == ColourState::Black) {
-        _stateName = "White";
-        MV1SetFrameVisible(animHandle, 0, FALSE);
-        MV1SetFrameVisible(animHandle, 1, TRUE);
-        MV1SetFrameVisible(animHandle, 2, FALSE);
-        MV1SetFrameVisible(animHandle, 3, TRUE);
-        _crState = ColourState::White;
+        SetWhite();
     }
     else if (_crState == ColourState::White) {
-        _stateName = "Black";
-        MV1SetFrameVisible(animHandle, 1, FALSE);
-        MV1SetFrameVisible(animHandle, 0, TRUE);
-        MV1SetFrameVisible(animHandle, 3, FALSE);
-        MV1SetFrameVisible(animHandle, 2, TRUE);
-        _crState = ColourState::Black;
+        SetBlack();
     }
+}
+
+void GlassHeart::Player::Player::SetWhite() {
+    auto animHandle = _modelAnimeManage->GetHandle();
+    _stateName = "White";
+    MV1SetFrameVisible(animHandle, 0, FALSE);
+    MV1SetFrameVisible(animHandle, 1, TRUE);
+    MV1SetFrameVisible(animHandle, 2, FALSE);
+    MV1SetFrameVisible(animHandle, 3, TRUE);
+    _crState = ColourState::White;
+}
+
+void GlassHeart::Player::Player::SetBlack() {
+    auto animHandle = _modelAnimeManage->GetHandle();
+    _stateName = "Black";
+    MV1SetFrameVisible(animHandle, 1, FALSE);
+    MV1SetFrameVisible(animHandle, 0, TRUE);
+    MV1SetFrameVisible(animHandle, 3, FALSE);
+    MV1SetFrameVisible(animHandle, 2, TRUE);
+    _crState = ColourState::Black;
 }
 
 void Player::Player::ResetPos() {
-    //// デスメッシュと当たっていたら
-    //if (_collsionManage->GetWDeathMesh().HitNum >= 1) {
-    //    // 
-    //    if (_checkPointFlag == true) {
-    //        // オブジェクトサーバーからチェックポイントの座標を取得
-    //        auto checkPos = GetObjectServer().GetPosition("CheckPoint");
-    //        // プレイヤーの座標をチェックポイントにする
-    //        _position = checkPos;
-    //    }
-    //    else {
-    //        _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
-    //    }
-    //}
-    //if (_collsionManage->GetBDeathMesh().HitNum >= 1) {
-    //    // 
-    //    if (_checkPointFlag == true) {
-    //        // オブジェクトサーバーからチェックポイントの座標を取得
-    //        auto checkPos = GetObjectServer().GetPosition("CheckPoint");
-    //        // プレイヤーの座標をチェックポイントにする
-    //        _position = checkPos;
-    //    }
-    //    else {
-    //        _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
-    //    }
-    //}
+    // デスメッシュと当たっていたら
+    if (_collsionManage->GetWDeathMesh().HitNum >= 1) {
+        if (_deadFlag == false) {
+            _deadFlag = true;
+            _deathCoolCount = 120;
+        }
+        if (_checkPointFlag == true) {
+            if (_deadFlag == true && _deathCoolCount == 0) {
+                // オブジェクトサーバーからチェックポイントの座標を取得
+                auto checkPos = GetObjectServer().GetPosition("CheckPoint");
+                // プレイヤーの座標をチェックポイントにする
+                _position = checkPos;
+                _deadFlag = false;
+            }
+        }
+        else {
+            if (_deadFlag == true && _deathCoolCount == 0) {
+                _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
+                _deadFlag = false;
+            }
+        }
+    }
+    if (_collsionManage->GetBDeathMesh().HitNum >= 1) {
+        if (_deadFlag == false) {
+            _deadFlag = true;
+            _deathCoolCount = 120;
+        }
+        if (_checkPointFlag == true) {
+            if (_deadFlag == true && _deathCoolCount == 0) {
+                // オブジェクトサーバーからチェックポイントの座標を取得
+                auto checkPos = GetObjectServer().GetPosition("CheckPoint");
+                // プレイヤーの座標をチェックポイントにする
+                _position = checkPos;
+                _deadFlag = false;
+            }
+        }
+        else {
+            if (_deadFlag == true && _deathCoolCount == 0) {
+                _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
+                _deadFlag = false;
+            }
+        }
+    }
 }
-
-void Player::Player::ReturnCheckPoint() {}

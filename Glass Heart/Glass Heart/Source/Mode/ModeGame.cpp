@@ -29,7 +29,7 @@ void Mode::ModeGame::Init() {
 }
 /** 入り口処理 */
 void Mode::ModeGame::Enter() {
-    // ファクトリの生成とクリエイターの登録
+    // ファクトリーの生成とクリエイターの登録
     auto& of = GetObjectFactory();
     auto& os = GetObjectServer();
 
@@ -63,13 +63,10 @@ void Mode::ModeGame::Enter() {
     os.Add(std::move(goalPoint));
 
     auto& sm = GetSoundManager();
-
     sm.PlayLoop("bgm");
 
     _count = 60;
     _countSeconds = 350;
-    //_countSeconds = 100;
-
 
     auto& ui = GetUI();
     ui.Enter();
@@ -85,7 +82,7 @@ void Mode::ModeGame::Input(AppFrame::InputManager& input) {
 /** 更新処理 */
 void Mode::ModeGame::Process() {
     GetObjectServer().Process();
-   
+   // タイマー処理
     if (_count <= 60) {
         --_count;
     }

@@ -70,7 +70,7 @@ namespace GlassHeart {
              */
             void Render() override;
             /**
-             * @brief
+             * @brief オブラートタイプ
              */
             ObjectType GetObjectType() const  override { return ObjectType::Player; };
             /**
@@ -89,38 +89,34 @@ namespace GlassHeart {
              * 
              */
             void ColorCollisionDetectionSystem();
+            void SetWhite();
+            void SetBlack();
             /**
              * @brief リスポーンシステム
              * 
              */
             void ResetPos();
 
-            void ReturnCheckPoint();
+            inline float GetForwardSpeed() { return _forwardSpeed; }
+            inline void SetForwardSpeed(float forwardSpeed) { _forwardSpeed = forwardSpeed; }
+            
+            inline std::string& GetCrName() { return _stateName; }
+            
+            inline ColourState& GetColourState() { return _crState; }
+            
+            inline VECTOR GetJumpVelocity() { return _jumpVelocity; }
+            inline void SetJumpVelocity(VECTOR jump) { _jumpVelocity = jump; }
 
-            float GetForwardSpeed() { return _forwardSpeed; }
-            void SetForwardSpeed(float forwardSpeed) { _forwardSpeed = forwardSpeed; }
-
-            std::string& GetCrName() { return _stateName; }
-
-            VECTOR GetLastPosition() { return _lastPosition; }
-
-            ColourState& GetColourState() { return _crState; }
-
-            VECTOR GetJumpVelocity() { return _jumpVelocity; }
-            void SetJumpVelocity(VECTOR jump) { _jumpVelocity = jump; }
-
-            bool GetCheckPointFlag() { return _checkPointFlag; }
-            void SetCheckPointFlag(bool flag) { _checkPointFlag = flag; }
+            inline bool GetCheckPointFlag() { return _checkPointFlag; }
+            inline void SetCheckPointFlag(bool flag) { _checkPointFlag = flag; }
         protected:
             ColourState _crState{ ColourState::White }; //!< 色状態を管理する変数
-            float _forwardSpeed{ 0.0f };  //!< 前進スピード
-            float _angularSpeed{ 0.0f };  //!< 
-            VECTOR _lastPosition{ 0.0f, 0.0f, 0.0f };
-            std::string _stateName{ "White" }; //!< 状態名変数
-            int _colourCount{ 0 };  //!< 色変更クールタイム用カウンター
-            int _deathCoolCount{ 0 };  //!<死亡した時の復活クールタイム
-            bool _checkPointFlag{ false };
-            VECTOR _jumpVelocity{ 0.f, 0.f, 0.f };
+            float _forwardSpeed{ 0.0f };                //!< 前進スピード
+            std::string _stateName{ "White" };          //!< デバッグ用状態名変数
+            int _recastCount{ 0 };                      //!< 色変更クールタイム用カウンター
+            int _deathCoolCount{ 0 };                   //!<死亡した時の復活クールタイム
+            bool _checkPointFlag{ false };              //!< チェックポイントフラグ
+            VECTOR _jumpVelocity{ 0.f, 0.f, 0.f };      //!< ジャンプ速度
         };
-    }
-}
+    } // Player
+} // GlassHeart 

@@ -17,9 +17,7 @@
 using namespace GlassHeart;
 
 /** コンストラクタ */
-State::StateJump::StateJump(Player::Player& owner) : StateBase{ owner } {
-    _lastPosition = _owner.GetPosition();
-}
+State::StateJump::StateJump(Player::Player& owner) : StateBase{ owner } {}
 /** 入り口処理 */
 void State::StateJump::Enter() {
     _isJump = true;

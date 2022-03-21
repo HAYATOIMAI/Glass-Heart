@@ -31,5 +31,5 @@ namespace GlassHeart {
             float _reVx{ 0.0f };
             VECTOR  _jumpVelocity{ 0.0f, 0.0f, 0.0f }; //!< 
         };
-    }
-}
+    }// State 
+}// GlassHeart

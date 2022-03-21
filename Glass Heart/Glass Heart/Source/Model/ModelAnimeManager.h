@@ -29,13 +29,11 @@ namespace GlassHeart {
             ModelAnimeManager(GlassHeart::Object::ObjectBase& owner);
 
             virtual ~ModelAnimeManager() override;
-
             /**
              * @brief 初期化
              * 
              */
             void Init() override;
-
             /**
              * @brief アニメーションの登録
              * 
@@ -43,19 +41,16 @@ namespace GlassHeart {
              * @param[in] animIndex 関連付けるアニメインデックス
              */
             void Register(std::string_view key, int animIndex);
-
             /**
              * @brief 更新
              * 
              */
             void Update() override;
-
             /**
              * @brief 描画
              * 
              */
             void Draw() override;
-
             /**
              * @brief アニメーションの変更
              * 
@@ -64,48 +59,41 @@ namespace GlassHeart {
              * @param[in] newAnimIndex アニメインデックス
              */
             void ChangeAnime(std::string_view key, bool repeate = false);
-
             /**
              * @brief アニメーションブレンド
              * 
              */
             void AnimeBlend();
-
             /**
              * @brief アニメーションを繰り返した回数の取得
              * 
              * @return 繰り返した回数
              */
             int GetRepeatedCount() const { return _repeatedCount; }
-
             /**
              * @brief アニメーションの総時間を取得
              *
              * @return 総時間
              */
             float GetPlayTime() const { return _playTime; }
-
             /**
              * @brief アニメーションの総時間を取得
              *
              * @return 総時間
              */
             float GetPlayProgress() const { return _playTime / _totalTime; }
-
             /**
              * @brief 再生時間の掛率設定
              *
              * @param[in] timeRate 再生時間の掛率
              */
             void SetTimeRate(float timeRate) { _timeRate = timeRate; }
-
             /**
              * @brief 再生時間掛率の取得
              * 
              * @return 再生時間掛率 
              */
             float GetTimeRate() { return _timeRate; }
-
         private:
             std::unordered_map<std::string, int> _registry;
             int _animIndex{ -1 };
@@ -118,5 +106,5 @@ namespace GlassHeart {
             float _animrate{ 1.f };//!アニメーションブレンド率
             bool _repeate{ false };
         };
-    }
-}
+    } // Model
+} // GlassHeart

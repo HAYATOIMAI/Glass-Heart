@@ -27,8 +27,8 @@ namespace GlassHeart {
         private:
             VECTOR _position;
         };
-    }
-}
+    }// State 
+} // GlassHeart
 
 
 

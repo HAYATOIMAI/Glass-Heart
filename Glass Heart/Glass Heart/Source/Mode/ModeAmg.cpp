@@ -49,9 +49,8 @@ void Mode::ModeAmg::Init() {
     AppFrame::ResourceServer::ModelMap usemap{
     {"Player",    "Boy/PC2_motion.mv1"},
     {"Girl",    "Girl/Girl.mv1"},
-    {"Stage", "Stage/Stage02.mv1"},
-    {"BackGround",  "BackGround/bg.mv1"},
-    //{"Light",       "Light/light.mv1"},
+    /*{"Stage", "Stage/Stage02.mv1"},
+    {"BackGround",  "BackGround/bg.mv1"},*/
     };
     //!< ƒ‚ƒfƒ‹‚Ì“Ç‚Ýž‚Ý
     GetResourceServer().LoadModels(usemap);

@@ -50,12 +50,12 @@ void Girl::ComputeWorldTransform() {
     _worldTransform = MMult(world, MGetTranslate(_position));
 }
 
-/**  */
+/** •`‰æˆ— */
 void Girl::StateBase::Draw() {
     _owner.GetModelAnime().Draw();
 }
 
-/**  */
+/** “ü‚èŒûˆ— */
 void Girl::StateWait::Enter() {
     _owner.GetModelAnime().ChangeAnime("PC3_wait", true);
 }

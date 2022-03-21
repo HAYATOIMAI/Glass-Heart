@@ -16,7 +16,14 @@
 using namespace GlassHeart;
 
 void State::StateIdle::Enter() {
+
+	if (_resetFlag == false) {
+		_owner.SetWhite();
+		_resetFlag = true;
+	}
+
 	_owner.SetForwardSpeed(0.0f);
+	// 待機モーションを再生
 	_owner.GetModelAnime().ChangeAnime("idle", true);
 }
 
@@ -38,21 +45,6 @@ void State::StateIdle::Input(AppFrame::InputManager& input) {
 }
 
 void State::StateIdle::Update() {
-	//// 足場と接しているか
-	/*if (_owner.GetCollision().GetHitFloor().HitFlag == 1) {
-	    _owner.SetPosition(_owner.GetCollision().GetHitFloor().HitPosition);
-	}
-	if (_owner.GetCollision().GetBThrough().HitFlag == 1) {
-		if (_owner.GetColourState() == Player::Player::ColourState::White) {
-			_owner.SetPosition(_owner.GetCollision().GetBThrough().HitPosition);
-		}
-	}
-	if (_owner.GetCollision().GetWThrough().HitFlag == 1) {
-		if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-			_owner.SetPosition(_owner.GetCollision().GetWThrough().HitPosition);
-		}	
-	}*/
-
 	// 入力制限の為カウンタを減少
 	if (_cnt > 0) {
 		--_cnt;

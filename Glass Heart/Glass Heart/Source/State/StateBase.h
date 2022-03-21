@@ -36,8 +36,8 @@ namespace GlassHeart {
         protected:
             Player::Player& _owner; //!< プレイヤークラスの参照
         };
-    }
-}
+    } // State 
+} // GlassHeart
 
 
 

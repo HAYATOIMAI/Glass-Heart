@@ -26,13 +26,11 @@ namespace {
 using namespace GlassHeart;
 
 void State::StateFall::Enter() {
-    //VECTOR jumpbase = VGet(0.0f, JumpVecY, 0.0f);
-    //_jumpVelocity = jumpbase;
 
     auto& game = _owner.GetGame();
     game.GetSoundManager().StopSound("run");
 
-    _owner.SetJumpVelocity({ 0,3,0 });
+    _owner.SetJumpVelocity({ 0.f,3.f,0.f });
 }
 
 void State::StateFall::Input(AppFrame::InputManager& input) {
@@ -50,25 +48,6 @@ void State::StateFall::Input(AppFrame::InputManager& input) {
 }
 
 void State::StateFall::Update() {
-    //ƒŠƒXƒ|[ƒ“ˆ—
-    //if (_owner.GetCollision().GetBDeathMesh().HitNum >= 1) {
-    //    if (_owner.GetColourState() == Player::Player::ColourState::White) {
-    //        _owner.ResetPos();
-    //        _owner.GetStateManage().PushBack("Dead");
-    //    }
-    //    if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-    //        // SetPosition(VGet(_position.x, _position.y, _position.z));
-
-    //    }
-    //}
-    //if (_owner.GetCollision().GetWDeathMesh().HitNum >= 1) {
-    //    if (_owner.GetColourState() == Player::Player::ColourState::White) {
-    //    }
-    //    if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-    //        _owner.ResetPos();
-    //        _owner.GetStateManage().PushBack("Dead");
-    //    }
-    //}
     
     auto pos = _owner.GetPosition();
 
@@ -81,7 +60,7 @@ void State::StateFall::Update() {
     forward.y = jumpVelocity.y;
 
     int state = static_cast<int> (_owner.GetColourState());
-    pos = _owner.GetCollision().CheckHitSideAndBottom(pos, { forward.x, 0, 0 }, state);
+    pos = _owner.GetCollision().CheckHitSideAndBottom(pos, { forward.x, 0.f, 0.f }, state);
 
     pos = _owner.GetCollision().CheckJumpStand(pos, { 0.f, forward.y, 0.f }, state);
 
@@ -100,19 +79,19 @@ void State::StateFall::Update() {
         }
     }
 
-    pos = _owner.GetCollision().CheckHitWDeathMesh(pos, { 0.f, forward.y, 0 });
+    pos = _owner.GetCollision().CheckHitWDeathMesh(pos, { 0.f, forward.y, 0.f });
 
 
     if (_owner.GetCollision().GetWDeathMesh().HitNum >= 1) {
         if (_owner.GetColourState() == Player::Player::ColourState::White) {
         }
         if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-           // _owner.ResetPos();
-           _owner.GetStateManage().PushBack("Dead");
+            _owner.ResetPos();
+           //_owner.GetStateManage().PushBack("Dead");
         }
     }
 
-    pos = _owner.GetCollision().CheckHitBDeathMesh(pos, { 0.f, forward.y, 0 });
+    pos = _owner.GetCollision().CheckHitBDeathMesh(pos, { 0.f, forward.y, 0.f });
 
     if (_owner.GetCollision().GetBDeathMesh().HitNum >= 1) {
         if (_owner.GetColourState() == Player::Player::ColourState::White) {

@@ -23,7 +23,7 @@ namespace GlassHeart {
             /**
              * @brief コンストラクタ
              *
-             * @param owner 所有者への参照
+             * @param[in] owner オブジェクトベースクラスへの参照
              */
             ModelManager(GlassHeart::Object::ObjectBase& owner);
             /**
@@ -47,57 +47,54 @@ namespace GlassHeart {
              */
             virtual void Draw();
             /**
-             * @brief
+             * @brief モデルの取得
              * 
-             */
-            virtual void MeshDraw();
-            /**
-             * @brief ハンドルの取得
-             *
-             * @return  モデルのハンドル
+             * @param[in] key ResourceServerに登録済みのキー
+             * @param[in] no  同一モデルの通し番号
+             * @return 
              */
             virtual int handle(std::string_view key, int no = 0);
             /**
              * @brief     モデルの設定
              *
-             * @param key ResourceServerに登録済みのキー
-             * @param no  同一モデルの通し番号
+             * @param[in] key ResourceServerに登録済みのキー
+             * @param[in] no  同一モデルの通し番号
              * @return    実際に登録し通し番号
              */
             virtual int SetModel(std::string_view key, int no = 0);
             /**
              * @brief 座標の設定
              *
-             * @param position  座標x,y,z
+             * @param[in] position  座標x,y,z
              */
             virtual void SetPosition(VECTOR position);
             /**
              * .@brief 回転角度の設定
              *
-             * @param rotation 回転角度x,y,z
+             * @param[in] rotation 回転角度x,y,z
              */
             virtual void SetRotation(VECTOR rotation);
             /**
              * @brief 拡大率の設定
              *
-             * @param scale 拡大率
+             * @param[in] scale 拡大率
              */
             virtual void SetScale(VECTOR scale);
             /**
              * @brief ワールド行列の設定
              *
-             * @param world
+             * @param[in] world
              */
             virtual void SetMatrix(MATRIX& world);
 
-            void SetHandle(int handle) { _handle = handle; }
-            int GetHandle() { return _handle; }
+            inline void SetHandle(int handle) { _handle = handle; }
+            inline int GetHandle() { return _handle; }
             void SetColor(int index, float r, float g, float b);
         protected:
-            GlassHeart::Object::ObjectBase& _owner;
-            int _handle{ -1 };
-            std::string _key;
-            bool _isLighting{ true };
+            GlassHeart::Object::ObjectBase& _owner; //!< オブジェクトベースクラスへの参照
+            int _handle{ -1 };                      //!< モデル用ハンドル
+            std::string _key;                       //!< 文字列
+            bool _isLighting{ true };               //!< ライティング処理をするかのフラグ
         };
-    }
-}
+    } // Model
+} // GlassHeart

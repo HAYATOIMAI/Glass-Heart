@@ -50,8 +50,8 @@ namespace GlassHeart {
             bool _isfall{ false }; //!< —Ž‰º’†‚©‚ð”»’f‚·‚éƒtƒ‰ƒO
             float _vX{ 0.0f };  //!< ¡‰ñ‚ÌˆÚ“®—Ê
         };
-    }
-}
+    } // State 
+} // GlassHeart
 
 
 

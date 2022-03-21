@@ -25,6 +25,14 @@ void Mode::ModeTeamLogo::Init() {
     // 画像のハンドルの取得
     _teamLogo = res.GetGraph("TeamLogo");
     _fadeCount = 30;
+
+    //!< 使用するモデル
+    AppFrame::ResourceServer::ModelMap useModel{
+    {"Stage", "Stage/Stage02.mv1"},
+    {"BackGround",  "BackGround/bg.mv1"},
+    };
+    //!< モデルの読み込み
+    GetResourceServer().LoadModels(useModel);
 }
 /** 入り口処理 */
 void Mode::ModeTeamLogo::Enter() {

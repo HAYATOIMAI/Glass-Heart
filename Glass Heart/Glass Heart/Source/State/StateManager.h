@@ -23,7 +23,10 @@ namespace GlassHeart {
     }
 
     namespace State {
-
+        /**
+         * @class StateBaseRoot
+         * @brief 状態の基底クラス
+         */
         class StateBaseRoot {
         public:
             StateBaseRoot() {};
@@ -38,36 +41,59 @@ namespace GlassHeart {
          */
         class StateManager {
         public:
-            /// コンストラクタ
-            /// @param[in] key   最初のシーンに関連付ける任意の文字列
-            /// @param[in] scene 最初のシーンの
+            /**
+             * @brief コンストラクタ
+             * 
+             * @param[in] key   最初のシーンに関連付ける任意の文字列
+             * @param[in] state 最初のステートの
+             */
             StateManager(std::string_view key, std::shared_ptr<StateBaseRoot> state);
-            /// コンストラクタ
-            /// @param[in] key   最初のシーンに関連付ける任意の文字列
-            /// @param[in] scene 最初のシーンの
+            /**
+             * @brief 状態の登録
+             * 
+             * @param[in] key   最初のシーンに関連付ける任意の文字列
+             * @param[in] state 最初の ステートの
+             */
             void Register(std::string_view key, std::shared_ptr<StateBaseRoot> state);
-            /// 状態のプッシュバック
-            /// リストの一番後ろ(最前面)にシーンをプッシュ追加する
-            /// Modeの入口処理Enterを実行する
-            /// @param[in] key 登録済みのシーンに関連付けた文字列
+            /**
+             * @brief 状態のプッシュバック
+             *        リストの一番後ろ(最前面)にシーンをプッシュ追加する
+             *        stateの入口処理Enterを実行する
+             * 
+             * @param[in] key 登録済みのシーンに関連付けた文字列
+             */
             void PushBack(std::string_view key);
-            /// 状態のポップバック
-            /// リストの一番後ろ(最前面)のシーンをポップ除外する
-            /// Sceneの出口処理Exitを実行する
+            /**
+             * @brief 状態のポップバック
+             *        リストの一番後ろ(最前面)のシーンをポップ除外する
+             *         stateの出口処理Exitを実行する
+             */
             void PopBack();
-            /// 状態の遷移
-            /// PopBackしてPushBackする
-            /// @param[in] key 登録済みのシーンに関連付けた文字列
+            /**
+             * @brief 状態の遷移
+             *         PopBackしてPushBackする
+             * 
+             * @param[in] key 登録済みのシーンに関連付けた文字列
+             */
             void GoToState(std::string_view key);
-            /// 入力
-            /// リストの一番後ろ(最前面)のシーンだけ処理する
-            /// @param[in] input インプットコンポーネントの参照
+            /**
+             * @brief 入力処理
+             *        リストの一番後ろ(最前面)のシーンだけ処理する
+             * 
+             * @param[in] input インプットマネージャークラスの参照
+             */
             void Input(AppFrame::InputManager& input);
-            /// 更新
-            /// リストの一番後ろ(最前面)のシーンだけ処理する
+            /**
+             * @brief 更新処理
+             *        リストの一番後ろ(最前面)のシーンだけ処理する
+             * 
+             */
             void Update();
-            /// 描画
-            /// リストの全シーンを処理する
+            /**
+             * @brief 描画処理
+             *        リストの全シーンを処理する
+             * 
+             */
             void Draw() const;
         private:
             std::unordered_map<std::string, std::shared_ptr<StateBaseRoot>>	_registry;  //!< 状態のレジストリ
