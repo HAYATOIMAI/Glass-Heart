@@ -159,9 +159,6 @@
     <ClInclude Include="Source\State\StateJumpUp.h">
       <Filter>ヘッダー ファイル\State\Jump</Filter>
     </ClInclude>
-    <ClInclude Include="Source\State\StateDead.h">
-      <Filter>ヘッダー ファイル\State</Filter>
-    </ClInclude>
     <ClInclude Include="Source\CheckPoint\CheckPoint.h">
       <Filter>ヘッダー ファイル\CheckPoint</Filter>
     </ClInclude>
@@ -259,9 +256,6 @@
     </ClCompile>
     <ClCompile Include="Source\State\StateJumpUp.cpp">
       <Filter>ソース ファイル\State\Jump</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\State\StateDead.cpp">
-      <Filter>ソース ファイル\State</Filter>
     </ClCompile>
     <ClCompile Include="Source\CheckPoint\CheckPoint.cpp">
       <Filter>ソース ファイル\CheckPoint</Filter>

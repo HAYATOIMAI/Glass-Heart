@@ -18,8 +18,6 @@ namespace AppFrame {
          * @brief 更新処理
          */
         void Process();
-
-        void InputReject();
         // 方向キー上
         bool GetXinputUp() { return _xInput.Buttons[XINPUT_BUTTON_DPAD_UP]; }
         // 方向キー下
@@ -99,7 +97,5 @@ namespace AppFrame {
         int _trgInfo{ 0 };  //!< トリガー入力情報
         XINPUT_STATE _xInput{ 0 };  //!< XInput用入力情報
         XINPUT_STATE _xTrigger{ 0 };  //!< XInput用トリガー入力情報
-        DINPUT_JOYSTATE _dInput{ 0 };  //!< DirectInput用入力情報
-        DINPUT_JOYSTATE _dTrigger{ 0 };  //!< DirectInput用トリガー入力情報
     };
 }

@@ -17,7 +17,10 @@ namespace GlassHeart {
     }
 
     class GameMain;
-
+    /**
+     * @class Stage
+     * @brief ステージクラスの宣言
+     */
     namespace Stage {
         /**
          * @class Stage
@@ -41,9 +44,10 @@ namespace GlassHeart {
              * 
              */
             void Render() override;
-            ObjectType GetObjectType() const override { return ObjectType::Stage; }
+
+            inline ObjectType GetObjectType() const override { return ObjectType::Stage; }
         private:
-            std::unique_ptr<Model::ModelManager> _stage; //!< ステージ用ユニークポインタ
+            std::unique_ptr<Model::ModelManager> _stage;        //!< ステージ用ユニークポインタ
             std::unique_ptr<Model::ModelManager> _backGround;   //!< スカイスフィア用ユニークポインタ
         };
     } // Stage

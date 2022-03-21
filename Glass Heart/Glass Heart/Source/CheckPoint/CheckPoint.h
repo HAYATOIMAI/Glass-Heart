@@ -24,23 +24,34 @@ namespace GlassHeart {
 
         class CheckPoint : public Object::ObjectBase {
         public:
-
+            /**
+             * @brief コンストラクタ
+             * 
+             * @param[in] game ゲームメインクラスへの参照
+             */
             CheckPoint(GameMain& game);
-
-            ~CheckPoint();
-
+            /**
+             * @brief　デストラクタ
+             * 
+             */
+            virtual ~CheckPoint()override = default;
+            /**
+             * @brief 更新処理
+             * 
+             */
             void Process() override;
-
+            /**
+             * @brief 描画処理
+             * 
+             */
             void Render() override;
 
             ObjectType GetObjectType() const override { return ObjectType::CheckPoint; };
 
         private:
             int _checkPoint{ -1 };
-            //VECTOR _checkDrawPos{ -4510.0f, 5660.0f, -80.0f };
             VECTOR _checkDrawPos{ 8190.0f, 5880.0f, -80.0f };
             VECTOR _checkPos{ 0.0f, 0.0f, 0.0f };
-            //std::unique_ptr<Model::ModelManager> _light;    //!< ライト用ユニークポインタ
         };
     }
 }

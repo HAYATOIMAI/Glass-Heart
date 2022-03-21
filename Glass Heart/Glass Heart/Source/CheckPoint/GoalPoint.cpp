@@ -4,7 +4,7 @@
  * @brief  ゴールポイントの処理
  *
  * @author Yoshihiro Takahashi
- * @date   December 2021
+ * @date   February 2022
  *********************************************************************/
 #include "GoalPoint.h"
 #include "../Application/GameMain.h"
@@ -17,20 +17,17 @@ namespace {
     constexpr auto GoalPositionZ = -30.0f;      //!< ゴールの位置Z
 }
 
-
 using namespace GlassHeart::CheckPoint;
 
+/** コンストラクタ */
 GoalPoint::GoalPoint(GameMain& game) : ObjectBase{ game } {
 
     _goalPoint = LoadGraph("resource/Test/2dMaterial/light3.png");
     _position = VGet(GoalPositionX, GoalPositionY, GoalPositionZ);
-    //_position = VGet(0.f, 0.f, 0.f);
     _radius = 100.0f;
     _hitFlag = false;
 }
-
-GoalPoint::~GoalPoint() {}
-
+/** 更新処理 */
 void GoalPoint::Process() {
 
     GetObjectServer().Register("GoalPoint", _position);
@@ -52,7 +49,7 @@ void GoalPoint::Process() {
         }
     }
 }
-
+/** 描画処理 */
 void GoalPoint::Render() {
 
     auto cr = GetColor(0, 0, 255);
@@ -71,7 +68,7 @@ void GoalPoint::Render() {
     }
 #endif // _DEBUG
 }
-
+/** ゲームクリアへ遷移処理 */
 void GoalPoint::GoToGameClear() {
 
     if (_hitFlag == true) {

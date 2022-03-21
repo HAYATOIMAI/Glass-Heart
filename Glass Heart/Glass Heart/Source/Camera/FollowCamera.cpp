@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   FollowCamera.cpp
  * @brief  フォローカメラの処理
@@ -15,18 +14,15 @@
 namespace {
     constexpr auto StartPositionX = -150.0f;     //!< 初期位置X
     constexpr auto StartPositionY = 35.0f;    //!< 初期位置Y
-    constexpr auto StartPositionZ = -140.0f;  //!< 初期位置Z
+    constexpr auto StartPositionZ = -55.0f;  //!< 初期位置Z
 }
 
 using namespace GlassHeart::Camera;
 
 /** コンストラクタ */
 FollowCamera::FollowCamera(GameMain& game) : ObjectBase{ game } {
-
     _rotation = VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f);
     _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
-
-    Init();
 }
 /** 更新処理 */
 void FollowCamera::Process() {

@@ -40,7 +40,7 @@ namespace GlassHeart {
 			 */
 			virtual void Enter();
 			/**
-			 * @brief
+			 * @brief 入力処理
 			 */
 			virtual void Input();
 			/**
@@ -55,6 +55,14 @@ namespace GlassHeart {
 			 * @param interval 間隔
 			 */
 			virtual void Render(int x, int y, double exrate);
+			/**
+			 * @brief 残り時間用描画処理
+			 *
+			 * @param x
+			 * @param y
+			 * @param interval 間隔
+			 * @param exrate   拡大率
+			 */
 			void NumberRender(int x, int y, int interval, double exrate);
 			/**
 			 * @brief 一の位の値を抽出する処理
@@ -73,17 +81,12 @@ namespace GlassHeart {
 
 			GameMain& GetGame() { return _game; }
 		private:
-			GameMain& _game;
-			int _timerhandle{ 0 };
-			int _numberhandle[3]{ 0,0,0 };//数字の画像ハンド
-			int digit{ -1 };
-			int _interval{ 100 };  //数字同士の間隔
-			int _second{ 0 };
+			GameMain& _game;                //!< プロジェクト
+			int _timerhandle{ 0 };          //!< タイマーの画像ハンドル
+			int _numberhandle[3]{ 0,0,0 };  //!< 数字の画像ハンドル
+			int digit{ -1 };                //!< 位
+			int _interval{ 100 };           //!< 数字同士の間隔
+			int _second{ 0 };               //!< 残り秒数
 		};
 	}
 }
-
-
-
-
-

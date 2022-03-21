@@ -13,18 +13,16 @@
 
 namespace AppFrame {
 
-    SoundManager::~SoundManager()
-    {
-    }
-
+    SoundManager::~SoundManager(){}
+    /** 再生(ループ無し) */
     void SoundManager::Play(std::string_view key) {
         Play(key, DX_PLAYTYPE_BACK);
     }
-
+    /** ループ再生 */
     void SoundManager::PlayLoop(std::string_view key) {
         Play(key, DX_PLAYTYPE_LOOP);
     }
-
+    /** 音量を設定 */
     void SoundManager::SetVolume(std::string_view key, int volume) {
         auto res = _game.GetResourceServer();
         auto&& [filename, handle] = res.GetSoundInfo(key);
@@ -38,7 +36,7 @@ namespace AppFrame {
             SetVolumeMusic(volume);
         }
     }
-
+    /** 停止 */
     void SoundManager::StopSound(std::string_view key) {
         auto res = _game.GetResourceServer();
         auto&& [filename, handle] = res.GetSoundInfo(key);
@@ -52,7 +50,7 @@ namespace AppFrame {
             StopMusic();
         }
     }
-
+    /** 再生 */
     void SoundManager::Play(std::string_view key, int playType) {
         if (_isMute) {
             return;
@@ -70,5 +68,5 @@ namespace AppFrame {
             PlayMusic(filename.c_str(), playType);
         }
     }
-}
+}// AppFrame
 

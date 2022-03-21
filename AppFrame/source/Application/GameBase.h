@@ -24,7 +24,7 @@ namespace AppFrame {
     class GameBase {
     public:
         /**
-         * @enum  Enum
+         * @enumclass  Enum
          * @brief ゲームの状態
          */
         enum class GameState {
@@ -83,11 +83,11 @@ namespace AppFrame {
         inline static GameBase* GameInstance() { return _gameInstance; }
 
     protected:
-        static GameBase* _gameInstance;  //!< ゲームベースクラスのインスタンス
-        GameState _gameState{ GameState::Active };  //!< ゲームの状態
-        std::unique_ptr<ModeServer> _modeServer;  //!< モードサーバーのユニークポインタ
+        static GameBase* _gameInstance;              //!< ゲームベースクラスのインスタンス
+        GameState _gameState{ GameState::Active };   //!< ゲームの状態
+        std::unique_ptr<ModeServer> _modeServer;     //!< モードサーバーのユニークポインタ
         std::unique_ptr<ResourceServer> _resServer;  //!< リソースサーバーのユニークポインタ
         std::unique_ptr<InputManager> _inputManage;  //!< インプットマネージャーのユニークポインタ
         std::unique_ptr<SoundManager> _soundManage;  //!< サウンドマネージャーのユニークポインタ
     };
-}
+} //AppFrame

@@ -1,7 +1,7 @@
 
 /*****************************************************************//**
  * @file   ModeMain.h
- * @brief  
+ * @brief  モードの基底クラスの宣言
  * 
  * @author Hayato Imai
  * @date   December 2021
@@ -24,9 +24,9 @@ namespace GlassHeart {
     namespace Mode {
         /**
          * @class ModeMain
-         * @brief 
+         * @brief モードの基底クラスの宣言
          */
-        class ModeMain : public AppFrame::ModeBase{
+        class ModeMain : public AppFrame::ModeBase {
         public:
             /**
              * @brief コンストラクタ
@@ -79,9 +79,9 @@ namespace GlassHeart {
             UI::UI& GetUI();
         protected:
             GameMain& _gameMain;
-            static int _count;         //!< フレームカウント
-            static int _countSeconds;  //!< 
-            int _fadeCount;
+            static int _count;         //!< タイマー用フレームカウント
+            static int _countSeconds;  //!< タイマー用フレームカウント
+            int _fadeCount;            //!< 自動フェードインアウト用カウンタ
         };
     }
 }

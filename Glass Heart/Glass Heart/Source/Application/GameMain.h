@@ -80,4 +80,4 @@ namespace GlassHeart {
 		std::unique_ptr<GlassHeart::UI::UI> _ui;                         //!< UIのユニークポインタ
 		std::unique_ptr<GlassHeart::Effect::EffectServer> _effectServer; //!< エフェクトサーバーのユニークポインタ
 	};
-}
+} //GlassHeart

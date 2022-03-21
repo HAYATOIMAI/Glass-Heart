@@ -3,7 +3,7 @@
  * @brief  フォローカメラクラスの宣言
  *
  * @author Yoshihiro Takahashi
- * @date   December 2021
+ * @date   February 2022
  *********************************************************************/
 #pragma once
 
@@ -16,22 +16,43 @@ namespace GlassHeart {
     }
 
     namespace Camera {
-
+        /**
+        * @class FollowCamera
+        * @brief フォローカメラ
+        */
         class FollowCamera : public Object::ObjectBase {
         public:
-
+            /**
+            * @brief コンストラクタ
+            *
+            * @param game ゲームメインクラスへの参照
+            */
             FollowCamera(GameMain& game);
-
-            ~FollowCamera() {};
-
-            void Init() override {};
-
+            /**
+            * @brief デストラクタ
+            *
+            */
+            virtual ~FollowCamera() override = default;
+            /**
+            * @brief 更新処理
+            *
+            */
             void Process() override;
-
+            /**
+            * @brief 描画処理
+            *
+            */
             void Render() override;
-
+            /**
+            * @brief タイプの取得
+            * @return タイプID
+            */
             ObjectType GetObjectType() const override { return ObjectType::Camera; };
-
+            /**
+            * @brief カメラのスピード設定
+            * @param[in] forwardSpeed
+            * @return フォワードスピード
+            */
             void SetForwardSpeed(float forwardSpeed) { _forwardSpeed = forwardSpeed; }
 
         protected:

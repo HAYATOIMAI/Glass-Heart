@@ -52,7 +52,7 @@ namespace GlassHeart {
              * @brief デストラクタ
              *
              */
-            virtual~Player() = default;
+            virtual~Player() override = default;
             /**
              * @brief 入力処理
              *
@@ -114,7 +114,7 @@ namespace GlassHeart {
             float _forwardSpeed{ 0.0f };                //!< 前進スピード
             std::string _stateName{ "White" };          //!< デバッグ用状態名変数
             int _recastCount{ 0 };                      //!< 色変更クールタイム用カウンター
-            int _deathCoolCount{ 0 };                   //!<死亡した時の復活クールタイム
+            int _deathCoolCount{ 0 };                   //!< 死亡した時の復活クールタイム
             bool _checkPointFlag{ false };              //!< チェックポイントフラグ
             VECTOR _jumpVelocity{ 0.f, 0.f, 0.f };      //!< ジャンプ速度
         };

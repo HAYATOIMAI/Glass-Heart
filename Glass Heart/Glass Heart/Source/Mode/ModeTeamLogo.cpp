@@ -26,12 +26,12 @@ void Mode::ModeTeamLogo::Init() {
     _teamLogo = res.GetGraph("TeamLogo");
     _fadeCount = 30;
 
-    //!< 使用するモデル
+    // 使用するモデル
     AppFrame::ResourceServer::ModelMap useModel{
-    {"Stage", "Stage/Stage02.mv1"},
-    {"BackGround",  "BackGround/bg.mv1"},
+    {"Player", "Boy/PC2_motion.mv1"},
+    {"Girl", "Girl/Girl.mv1"},
     };
-    //!< モデルの読み込み
+    // モデルの読み込み
     GetResourceServer().LoadModels(useModel);
 }
 /** 入り口処理 */

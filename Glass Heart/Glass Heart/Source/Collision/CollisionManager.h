@@ -70,15 +70,7 @@ namespace GlassHeart {
              */
             VECTOR CheckHitBDeathMesh(const VECTOR& pos, const VECTOR& forward);
             /**
-             * @brief 前半ステージ: 空中の足場の落下処理
-             * 
-             * @param[in] pos
-             * @param[in] forward
-             * @return 
-             */
-            VECTOR CheckFall(const VECTOR& pos, const VECTOR& forward);
-            /**
-             * @brief 円の当たり判定描画
+             * @brief デバッグ用当たり判定描画処理
              * 
              * @param[in] circlePos 円の位置ベクトル
              * @param[in] range 範囲
@@ -88,37 +80,33 @@ namespace GlassHeart {
             /**
              * @brief 円の当たり判定
              * 
-             * @param[in] owner
-             * @param[in] target
-             * @return 
+             * @param[in] owner  チェックポイント
+             * @param[in] target プレイヤー
+             * @return 接触しているか
              */
             bool CheckCircleToCircle(const GlassHeart::Object::ObjectBase& owner, const GlassHeart::Object::ObjectBase& target);
 
            // 各種ゲッター
            inline MV1_COLL_RESULT_POLY GetHitFloor() { return _floor; }
-           inline MV1_COLL_RESULT_POLY_DIM GetHitwall() { return _collpol; }
            inline MV1_COLL_RESULT_POLY_DIM GetSideAndBottom() { return _sideBottom; }
            inline MV1_COLL_RESULT_POLY GetStand() { return _stand; }
            inline MV1_COLL_RESULT_POLY GetWThrough() { return _wThrough; }
+           inline MV1_COLL_RESULT_POLY GetBThrough() { return _bThrough; }
            inline MV1_COLL_RESULT_POLY_DIM GetWDeathMesh() { return _wDeath; }
            inline MV1_COLL_RESULT_POLY_DIM GetBDeathMesh() { return _bDeath; }
-           inline MV1_COLL_RESULT_POLY GetBThrough() { return _bThrough; }
            inline MV1_COLL_RESULT_POLY_DIM GetBWallThroughMesh() { return _bWallThrough; }
            inline MV1_COLL_RESULT_POLY_DIM GetWWallThroughMesh() { return _wWallThrough; }
-           inline MV1_COLL_RESULT_POLY GetFall() { return _fall; }
         private:
-            Object::ObjectBase& _owner;
-            MV1_COLL_RESULT_POLY _floor;
-            MV1_COLL_RESULT_POLY _stand;
-            MV1_COLL_RESULT_POLY _wThrough;
-            MV1_COLL_RESULT_POLY_DIM _collpol;
-            MV1_COLL_RESULT_POLY_DIM _sideBottom;
-            MV1_COLL_RESULT_POLY_DIM _wDeath;
-            MV1_COLL_RESULT_POLY_DIM _bDeath;
-            MV1_COLL_RESULT_POLY _bThrough;
-            MV1_COLL_RESULT_POLY_DIM _bWallThrough;
-            MV1_COLL_RESULT_POLY_DIM _wWallThrough;
-            MV1_COLL_RESULT_POLY _fall;
+            Object::ObjectBase& _owner;               //!< オブジェクトベースクラスへの参照
+            MV1_COLL_RESULT_POLY _floor;              //!< 床との当たり判定用変数
+            MV1_COLL_RESULT_POLY _stand;              //!< ジャンプ用床との当たり判定変数
+            MV1_COLL_RESULT_POLY _wThrough;           //!< 白い床との当たり判定用変数
+            MV1_COLL_RESULT_POLY _bThrough;           //!< 黒い床との当たり判定用変数
+            MV1_COLL_RESULT_POLY_DIM _sideBottom;     //!< 底面や側面との当たり判定用変数
+            MV1_COLL_RESULT_POLY_DIM _wDeath;         //!< 白いデスメッシュとの当たり判定用変数
+            MV1_COLL_RESULT_POLY_DIM _bDeath;         //!< 黒いデスメッシュとの当たり判定用変数
+            MV1_COLL_RESULT_POLY_DIM _bWallThrough;   //!< 白い底面や側面との当たり判定用変数
+            MV1_COLL_RESULT_POLY_DIM _wWallThrough;   //!< 黒い底面や側面との当たり判定用変数
         
             float _radius1{ 0.0f };
             float _radius2{ 0.0f };

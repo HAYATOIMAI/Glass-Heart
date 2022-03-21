@@ -22,7 +22,6 @@
 #include "../State/StateBase.h"
 #include "../State/StateJumpUp.h"
 #include "../State/StateJumpFall.h"
-#include "../State/StateDead.h"
 #include "../State/StateFall.h"
 #include "../Stage/Stage.h"
 #include "../CheckPoint/CheckPoint.h"
@@ -62,7 +61,6 @@ void Object::ObjectFactory::Clear() {
 }
 /** プレイヤーを生成 */
 std::unique_ptr<Object::ObjectBase> Object::PlayerCreate::Create(GameMain& game) {
-    // プレイヤーの生成
     auto player = std::make_unique<Player::Player>(game);
 
     // モデルの読み込みと生成
@@ -74,7 +72,6 @@ std::unique_ptr<Object::ObjectBase> Object::PlayerCreate::Create(GameMain& game)
     auto state = std::make_unique<State::StateManager>("Idle", std::make_shared<State::StateIdle>(*player));
     state->Register("Run", std::make_shared<State::StateRun>(*player));
     state->Register("Fall", std::make_shared<State::StateFall>(*player));
-    state->Register("Dead", std::make_shared<State::StateDead>(*player));
     state->Register("Jump", std::make_shared<State::StateJump>(*player));
     state->Register("JumpUp", std::make_shared<State::StateJumpUp>(*player));
     state->Register("JumpFall", std::make_shared<State::StateJumpFall>(*player));

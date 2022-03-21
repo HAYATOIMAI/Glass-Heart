@@ -47,12 +47,10 @@ void Mode::ModeAmg::Init() {
 
     //!< 使用するモデル
     AppFrame::ResourceServer::ModelMap usemap{
-    {"Player",    "Boy/PC2_motion.mv1"},
-    {"Girl",    "Girl/Girl.mv1"},
-    /*{"Stage", "Stage/Stage02.mv1"},
-    {"BackGround",  "BackGround/bg.mv1"},*/
+    {"Stage", "Stage/Stage03.mv1"},
+    {"BackGround", "BackGround/bg.mv1"},
     };
-    //!< モデルの読み込み
+    // モデルの読み込み
     GetResourceServer().LoadModels(usemap);
     // 非同期読み込み開始
     SetUseASyncLoadFlag(TRUE);
@@ -75,6 +73,4 @@ void Mode::ModeAmg::Process() {
 /** 描画処理 */
 void Mode::ModeAmg::Render() {
     DrawGraph(0, 0, _titleBgHandle, FALSE);
-    /*SetDrawBlendMode(DX_BLENDMODE_ALPHA, _alpha);
-    SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);*/
 }

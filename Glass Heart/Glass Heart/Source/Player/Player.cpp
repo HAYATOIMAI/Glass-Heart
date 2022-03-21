@@ -47,13 +47,6 @@ void Player::Player::Input(AppFrame::InputManager& input) {
         ColorCollisionDetectionSystem();
         _recastCount = Recast;
     }
-    // Bボタンを押すとチェックポイントに保存
-    if (_hitFlag == true) {
-
-        if (input.GetJoyPad().GetXTriggerButtonB()) {
-            _checkPointFlag = true;
-        }
-    }
 #ifdef _DEBUG
     if (input.GetJoyPad().GetXinputRightShoulder()) {
         _rotation = VGet(0.0f, RightRotation, 0.0f);
@@ -70,15 +63,7 @@ void Player::Player::Process() {
     if (_deathCoolCount > 0) {
         --_deathCoolCount;
     }
-
-    if (_deadFlag == false) {
-        // 状態の更新
-        _stateManage->Update();
-        // ワールド行列の更新
-        ComputeWorldTransform();
-        // モデルの更新
-        _modelAnimeManage->Update();
-    }
+    // 白いデスメッシュと当たっていたら
     if (GetCollision().GetWDeathMesh().HitNum >= 1) {
         if (GetColourState() == Player::Player::ColourState::White) {
             SetPosition(_position);
@@ -87,14 +72,22 @@ void Player::Player::Process() {
             ResetPos();
         }
     }
+    // 黒いデスメッシュと当たっていたら
     if (GetCollision().GetBDeathMesh().HitNum >= 1) {
         if (GetColourState() == Player::Player::ColourState::White) {
             ResetPos();
-            // _owner.GetStateManage().PushBack("Dead");
         }
         if (GetColourState() == Player::Player::ColourState::Black) {
             SetPosition(_position);
         }
+    }
+    if (_deadFlag == false) {
+        // 状態の更新
+        _stateManage->Update();
+        // ワールド行列の更新
+        ComputeWorldTransform();
+        // モデルの更新
+        _modelAnimeManage->Update();
     }
     // オブジェクトサーバーに位置を送信
     GetObjectServer().Register("Player", _position);
@@ -106,6 +99,7 @@ void Player::Player::Process() {
             if (_collsionManage->CheckCircleToCircle(*this, **ite) == true) {
                 // 当たった
                 _hitFlag = true;
+                _checkPointFlag = true;
             }
             else {
                 // 当たらなかった
@@ -129,8 +123,9 @@ void Player::Player::Process() {
 }
 /** 描画処理 */
 void Player::Player::Render() {
+    _stateManage->Draw();
 #ifdef _DEBUG
-    //プレイヤーの座標を表示
+    // デバッグ用 プレイヤーの座標を表示
     auto x = 0; auto y = 0; auto size = 32;
     auto i = 0; auto o = 32 * 6; auto timeY = 32 * 10;
     auto white = GetColor(255, 255, 255);
@@ -144,7 +139,6 @@ void Player::Player::Render() {
     //カメラの位置を表示
     //_cameraManage->Render();
 #endif // _DEBUG
-    _stateManage->Draw();
 }
 /** ワールド座標変換 */
 void Player::Player::ComputeWorldTransform() {
@@ -157,32 +151,24 @@ void Player::Player::ComputeWorldTransform() {
 /** 移動処理 */
 void Player::Player::Move(const VECTOR& forward) {
     auto pos = _position;
-
+    // プレイヤーの色を取得
     int state = static_cast<int> (_crState);
+    // 空中の足場の底面と側面判定処理
     pos = _collsionManage->CheckHitSideAndBottom(pos, { forward.x, 0.f, 0.f }, state);
+    // 床との当たり判定
     pos = _collsionManage->CheckHitFloor(pos, { 0.f, -10.f, 0.f }, state);
-
+    // 死亡判定を取るメッシュと当たり判定
     pos = _collsionManage->CheckHitBDeathMesh(pos, { 0.f, forward.y, 0.f });
-
+    // 死亡判定を取るメッシュと当たり判定
     pos = _collsionManage->CheckHitWDeathMesh(pos, { 0.f, forward.y, 0.f });
 
     if (_collsionManage->GetHitFloor().HitFlag == 0 && _collsionManage->GetSideAndBottom().HitNum == 0) {
         GetStateManage().PushBack("Fall");
     }
-    if (_crState == Player::ColourState::Black) {
-        if (_collsionManage->GetWThrough().HitFlag == 0) {
-            //GetStateManage().PushBack("Fall");
-        }
-    }
-    if (_crState == Player::Player::ColourState::White) {
-        if (_collsionManage->GetBThrough().HitFlag == 0) {
-            //GetStateManage().GoToState("Fall");
-        }
-    }
     // 座標更新
     _position = pos;
 }
-/** 色判定処理 */
+/** 色変更処理 */
 void Player::Player::ColorCollisionDetectionSystem() {
     if (_crState == ColourState::Black) {
         SetWhite();
@@ -191,7 +177,7 @@ void Player::Player::ColorCollisionDetectionSystem() {
         SetBlack();
     }
 }
-
+/** 白に設定 */
 void GlassHeart::Player::Player::SetWhite() {
     auto animHandle = _modelAnimeManage->GetHandle();
     _stateName = "White";
@@ -201,7 +187,7 @@ void GlassHeart::Player::Player::SetWhite() {
     MV1SetFrameVisible(animHandle, 3, TRUE);
     _crState = ColourState::White;
 }
-
+/** 黒に設定 */
 void GlassHeart::Player::Player::SetBlack() {
     auto animHandle = _modelAnimeManage->GetHandle();
     _stateName = "Black";
@@ -211,9 +197,9 @@ void GlassHeart::Player::Player::SetBlack() {
     MV1SetFrameVisible(animHandle, 2, TRUE);
     _crState = ColourState::Black;
 }
-
+/** リスポーンシステム */
 void Player::Player::ResetPos() {
-    // デスメッシュと当たっていたら
+    // 白いデスメッシュと当たっていたら
     if (_collsionManage->GetWDeathMesh().HitNum >= 1) {
         if (_deadFlag == false) {
             GetGame().GetSoundManager().Play("death");
@@ -236,6 +222,7 @@ void Player::Player::ResetPos() {
             }
         }
     }
+    // 黒いデスメッシュと当たっていたら
     if (_collsionManage->GetBDeathMesh().HitNum >= 1) {
         if (_deadFlag == false) {
             GetGame().GetSoundManager().Play("death");

@@ -25,7 +25,7 @@ namespace AppFrame {
         /**
          * @brief コンストラクタ
          *
-         * @param game　ゲームベースクラス
+         * @param[in] game　ゲームベースクラス
          */
         ModeBase(GameBase& game);
         /**

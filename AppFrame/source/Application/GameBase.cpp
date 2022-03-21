@@ -15,7 +15,6 @@
 #include "../Mode/ModeFade.h"
 
 namespace {
-
     constexpr auto SCREENWIDTH  = 1920;  //!< 画面の横幅
     constexpr auto SCREENHEIGHT = 1080;  //!< 画面の縦幅
     constexpr auto SCREENDEPTH  = 32;    //!< カラービット数
@@ -24,14 +23,14 @@ namespace {
 namespace AppFrame {
 
     GameBase* GameBase::_gameInstance = nullptr;
-
+    /** コンストラクタ */
     GameBase::GameBase() {
         //静的メンバに自分のクラス情報を入れる
         _gameInstance = this;
     }
-
+    /** デストラクタ */
     GameBase::~GameBase() {}
-
+    /** 初期化処理 */
     bool GameBase::Initialize(HINSTANCE hInstance) {
 
         // Log.txtを出力しない
@@ -44,7 +43,6 @@ namespace AppFrame {
         SetGraphMode(SCREENWIDTH, SCREENHEIGHT, SCREENDEPTH);
 
 #ifndef _DEBUG
-        // Releaseビルド時にウィンドウモードを解除する
         ChangeWindowMode(true);
 #endif // _DEBUG
 #ifdef _DEBUG
@@ -68,7 +66,6 @@ namespace AppFrame {
         SetChangeScreenModeGraphicsSystemResetFlag(FALSE);
         Effekseer_SetGraphicsDeviceLostCallbackFunctions();
 
-
         // 描画先画面を裏にする
         SetDrawScreen(DX_SCREEN_BACK);
 
@@ -89,22 +86,23 @@ namespace AppFrame {
 
         return true;
     }
+    /** 解放処理 */
     void GameBase::Terminate() {
         // Dxライブラリ終了
         DxLib_End();
         Effkseer_End();
     }
-
+    /** 更新処理 */
     void GameBase::Process() {
         _modeServer->Process();
     }
-
+    /** 描画処理 */
     void GameBase::Render() {
-        ClearDrawScreen();      //!< 画面をクリアする
+        ClearDrawScreen();      // 画面をクリアする
         _modeServer->Render();
-        ScreenFlip();           //!< 裏画面を表示する
+        ScreenFlip();           // 裏画面を表示する
     }
-
+    /** 入力処理 */
     void GameBase::Input() {
         if (ProcessMessage() == -1) {
             _gameState = GameState::End;
@@ -115,15 +113,15 @@ namespace AppFrame {
             _gameState = GameState::End;
         }
 #endif // DEBUG
+        // BackボタンかESCキーが押されたらゲーム終了
         if (_inputManage->GetJoyPad().GetXinputBack() || 1 == CheckHitKey(KEY_INPUT_ESCAPE)) {
             _gameState = GameState::End;
         }
 
         _modeServer->Input(*_inputManage);
     }
-
+    /** メインループ */
     void GameBase::Run() {
-        // メインループ
         while (_gameState != GameState::End) {
             Input();    //!< 入力
             Process();  //!< 更新

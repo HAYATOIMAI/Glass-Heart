@@ -1,11 +1,11 @@
 
 /*********************************************************************
- * @file   GoalPoint.h
- * @brief  ゴールポイントクラスの宣言
- *
- * @author Yoshihiro Takahashi
- * @date   December 2021
- *********************************************************************/
+* @file   GoalPoint.h
+* @brief  ゴールポイントクラスの宣言
+*
+* @author Yoshihiro Takahashi
+* @date   February 2022
+*********************************************************************/
 #pragma once
 
 #include "../Application/GameMain.h"
@@ -15,20 +15,42 @@
 namespace GlassHeart {
 
     namespace CheckPoint {
-
+        /**
+        * @class GoalPoint
+        * @brief ゴールポイント
+        */
         class GoalPoint : public Object::ObjectBase {
         public:
-
+            /**
+            * @brief コンストラクタ
+            *
+            * @param game ゲームメインクラスへの参照
+            */
             GoalPoint(GameMain& game);
-
-            ~GoalPoint();
-
+            /**
+            * @brief デストラクタ
+            *
+            */
+            virtual ~GoalPoint() override = default;
+            /**
+            * @brief 更新処理
+            *
+            */
             void Process() override;
-
+            /**
+            * @brief 描画処理
+            *
+            */
             void Render() override;
-
+            /**
+            * @brief ゲームクリアへ遷移処理
+            *
+            */
             void GoToGameClear();
-
+            /**
+            * @brief タイプの取得
+            * @return タイプID
+            */
             ObjectType GetObjectType() const override { return ObjectType::GoalPoint; };
 
         private:
