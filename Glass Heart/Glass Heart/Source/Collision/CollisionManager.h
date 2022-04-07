@@ -30,7 +30,7 @@ namespace GlassHeart {
              */
             CollisionManager(GlassHeart::Object::ObjectBase& owner);
             /**
-             * @brief 前半ステージ:床との当たり判定
+             * @brief  床との当たり判定
              * 
              * @param[in] pos 位置ベクトル
              * @param[in] forward 移動量ベクトル
@@ -38,7 +38,7 @@ namespace GlassHeart {
              */
             VECTOR CheckHitFloor(const VECTOR& pos, const VECTOR& forward, int state);
             /**
-             * @brief  前半ステージ:空中の足場との当たり判定
+             * @brief 空中の足場との当たり判定
              * 
              * @param[in] pos 位置ベクトル
              * @param[in] forward  移動量ベクトル
@@ -46,7 +46,7 @@ namespace GlassHeart {
              */
             VECTOR CheckJumpStand(const VECTOR& pos, const VECTOR& forward, int state);
             /**
-             * @brief  前半ステージ: 空中の足場の底面や側面との当たり判定
+             * @brief 空中の足場の底面や側面との当たり判定
              * 
              * @param[in] pos 位置ベクトル
              * @param[in] forward 移動量ベクトル
@@ -54,7 +54,7 @@ namespace GlassHeart {
              */
             VECTOR CheckHitSideAndBottom(const VECTOR& pos, const VECTOR& forward, int state);
             /**
-             * @brief 前半ステージ: 
+             * @brief 白いデスメッシュとの当たり判定
              * 
              * @param[in] pos
              * @param[in] forward
@@ -62,7 +62,7 @@ namespace GlassHeart {
              */
             VECTOR CheckHitWDeathMesh(const VECTOR& pos, const VECTOR& forward);
             /**
-             * @brief 前半ステージ: 
+             * @brief 黒いデスメッシュとの当たり判定 
              * 
              * @param[in] pos
              * @param[in] forward
