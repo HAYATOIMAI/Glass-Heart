@@ -17,10 +17,7 @@ namespace GlassHeart {
     }
 
     class GameMain;
-    /**
-     * @class Stage
-     * @brief ステージクラスの宣言
-     */
+
     namespace Stage {
         /**
          * @class Stage

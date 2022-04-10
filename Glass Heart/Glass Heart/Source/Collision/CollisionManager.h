@@ -3,7 +3,7 @@
  * @file   CollisionManager.h
  * @brief  コリジョンマネージャークラスの宣言
  * 
- * @author Hayato Imai
+ * @author Hayato Imai, Yoshihiro Takahashi
  * @date   December 2021
  *********************************************************************/
 #pragma once
@@ -56,17 +56,17 @@ namespace GlassHeart {
             /**
              * @brief 白いデスメッシュとの当たり判定
              * 
-             * @param[in] pos
-             * @param[in] forward
-             * @return 
+             * @param[in] pos 位置ベクトル
+             * @param[in] forward 移動量ベクトル
+             * @return 位置ベクトル
              */
             VECTOR CheckHitWDeathMesh(const VECTOR& pos, const VECTOR& forward);
             /**
              * @brief 黒いデスメッシュとの当たり判定 
              * 
-             * @param[in] pos
-             * @param[in] forward
-             * @return 
+             * @param[in] pos 位置ベクトル
+             * @param[in] forward 移動量ベクトル
+             * @return 位置ベクトル
              */
             VECTOR CheckHitBDeathMesh(const VECTOR& pos, const VECTOR& forward);
             /**
@@ -108,7 +108,7 @@ namespace GlassHeart {
             MV1_COLL_RESULT_POLY_DIM _bWallThrough;   //!< 白い底面や側面との当たり判定用変数
             MV1_COLL_RESULT_POLY_DIM _wWallThrough;   //!< 黒い底面や側面との当たり判定用変数
         
-            float _radius1{ 0.0f };
+            float _radius1{ 0.0f };   
             float _radius2{ 0.0f };
         };
     }

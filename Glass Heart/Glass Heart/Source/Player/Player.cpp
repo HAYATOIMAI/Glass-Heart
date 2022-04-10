@@ -3,7 +3,7 @@
  * @file   Player.cpp
  * @brief  プレイヤーの処理
  *
- * @author Hayato Imai
+ * @author Hayato Imai, Haruki Ikeda, Yoshihiro Takahashi
  * @date   December 2021
  *********************************************************************/
 #include "Player.h"
@@ -16,15 +16,11 @@
 #include <numbers>
 
 namespace {
-
-    //constexpr auto StartPositionX = 25600.0f;  //!< テスト用プレイヤーの初期位置X
-    //constexpr auto StartPositionY = 12420.0f;  //!< テスト用プレイヤーの初期位置Y
-    //constexpr auto StartPositionZ = -55.0f;  //!< テスト用プレイヤーの初期位置Z
-    constexpr auto StartPositionX = -150.0f;  //!< プレイヤーの初期位置X
-    constexpr auto StartPositionY = 40.0f;    //!< プレイヤーの初期位置Y
+    constexpr auto StartPositionX = -150.0f; //!< プレイヤーの初期位置X
+    constexpr auto StartPositionY = 40.0f;   //!< プレイヤーの初期位置Y
     constexpr auto StartPositionZ = -55.0f;  //!< プレイヤーの初期位置Z
-    constexpr auto Recast = 20;  //!<　色変更リキャストタイム 
-    constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f); //!< 右方向の角度
+    constexpr auto Recast = 20;              //!< 色変更リキャストタイム 
+    constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 右方向の角度
     constexpr auto LeftRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 左方向の角度
 }
 
@@ -34,12 +30,14 @@ using namespace GlassHeart;
 Player::Player::Player(GameMain& game) : GlassHeart::Object::ObjectBase{ game } {
     _rotation = VGet(0.0f, RightRotation, 0.0f);
     _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
-    _radius = 25.0f;
+    _radius = 25.0f;  // チェックポイントとの当たり判定用半径をセット
 }
 /** 入力処理 */
 void Player::Player::Input(AppFrame::InputManager& input) {
     if (_deadFlag == false) {
+        // カメラの更新
         _cameraManage->Input(input);
+        // 状態の更新
         _stateManage->Input(input);
     }
     //LBボタンを押すと色変更
@@ -49,6 +47,7 @@ void Player::Player::Input(AppFrame::InputManager& input) {
         _recastCount = Recast;
     }
 #ifdef _DEBUG
+    // デバッグ用LBボタンを押すとプレイヤーの位置を初期化
     if (input.GetJoyPad().GetXinputRightShoulder()) {
         _rotation = VGet(0.0f, RightRotation, 0.0f);
         _position = VGet(StartPositionX, StartPositionY + 20, StartPositionZ);
@@ -124,6 +123,7 @@ void Player::Player::Process() {
 }
 /** 描画処理 */
 void Player::Player::Render() {
+    // 状態の更新
     _stateManage->Draw();
 #ifdef _DEBUG
     // デバッグ用 プレイヤーの座標を表示
@@ -137,8 +137,6 @@ void Player::Player::Render() {
     DrawFormatString(x, y, GetColor(255, 255, 255), "プレイヤーZ座標 =  %.3f ", _position.z); y += size;
     // 色状態を表示
     DrawFormatString(i, o, GetColor(255, 255, 255), _stateName.c_str(), _crState); y += size;
-    //カメラの位置を表示
-    //_cameraManage->Render();
 #endif // _DEBUG
 }
 /** ワールド座標変換 */
@@ -162,7 +160,7 @@ void Player::Player::Move(const VECTOR& forward) {
     pos = _collsionManage->CheckHitBDeathMesh(pos, { 0.f, forward.y, 0.f });
     // 死亡判定を取るメッシュと当たり判定
     pos = _collsionManage->CheckHitWDeathMesh(pos, { 0.f, forward.y, 0.f });
-
+    // 足場と底面と側面に当たっていなかったら落下状態へ移行
     if (_collsionManage->GetHitFloor().HitFlag == 0 && _collsionManage->GetSideAndBottom().HitNum == 0) {
         GetStateManage().PushBack("Fall");
     }
@@ -203,20 +201,23 @@ void Player::Player::ResetPos() {
     // 白いデスメッシュと当たっていたら
     if (_collsionManage->GetWDeathMesh().HitNum >= 1) {
         if (_deadFlag == false) {
+            // 死亡時の効果音を再生
             GetGame().GetSoundManager().Play("death");
             _deadFlag = true;
             _deathCoolCount = 120;
         }
+        // チェックポイントと当たっていたらプレイヤーの座標をチェックポイントの位置にする
         if (_checkPointFlag == true) {
             if (_deadFlag == true && _deathCoolCount == 0) {
                 // オブジェクトサーバーからチェックポイントの座標を取得
                 auto checkPos = GetObjectServer().GetPosition("CheckPoint");
-                // プレイヤーの座標をチェックポイントにする
+                // プレイヤーの座標をチェックポイント位置にする
                 _position = checkPos;
                 _deadFlag = false;
             }
         }
         else {
+            // チェックポイントと当たっていなかったら初期位置に戻す
             if (_deadFlag == true && _deathCoolCount == 0) {
                 _position = VGet(StartPositionX, StartPositionY + 20.f, StartPositionZ);
                 _deadFlag = false;
@@ -226,20 +227,23 @@ void Player::Player::ResetPos() {
     // 黒いデスメッシュと当たっていたら
     if (_collsionManage->GetBDeathMesh().HitNum >= 1) {
         if (_deadFlag == false) {
+            // 死亡時の効果音を再生
             GetGame().GetSoundManager().Play("death");
             _deadFlag = true;
             _deathCoolCount = 120;
         }
+        // チェックポイントと当たっていたらプレイヤーの座標をチェックポイントの位置にする
         if (_checkPointFlag == true) {
             if (_deadFlag == true && _deathCoolCount == 0) {
                 // オブジェクトサーバーからチェックポイントの座標を取得
                 auto checkPos = GetObjectServer().GetPosition("CheckPoint");
-                // プレイヤーの座標をチェックポイントにする
+                // プレイヤーの座標をチェックポイントの位置にする
                 _position = checkPos;
                 _deadFlag = false;
             }
         }
         else {
+            // チェックポイントと当たっていなかったら初期位置に戻す
             if (_deadFlag == true && _deathCoolCount == 0) {
                 _position = VGet(StartPositionX, StartPositionY + 20.f, StartPositionZ);
                 _deadFlag = false;

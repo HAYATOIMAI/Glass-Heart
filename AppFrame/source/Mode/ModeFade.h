@@ -105,4 +105,4 @@ namespace AppFrame {
         void Process() override;
     };
 
-}
+} // AppFrame

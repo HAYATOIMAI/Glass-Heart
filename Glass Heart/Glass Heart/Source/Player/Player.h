@@ -3,7 +3,7 @@
  * @file   Player.h
  * @brief  プレイヤークラスの宣言
  *
- * @author Hayato Imai
+ * @author Hayato Imai, Yoshihiro Takahashi
  * @date   December 2021
  *********************************************************************/
 #pragma once
@@ -31,7 +31,7 @@ namespace GlassHeart {
     namespace Player {
         /**
          * @class Player
-         * @brief プレイヤー
+         * @brief プレイヤークラスの宣言
          */
         class Player : public  Object::ObjectBase {
         public:
@@ -89,6 +89,7 @@ namespace GlassHeart {
              * 
              */
             void ColorCollisionDetectionSystem();
+
             void SetWhite();
             void SetBlack();
             /**
@@ -110,13 +111,13 @@ namespace GlassHeart {
             inline bool GetCheckPointFlag() { return _checkPointFlag; }
             inline void SetCheckPointFlag(bool flag) { _checkPointFlag = flag; }
         protected:
-            ColourState _crState{ ColourState::White }; //!< 色状態を管理する変数
-            float _forwardSpeed{ 0.0f };                //!< 前進スピード
-            std::string _stateName{ "White" };          //!< デバッグ用状態名変数
-            int _recastCount{ 0 };                      //!< 色変更クールタイム用カウンター
-            int _deathCoolCount{ 0 };                   //!< 死亡した時の復活クールタイム
-            bool _checkPointFlag{ false };              //!< チェックポイントフラグ
-            VECTOR _jumpVelocity{ 0.f, 0.f, 0.f };      //!< ジャンプ速度
+            ColourState _crState{ ColourState::White };  //!< 色状態を管理する変数
+            float _forwardSpeed{ 0.0f };                 //!< 前進スピード
+            std::string _stateName{ "White" };           //!< デバッグ用状態名変数
+            int _recastCount{ 0 };                       //!< 色変更クールタイム用カウンタ
+            int _deathCoolCount{ 0 };                    //!< 死亡した時の復活までのクールタイム
+            bool _checkPointFlag{ false };               //!< チェックポイントフラグ
+            VECTOR _jumpVelocity{ 0.f, 0.f, 0.f };       //!< ジャンプ速度
         };
     } // Player
 } // GlassHeart 

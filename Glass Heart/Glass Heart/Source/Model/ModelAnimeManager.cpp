@@ -3,7 +3,7 @@
  * @file   ModelAnimeManager.cpp
  * @brief モデルアニメーションマネージャークラスの処理
  *
- * @author Hayato Imai
+ * @author Hayato Imai,Haruki Ikeda
  * @date   December 2021
  *********************************************************************/
 #include "ModelAnimeManager.h"

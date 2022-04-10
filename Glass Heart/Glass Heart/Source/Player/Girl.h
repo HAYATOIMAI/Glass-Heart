@@ -76,7 +76,7 @@ namespace GlassHeart {
             * @class StateBase
             * @brief ƒK[ƒ‹‚Ìó‘ÔŠî’êƒNƒ‰ƒX
             */
-            class StateBase : public State::StateBaseRoot {
+            class StateBase : public AppFrame::StateBaseRoot {
             public:
                 StateBase(Girl& owner) :_owner{ owner } {};
                 void Draw() override;

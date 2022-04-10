@@ -3,7 +3,7 @@
  * @file   ObjectBase.h
  * @brief  オブジェクトの基底クラス
  * 
- * @author Hayato Imai
+ * @author Hayato Imai, Yoshihiro Takahashi
  * @date   December 2021
  *********************************************************************/
 #pragma once
@@ -11,7 +11,6 @@
 #include <DxLib.h>
 #include <memory>
 
-/** 二重インクルード防止 */
 namespace AppFrame {
     class ResourceServer;
     class InputManager;
@@ -58,7 +57,7 @@ namespace GlassHeart {
                 Camera,
                 Stage,
                 CheckPoint,
-                GoalPoint,
+                GoalPoint
             };
             /**
              * @brief オブジェクトの状態
@@ -122,6 +121,7 @@ namespace GlassHeart {
              *
              */
             virtual void ComputeWorldTransform();
+            // 各種ゲッターセッター
             inline const MATRIX& GetWorldTransform() const { return _worldTransform; }
             inline VECTOR GetForward() const { return VTransform({ 0, 0, 1 }, MGetRotY(_rotation.y)); }
 
@@ -148,28 +148,28 @@ namespace GlassHeart {
             inline Collision::CollisionManager& GetCollision() { return *_collsionManage; }
             inline Camera::CameraManager& GetCamera() { return *_cameraManage; }
             inline Model::ModelAnimeManager& GetModelAnime() { return *_modelAnimeManage; }
-            ObjectServer& GetObjectServer();
+            inline ObjectServer& GetObjectServer() { return _game.GetObjectServer(); }
         protected:
-            GameMain& _game; //!< ゲームメインクラスの参照
+            GameMain& _game;  //!< ゲームメインクラスの参照
 
             inline ObjectState GetObjectState() const { return _objectState; }
             inline void SetObjectState(ObjectState objstate) { _objectState = objstate; }
             ObjectState _objectState{ ObjectState::Active };
 
-            std::unique_ptr<State::StateManager> _stateManage;  //!< ステートマネージャーのユニークポインタ
+            std::unique_ptr<State::StateManager> _stateManage;             //!< ステートマネージャーのユニークポインタ
             std::shared_ptr<Collision::CollisionManager> _collsionManage;  //!< コリジョンのシェアードポインタ
-            std::shared_ptr<Camera::CameraManager> _cameraManage;  //!< カメラのシェアードポインタ
-            std::unique_ptr<Model::ModelAnimeManager> _modelAnimeManage; //!< モデルアニメマネージャーのユニークポインタ
-            std::unique_ptr<Effect::EffectManager> _effectManage;  //!< エフェクト管理クラスのユニークポインタ
+            std::shared_ptr<Camera::CameraManager> _cameraManage;          //!< カメラのシェアードポインタ
+            std::unique_ptr<Model::ModelAnimeManager> _modelAnimeManage;   //!< モデルアニメマネージャーのユニークポインタ
+            std::unique_ptr<Effect::EffectManager> _effectManage;          //!< エフェクト管理クラスのユニークポインタ
 
             MATRIX _worldTransform{ MGetIdent() }; //!< ワールド座標変換
-            VECTOR _position{ 0, 0, 0 };  //!< 位置情報
-            VECTOR _rotation{ 0, 0, 0 };  //!< 角度
-            VECTOR _scale{ 1, 1, 1 };     //!< 拡大率
+            VECTOR _position{ 0, 0, 0 };           //!< 位置情報
+            VECTOR _rotation{ 0, 0, 0 };           //!< 角度
+            VECTOR _scale{ 1, 1, 1 };              //!< 拡大率
 
-            float _radius{ 0.0f };  //!< コリジョン用半径
-            bool _hitFlag{ false }; //!< コリジョン用フラグ
-            bool _deadFlag{ false };    //!<死亡したかのフラグ
+            float _radius{ 0.0f };    //!< コリジョン用半径
+            bool _hitFlag{ false };   //!< コリジョン用フラグ
+            bool _deadFlag{ false };  //!<死亡したかのフラグ
         };
     } // Object
 } // GlassHeart

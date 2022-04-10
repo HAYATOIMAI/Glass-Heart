@@ -72,4 +72,4 @@ namespace AppFrame {
     protected:
         GameBase& _game; //!< ゲームベースクラスへの参照
     };
-}
+} // AppFrame

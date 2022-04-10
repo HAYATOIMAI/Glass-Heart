@@ -69,11 +69,11 @@ namespace GlassHeart {
              */
             inline VECTOR GetForward() const { return VNorm(VSub(_target, _position)); }
         protected:
-            VECTOR _position{ 0, 0, 0 };        //!< カメラの位置ベクトル
-            VECTOR _target{ 0, 0, 0 };          //!< 目標の位置ベクトル
-            VECTOR _forwardOfTarget{ 0, 0, 0 }; //!< 目標の位置ベクトル
-            float targetDist{ 100.0f };         //!< 目標との距離
-            float vertDist{ 100.0f };           //!< 
+            VECTOR _position{ 0, 0, 0 };         //!< カメラの位置ベクトル
+            VECTOR _target{ 0, 0, 0 };           //!< 目標の位置ベクトル
+            VECTOR _forwardOfTarget{ 0, 0, 0 };  //!< 目標の向きベクトル
+            float _targetDist{ 100.0f };         //!< 目標との距離
+            float _vertDist{ 100.0f };           //!< 垂直方向の距離
         };
     }
 }

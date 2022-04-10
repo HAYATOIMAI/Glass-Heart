@@ -3,7 +3,7 @@
  * @file   CollisionManager.cpp
  * @brief  コリジョンマネージャークラスの処理
  *
- * @author Hayato Imai
+ * @author Hayato Imai, Yoshihiro Takahashi
  * @date   December 2021
  *********************************************************************/
 #include "CollisionManager.h"
@@ -149,11 +149,11 @@ VECTOR Collision::CollisionManager::CheckHitWDeathMesh(const VECTOR& pos, const 
     _wDeath = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "WDeath_NavMesh"), c1, c2,round);
 
     if (_wDeath.HitNum == 0) {
-        // 衝突なし
+        // 衝突なし 現在位置を返す
         return pos;
 }
     else if (_wDeath.HitNum >= 1) {
-        // 衝突あれば移動する
+        // 衝突あり 現在位置と移動量ベクトルを加算して返す
         newPos = VAdd(pos, forward);
     }
     return  newPos;
@@ -170,11 +170,11 @@ VECTOR Collision::CollisionManager::CheckHitBDeathMesh(const VECTOR& pos, const 
     _bDeath = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "BDeath_NavMesh"), c1, c2, round);
 
     if (_bDeath.HitNum == 0) {
-        // 衝突なし
+        // 衝突なし 現在位置を返す
         return pos;
     }
     else if (_bDeath.HitNum >= 1) {
-        // 衝突あれば移動する
+        // 衝突あり 現在位置と移動量ベクトルを加算して返す
         newPos = VAdd(pos, forward);
     }
     return newPos;

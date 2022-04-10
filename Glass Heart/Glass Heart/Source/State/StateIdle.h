@@ -44,10 +44,10 @@ namespace GlassHeart {
              */
             void Update() override;
         private:
-            int _cnt{ 0 }; //!< リキャスト用カウンター
-            bool _resetFlag{ false }; //!< 色をリセットするかのフラグ
+            int _cnt{ 0 };             //!< リキャスト用カウンター
+            bool _resetFlag{ false };  //!< 色をリセットするかのフラグ
         };
-    }// State
-}// GlassHeart   StateIdle(Player::Player& owner) : StateBase{ owner } {}
+    } // State
+} // GlassHeart 
 
 

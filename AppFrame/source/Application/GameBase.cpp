@@ -37,7 +37,8 @@ namespace AppFrame {
         SetOutApplicationLogValidFlag(false);
 
         // ウィンドウのタイトルを設定する
-        SetMainWindowText("Glass Heart");
+        auto windowName = SetWindowName();
+        SetMainWindowText(windowName.c_str());
 
         // 画面モードのを設定
         SetGraphMode(SCREENWIDTH, SCREENHEIGHT, SCREENDEPTH);
@@ -49,9 +50,6 @@ namespace AppFrame {
         //! Debugビルド時にウィンドウモードに指定する
         ChangeWindowMode(true);
 #endif // DEBUG
-
-        //! Effekseerを使用するためDirect11を指定
-        SetUseDirect3DVersion(DX_DIRECT3D_11);
 
         // Dxライブラリ初期化
         if (DxLib_Init() == -1) {
@@ -99,11 +97,6 @@ namespace AppFrame {
             _gameState = GameState::End;
         }
         _inputManage->Process();
-#ifdef _DEBUG
-        if (1 == CheckHitKey(KEY_INPUT_ESCAPE)) {
-            _gameState = GameState::End;
-        }
-#endif // DEBUG
         // BackボタンかESCキーが押されたらゲーム終了
         if (_inputManage->GetJoyPad().GetXinputBack() || 1 == CheckHitKey(KEY_INPUT_ESCAPE)) {
             _gameState = GameState::End;

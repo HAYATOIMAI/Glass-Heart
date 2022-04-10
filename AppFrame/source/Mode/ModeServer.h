@@ -13,7 +13,6 @@
 #include <list>
 
 namespace AppFrame {
-    /** 前方宣言 */
     class ModeBase;
     class InputManager;
     class GameBase;
@@ -40,31 +39,31 @@ namespace AppFrame {
         void Register(std::string_view key, std::shared_ptr<ModeBase> mode);
         /**
          * @brief      モードのプッシュバック
-         *             リストの一番後ろ(最前面)にシーンをプッシュ追加する
+         *             リストの一番後ろ(最前面)にモードをプッシュ追加する
          *             ModeBaseの入口処理Enterを実行する
          *
-         * @param[in] key  登録済みのシーンに関連付けた文字列
+         * @param[in] key  登録済みのモードに関連付けた文字列
          */
         void PushBack(std::string_view key);
         /**
          * @brief モードのポップバック
-         *        リストの一番後ろ(最前面)のシーンをポップ除外する
+         *        リストの一番後ろ(最前面)のモードをポップ除外する
          *        ModeBaseの出口処理Exitを実行する
          *
          */
         void PopBack();
         /**
          * @brief      モードの遷移
-         *             PopBackしてPushBackする
+         *             keyで指定されたモードへ移行する
          *
-         * @param[in] key  登録済みのシーンに関連付けた文字列
+         * @param[in] key  登録済みのモードに関連付けた文字列
          */
         void GoToMode(std::string_view key);
         /**
-         * @brief      リストの一番後ろ(生前面)のモードの真下に挿入する
+         * @brief      リストの一番後ろ(最前面)のモードの真下に挿入する
          *             ModeBaseの入口処理Enterを実行する
          *
-         * @param[in] key  登録済みのシーンに関連付けた文字列
+         * @param[in] key  登録済みのモードに関連付けた文字列
          */
         void InsertBelowBack(std::string_view key);
         /**
@@ -87,5 +86,4 @@ namespace AppFrame {
         std::unordered_map<std::string, std::shared_ptr<ModeBase>> _registry;   //!< モードのレジストリ
         std::list<std::shared_ptr<ModeBase>> _mode;  //!< モードのリスト
     };
-}
-
+} // AppFrame

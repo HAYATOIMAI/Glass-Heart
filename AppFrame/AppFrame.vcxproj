@@ -174,8 +174,10 @@
     <ClInclude Include="source\Mode\ModeBase.h" />
     <ClInclude Include="source\Mode\ModeFade.h" />
     <ClInclude Include="source\Mode\ModeServer.h" />
+    <ClInclude Include="source\Resource\LoadJson.h" />
     <ClInclude Include="source\Resource\ResourceServer.h" />
     <ClInclude Include="source\Sound\SoundManager.h" />
+    <ClInclude Include="source\State\StateBaseRoot.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\GameBase.cpp" />
@@ -185,10 +187,21 @@
     <ClCompile Include="source\Mode\ModeBase.cpp" />
     <ClCompile Include="source\Mode\ModeFade.cpp" />
     <ClCompile Include="source\Mode\ModeServer.cpp" />
+    <ClCompile Include="source\Resource\LoadJson.cpp" />
     <ClCompile Include="source\Resource\ResourceServer.cpp" />
     <ClCompile Include="source\Sound\SoundManager.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\Glass Heart\packages\nlohmann.json.3.10.4\build\native\nlohmann.json.targets" Condition="Exists('..\Glass Heart\packages\nlohmann.json.3.10.4\build\native\nlohmann.json.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\Glass Heart\packages\nlohmann.json.3.10.4\build\native\nlohmann.json.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\Glass Heart\packages\nlohmann.json.3.10.4\build\native\nlohmann.json.targets'))" />
+  </Target>
 </Project>

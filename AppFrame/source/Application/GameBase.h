@@ -8,6 +8,7 @@
  *********************************************************************/
 #pragma once
 #include <memory>
+#include <string>
 #include <DxLib.h>
 
 namespace AppFrame {
@@ -72,6 +73,8 @@ namespace AppFrame {
          *
          */
         virtual void Run();
+
+        inline virtual std::string SetWindowName() { return ""; }
 
         inline ModeServer& GetModeServer() const { return *_modeServer; }
 

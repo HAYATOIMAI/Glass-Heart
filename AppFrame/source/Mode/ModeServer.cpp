@@ -47,16 +47,16 @@ namespace AppFrame {
 		_mode.pop_back();
 	}
 	/** モードの遷移
-	 ↑次のシーン
+	 ↑次のモード
 	 ↑フェードイン
-	 ↑現在のシーン
+	 ↑現在のモード
 	 ↑フェードアウト：最前面 */
 	void ModeServer::GoToMode(std::string_view key) {
-		InsertBelowBack(key.data());  // 次のシーンを挿入
+		InsertBelowBack(key.data());  // 次のモードを挿入
 		InsertBelowBack("FadeIn");    // フェードインを挿入
 		PushBack("FadeOut");          // フェードアウトをプッシュバック
 	}
-	/** リストの一番後ろ(最前面)のシーンの真下に挿入 */
+	/** リストの一番後ろ(最前面)のモードの真下に挿入 */
 	void ModeServer::InsertBelowBack(std::string_view key) {
 		if (!_registry.contains(key.data())) {
 			return;   // キーが未登録
@@ -85,4 +85,4 @@ namespace AppFrame {
 			mode->Render();
 		}
 	}
-}
+} // AppFrame

@@ -3,7 +3,7 @@
  * @file   ModelAnimeManager.h
  * @brief  3Dモデル管理
  * 
- * @author Hayato Imai
+ * @author Hayato Imai, Haruki Ikeda
  * @date   December 2021
  *********************************************************************/
 
@@ -103,7 +103,7 @@ namespace GlassHeart {
              */
             float GetTimeRate() { return _timeRate; }
         private:
-            std::unordered_map<std::string, int> _registry;
+            std::unordered_map<std::string, int> _registry; //!< レジストリ
             int _animIndex{ -1 };      //!< アニメーション番号
             int _oldattachIndex{ -1 }; //!< 前のアタッチ番号
             int _attachIndex{ -1 };    //!< アタッチする番号

@@ -49,7 +49,3 @@ void Object::ObjectBase::SetCameraManage(std::shared_ptr<Camera::CameraManager> 
 void Object::ObjectBase::SetEffectManage(std::unique_ptr<Effect::EffectManager> effect) {
     _effectManage = std::move(effect);
 }
-
-Object::ObjectServer& Object::ObjectBase::GetObjectServer() {
-    return _game.GetObjectServer();
-}

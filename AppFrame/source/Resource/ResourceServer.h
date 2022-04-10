@@ -40,7 +40,7 @@ namespace AppFrame {
         /**
          * @brief 任意の文字列をキーにして音ファイル名と事前読み込みの有無を管理
          */
-        using SoundMap = std::unordered_map < std::string, std::pair<std::string, bool> >;
+        using SoundMap = std::unordered_map <std::string, std::pair<std::string, bool>>;
         /**
          * @brief 任意の文字列をキーにしてモデルファイル名を管理
          */
@@ -178,7 +178,7 @@ namespace AppFrame {
 
     private:
         GameBase& _game;  //!< ゲームベースクラスへの参照
-        std::filesystem::path _currrntPath;  //!< 格納フォルダへのパス
+        std::filesystem::path _currntPath;  //!< 格納フォルダへのパス
         /**
          * @brief 任意の文字列をキーにしてDivGraphと画像ハンドルのペアを管理
          */

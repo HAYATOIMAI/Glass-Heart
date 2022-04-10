@@ -42,5 +42,5 @@ namespace GlassHeart {
              */
             void Update() override;
         };
-    }// State 
-}// GlassHeart
+    } // State 
+} // GlassHeart

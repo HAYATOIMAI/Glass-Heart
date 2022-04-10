@@ -14,6 +14,8 @@
 #include "Application/GameBase.h"
 #include "Input/InputManager.h"
 #include "Resource/ResourceServer.h"
+#include "Resource/LoadJson.h"
 #include "Sound/SoundManager.h"
+#include "State/StateBaseRoot.h"
 #include "Mode/ModeBase.h"
 #include "Mode/ModeServer.h"

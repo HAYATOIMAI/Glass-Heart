@@ -17,9 +17,9 @@
 #include <AppFrame.h>
 
 namespace {
-    constexpr auto StraifVector = 6.5f; // ストレイフ用X軸移動量
-    constexpr auto JumpVecY = 0.0f;  //!< ジャンプ用Y軸移動量ベクトル
-    constexpr auto Gravity = -1.0f;  //!< 重力加速度
+    constexpr auto StraifVector = 6.5f;  // ストレイフ用X軸移動量
+    constexpr auto JumpVecY = 0.0f;      //!< ジャンプ用Y軸移動量ベクトル
+    constexpr auto Gravity = -1.0f;      //!< 重力加速度
     constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f); //!< 右方向の角度
     constexpr auto LeftRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 左方向の角度
 }
@@ -27,10 +27,10 @@ namespace {
 using namespace GlassHeart;
 /** 入り口処理 */
 void State::StateFall::Enter() {
-
+    // 効果音を停止
     auto& game = _owner.GetGame();
     game.GetSoundManager().StopSound("run");
-
+    // 落下時のはじかれる距離をセット
     _owner.SetJumpVelocity({ 0.f,5.5f,0.f });
 }
 /** 入力処理 */

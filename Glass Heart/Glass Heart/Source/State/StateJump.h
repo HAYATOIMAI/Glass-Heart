@@ -48,7 +48,7 @@ namespace GlassHeart {
         private:
             bool _isJump{ false }; //!< ジャンプするかのフラグ
         };
-    } //  State 
+    } // State 
 } // GlassHeart
 
 

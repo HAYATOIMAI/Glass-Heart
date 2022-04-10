@@ -3,7 +3,7 @@
  * @file   ModelManager.h
  * @brief  モデルマネージャークラスの宣言
  * 
- * @author Hayato Imai
+ * @author Hayato Imai, Haruki Ikeda
  * @date   December 2021
  *********************************************************************/
 #pragma once

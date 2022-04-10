@@ -30,4 +30,4 @@ namespace AppFrame {
         InputJoypad _inputjoy;  //!< インプットジョイパッドクラスの参照
     };
 
-}
+} // AppFrame

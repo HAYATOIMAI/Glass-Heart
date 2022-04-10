@@ -24,10 +24,9 @@ void Mode::ModeLoading::Init() {
     res.LoadGraphics(useMap);
 
     _nowLoading = res.GetGraph("NowLoading");
-    //_loadHandle = res.GetGraph("LoadGif");
 
     _loadHandle = LoadGraph("resource/Loading/LoadGraphHeart.gif");
-    _cnt = 80;
+    _cnt = 30;
 }
 
 void Mode::ModeLoading::Enter() {}

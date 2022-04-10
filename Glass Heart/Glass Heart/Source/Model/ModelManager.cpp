@@ -3,7 +3,7 @@
  * @file   ModelManager.cpp
  * @brief  モデルマネージャークラスの処理
  *
- * @author Hayato Imai
+ * @author Hayato Imai,Haruki Ikeda
  * @date   December 2021
  *********************************************************************/
 #include "ModelManager.h"

@@ -62,7 +62,7 @@ namespace AppFrame {
          */
         void Play(std::string_view key, int playType);
 
-        GameBase& _game; //!< ゲームベースクラスへの参照
-        bool _isMute{ false }; //!< ミュートにするかのフラグ
+        GameBase& _game;        //!< ゲームベースクラスへの参照
+        bool _isMute{ false };  //!< ミュートにするかのフラグ
     };
 } // AppFrame

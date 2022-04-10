@@ -21,7 +21,7 @@ namespace GlassHeart {
          * @class StateBase
          * @brief プレイヤーの状態基底クラス
          */
-        class StateBase : public StateBaseRoot {
+        class StateBase : public AppFrame::StateBaseRoot {
         public:
             /**
              * @brief コンストラクタ
@@ -34,7 +34,7 @@ namespace GlassHeart {
              */
             void Draw() override;
         protected:
-            Player::Player& _owner; //!< プレイヤークラスの参照
+            Player::Player& _owner;  //!< プレイヤークラスの参照
         };
     } // State 
 } // GlassHeart

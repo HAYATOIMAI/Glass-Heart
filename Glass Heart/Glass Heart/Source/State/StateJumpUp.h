@@ -45,10 +45,6 @@ namespace GlassHeart {
              * 
              */
             void Update() override;
-        private:
-            float _jY{ -2.0f }; //!< 重力加速度
-            bool _isfall{ false }; //!< 落下中かを判断するフラグ
-            float _vX{ 0.0f };  //!< 今回の移動量
         };
     } // State 
 } // GlassHeart

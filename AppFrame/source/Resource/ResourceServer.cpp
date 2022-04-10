@@ -48,12 +48,12 @@ namespace AppFrame {
         for (auto&& [key, graph] : graphmap) {
             auto gra = graph;
             // _currentPath(格納フォルダ)＋ファイル名
-            gra.fileName = (_currrntPath / gra.fileName).generic_string();
+            gra.fileName = (_currntPath / gra.fileName).generic_string();
             LoadGraphic(key, gra);
         }
     }
     void ResourceServer::ChangeCurrentFile(std::string_view path) {
-        _currrntPath = path;
+        _currntPath = path;
     }
     /** 画像ハンドルの取得 */
     int ResourceServer::GetGraph(std::string_view key, int no) {
@@ -121,7 +121,7 @@ namespace AppFrame {
     /** モデルの一括読み込み */
     void ResourceServer::LoadModels(const ModelMap& modelmap) {
         for (auto&& [key, filename] : modelmap) {
-            auto path = (_currrntPath / filename).generic_string();
+            auto path = (_currntPath / filename).generic_string();
             LoadModel(key, path);
         }
     }
@@ -200,7 +200,7 @@ namespace AppFrame {
         for (auto&& [key, filename_isLoad] : soundMap) {
             auto [filename, isLoad] = filename_isLoad;
             // _currentPath(格納フォルダ)＋ファイル名
-            filename = (_currrntPath / filename).generic_string();
+            filename = (_currntPath / filename).generic_string();
             LoadSound(key, { filename, isLoad });
         }
     }
