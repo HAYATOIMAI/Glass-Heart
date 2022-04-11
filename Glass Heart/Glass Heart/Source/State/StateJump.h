@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   StateJump.h
  * @brief  プレイヤーのジャンプ状態クラスの宣言
@@ -11,11 +10,9 @@
 #include <AppFrame.h>
 
 namespace GlassHeart {
-
     namespace Player {
         class Player;
     }
-
     namespace State {
         /**
          * @class StateJump
@@ -48,7 +45,5 @@ namespace GlassHeart {
         private:
             bool _isJump{ false }; //!< ジャンプするかのフラグ
         };
-    } // State 
-} // GlassHeart
-
-
+    } // namespace State 
+} // namespace GlassHeart

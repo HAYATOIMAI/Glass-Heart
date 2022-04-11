@@ -65,4 +65,4 @@ namespace AppFrame {
         GameBase& _game;        //!< ゲームベースクラスへの参照
         bool _isMute{ false };  //!< ミュートにするかのフラグ
     };
-} // AppFrame
+} // namespace AppFrame

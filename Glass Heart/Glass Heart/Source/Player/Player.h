@@ -1,4 +1,3 @@
-
 /*********************************************************************
  * @file   Player.h
  * @brief  プレイヤークラスの宣言
@@ -7,7 +6,6 @@
  * @date   December 2021
  *********************************************************************/
 #pragma once
-
 #include "../Object/ObjectBase.h"
 #include <string>
 #include <AppFrame.h>
@@ -18,16 +16,15 @@ namespace AppFrame {
 }
 
 namespace GlassHeart {
-
-    class GameMain;
-
+    namespace Application {
+        class GameMain;
+    }
     namespace Camera {
         class CameraManager;
     }
     namespace Model {
         class ModelAnimeManager;
     }
-
     namespace Player {
         /**
          * @class Player
@@ -47,7 +44,7 @@ namespace GlassHeart {
              *
              * @param game ゲームメインクラスへの参照
              */
-            Player(GameMain& game);
+            Player(Application::GameMain& game);
             /**
              * @brief デストラクタ
              *
@@ -119,5 +116,5 @@ namespace GlassHeart {
             bool _checkPointFlag{ false };               //!< チェックポイントフラグ
             VECTOR _jumpVelocity{ 0.f, 0.f, 0.f };       //!< ジャンプ速度
         };
-    } // Player
-} // GlassHeart 
+    } // namespace Player
+} // namespace GlassHeart

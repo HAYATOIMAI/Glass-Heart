@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   ObjectFactory.h
  * @brief  オブジェクトファクトリークラスの宣言
@@ -34,7 +33,7 @@ namespace GlassHeart {
              *
              * @param game
              */
-            ObjectFactory(GameMain& game);
+            ObjectFactory(Application::GameMain& game);
             /**
              * @brief クリエイターの登録
              *
@@ -56,7 +55,7 @@ namespace GlassHeart {
              */
             void Clear();
         private:
-            GameMain& _game;
+            Application::GameMain& _game;
             std::unordered_map<std::string, std::unique_ptr<CreateBase>> _creatorMap;
             unsigned int _progress{ 0 };
             unsigned int _spawnProgress{ 0 };
@@ -69,7 +68,7 @@ namespace GlassHeart {
         class CreateBase {
         public:
             virtual ~CreateBase() = default;
-            virtual std::unique_ptr<ObjectBase> Create(GameMain& game) = 0;
+            virtual std::unique_ptr<ObjectBase> Create(Application::GameMain& game) = 0;
         };
         /**
         * @class GirlCreate
@@ -77,14 +76,14 @@ namespace GlassHeart {
         */
         class GirlCreate : public CreateBase {
         public:
-            virtual std::unique_ptr<ObjectBase> Create(GameMain& game);
+            virtual std::unique_ptr<ObjectBase> Create(Application::GameMain& game);
         };
         /**
         * @class GoalPointCreate
         * @brief ゴールポイント用のクリエイター
         */
         class GoalPointCreate : public CreateBase {
-            virtual std::unique_ptr<ObjectBase> Create(GameMain& game);
+            virtual std::unique_ptr<ObjectBase> Create(Application::GameMain& game);
         };
         /**
          * @class PlayerCreate
@@ -92,30 +91,28 @@ namespace GlassHeart {
          */
         class PlayerCreate : public CreateBase {
         public:
-            virtual std::unique_ptr<ObjectBase> Create(GameMain& game);
+            virtual std::unique_ptr<ObjectBase> Create(Application::GameMain& game);
         };
         /**
          * @class EnemyCreate
          * @brief エネミー用のクリエイター
          */
         class CheckPointCreate : public CreateBase {
-            virtual std::unique_ptr<ObjectBase> Create(GameMain& game);
+            virtual std::unique_ptr<ObjectBase> Create(Application::GameMain& game);
         };
         /**
          * @class StageCreate
          * @brief ステージ用のクリエイター
          */
         class StageCreate : public CreateBase {
-            virtual std::unique_ptr<ObjectBase> Create(GameMain& game);
+            virtual std::unique_ptr<ObjectBase> Create(Application::GameMain& game);
         };
         /**
          * @class StageCreate
          * @brief カメラフォロー用のクリエイター
          */
         class FollowCameraCreate : public CreateBase {
-            virtual std::unique_ptr<ObjectBase> Create(GameMain& game);
+            virtual std::unique_ptr<ObjectBase> Create(Application::GameMain& game);
         };
-    } // Object
-} // GlassHeart
-
-
+    } // namespace Object
+} // namespace GlassHeart

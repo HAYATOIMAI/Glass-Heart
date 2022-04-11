@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   Player.cpp
  * @brief  プレイヤーの処理
@@ -27,7 +26,7 @@ namespace {
 using namespace GlassHeart;
 
 /** コンストラクタ */
-Player::Player::Player(GameMain& game) : GlassHeart::Object::ObjectBase{ game } {
+Player::Player::Player(Application::GameMain& game) : GlassHeart::Object::ObjectBase{ game } {
     _rotation = VGet(0.0f, RightRotation, 0.0f);
     _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
     _radius = 25.0f;  // チェックポイントとの当たり判定用半径をセット

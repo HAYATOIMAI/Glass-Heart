@@ -1,8 +1,7 @@
-
 /*********************************************************************
  * @file   StateFall.h
- * @brief  
- * 
+ * @brief  プレイヤー落下状態の宣言
+ *
  * @author Hayato Imai
  * @date   February 2022
  *********************************************************************/
@@ -10,13 +9,14 @@
 #include "StateBase.h"
 
 namespace GlassHeart {
-
     namespace Player {
         class Player;
-    }
-
+    }// namespace
     namespace State {
-
+        /**
+         * @class StateFall
+         * @brief プレイヤー落下状態の宣言
+         */
         class StateFall : public StateBase {
         public:
             /**
@@ -32,15 +32,15 @@ namespace GlassHeart {
             void Enter() override;
             /**
              * @brief 入力処理
-             * 
+             *
              * @param[in] input インプットマネージャークラスの参照
              */
             void Input(AppFrame::InputManager& input) override;
             /**
              * @brief更新処理
-             * 
+             *
              */
             void Update() override;
         };
-    } // State 
-} // GlassHeart
+    } // namespace State 
+} // namespace GlassHeart

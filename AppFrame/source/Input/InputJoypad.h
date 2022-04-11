@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   InputJoypad.h
  * @brief  ジョイパッドクラスの宣言
@@ -98,4 +97,4 @@ namespace AppFrame {
         XINPUT_STATE _xInput{ 0 };  //!< XInput用入力情報
         XINPUT_STATE _xTrigger{ 0 };  //!< XInput用トリガー入力情報
     };
-}
+} // namespace AppFrame

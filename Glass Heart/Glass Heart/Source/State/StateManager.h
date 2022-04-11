@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   StateManager.h
  * @brief  ステートマネージャークラスの宣言
@@ -17,11 +16,9 @@ namespace AppFrame {
 }
 
 namespace GlassHeart {
-
     namespace Object {
         class ObjectBase;
     }
-
     namespace State {
         /**
          * @class StateManager
@@ -94,5 +91,5 @@ namespace GlassHeart {
             std::unordered_map<std::string, std::shared_ptr<AppFrame::StateBaseRoot>>	_registry;  //!< 状態のレジストリ
             std::list<std::shared_ptr<AppFrame::StateBaseRoot>> _states;                            //!< 状態のリスト
         };
-    } // State
-} // GlassHeart
+    } // namespace State
+} // namespace GlassHeart

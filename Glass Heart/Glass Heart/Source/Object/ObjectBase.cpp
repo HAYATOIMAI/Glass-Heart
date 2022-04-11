@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   ObjectBase.cpp
  * @brief  オブジェクトの基底クラスの処理
@@ -16,17 +15,14 @@
 #include "../Effect/EffectManager.h"
 #include "../Application/GameMain.h"
 #include <AppFrame.h>
-
-using namespace GlassHeart;
-
 //! コンストラクタ
-Object::ObjectBase::ObjectBase(GameMain& game) : _game{ game } {
+GlassHeart::Object::ObjectBase::ObjectBase(Application::GameMain& game) : _game{ game } {
     _collsionManage = std::make_unique<Collision::CollisionManager>(*this);
 }
 //! デストラクタ
-Object::ObjectBase::~ObjectBase() {}
+GlassHeart::Object::ObjectBase::~ObjectBase() {}
 //! ワールド座標変換
-void Object::ObjectBase::ComputeWorldTransform() {
+void GlassHeart::Object::ObjectBase::ComputeWorldTransform() {
     auto world = MGetScale(_scale);
     world = MMult(world, MGetRotZ(_rotation.z));
     world = MMult(world, MGetRotX(_rotation.x));
@@ -34,18 +30,18 @@ void Object::ObjectBase::ComputeWorldTransform() {
     _worldTransform = MMult(world, MGetTranslate(_position));
 }
 
-void Object::ObjectBase::SetStateManage(std::unique_ptr<State::StateManager> state) {
+void GlassHeart::Object::ObjectBase::SetStateManage(std::unique_ptr<GlassHeart::State::StateManager> state) {
     _stateManage = std::move(state);
 }
 
-void Object::ObjectBase::SetModelManage(std::unique_ptr<Model::ModelAnimeManager> model) {
+void GlassHeart::Object::ObjectBase::SetModelManage(std::unique_ptr<GlassHeart::Model::ModelAnimeManager> model) {
     _modelAnimeManage = std::move(model);
 }
 
-void Object::ObjectBase::SetCameraManage(std::shared_ptr<Camera::CameraManager> camera) {
+void GlassHeart::Object::ObjectBase::SetCameraManage(std::shared_ptr<GlassHeart::Camera::CameraManager> camera) {
     _cameraManage = std::move(camera);
 }
 
-void Object::ObjectBase::SetEffectManage(std::unique_ptr<Effect::EffectManager> effect) {
+void GlassHeart::Object::ObjectBase::SetEffectManage(std::unique_ptr<GlassHeart::Effect::EffectManager> effect) {
     _effectManage = std::move(effect);
 }

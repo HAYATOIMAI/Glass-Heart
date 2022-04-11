@@ -1,7 +1,7 @@
 
 /*****************************************************************//**
  * @file   CameraManager.h
- * @brief  カメラマネージャー
+ * @brief  カメラマネージャークラスの宣言
  * 
  * @author Hayato Imai
  * @date   December 2021
@@ -16,9 +16,11 @@ namespace AppFrame {
 }
 
 namespace GlassHeart {
-
     namespace Camera {
-
+        /**
+         * @class CameraManager
+         * @brief カメラマネージャークラスの宣言
+         */
         class CameraManager {
         public:
             /**
@@ -75,5 +77,5 @@ namespace GlassHeart {
             float _targetDist{ 100.0f };         //!< 目標との距離
             float _vertDist{ 100.0f };           //!< 垂直方向の距離
         };
-    }
-}
+    } // namespace Camera
+} // namespace GlassHeart

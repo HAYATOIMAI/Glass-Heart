@@ -1,13 +1,11 @@
-
 /*****************************************************************//**
  * @file   ObjectBase.h
  * @brief  オブジェクトの基底クラス
- * 
+ *
  * @author Hayato Imai, Yoshihiro Takahashi
  * @date   December 2021
  *********************************************************************/
 #pragma once
-
 #include <DxLib.h>
 #include <memory>
 
@@ -17,8 +15,9 @@ namespace AppFrame {
 }
 
 namespace GlassHeart {
-
-    class GameMain;
+    namespace Application {
+        class GameMain;
+    }
     namespace Collision {
         class CollisionManager;
     }
@@ -36,8 +35,7 @@ namespace GlassHeart {
     }
     namespace Effect {
         class EffectManager;
-    }
-
+    } // namespace 
     namespace Object {
         class ObjectServer;
         class ObjectFactory;
@@ -72,7 +70,7 @@ namespace GlassHeart {
              *
              * @param game ゲームメインクラスへの参照
              */
-            ObjectBase(GameMain& game);
+            ObjectBase(Application::GameMain& game);
             /**
              * @brief デストラクタ
              *
@@ -84,7 +82,7 @@ namespace GlassHeart {
             virtual	void Init() {};
             /**
              * @brief 入力処理
-             * 
+             *
              * @param[in] input インプットマネージャークラスの参照
              */
             virtual	void Input(AppFrame::InputManager& input) {};
@@ -115,7 +113,7 @@ namespace GlassHeart {
              */
             inline bool IsActive() { return (_objectState == ObjectState::Active); }
 
-            inline GameMain& GetGame() { return _game; }
+            inline Application::GameMain& GetGame() { return _game; }
             /**
              * @brief ワールド座標変換
              *
@@ -123,7 +121,7 @@ namespace GlassHeart {
             virtual void ComputeWorldTransform();
             // 各種ゲッターセッター
             inline const MATRIX& GetWorldTransform() const { return _worldTransform; }
-            inline VECTOR GetForward() const { return VTransform({ 0, 0, 1 }, MGetRotY(_rotation.y)); }
+            inline VECTOR GetForward() const { return VTransform({ 0.0f, 0.0f, 1.0f }, MGetRotY(_rotation.y)); }
 
             inline void SetPosition(const VECTOR& position) { _position = position; }
             inline VECTOR GetPosition() const { return _position; }
@@ -150,7 +148,7 @@ namespace GlassHeart {
             inline Model::ModelAnimeManager& GetModelAnime() { return *_modelAnimeManage; }
             inline ObjectServer& GetObjectServer() { return _game.GetObjectServer(); }
         protected:
-            GameMain& _game;  //!< ゲームメインクラスの参照
+            Application::GameMain& _game;  //!< ゲームメインクラスの参照
 
             inline ObjectState GetObjectState() const { return _objectState; }
             inline void SetObjectState(ObjectState objstate) { _objectState = objstate; }
@@ -163,15 +161,13 @@ namespace GlassHeart {
             std::unique_ptr<Effect::EffectManager> _effectManage;          //!< エフェクト管理クラスのユニークポインタ
 
             MATRIX _worldTransform{ MGetIdent() }; //!< ワールド座標変換
-            VECTOR _position{ 0, 0, 0 };           //!< 位置情報
-            VECTOR _rotation{ 0, 0, 0 };           //!< 角度
-            VECTOR _scale{ 1, 1, 1 };              //!< 拡大率
+            VECTOR _position{ 0.0f, 0.0f, 0.0f };           //!< 位置情報
+            VECTOR _rotation{ 0.0f, 0.0f, 0.0f };           //!< 角度
+            VECTOR _scale{ 1.0f, 1.0f, 1.0f };              //!< 拡大率
 
             float _radius{ 0.0f };    //!< コリジョン用半径
             bool _hitFlag{ false };   //!< コリジョン用フラグ
-            bool _deadFlag{ false };  //!<死亡したかのフラグ
+            bool _deadFlag{ false };  //!< 死亡したかのフラグ
         };
-    } // Object
-} // GlassHeart
-
-
+    } // namespace Object
+} // namespace GlassHeart

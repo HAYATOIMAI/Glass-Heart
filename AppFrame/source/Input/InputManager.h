@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   InputManager.h
  * @brief  インプットマネージャークラスの宣言
@@ -30,4 +29,4 @@ namespace AppFrame {
         InputJoypad _inputjoy;  //!< インプットジョイパッドクラスの参照
     };
 
-} // AppFrame
+} // namespace AppFrame

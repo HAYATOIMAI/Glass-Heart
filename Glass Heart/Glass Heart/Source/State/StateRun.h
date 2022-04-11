@@ -1,4 +1,3 @@
-
 /*********************************************************************
  * @file   StateRun.h
  * @brief  プレイヤーの走り状態クラスの宣言
@@ -10,11 +9,9 @@
 #include "StateBase.h"
 
 namespace GlassHeart {
-
     namespace Player {
         class Player;   
     }
-
     namespace State {
        /**
         * @class StateRun
@@ -45,5 +42,5 @@ namespace GlassHeart {
             */
             void Update() override;
         };
-    } // State
-} // GlassHeart
+    } // namespace State
+} // namespace GlassHeart

@@ -1,4 +1,3 @@
-
 /*********************************************************************
  * @file   StateIdle.h
  * @brief  アイドル状態クラスの宣言
@@ -10,7 +9,6 @@
 #include "StateBase.h"
 
 namespace GlassHeart {
-
     namespace Player {
         class Player;
     }
@@ -47,7 +45,7 @@ namespace GlassHeart {
             int _cnt{ 0 };             //!< リキャスト用カウンター
             bool _resetFlag{ false };  //!< 色をリセットするかのフラグ
         };
-    } // State
-} // GlassHeart 
+    } // namespace State
+} // namespace GlassHeart 
 
 

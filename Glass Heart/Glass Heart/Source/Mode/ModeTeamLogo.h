@@ -1,8 +1,7 @@
-
 /*****************************************************************//**
  * @file   ModeTeamLogo.h
  * @brief  チームロゴ画面クラスの宣言
- * 
+ *
  * @author Hayato Imai
  * @date   December 2021
  *********************************************************************/
@@ -11,9 +10,9 @@
 #include <AppFrame.h>
 
 namespace GlassHeart {
-
-    class GameMain;
-
+    namespace Application {
+        class GameMain;
+    }
     namespace Mode {
         /**
          * @class ModeTeamLogo
@@ -26,7 +25,7 @@ namespace GlassHeart {
              *
              * @param game　ゲームベースクラス
              */
-            ModeTeamLogo(GameMain& game);
+            ModeTeamLogo(Application::GameMain& game);
             /**
              * @brief デストラクタ
              *
@@ -59,7 +58,7 @@ namespace GlassHeart {
              */
             void Render() override;
         private:
-            int _teamLogo{ -1 };   //!< 背景画像    
+            int _teamLogo{ -1 };   //!< 背景画像用ハンドル    
         };
-    }
-}
+    } // Mode
+} // GlassHeart

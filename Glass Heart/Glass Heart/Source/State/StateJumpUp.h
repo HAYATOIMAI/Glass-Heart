@@ -1,4 +1,3 @@
-
 /*********************************************************************
  * @file   StateJumpUp.h
  * @brief  ã¸ó‘Ô‚ÌéŒ¾
@@ -11,11 +10,9 @@
 #include <DxLib.h>
 
 namespace GlassHeart {
-
     namespace Player {
         class Player;
     }
-
     namespace State {
         /**
          * @class StateJumpUp
@@ -46,8 +43,5 @@ namespace GlassHeart {
              */
             void Update() override;
         };
-    } // State 
-} // GlassHeart
-
-
-
+    } // namespace State 
+} // namespace GlassHeart

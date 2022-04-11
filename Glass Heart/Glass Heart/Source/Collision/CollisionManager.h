@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   CollisionManager.h
  * @brief  コリジョンマネージャークラスの宣言
@@ -11,11 +10,9 @@
 #include <DxLib.h>
 
 namespace GlassHeart {
-
     namespace Object {
         class ObjectBase;
     }
-
     namespace Collision {
         /**
          * @class CollisionManager

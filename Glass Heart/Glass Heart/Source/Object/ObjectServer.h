@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   ObjectServer.h
  * @brief  オブジェクトサーバーの宣言
@@ -7,7 +6,6 @@
  * @date   December 2021
  *********************************************************************/
 #pragma once
-
 #include <memory>
 #include <vector>
 #include <unordered_map>
@@ -20,7 +18,6 @@ namespace AppFrame {
 }
 
 namespace GlassHeart {
-
     namespace Object {
         /**
         * @class ObjectServer
@@ -89,7 +86,5 @@ namespace GlassHeart {
             std::vector<std::unique_ptr<ObjectBase>> _pendingObjects; //!< 保留リスト
             std::unordered_map<std::string, VECTOR> _registry;        //!< レジストリ
         };
-    } // Object
-} // GlassHeart
-
-
+    } // namespace Object
+} // namespace GlassHeart

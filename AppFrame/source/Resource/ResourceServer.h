@@ -179,17 +179,11 @@ namespace AppFrame {
     private:
         GameBase& _game;  //!< ゲームベースクラスへの参照
         std::filesystem::path _currntPath;  //!< 格納フォルダへのパス
-        /**
-         * @brief 任意の文字列をキーにしてDivGraphと画像ハンドルのペアを管理
-         */
+        //!< 任意の文字列をキーにしてDivGraphと画像ハンドルのペアを管理
         std::unordered_map<std::string, std::pair<DivGraph, std::vector<int>>>	_graphs;
-        /**
-         * @brief 任意の文字列をキーにして音ファイル名とハンドルのペアを管理
-         */
+         //!< 任意の文字列をキーにして音ファイル名とハンドルのペアを管理
         std::unordered_map<std::string, std::pair<std::string, int>> _sounds;
-        /**
-         * @brief 任意の文字列をキーにしてモデルファイル名とハンドルのペアを管理
-         */
+         //!< 任意の文字列をキーにしてモデルファイル名とハンドルのペアを管理
         std::unordered_map<std::string, std::tuple<std::string, std::vector<int>, std::unordered_map<std::string, int>>> _models;
     };
-} //AppFrame
+} // namespace AppFrame

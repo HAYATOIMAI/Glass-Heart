@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   ModeBase.h
  * @brief  モードの基底クラスの宣言
@@ -10,7 +9,6 @@
 #include <memory>
 
 namespace AppFrame {
-    /** 二重インクルード防止 */
     class GameBase;
     class InputManager;
     class ResourceServer;
@@ -72,4 +70,4 @@ namespace AppFrame {
     protected:
         GameBase& _game; //!< ゲームベースクラスへの参照
     };
-} // AppFrame
+} // namespace AppFrame

@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   ModeServer.h
  * @brief  モードサーバークラスの宣言
@@ -86,4 +85,4 @@ namespace AppFrame {
         std::unordered_map<std::string, std::shared_ptr<ModeBase>> _registry;   //!< モードのレジストリ
         std::list<std::shared_ptr<ModeBase>> _mode;  //!< モードのリスト
     };
-} // AppFrame
+} // namespace AppFrame

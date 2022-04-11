@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   ModelManager.h
  * @brief  モデルマネージャークラスの宣言
@@ -11,11 +10,9 @@
 #include <string_view>
 
 namespace GlassHeart {
-   
     namespace Object {
         class ObjectBase;
     }
-
     namespace Model {
         /**
          * @class ModelManager

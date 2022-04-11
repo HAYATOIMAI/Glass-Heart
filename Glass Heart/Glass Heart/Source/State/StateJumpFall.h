@@ -1,4 +1,3 @@
-
 /*********************************************************************
  * @file   StateBaseFall.h
  * @brief  ƒWƒƒƒ“ƒv‰º~ó‘Ô‚ÌéŒ¾
@@ -10,11 +9,9 @@
 #include "StateBase.h"
 
 namespace GlassHeart {
-
     namespace Player {
         class Player;
     }
-
     namespace State {
         /**
          * @class StateJumpFall 
@@ -45,5 +42,5 @@ namespace GlassHeart {
              */
             void Update() override;
         };
-    }  // State 
-} // GlassHeart
+    } // namespace State
+} // namespace GlassHeart

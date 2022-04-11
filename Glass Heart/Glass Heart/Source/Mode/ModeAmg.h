@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   ModeAmg.h
  * @brief  AMGâÊñ ÉNÉâÉXÇÃêÈåæ
@@ -7,14 +6,13 @@
  * @date   December 2021
  *********************************************************************/
 #pragma once
-
 #include <AppFrame.h>
 #include "ModeMain.h"
 
 namespace GlassHeart {
-
-    class GameMain;
-
+    namespace Application {
+        class GameMain;
+    }
     namespace Mode {
         /**
          * @class ModeAmg
@@ -63,7 +61,5 @@ namespace GlassHeart {
         private:
             int _titleBgHandle{ -1 };   //!< îwåiâÊëú 
         };
-    }
-}
-
-
+    } // Mode
+} // GlassHeart

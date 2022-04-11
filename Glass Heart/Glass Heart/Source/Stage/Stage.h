@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   Stage.h
  * @brief  ステージクラスの宣言
@@ -11,13 +10,12 @@
 #include <memory>
 
 namespace GlassHeart {
-
     namespace Model {
         class ModelManager;
     }
-
-    class GameMain;
-
+    namespace Application {
+        class GameMain;
+    }
     namespace Stage {
         /**
          * @class Stage
@@ -30,7 +28,7 @@ namespace GlassHeart {
              * 
              * @param game ゲームメインクラスへの参照
              */
-            Stage(GameMain& game);
+            Stage(Application::GameMain& game);
             /**
              * @brief 更新処理
              * 
@@ -47,7 +45,5 @@ namespace GlassHeart {
             std::unique_ptr<Model::ModelManager> _stage;        //!< ステージ用ユニークポインタ
             std::unique_ptr<Model::ModelManager> _backGround;   //!< スカイスフィア用ユニークポインタ
         };
-    } // Stage
-} // GlassHeart
-
-
+    } // namespace Stage
+} // namespace GlassHeart

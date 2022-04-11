@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   ModelAnimeManager.h
  * @brief  3DÉÇÉfÉãä«óù
@@ -6,18 +5,15 @@
  * @author Hayato Imai, Haruki Ikeda
  * @date   December 2021
  *********************************************************************/
-
 #pragma once
 #include "ModelManager.h"
 #include <string_view>
 #include <unordered_map>
 
 namespace GlassHeart {
-
     namespace Object {
         class ObjectBase;
     }
-
     namespace Model {
 
         /**

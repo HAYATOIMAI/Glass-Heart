@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   Stage.cpp
  * @brief  ステージクラスの処理
@@ -17,7 +16,7 @@ namespace {
     constexpr auto RightRotation = 0.0f * (std::numbers::pi_v<float> / 180.0f); //!< 右方向の角度
 }
 
-Stage::Stage::Stage(GameMain& game) : Object::ObjectBase{ game } {
+Stage::Stage::Stage(Application::GameMain& game) : Object::ObjectBase{ game } {
     // スカイスフィアのモデル
     _backGround = std::make_unique<Model::ModelManager>(*this);
     _backGround->handle("BackGround");

@@ -1,8 +1,7 @@
-
 /*****************************************************************//**
  * @file   ModeMain.h
  * @brief  モードの基底クラスの宣言
- * 
+ *
  * @author Hayato Imai
  * @date   December 2021
  *********************************************************************/
@@ -10,17 +9,16 @@
 #include <AppFrame.h>
 
 namespace GlassHeart {
-
-    class GameMain;
-
+    namespace Application {
+        class GameMain;
+    }
     namespace Object {
         class ObjectServer;
         class ObjectFactory;
     }
     namespace UI {
         class UI;
-    }
-
+    } // namespace
     namespace Mode {
         /**
          * @class ModeMain
@@ -33,36 +31,36 @@ namespace GlassHeart {
              *
              * @param game　ゲームメインクラス
              */
-            ModeMain(GameMain& game);
+            ModeMain(Application::GameMain& game);
             /**
              * @brief デストラクタ
-             * 
+             *
              */
             ~ModeMain() = default;
             /**
              * @brief 初期化処理
              *
              */
-             void Init() override {};
+            void Init() override {};
             /**
              * @brief 入り口処理
              *
              */
-             void Enter() override {};
+            void Enter() override {};
             /**
              * @brief 入力処理
-             * 
+             *
              * @param[in] input インプットマネージャークラスへの参照
              */
             void Input(AppFrame::InputManager& input) override {};
             /**
              * @brief 更新処理
-             * 
+             *
              */
-             void Process()override {};
+            void Process()override {};
             /**
              * @brief　描画処理
-             * 
+             *
              */
             void Render() override {};
             /**
@@ -70,7 +68,7 @@ namespace GlassHeart {
              */
             void Exit() override {};
 
-            inline GameMain& GetGameMain() const { return _gameMain; }
+            inline Application::GameMain& GetGameMain() const { return _gameMain; }
 
             Object::ObjectFactory& GetObjectFactory();
 
@@ -78,10 +76,10 @@ namespace GlassHeart {
 
             UI::UI& GetUI();
         protected:
-            GameMain& _gameMain;
+            Application::GameMain& _gameMain; //!< ゲームメインクラスへの参照
             static int _count;         //!< タイマー用フレームカウント
             static int _countSeconds;  //!< タイマー用フレームカウント
             int _fadeCount;            //!< 自動フェードインアウト用カウンタ
         };
-    }
-}
+    } // namespace Mode
+} // namespace GlassHeart

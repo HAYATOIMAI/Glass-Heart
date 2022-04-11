@@ -1,4 +1,3 @@
-
 /*********************************************************************
  * @file   StateBaseRoot.h
  * @brief  ó‘Ô‚ÌŠî’êƒNƒ‰ƒX‚ÌéŒ¾
@@ -42,4 +41,4 @@ namespace AppFrame {
 	     */
 		virtual void Draw() {};
 	};
-} // AppFrame
+} // namespace AppFrame

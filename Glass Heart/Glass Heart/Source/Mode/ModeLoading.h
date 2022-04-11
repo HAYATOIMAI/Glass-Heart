@@ -1,21 +1,33 @@
+/*****************************************************************//**
+ * @file   ModeLoading.h
+ * @brief  ローディング画面クラスの宣言
+ *
+ * @author Hayato Imai
+ * @date   March 2022
+ *********************************************************************/
 #pragma once
 #include "ModeMain.h"
 
 namespace GlassHeart {
-
+    namespace Application {
+        class GameMain;
+    }
     namespace Mode {
-
+        /**
+         * @class ModeLoading
+         * @brief ローディング画面クラスの宣言
+         */
         class ModeLoading : public ModeMain {
         public:
             /**
              * @brief コンストラクタ
-             * 
+             *
              * @param[in] game
              */
-            ModeLoading(GameMain& game);
+            ModeLoading(Application::GameMain& game);
             /**
              * @brief デストラクタ
-             * 
+             *
              */
             ~ModeLoading() = default;
             /**
@@ -45,9 +57,9 @@ namespace GlassHeart {
              */
             void Render() override;
         private:
-            int _loadHandle{ -1 };
-            int _nowLoading{ -1 };
-            int _cnt{ 0 };
+            int _loadHandle{ -1 };  //!< ローディングGIF画像用ハンドル
+            int _nowLoading{ -1 };  //!< NowLoadig画像用ハンドル
+            int _cnt{ 0 };          //!< ローディング時間
         };
-    }
-}
+    } // Mode
+} // GlassHeart

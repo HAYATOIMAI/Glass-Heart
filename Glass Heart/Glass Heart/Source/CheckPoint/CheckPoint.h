@@ -13,13 +13,12 @@
 #include "../Collision/CollisionManager.h"
 
 namespace GlassHeart {
-
     namespace Model {
         class ModelManager;
     }
-
-    class GameMain;
-
+    namespace Application {
+        class GameMain;
+    }
     namespace CheckPoint {
 
         class CheckPoint : public Object::ObjectBase {
@@ -29,7 +28,7 @@ namespace GlassHeart {
              * 
              * @param[in] game ゲームメインクラスへの参照
              */
-            CheckPoint(GameMain& game);
+            CheckPoint(Application::GameMain& game);
             /**
              * @brief　デストラクタ
              * 

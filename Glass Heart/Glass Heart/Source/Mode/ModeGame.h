@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   ModeGame.h
  * @brief  ゲーム内クラスの宣言
@@ -7,14 +6,14 @@
  * @date   December 2021
  *********************************************************************/
 #pragma once
-
 #include "ModeMain.h"
 #include <AppFrame.h>
 #include <memory>
 
 namespace GlassHeart {
-
-    class GameMain;
+    namespace Application {
+        class GameMain;
+    }
     namespace Camera {
         class CameraManager;
     }
@@ -23,7 +22,7 @@ namespace GlassHeart {
     }
     namespace UI {
         class UI;
-    }
+    } // namespace
     namespace Mode {
         /**
          * @class ModeGame
@@ -36,7 +35,7 @@ namespace GlassHeart {
              *
              * @param[in] game ゲームメインクラスへの参照
              */
-            ModeGame(GameMain& game);
+            ModeGame(Application::GameMain& game);
             /**
              * @brief デストラクタ
              *
@@ -74,9 +73,9 @@ namespace GlassHeart {
              */
             void Exit() override;
         private:
-            int _teamLogo{ -1 };
-            int _titleLogo{ -1 };
-            int _deathDrawHundle{ -1 };
+            int _teamLogo{ -1 };         //!< チームロゴ画像用ハンドル 
+            int _titleLogo{ -1 };        //!< タイトル画像用ハンドル
+            int _deathDrawHundle{ -1 };  //!< 死亡時に表示する画像用ハンドル
         };
-    }
-}
+    } // Mode
+} // GlassHeart

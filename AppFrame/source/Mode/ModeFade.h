@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   ModeFade.h
  * @brief  モードのフェードクラス宣言
@@ -105,4 +104,4 @@ namespace AppFrame {
         void Process() override;
     };
 
-} // AppFrame
+} // namespace AppFrame

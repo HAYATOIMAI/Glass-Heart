@@ -13,7 +13,9 @@
 
 namespace GlassHeart {
 
-    class GameMain;
+    namespace Application {
+        class GameMain;
+    }
 
     namespace Mode {
         /**
@@ -27,7 +29,7 @@ namespace GlassHeart {
              *
              * @param game　ゲームベースクラス
              */
-            ModeClear(GameMain& game);
+            ModeClear(Application::GameMain& game);
             /**
              * @brief デストラクタ
              *
@@ -71,5 +73,3 @@ namespace GlassHeart {
         };
     }
 }
-
-

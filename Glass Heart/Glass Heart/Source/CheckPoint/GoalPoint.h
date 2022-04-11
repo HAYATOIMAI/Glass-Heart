@@ -13,7 +13,6 @@
 #include "../Collision/CollisionManager.h"
 
 namespace GlassHeart {
-
     namespace CheckPoint {
         /**
         * @class GoalPoint
@@ -26,7 +25,7 @@ namespace GlassHeart {
             *
             * @param game ゲームメインクラスへの参照
             */
-            GoalPoint(GameMain& game);
+            GoalPoint(Application::GameMain& game);
             /**
             * @brief デストラクタ
             *

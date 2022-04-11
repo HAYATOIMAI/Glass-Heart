@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   ModeTitle.h
  * @brief  タイトル画面クラスの宣言
@@ -11,13 +10,13 @@
 #include <AppFrame.h>
 
 namespace GlassHeart {
-
-    class GameMain;
-
+    namespace Application {
+        class GameMain;
+    }
     namespace Mode {
         /**
-         * @class
-         * @brief
+         * @class ModeTitle
+         * @brief タイトル画面クラスの宣言
          */
         class ModeTitle : public ModeMain {
         public:
@@ -26,7 +25,7 @@ namespace GlassHeart {
              *
              * @param game　ゲームベースクラス
              */
-            ModeTitle(GameMain& game);
+            ModeTitle(Application::GameMain& game);
             /**
              * @brief デストラクタ
              *
@@ -64,17 +63,16 @@ namespace GlassHeart {
              */
             void Exit() override;
         private:
-            int _title{ -1 };               //!< タイトル画像
-            int _titlePlate{ -1 };          //!< 操作説明画像
-            int _titlePlate2{ -1 };         //!< 操作説明画像
-            int _titleButton{ -1 };         //!< タイトルボタン画像
-            int _titleLogo{ -1 };           //!< タイトルロゴ
-            int _titleBg{ -1 };             //!< タイトル背景
-            int _titleExit{ -1 };           //!< Exitボタン画像
-            int _alpha{ 0 };
-
-            int _x{ 0 };
-            int _x2{ 0 };
+            int _title{ -1 };        //!< タイトル画像
+            int _titlePlate{ -1 };   //!< 操作説明画像
+            int _titlePlate2{ -1 };  //!< 操作説明画像
+            int _titleButton{ -1 };  //!< タイトルボタン画像
+            int _titleLogo{ -1 };    //!< タイトルロゴ
+            int _titleBg{ -1 };      //!< タイトル背景
+            int _titleExit{ -1 };    //!< Exitボタン画像
+            int _alpha{ 0 };         //!< アルファ値
+            int _x{ 0 };             //!< 
+            int _x2{ 0 };            //!< 
         };
-    }
-}
+    } // Mode
+} // GlassHeart

@@ -1,8 +1,7 @@
-
 /*****************************************************************//**
  * @file   GameMain.cpp
  * @brief  このプロジェクトのメイン処理
- * 
+ *
  * @author Hayato Imai
  * @date   December 2021
  *********************************************************************/
@@ -18,37 +17,21 @@
 #include "../Effect/EffectServer.h"
 #include "../UI/UI.h"
 
-using namespace GlassHeart;
-
-/** 実体 */
-GameMain _gameMain;
+ /** 実体 */
+GlassHeart::Application::GameMain _gameMain;
 /** コンストラクタ */
-GameMain::GameMain() {}
+GlassHeart::Application::GameMain::GameMain() {}
 /** デストラクタ */
-GameMain::~GameMain() {}
+GlassHeart::Application::GameMain::~GameMain() {}
 /**  初期化処理 */
-bool GameMain::Initialize(HINSTANCE hInstance) {
+bool GlassHeart::Application::GameMain::Initialize(HINSTANCE hInstance) {
     if (!base::Initialize(hInstance)) { return false; }
 
     /** リソースサーバーの取得 */
     auto& res = GetResourceServer();
-
     /** リソースのカレントフォルダ設定 */
     res.ChangeCurrentFile("resource");
-     
-    /** エフェクトサーバーの生成 */
-    /*_effectServer = std::make_unique<GlassHeart::Effect::EffectServer>(*this);
 
-    _effectServer->ChangeCurrentFile("resource");
-
-    const Effect::EffectServer::EffectMap useefc{
-        {"death",{"Effect/EF_Death.efkefc",10.0f}},
-        {"run",{"Effect/EF_Dash.efkefc",10.0f}}
-    };
-
-    _effectServer->LoadEfeects(useefc);*/
-
-    
 #ifdef _DEBUG
     /** マテリアルの自己発光色を暗い青色にする */
     MATERIALPARAM material;
@@ -111,22 +94,22 @@ bool GameMain::Initialize(HINSTANCE hInstance) {
     return true;
 }
 /** 解放処理 */
-void GameMain::Terminate() {
+void GlassHeart::Application::GameMain::Terminate() {
     base::Terminate();
 }
 /** 入力処理 */
-void GameMain::Input() {
+void GlassHeart::Application::GameMain::Input() {
     base::Input();
 }
 /** 更新処理 */
-void GameMain::Process() {
+void GlassHeart::Application::GameMain::Process() {
     base::Process();
 }
 /** 描画処理 */
-void GameMain::Render() {
+void GlassHeart::Application::GameMain::Render() {
     base::Render();
 }
 /** メインループ */
-void GameMain::Run() {
+void GlassHeart::Application::GameMain::Run() {
     base::Run();
 }

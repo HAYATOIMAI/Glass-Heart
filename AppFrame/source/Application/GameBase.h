@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   GameBase.h
  * @brief  アプリケーションの基底クラスの宣言
@@ -12,11 +11,11 @@
 #include <DxLib.h>
 
 namespace AppFrame {
-    /** 二重インクルード防止 */
     class ResourceServer;
     class InputManager;
     class SoundManager;
     class ModeServer;
+    class LoadJson;
     /**
      * @class GameBase
      * @brief アプリケーションの基底クラスの宣言
@@ -24,7 +23,7 @@ namespace AppFrame {
     class GameBase {
     public:
         /**
-         * @enumclass  Enum
+         * @enumclass  GameState
          * @brief ゲームの状態
          */
         enum class GameState {
@@ -91,5 +90,6 @@ namespace AppFrame {
         std::unique_ptr<ResourceServer> _resServer;  //!< リソースサーバーのユニークポインタ
         std::unique_ptr<InputManager> _inputManage;  //!< インプットマネージャーのユニークポインタ
         std::unique_ptr<SoundManager> _soundManage;  //!< サウンドマネージャーのユニークポインタ
+        std::unique_ptr<LoadJson> _loadJson;         //!< 
     };
 } //AppFrame
