@@ -1,4 +1,3 @@
-
 /*********************************************************************
  * @file   Girl.cpp
  * @brief  ガールの処理
@@ -21,7 +20,7 @@ namespace {
 using namespace GlassHeart::Player;
 
 /** コンストラクタ */
-Girl::Girl(GameMain& game) : GlassHeart::Object::ObjectBase{ game } {
+Girl::Girl(Application::GameMain& game) : GlassHeart::Object::ObjectBase{ game } {
     _rotation = VGet(0.0f, 180.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f);
     _position = VGet(GirlPositionX, GirlPositionY, GirlPositionZ);
 }

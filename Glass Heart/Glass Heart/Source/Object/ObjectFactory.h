@@ -14,9 +14,9 @@
 #include <DxLib.h>
 
 namespace GlassHeart {
-    /** 二重インクルード防止 */
-    class GameMain;
-
+    namespace Application {
+        class GameMain;
+    }
     namespace Object {
 
         class ObjectBase;

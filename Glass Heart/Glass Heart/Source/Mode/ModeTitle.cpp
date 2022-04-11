@@ -12,7 +12,7 @@
 using namespace GlassHeart;
 
 // コンストラクタ
-Mode::ModeTitle::ModeTitle(GameMain& game) : ModeMain{ game } {}
+Mode::ModeTitle::ModeTitle(Application::GameMain& game) : ModeMain{ game } {}
 // 初期化処理
 void Mode::ModeTitle::Init() {
     // 使用する画像のテーブル

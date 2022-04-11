@@ -6,7 +6,6 @@
  * @date   February 2022
  *********************************************************************/
 #pragma once
-
 #include "../Object/ObjectBase.h"
 
 namespace GlassHeart {
@@ -27,7 +26,7 @@ namespace GlassHeart {
             *
             * @param game ゲームメインクラスへの参照
             */
-            FollowCamera(GameMain& game);
+            FollowCamera(Application::GameMain& game);
             /**
             * @brief デストラクタ
             *

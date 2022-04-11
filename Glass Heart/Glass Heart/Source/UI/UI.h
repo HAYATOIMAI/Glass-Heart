@@ -23,7 +23,7 @@ namespace GlassHeart {
 			 * @brief コンストラクタ
 			 *
 			 */
-			UI(GameMain& game);
+			UI(Application::GameMain& game);
 			/**
 			 * @brief デストラクタ
 			 *
@@ -79,9 +79,9 @@ namespace GlassHeart {
 			 */
 			int GetDigit(int value);
 
-			GameMain& GetGame() { return _game; }
+			Application::GameMain& GetGame() { return _game; }
 		private:
-			GameMain& _game;                //!< プロジェクト
+			Application::GameMain& _game;                //!< プロジェクト
 			int _timerhandle{ 0 };          //!< タイマーの画像ハンドル
 			int _numberhandle[3]{ 0,0,0 };  //!< 数字の画像ハンドル
 			int digit{ -1 };                //!< 位

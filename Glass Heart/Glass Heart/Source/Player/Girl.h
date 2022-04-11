@@ -20,7 +20,9 @@ namespace AppFrame {
 
 namespace GlassHeart {
 
-    class GameMain;
+    namespace Application {
+        class GameMain;
+    }
 
     namespace Model {
         class ModelAnimeManager;
@@ -38,7 +40,7 @@ namespace GlassHeart {
              *
              * @param game ゲームメインクラスへの参照
              */
-            Girl(GameMain& game);
+            Girl(Application::GameMain& game);
             /**
              * @brief デストラクタ
              *

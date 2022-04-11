@@ -1,7 +1,6 @@
-
 /*****************************************************************//**
  * @file   ModeMain.cpp
- * @brief  
+ * @brief  モードの基底クラスの処理
  * 
  * @author Hayato Imai
  * @date   December 2021
@@ -12,7 +11,7 @@
 
 using namespace GlassHeart;
 
-Mode::ModeMain::ModeMain(GameMain& game) : AppFrame::ModeBase{ game }, _gameMain{game} {
+Mode::ModeMain::ModeMain(Application::GameMain& game) : AppFrame::ModeBase{ game }, _gameMain{game} {
     _count = 0;
     _countSeconds = 0;
     _fadeCount = 0;

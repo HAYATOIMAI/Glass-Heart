@@ -45,3 +45,7 @@ void GlassHeart::Object::ObjectBase::SetCameraManage(std::shared_ptr<GlassHeart:
 void GlassHeart::Object::ObjectBase::SetEffectManage(std::unique_ptr<GlassHeart::Effect::EffectManager> effect) {
     _effectManage = std::move(effect);
 }
+
+GlassHeart::Object::ObjectServer& GlassHeart::Object::ObjectBase::GetObjectServer() {
+    return _game.GetObjectServer();
+}

@@ -20,7 +20,7 @@ namespace {
 using namespace GlassHeart::CheckPoint;
 
 /** コンストラクタ */
-GoalPoint::GoalPoint(GameMain& game) : ObjectBase{ game } {
+GoalPoint::GoalPoint(Application::GameMain& game) : ObjectBase{ game } {
 
     _goalPoint = LoadGraph("resource/Test/2dMaterial/light3.png");
     _position = VGet(GoalPositionX, GoalPositionY, GoalPositionZ);

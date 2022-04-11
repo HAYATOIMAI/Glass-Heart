@@ -11,7 +11,7 @@
 
 using namespace GlassHeart;
 
-Mode::ModeLoading::ModeLoading(GameMain& game) : ModeMain(game){}
+Mode::ModeLoading::ModeLoading(Application::GameMain& game) : ModeMain(game){}
 
 void Mode::ModeLoading::Init() {
     // 使用する画像のテーブル

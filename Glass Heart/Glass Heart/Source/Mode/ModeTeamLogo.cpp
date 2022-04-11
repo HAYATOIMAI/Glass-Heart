@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   ModeTeamLogo.cpp
  * @brief  チームロゴ画面クラスの処理
@@ -12,7 +11,7 @@
 using namespace GlassHeart;
 
 /** コンストラクタ */
-Mode::ModeTeamLogo::ModeTeamLogo(GameMain& game) : Mode::ModeMain{ game }{}
+Mode::ModeTeamLogo::ModeTeamLogo(Application::GameMain& game) : Mode::ModeMain{ game }{}
 /** 初期化処理 */
 void Mode::ModeTeamLogo::Init() {
     // 使用する画像のテーブル

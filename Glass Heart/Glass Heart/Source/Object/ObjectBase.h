@@ -146,7 +146,7 @@ namespace GlassHeart {
             inline Collision::CollisionManager& GetCollision() { return *_collsionManage; }
             inline Camera::CameraManager& GetCamera() { return *_cameraManage; }
             inline Model::ModelAnimeManager& GetModelAnime() { return *_modelAnimeManage; }
-            inline ObjectServer& GetObjectServer() { return _game.GetObjectServer(); }
+            ObjectServer& GetObjectServer();
         protected:
             Application::GameMain& _game;  //!< ゲームメインクラスの参照
 

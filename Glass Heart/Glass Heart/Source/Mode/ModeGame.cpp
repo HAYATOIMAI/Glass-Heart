@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   ModeGame.cpp
  * @brief  ゲーム内クラスの処理
@@ -18,7 +17,7 @@
 using namespace GlassHeart;
 
 /** コンストラクタ */
-Mode::ModeGame::ModeGame(GameMain& game) : ModeMain{ game } {}
+Mode::ModeGame::ModeGame(Application::GameMain& game) : ModeMain{ game } {}
 /** 初期化処理 */
 void Mode::ModeGame::Init() {
     // リソースサーバーを取得

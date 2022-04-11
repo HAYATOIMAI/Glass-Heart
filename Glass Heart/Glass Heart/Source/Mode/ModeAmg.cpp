@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   ModeAmg.cpp
  * @brief  AMG画面クラスの処理
@@ -12,7 +11,7 @@
 using namespace GlassHeart;
 
 /** コンストラクタ */
-Mode::ModeAmg::ModeAmg(GameMain& game) : ModeMain{ game } {}
+Mode::ModeAmg::ModeAmg(Application::GameMain& game) : ModeMain{ game } {}
 /** 初期化処理 */
 void Mode::ModeAmg::Init() {
     

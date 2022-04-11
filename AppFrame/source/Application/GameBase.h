@@ -90,6 +90,6 @@ namespace AppFrame {
         std::unique_ptr<ResourceServer> _resServer;  //!< リソースサーバーのユニークポインタ
         std::unique_ptr<InputManager> _inputManage;  //!< インプットマネージャーのユニークポインタ
         std::unique_ptr<SoundManager> _soundManage;  //!< サウンドマネージャーのユニークポインタ
-        std::unique_ptr<LoadJson> _loadJson;         //!< 
+        //std::unique_ptr<LoadJson> _loadJson;         //!< 
     };
 } //AppFrame

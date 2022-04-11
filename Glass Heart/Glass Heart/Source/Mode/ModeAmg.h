@@ -25,7 +25,7 @@ namespace GlassHeart {
              * 
              * @param game　ゲームベースクラス
              */
-            ModeAmg(GameMain& game);
+            ModeAmg(Application::GameMain& game);
             /**
              * @brief デストラクタ
              * 

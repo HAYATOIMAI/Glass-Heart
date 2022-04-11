@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   ModeClear.cpp
  * @brief  ゲームクリアクラスの宣言
@@ -18,7 +17,7 @@ int ModeMain::_count;
 int ModeMain::_countSeconds;
 
 /** コンストラクタ */
-ModeClear::ModeClear(GameMain& game) : ModeMain{ game } {
+ModeClear::ModeClear(Application::GameMain& game) : ModeMain{ game } {
 }
 /** 初期化処理 */
 void ModeClear::Init() {

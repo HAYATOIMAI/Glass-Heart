@@ -20,7 +20,7 @@ namespace {
 using namespace GlassHeart::Camera;
 
 /** コンストラクタ */
-FollowCamera::FollowCamera(GameMain& game) : ObjectBase{ game } {
+FollowCamera::FollowCamera(Application::GameMain& game) : ObjectBase{ game } {
     _rotation = VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f);
     _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
 }
