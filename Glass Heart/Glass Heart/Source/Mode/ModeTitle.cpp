@@ -11,9 +11,9 @@
 
 using namespace GlassHeart;
 
-// コンストラクタ
+/** コンストラクタ */
 Mode::ModeTitle::ModeTitle(Application::GameMain& game) : ModeMain{ game } {}
-// 初期化処理
+/** 入り口処理 */
 void Mode::ModeTitle::Init() {
     // 使用する画像のテーブル
     const AppFrame::ResourceServer::GraphMap useGraph{
@@ -24,14 +24,10 @@ void Mode::ModeTitle::Init() {
          {"TitlePlate",    {"Title/TitlePlate.png",  1, 1, 1920, 1080}},
          {"TitlePlate2",   {"Title/TitlePlate2.png", 1, 1, 1920, 1080}},
     };
-
-    // リソースサーバーを取得
     auto& res = GetResourceServer();
-
     // 画像の読み込み
     res.LoadGraphics(useGraph);
-
-    //!< 画像のハンドルの取得
+    // リソースマネージャーから登録した画像を取得
     _titleButton = res.GetGraph("TitleButton");
     _titleExit = res.GetGraph("TitleExit");
     _titleLogo = res.GetGraph("TitleLogo");
@@ -46,7 +42,7 @@ void Mode::ModeTitle::Enter() {
     auto& sm = GetSoundManager();
     sm.PlayLoop("titleBgm");
 }
-// 入力処理
+/** 入力処理 */
 void Mode::ModeTitle::Input(AppFrame::InputManager& input) {
 
     auto [handle, no] = GetGame().GetResourceServer().GetModles("Stage");
@@ -68,18 +64,6 @@ void Mode::ModeTitle::Input(AppFrame::InputManager& input) {
         else if (_x == center) {
             _x = leftEnd;
         }
-        //if (_x2 != center) {
-        //    if (_x < center) {
-        //        _x = center;
-        //    }
-        //    else {
-        //        _x = leftEnd;
-        //        _x2 = center;
-        //    }
-        //}
-        //else if (_x2 < rightEnd) {
-        //    _x2 = rightEnd;
-        //}
     }
     if (input.GetJoyPad().GetXTriggerRight() || input.GetJoyPad().GetXTriggerRightShoulder()) {
         if (_x != center) {
@@ -88,25 +72,13 @@ void Mode::ModeTitle::Input(AppFrame::InputManager& input) {
         else if (_x == center) {
             _x = leftEnd;
         }
-        //if (_x != center) {
-        //    if (_x2 > center) {
-        //        _x2 = center;
-        //    }
-        //    else {
-        //        _x2 = rightEnd;
-        //        _x = center;
-        //    }
-        //}
-        //else if (_x < rightEnd) {
-        //    _x = leftEnd;
-        //}
     }
 }
-// 更新処理
+/** 更新処理 */
 void Mode::ModeTitle::Process() {
     _alpha = (_alpha + 2) % 255;
 }
-// 描画処理
+/** 描画処理 */
 void Mode::ModeTitle::Render() {
 
     DrawGraph(0, 0, _titleBg, TRUE);
@@ -120,7 +92,7 @@ void Mode::ModeTitle::Render() {
     DrawGraph(0, 0, _titleButton, TRUE);
     SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 }
-
+/** 出口処理 */
 void Mode::ModeTitle::Exit() {
     auto& sm = GetSoundManager();
     sm.StopSound("titleBgm");

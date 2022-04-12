@@ -105,8 +105,8 @@ namespace GlassHeart {
             MV1_COLL_RESULT_POLY_DIM _bWallThrough;   //!< 白い底面や側面との当たり判定用変数
             MV1_COLL_RESULT_POLY_DIM _wWallThrough;   //!< 黒い底面や側面との当たり判定用変数
         
-            float _radius1{ 0.0f };   
-            float _radius2{ 0.0f };
+            float _radius1{ 0.0f };   //!< チェックポイントとの当たり判定用半径
+            float _radius2{ 0.0f };   //!< チェックポイントとの当たり判定用半径
         };
-    }
-}
+    } // namespce Collision
+} // namespace GlassHeart

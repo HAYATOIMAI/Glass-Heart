@@ -1,4 +1,3 @@
-
 /*********************************************************************
  * @file   StateJump.cpp
  * @brief  ジャンプ状態クラスの処理
@@ -20,17 +19,12 @@ using namespace GlassHeart;
 State::StateJump::StateJump(Player::Player& owner) : StateBase{ owner } {}
 /** 入り口処理 */
 void State::StateJump::Enter() {
-    _isJump = true;
-
+    // ジャンプ開始モーション再生
     _owner.GetModelAnime().ChangeAnime("Jump_start", true);
 }
 /** 入力処理 */
 void State::StateJump::Input(AppFrame::InputManager& input) {}
 /** 更新処理 */
 void State::StateJump::Update() {
-    // 対応するボタンが押されたらジャンプ処理実行
-    if (_isJump == true){
-        _owner.GetStateManage().PushBack("JumpUp");
-        _isJump = false;
-    }   
+    _owner.GetStateManage().PushBack("JumpUp");
 }

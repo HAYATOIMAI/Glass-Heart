@@ -109,7 +109,7 @@ namespace GlassHeart {
             inline void SetCheckPointFlag(bool flag) { _checkPointFlag = flag; }
         protected:
             ColourState _crState{ ColourState::White };  //!< 色状態を管理する変数
-            float _forwardSpeed{ 0.0f };                 //!< 前進スピード
+            float _forwardSpeed{ 0.0f };                 //!< 移動速度
             std::string _stateName{ "White" };           //!< デバッグ用状態名変数
             int _recastCount{ 0 };                       //!< 色変更クールタイム用カウンタ
             int _deathCoolCount{ 0 };                    //!< 死亡した時の復活までのクールタイム

@@ -31,7 +31,7 @@ std::unordered_map<std::string, nlohmann::json> AppFrame::LoadJson::GetParameter
 		// 引数の文字列と一致しているデータを取得
 		for (auto& itr : jsonArray) {
 			auto param = itr[parameter[i].data()];
-			// 一致している文字列をキーに、nlhomann::json型データを連想配列に登録
+			//  キーとデータを連想配列に登録
 			paramMap.emplace(parameter[i], param);
 		}
 	}

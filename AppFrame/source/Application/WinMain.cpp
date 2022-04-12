@@ -10,7 +10,7 @@
 #include <memory>
 
 int CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow) {
-    // GameBaseクラスのインスタンスを初期化する
+ 
     auto gamebase = AppFrame::GameBase::GameInstance();
 
     if (!gamebase) { return 0; }

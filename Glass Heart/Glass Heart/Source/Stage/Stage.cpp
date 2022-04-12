@@ -15,7 +15,7 @@ using namespace GlassHeart;
 namespace {
     constexpr auto RightRotation = 0.0f * (std::numbers::pi_v<float> / 180.0f); //!< 右方向の角度
 }
-
+/** コンストラクタ */
 Stage::Stage::Stage(Application::GameMain& game) : Object::ObjectBase{ game } {
     // スカイスフィアのモデル
     _backGround = std::make_unique<Model::ModelManager>(*this);
@@ -27,7 +27,6 @@ Stage::Stage::Stage(Application::GameMain& game) : Object::ObjectBase{ game } {
     _stage->SetPosition(VGet(0.0f, 0.0f, 10.0f));
     _stage->SetRotation(VGet(0.0f, RightRotation, 0.0f));
     _stage->SetScale({ 1.f, 1.f, 1.f });
-
     // ナビメッシュを非表示
     MV1SetFrameVisible(_stage->GetHandle(), 2, FALSE);
     MV1SetFrameVisible(_stage->GetHandle(), 3, FALSE);
@@ -52,12 +51,12 @@ Stage::Stage::Stage(Application::GameMain& game) : Object::ObjectBase{ game } {
     SetFogColor(247, 188, 101);
     SetFogStartEnd(50.0f, 15000.0f);
 }
-
+/** 更新処理 */
 void Stage::Stage::Process() {
-    // スカイスフィアをプレイヤと同じ位置にする
+    // スカイスフィアをカメラと同じ位置にする
     _backGround->SetPosition(GetObjectServer().GetPosition("Camera"));
 }
-
+/** 描画処理 */
 void Stage::Stage::Render() {
     _backGround->Draw();
     _stage->Draw();

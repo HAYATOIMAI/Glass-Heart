@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   GoalPoint.cpp
  * @brief  ゴールポイントの処理
@@ -22,7 +21,7 @@ using namespace GlassHeart::CheckPoint;
 /** コンストラクタ */
 GoalPoint::GoalPoint(Application::GameMain& game) : ObjectBase{ game } {
 
-    _goalPoint = LoadGraph("resource/Test/2dMaterial/light3.png");
+    _goalPoint = LoadGraph("resource/2dMaterial/light3.png");
     _position = VGet(GoalPositionX, GoalPositionY, GoalPositionZ);
     _radius = 100.0f;
     _hitFlag = false;

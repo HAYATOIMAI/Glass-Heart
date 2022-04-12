@@ -42,8 +42,6 @@ namespace GlassHeart {
              *
              */
             void Update() override;
-        private:
-            bool _isJump{ false }; //!< ジャンプするかのフラグ
         };
     } // namespace State 
 } // namespace GlassHeart

@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   GameBase.cpp
  * @brief  アプリケーションの基底クラスの処理
@@ -6,13 +5,13 @@
  * @author Hayato Imai
  * @date   December 2021
  *********************************************************************/
-
 #include "GameBase.h"
 #include "../Input/InputManager.h"
 #include "../Resource/ResourceServer.h"
 #include "../Mode/ModeServer.h"
 #include "../Sound/SoundManager.h"
 #include "../Mode/ModeFade.h"
+#include "../Resource/LoadJson.h"
 
 namespace {
     constexpr auto SCREENWIDTH  = 1920;  //!< 画面の横幅
@@ -74,6 +73,8 @@ namespace AppFrame {
         // サウンドマネージャーの生成
         _soundManage = std::make_unique<SoundManager>(*this);
 
+        _loadJson = std::make_unique<LoadJson>();
+
         return true;
     }
     /** 解放処理 */
@@ -107,10 +108,9 @@ namespace AppFrame {
     /** メインループ */
     void GameBase::Run() {
         while (_gameState != GameState::End) {
-            Input();    //!< 入力
-            Process();  //!< 更新
-            Render();   //!< 描画
+            Input();    // 入力
+            Process();  // 更新
+            Render();   // 描画
         }
     }
 }
-

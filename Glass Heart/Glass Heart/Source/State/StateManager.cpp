@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   StateManager.cpp
  * @brief  ステートマネージャークラスの処理
@@ -30,7 +29,6 @@ void State::StateManager::PushBack(std::string_view key) {
     auto pushState = _registry[key.data()];
     // 一致するステートの入り口処理を実行
     pushState->Enter();
-    // リストの最前面に挿入
     _states.push_back(pushState);
 }
 /** ステートのポップバック */
@@ -56,11 +54,8 @@ void State::StateManager::InsertBelowBack(std::string_view key) {
     if (!_registry.contains(key.data())) {
         return;   // キーが未登録
     }
-    // 文字列と一致するステートをレジストリから取得
     auto insertState = _registry[key.data()];
-    // 一致するステートの入り口処理を実行
     insertState->Enter();
-    // リストの真下に挿入
     _states.insert(std::prev(_states.end()),insertState);
 }
 /** 入力処理 */

@@ -58,7 +58,6 @@ namespace GlassHeart {
             void Render() override;
         private:
             int _loadHandle{ -1 };  //!< ローディングGIF画像用ハンドル
-            int _nowLoading{ -1 };  //!< NowLoadig画像用ハンドル
             int _cnt{ 0 };          //!< ローディング時間
         };
     } // Mode

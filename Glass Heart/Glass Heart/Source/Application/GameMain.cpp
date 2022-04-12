@@ -27,7 +27,6 @@ GlassHeart::Application::GameMain::~GameMain() {}
 bool GlassHeart::Application::GameMain::Initialize(HINSTANCE hInstance) {
     if (!base::Initialize(hInstance)) { return false; }
 
-    /** リソースサーバーの取得 */
     auto& res = GetResourceServer();
     /** リソースのカレントフォルダ設定 */
     res.ChangeCurrentFile("resource");

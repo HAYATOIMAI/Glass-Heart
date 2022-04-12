@@ -31,7 +31,7 @@ void Mode::ModeGame::Enter() {
     // ファクトリーの生成とクリエイターの登録
     auto& of = GetObjectFactory();
     auto& os = GetObjectServer();
-
+    
     of.Register("Player", std::make_unique<Object::PlayerCreate>());
     of.Register("Girl", std::make_unique<Object::GirlCreate>());
     of.Register("FollowCamera", std::make_unique<Object::FollowCameraCreate>());
@@ -40,7 +40,7 @@ void Mode::ModeGame::Enter() {
     of.Register("GoalPoint", std::make_unique<Object::GoalPointCreate>());
 
     auto player = of.Create("Player");
-
+    // オブジェクトサーバーに登録
     os.Register("Player", player->GetPosition());
     os.Add(std::move(player));
 
@@ -60,16 +60,16 @@ void Mode::ModeGame::Enter() {
 
     auto goalPoint = of.Create("GoalPoint");
     os.Add(std::move(goalPoint));
-
+    // BGMをループ再生
     auto& sm = GetSoundManager();
     sm.PlayLoop("bgm");
-
+    // タイマーの秒数
     _count = 60;
     _countSeconds = 350;
 
     auto& ui = GetUI();
     ui.Enter();
-    
+    // リソースマネージャーから登録した画像を取得
     _deathDrawHundle = _game.GetResourceServer().GetGraph("Death");
 
     Process();
@@ -94,6 +94,7 @@ void Mode::ModeGame::Process() {
     if (_countSeconds < 0) {
         _countSeconds = 0;
     }
+    // タイマーがゼロになったらクリアモードへ
     if (_countSeconds == 0) {
         GetModeServer().GoToMode("GameClear");
     }
@@ -117,6 +118,7 @@ void Mode::ModeGame::Render() {
     // チームロゴとタイトル画像描画
     DrawBillboard3D(VGet(22500.0f, 12600.0f, 200.0f), 0.5f, 0.5f, 800.0f, 0.0f, _teamLogo, TRUE);
     DrawBillboard3D(VGet(25450.0f, 12400.0f, 200.0f), 0.5f, 0.5f, 1200.0f, 0.0f, _titleLogo, TRUE);
+    // デバッグ用タイマー秒数表示
 #ifdef _DEBUG
     auto x = 1000; auto y = 0; auto size = 32;
     auto white = GetColor(255, 255, 255);

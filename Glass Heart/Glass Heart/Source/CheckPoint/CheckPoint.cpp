@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   CheckPoint.cpp
  * @brief  チェックポイントの処理
@@ -21,7 +20,7 @@ namespace {
 using namespace GlassHeart::CheckPoint;
 
 CheckPoint::CheckPoint(Application::GameMain& game) : ObjectBase{ game } {
-    _checkPoint = LoadGraph("resource/Test/2dMaterial/light3.png");
+    _checkPoint = LoadGraph("resource/2dMaterial/light3.png");
     _position = VGet(CheckPositionX, CheckPositionY, CheckPositionZ);
     _radius = 100.0f;
     _hitFlag = false;

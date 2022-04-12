@@ -1,4 +1,3 @@
-
 /*********************************************************************
  * @file   CollisionManager.cpp
  * @brief  コリジョンマネージャークラスの処理
@@ -52,7 +51,6 @@ VECTOR Collision::CollisionManager::CheckHitFloor(const VECTOR& pos, const VECTO
     }
     // 当たっていたら位置を返す
     return  pos;
-
 }
 // 空中の足場との当たり判定
 VECTOR Collision::CollisionManager::CheckJumpStand(const VECTOR& pos, const VECTOR& forward, int state) {
@@ -65,7 +63,6 @@ VECTOR Collision::CollisionManager::CheckJumpStand(const VECTOR& pos, const VECT
     switch (state) {
     case 0:
         _bThrough = MV1CollCheck_Line(handle, MV1SearchFrame(handle, "BThroughFloor_NavMesh"), start, end);
-
         if (_bThrough.HitFlag == 0) {
             // 衝突なし
         }
@@ -117,7 +114,6 @@ VECTOR Collision::CollisionManager::CheckHitSideAndBottom(const VECTOR& pos, con
         if (_bWallThrough.HitNum > 0) {
             return pos;
         }
-
         _sideBottom = MV1CollCheck_Capsule(handle, MV1SearchFrame(handle, "Wall_NavMesh"), c1, c2, round);
         break;
     case 1:

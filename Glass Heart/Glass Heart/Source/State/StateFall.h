@@ -11,7 +11,7 @@
 namespace GlassHeart {
     namespace Player {
         class Player;
-    }// namespace
+    }
     namespace State {
         /**
          * @class StateFall

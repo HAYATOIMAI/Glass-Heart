@@ -18,6 +18,9 @@ namespace {
     constexpr auto StartPositionX = -150.0f; //!< プレイヤーの初期位置X
     constexpr auto StartPositionY = 40.0f;   //!< プレイヤーの初期位置Y
     constexpr auto StartPositionZ = -55.0f;  //!< プレイヤーの初期位置Z
+    //constexpr auto StartPositionX = 25030.0f;//!< プレイヤーの初期位置X
+    //constexpr auto StartPositionY = 12510.0f;   //!< プレイヤーの初期位置Y
+    //constexpr auto StartPositionZ = 30.0f;  //!< プレイヤーの初期位置Z
     constexpr auto Recast = 20;              //!< 色変更リキャストタイム 
     constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 右方向の角度
     constexpr auto LeftRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 左方向の角度
@@ -49,7 +52,7 @@ void Player::Player::Input(AppFrame::InputManager& input) {
     // デバッグ用LBボタンを押すとプレイヤーの位置を初期化
     if (input.GetJoyPad().GetXinputRightShoulder()) {
         _rotation = VGet(0.0f, RightRotation, 0.0f);
-        _position = VGet(StartPositionX, StartPositionY + 20, StartPositionZ);
+        _position = VGet(StartPositionX, StartPositionY + 20.f, StartPositionZ);
     }
 #endif // _DEBUG
 }

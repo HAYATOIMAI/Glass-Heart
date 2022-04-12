@@ -15,7 +15,6 @@ namespace GlassHeart {
         class ObjectBase;
     }
     namespace Model {
-
         /**
          * @class ModelAnimeManager
          * @brief モデルアニメーション管理クラス

@@ -1,6 +1,6 @@
 /*********************************************************************
  * @file   StateJumpUp.h
- * @brief  ã¸ó‘Ô‚ÌéŒ¾
+ * @brief   ƒWƒƒƒ“ƒvã¸ó‘Ô‚ÌéŒ¾
  * 
  * @author Hayato Imai
  * @date   January 2022

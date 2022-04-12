@@ -17,27 +17,26 @@ void Mode::ModeTeamLogo::Init() {
     // 使用する画像のテーブル
     const AppFrame::ResourceServer::GraphMap useGraph{
     {"TeamLogo",          {"TeamLogo/TeamLogo.png",          1, 1, 1920, 1080}} };
-    // リソースサーバーを取得
+
     auto& res = GetResourceServer();
     // 画像の読み込み
     res.LoadGraphics(useGraph);
-    // 画像のハンドルの取得
+    // リソースマネージャーから登録した画像を取得
     _teamLogo = res.GetGraph("TeamLogo");
     _fadeCount = 30;
 
-    // 使用するモデル
-    AppFrame::ResourceServer::ModelMap useModel{
-    {"Player", "Boy/PC2_motion.mv1"},
-    {"Girl", "Girl/Girl.mv1"},
-    };
-    // モデルの読み込み
-    GetResourceServer().LoadModels(useModel);
+    //// 使用するモデル
+    //AppFrame::ResourceServer::ModelMap useModel{
+    //};
+    //// モデルの読み込み
+    //GetResourceServer().LoadModels(useModel);
 }
 /** 入り口処理 */
 void Mode::ModeTeamLogo::Enter() {
 }
 /** 入力処理 */
 void Mode::ModeTeamLogo::Input(AppFrame::InputManager& input) {
+    // Bボタンが押された又は一定時間経過したらタイトルへ遷移
     if (input.GetJoyPad().GetXinputButtonB() || _fadeCount == 0) {
         GetModeServer().GoToMode("Title");
     }

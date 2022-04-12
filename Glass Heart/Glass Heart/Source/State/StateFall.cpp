@@ -16,7 +16,7 @@
 #include <AppFrame.h>
 
 namespace {
-    constexpr auto StraifVector = 6.5f;  // ストレイフ用X軸移動量
+    constexpr auto StraifVector = 6.5f;  //!<z ストレイフ用X軸移動量
     constexpr auto JumpVecY = 0.0f;      //!< ジャンプ用Y軸移動量ベクトル
     constexpr auto Gravity = -1.0f;      //!< 重力加速度
     constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f); //!< 右方向の角度
@@ -26,6 +26,8 @@ namespace {
 using namespace GlassHeart;
 /** 入り口処理 */
 void State::StateFall::Enter() {
+    // 落下モーションを再生
+    _owner.GetModelAnime().ChangeAnime("fall", true);
     // 効果音を停止
     auto& game = _owner.GetGame();
     game.GetSoundManager().StopSound("run");

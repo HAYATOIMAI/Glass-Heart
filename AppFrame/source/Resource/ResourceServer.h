@@ -1,7 +1,6 @@
-
 /*****************************************************************//**
  * @file   ResourceServer.h
- * @brief  リソースサーバー
+ * @brief  リソースマネージャークラスの宣言
  * 
  * @author Hayato Imai
  * @date   December 2021
@@ -29,7 +28,7 @@ namespace AppFrame {
     };
     /**
      * @class ResourceServer
-     * @brief リソース管理マネージャー
+     * @brief リソースマネージャークラスの宣言
      */
     class ResourceServer {
     public:

@@ -6,17 +6,14 @@
  * @date   December 2021
  *********************************************************************/
 #pragma once
-
 #include <AppFrame.h>
 #include "ModeMain.h"
 #include "../Object/ObjectBase.h"
 
 namespace GlassHeart {
-
     namespace Application {
         class GameMain;
     }
-
     namespace Mode {
         /**
          * @class ModeClear
