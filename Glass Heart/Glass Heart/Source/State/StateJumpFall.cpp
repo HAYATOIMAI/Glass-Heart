@@ -1,4 +1,3 @@
-
 /*********************************************************************
  * @file   StateJumpFall.cpp
  * @brief  ジャンプ下降状態の宣言
@@ -14,15 +13,13 @@
 #include <numbers>
 
 namespace {
-    constexpr auto StraifVector = 6.5f;                                          //!< 空中移動用のX軸移動量
-    constexpr auto Gravity = -0.6f;                                              //!< 重力加速度
-    constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f); //!< 右方向の角度
-    constexpr auto LeftRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f); //!< 左方向の角度
+    constexpr auto StraifVector = 6.5f;                                                        //!< 空中移動用のX軸移動量
+    constexpr auto Gravity = -0.6f;                                                              //!< 重力加速度
+    constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 右方向の角度
+    constexpr auto LeftRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 左方向の角度
 }
-
-using namespace GlassHeart;
 /** 入り口処理 */
-void State::StateJumpFall::Enter() {
+void GlassHeart::State::StateJumpFall::Enter() {
     // 落下中のアニメーションを再生
     _owner.GetModelAnime().ChangeAnime("Jump_End", true);
     // SEの再生を停止
@@ -30,7 +27,7 @@ void State::StateJumpFall::Enter() {
     game.GetSoundManager().StopSound("run");
 }
 /** 入力処理 */
-void State::StateJumpFall::Input(AppFrame::InputManager& input) {
+void GlassHeart::State::StateJumpFall::Input(AppFrame::Input::InputManager& input) {
     _owner.SetForwardSpeed(0.f);
     if (input.GetJoyPad().GetAnalogStickLX() >= 5000 && input.GetJoyPad().GetAnalogStickLX() > 1) {
         // 右方向に向きを変更
@@ -44,7 +41,7 @@ void State::StateJumpFall::Input(AppFrame::InputManager& input) {
     }
 }
 /** 更新処理 */
-void State::StateJumpFall::Update() {
+void GlassHeart::State::StateJumpFall::Update() {
 
     auto pos = _owner.GetPosition();
     // 移動量ベクトルを取得

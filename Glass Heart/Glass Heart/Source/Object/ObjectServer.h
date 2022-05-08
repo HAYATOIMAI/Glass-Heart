@@ -14,7 +14,9 @@
 #include "ObjectBase.h"
 
 namespace AppFrame {
-    class InputManager;
+    namespace Input {
+        class InputManager;
+    }
 }
 
 namespace GlassHeart {
@@ -36,7 +38,7 @@ namespace GlassHeart {
              *
              * @param[in] input インプットマネージャークラスの参照
              */
-            void Input(AppFrame::InputManager& input);
+            void Input(AppFrame::Input::InputManager& input);
             /**
              * @brief 更新処理
              *
@@ -81,10 +83,10 @@ namespace GlassHeart {
              */
             VECTOR GetForward(std::string_view key);
         private:
-            bool _updating{ false };                                  //!< 更新中かを判断するフラグ
-            std::vector<std::unique_ptr<ObjectBase>> _objects;        //!< 登録リスト
-            std::vector<std::unique_ptr<ObjectBase>> _pendingObjects; //!< 保留リスト
-            std::unordered_map<std::string, VECTOR> _registry;        //!< レジストリ
+            bool _updating{ false };                                                 //!< 更新中かを判断するフラグ
+            std::vector<std::unique_ptr<ObjectBase>> _objects;            //!< 登録リスト
+            std::vector<std::unique_ptr<ObjectBase>> _pendingObjects;  //!< 保留リスト
+            std::unordered_map<std::string, VECTOR> _registry;             //!< レジストリ
         };
     } // namespace Object
 } // namespace GlassHeart

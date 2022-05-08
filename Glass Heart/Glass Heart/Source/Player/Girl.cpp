@@ -25,7 +25,7 @@ Girl::Girl(Application::GameMain& game) : GlassHeart::Object::ObjectBase{ game }
     _position = VGet(GirlPositionX, GirlPositionY, GirlPositionZ);
 }
 /** “ü—Íˆ— */
-void Girl::Input(AppFrame::InputManager& input) {}
+void Girl::Input(AppFrame::Input::InputManager& input) {}
 
 /** XVˆ— */
 void Girl::Process() {

@@ -24,7 +24,7 @@ namespace GlassHeart {
          * @class ModeMain
          * @brief モードの基底クラスの宣言
          */
-        class ModeMain : public AppFrame::ModeBase {
+        class ModeMain : public AppFrame::Mode::ModeBase {
         public:
             /**
              * @brief コンストラクタ
@@ -52,7 +52,7 @@ namespace GlassHeart {
              *
              * @param[in] input インプットマネージャークラスへの参照
              */
-            void Input(AppFrame::InputManager& input) override {};
+            void Input(AppFrame::Input::InputManager& input) override {};
             /**
              * @brief 更新処理
              *
@@ -77,9 +77,9 @@ namespace GlassHeart {
             UI::UI& GetUI();
         protected:
             Application::GameMain& _gameMain; //!< ゲームメインクラスへの参照
-            static int _count;         //!< タイマー用フレームカウント
-            static int _countSeconds;  //!< タイマー用フレームカウント
-            int _fadeCount;            //!< 自動フェードインアウト用カウンタ
+            static int _count;                      //!< タイマー用フレームカウント
+            static int _countSeconds;            //!< タイマー用フレームカウント
+            int _fadeCount;                          //!< 自動フェードインアウト用カウンタ
         };
     } // namespace Mode
 } // namespace GlassHeart

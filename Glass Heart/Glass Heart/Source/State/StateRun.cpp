@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   StateRun.cpp
  * @brief  走り状態クラスの処理
@@ -14,21 +13,19 @@
 #include <AppFrame.h>
 #include <numbers>
 
-using namespace GlassHeart;
-
 namespace {
-    constexpr auto DefaultSpeed = 8.5f / 1.5f; //!< 歩行スピード
+    constexpr auto DefaultSpeed = 5.6f; //!< 歩行スピード
     constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 右方向の角度
     constexpr auto LeftRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 左方向の角度
 }
 
-void State::StateRun::Enter() {
+void GlassHeart::State::StateRun::Enter() {
     _owner.SetForwardSpeed(DefaultSpeed);
     // 走りアニメーションを再生
     _owner.GetModelAnime().ChangeAnime("dash", true);
 }
 
-void State::StateRun::Input(AppFrame::InputManager& input) {
+void GlassHeart::State::StateRun::Input(AppFrame::Input::InputManager& input) {
     auto& game = _owner.GetGame();
     // Aボタンが押されたらジャンプ状態へ移行
     if (input.GetJoyPad().GetXTriggerButtonA()) {
@@ -50,7 +47,7 @@ void State::StateRun::Input(AppFrame::InputManager& input) {
     }
 }
 /** 更新処理 */
-void State::StateRun::Update() {
+void GlassHeart::State::StateRun::Update() {
     // 移動処理
     _owner.Move(VScale(_owner.GetForward(), _owner.GetForwardSpeed()));
 }

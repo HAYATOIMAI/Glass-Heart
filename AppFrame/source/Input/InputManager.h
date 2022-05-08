@@ -12,21 +12,23 @@
 #include <utility>
 
 namespace AppFrame {
-    /**
-     * @class InputManager
-     * @brief インプットマネージャー
-     */
-    class InputManager {
-    public:
+   
+    namespace Input {
         /**
-         * @brief 更新処理
+         * @class InputManager
+         * @brief インプットマネージャークラスの宣言
          */
-        void Process();
+        class InputManager {
+        public:
+            /**
+             * @brief 更新処理
+             */
+            void Process();
 
-        inline InputJoypad& GetJoyPad() { return _inputjoy; }
+            inline InputJoypad& GetJoyPad() { return _inputjoy; }
 
-    private:
-        InputJoypad _inputjoy;  //!< インプットジョイパッドクラスの参照
-    };
-
+        private:
+            InputJoypad _inputjoy;  //!< インプットジョイパッドクラスの参照
+        };
+    }
 } // namespace AppFrame

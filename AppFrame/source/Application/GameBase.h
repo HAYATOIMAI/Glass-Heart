@@ -10,12 +10,26 @@
 #include <string>
 #include <DxLib.h>
 
+namespace {
+    std::string WindowName = "";
+    constexpr auto WindowWidth = 1920;
+    constexpr auto WindowHeight = 1080;
+}
+
 namespace AppFrame {
-    class ResourceServer;
-    class InputManager;
-    class SoundManager;
-    class ModeServer;
-    class LoadJson;
+
+    namespace Resource {
+        class ResourceServer;
+    }   
+    namespace Input {
+        class InputManager;
+    }
+    namespace Sound {
+        class SoundManager;
+    }
+    namespace Mode {
+        class ModeServer;
+    }
     /**
      * @class GameBase
      * @brief アプリケーションの基底クラスの宣言
@@ -29,7 +43,7 @@ namespace AppFrame {
         enum class GameState {
             Active,  //!< アクティブ
             Pause,   //!< 中断
-            End      //!< 終了
+            End       //!< 終了
         };
         /**
          * @brief コンストラクタ
@@ -73,23 +87,26 @@ namespace AppFrame {
          */
         virtual void Run();
 
-        inline virtual std::string SetWindowName() { return ""; }
+        inline virtual std::string SetWindowName() { return WindowName; }
 
-        inline ModeServer& GetModeServer() const { return *_modeServer; }
+        inline virtual int SetWindowWidthSize() { return WindowWidth; }
 
-        inline ResourceServer& GetResourceServer()	const { return *_resServer; }
+        inline virtual int SetWindowHeightSize() { return WindowHeight; }
 
-        inline SoundManager& GetSoundManager()	const { return *_soundManage; }
+        inline Mode::ModeServer& GetModeServer() const { return *_modeServer; }
+
+        inline Resource::ResourceServer& GetResourceServer()	const { return *_resServer; }
+
+        inline Sound::SoundManager& GetSoundManager()	const { return *_soundManage; }
 
         inline static GameBase* GameInstance() { return _gameInstance; }
 
     protected:
-        static GameBase* _gameInstance;              //!< ゲームベースクラスのインスタンス
-        GameState _gameState{ GameState::Active };   //!< ゲームの状態
-        std::unique_ptr<ModeServer> _modeServer;     //!< モードサーバーのユニークポインタ
-        std::unique_ptr<ResourceServer> _resServer;  //!< リソースサーバーのユニークポインタ
-        std::unique_ptr<InputManager> _inputManage;  //!< インプットマネージャーのユニークポインタ
-        std::unique_ptr<SoundManager> _soundManage;  //!< サウンドマネージャーのユニークポインタ
-        std::unique_ptr<LoadJson> _loadJson;         //!< 
+        static GameBase* _gameInstance;                                 //!< ゲームベースクラスのインスタンス
+        GameState _gameState{ GameState::Active };                  //!< ゲームの状態
+        std::unique_ptr<Mode::ModeServer> _modeServer;            //!< モードサーバーのユニークポインタ
+        std::unique_ptr<Resource::ResourceServer> _resServer;  //!< リソースサーバーのユニークポインタ
+        std::unique_ptr<Input::InputManager> _inputManage;   //!< インプットマネージャーのユニークポインタ
+        std::unique_ptr<Sound::SoundManager> _soundManage;  //!< サウンドマネージャーのユニークポインタ
     };
-} //AppFrame
+} // namespace AppFrame

@@ -14,7 +14,6 @@
 #include "../Mode/ModeLoading.h"
 #include "../Object/ObjectFactory.h"
 #include "../Object/ObjectServer.h"
-#include "../Effect/EffectServer.h"
 #include "../UI/UI.h"
 
  /** 実体 */
@@ -42,10 +41,10 @@ bool GlassHeart::Application::GameMain::Initialize(HINSTANCE hInstance) {
     SetMaterialParam(material);
 #endif
     /** 使用する音のテーブル */
-    const AppFrame::ResourceServer::SoundMap usesound{
+    const AppFrame::Resource::ResourceServer::SoundMap useSound{
         // BGM
-        {"bgm",     {"Sound/BGM/BGM01_Ver2.mp3",false}},
-        {"titleBgm",  {"Sound/BGM/titleBGM.mp3",false}},
+        {"bgm",      {"Sound/BGM/BGM01_Ver2.mp3",false}},
+        {"titleBgm", {"Sound/BGM/titleBGM.mp3",false}},
         // SE
         {"walk",    {"Sound/SE/SE_Walk.wav",true}},
         {"run",     {"Sound/SE/SE_Run.wav",true}},
@@ -55,7 +54,7 @@ bool GlassHeart::Application::GameMain::Initialize(HINSTANCE hInstance) {
         {"select",  {"Sound/SE/SE_Select.wav",true}}
     };
     /** 音を読み込み */
-    res.LoadSounds(usesound);
+    res.LoadSounds(useSound);
 
     // サウンドマネージャーの取得
     auto& sm = GetSoundManager();
@@ -68,8 +67,12 @@ bool GlassHeart::Application::GameMain::Initialize(HINSTANCE hInstance) {
     sm.SetVolume("death", 128);
     sm.SetVolume("select", 255);
 
+#ifndef DEBUG
+    sm.SetMute(true);
+#endif // !DEBUG
+#ifdef DEBUG
     sm.SetMute(false);
-
+#endif // DEBUG
     // オブジェクトサーバーの生成
     _objServer = std::make_unique<Object::ObjectServer>();
     // オブジェクトファクトリーの生成
@@ -78,7 +81,7 @@ bool GlassHeart::Application::GameMain::Initialize(HINSTANCE hInstance) {
     _ui = std::make_unique<GlassHeart::UI::UI>(*this);
 
     // モードサーバーを生成し、AMGモードを登録
-    _modeServer = std::make_unique<AppFrame::ModeServer>("Amg", std::make_shared<Mode::ModeAmg>(*this));
+    _modeServer = std::make_unique<AppFrame::Mode::ModeServer>("Amg", std::make_shared<Mode::ModeAmg>(*this));
     // チームロゴモードを登録
     _modeServer->Register("TeamLogo", std::make_shared<Mode::ModeTeamLogo>(*this));
     // タイトルモードを登録
@@ -88,7 +91,7 @@ bool GlassHeart::Application::GameMain::Initialize(HINSTANCE hInstance) {
     // インゲームモードを登録
     _modeServer->Register("InGame", std::make_shared<Mode::ModeGame>(*this));
     // ゲームクリアモードを登録
-    _modeServer->Register("GameClear", std::make_shared<GlassHeart::Mode::ModeClear>(*this));
+    _modeServer->Register("GameClear", std::make_shared<Mode::ModeClear>(*this));
 
     return true;
 }

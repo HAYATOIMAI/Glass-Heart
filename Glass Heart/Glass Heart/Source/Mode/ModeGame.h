@@ -56,7 +56,7 @@ namespace GlassHeart {
              *
              * @param[in] input インプットマネージャークラスへの参照
              */
-            void Input(AppFrame::InputManager& input) override;
+            void Input(AppFrame::Input::InputManager& input) override;
             /**
              * @brief 更新処理
              *
@@ -73,9 +73,9 @@ namespace GlassHeart {
              */
             void Exit() override;
         private:
-            int _teamLogo{ -1 };         //!< チームロゴ画像用ハンドル 
-            int _titleLogo{ -1 };        //!< タイトル画像用ハンドル
+            int _teamLogo{ -1 };            //!< チームロゴ画像用ハンドル 
+            int _titleLogo{ -1 };           //!< タイトル画像用ハンドル
             int _deathDrawHundle{ -1 };  //!< 死亡時に表示する画像用ハンドル
         };
-    } // Mode
-} // GlassHeart
+    } // namespace Mode
+} // namespace GlassHeart

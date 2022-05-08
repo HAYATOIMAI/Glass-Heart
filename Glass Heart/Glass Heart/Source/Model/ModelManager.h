@@ -91,10 +91,11 @@ namespace GlassHeart {
             inline int GetHandle() { return _handle; }
             void SetColor(int index, float r, float g, float b);
         protected:
-            GlassHeart::Object::ObjectBase& _owner; //!< オブジェクトベースクラスへの参照
-            int _handle{ -1 };                      //!< モデル用ハンドル
-            std::string _key;                       //!< 文字列
-            bool _isLighting{ true };               //!< ライティング処理をするかのフラグ
+            //!< オブジェクトベースクラスへの参照
+            GlassHeart::Object::ObjectBase& _owner; 
+            int _handle{ -1 };             //!< モデル用ハンドル
+            std::string _key;              //!< 文字列
+            bool _isLighting{ true };  //!< ライティング処理をするかのフラグ
         };
     } // Model
 } // GlassHeart

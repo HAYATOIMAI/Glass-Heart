@@ -91,6 +91,12 @@
     <Filter Include="ヘッダー ファイル\UI">
       <UniqueIdentifier>{0be92ad8-78f9-4299-a21c-74c951f6defb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Object\Creator">
+      <UniqueIdentifier>{807912d1-d2d7-4e66-bba4-bc9e9709a9f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\Creator">
+      <UniqueIdentifier>{8ad50861-709a-45cf-b8ba-12ae9835e0d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Camera\CameraManager.h">
@@ -290,10 +296,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
-    <None Include="ClassDiagram3.cd" />
-    <None Include="ClassDiagram4.cd" />
   </ItemGroup>
 </Project>

@@ -10,8 +10,12 @@
 #include <memory>
 
 namespace AppFrame {
-    class ResourceServer;
-    class InputManager;
+    namespace Resource {
+        class ResourceServer;
+    }
+    namespace Input {
+        class InputManager;
+    }
 }
 
 namespace GlassHeart {
@@ -32,9 +36,6 @@ namespace GlassHeart {
     }
     namespace UI {
         class UI;
-    }
-    namespace Effect {
-        class EffectManager;
     } // namespace 
     namespace Object {
         class ObjectServer;
@@ -85,7 +86,7 @@ namespace GlassHeart {
              *
              * @param[in] input インプットマネージャークラスの参照
              */
-            virtual	void Input(AppFrame::InputManager& input) {};
+            virtual	void Input(AppFrame::Input::InputManager& input) {};
             /**
              * @brief 更新処理
              */
@@ -112,14 +113,12 @@ namespace GlassHeart {
              * @return  オブジェクトの状態
              */
             inline bool IsActive() { return (_objectState == ObjectState::Active); }
-
-            inline Application::GameMain& GetGame() { return _game; }
             /**
              * @brief ワールド座標変換
-             *
              */
             virtual void ComputeWorldTransform();
             // 各種ゲッターセッター
+            inline Application::GameMain& GetGame() { return _game; }
             inline const MATRIX& GetWorldTransform() const { return _worldTransform; }
             inline VECTOR GetForward() const { return VTransform({ 0.0f, 0.0f, 1.0f }, MGetRotY(_rotation.y)); }
 
@@ -140,7 +139,6 @@ namespace GlassHeart {
             void SetStateManage(std::unique_ptr<State::StateManager> state);
             void SetModelManage(std::unique_ptr<Model::ModelAnimeManager> model);
             void SetCameraManage(std::shared_ptr<Camera::CameraManager> camera);
-            void SetEffectManage(std::unique_ptr<GlassHeart::Effect::EffectManager> effect);
 
             inline State::StateManager& GetStateManage() { return *_stateManage; }
             inline Collision::CollisionManager& GetCollision() { return *_collsionManage; }
@@ -154,16 +152,15 @@ namespace GlassHeart {
             inline void SetObjectState(ObjectState objstate) { _objectState = objstate; }
             ObjectState _objectState{ ObjectState::Active };
 
-            std::unique_ptr<State::StateManager> _stateManage;             //!< ステートマネージャーのユニークポインタ
+            std::unique_ptr<State::StateManager> _stateManage;                 //!< ステートマネージャーのユニークポインタ
             std::shared_ptr<Collision::CollisionManager> _collsionManage;  //!< コリジョンのシェアードポインタ
-            std::shared_ptr<Camera::CameraManager> _cameraManage;          //!< カメラのシェアードポインタ
+            std::shared_ptr<Camera::CameraManager> _cameraManage;            //!< カメラのシェアードポインタ
             std::unique_ptr<Model::ModelAnimeManager> _modelAnimeManage;   //!< モデルアニメマネージャーのユニークポインタ
-            std::unique_ptr<Effect::EffectManager> _effectManage;          //!< エフェクト管理クラスのユニークポインタ
 
-            MATRIX _worldTransform{ MGetIdent() }; //!< ワールド座標変換
-            VECTOR _position{ 0.0f, 0.0f, 0.0f };           //!< 位置情報
-            VECTOR _rotation{ 0.0f, 0.0f, 0.0f };           //!< 角度
-            VECTOR _scale{ 1.0f, 1.0f, 1.0f };              //!< 拡大率
+            MATRIX _worldTransform{ MGetIdent() };  //!< ワールド座標変換
+            VECTOR _position{ 0.0f, 0.0f, 0.0f };        //!< 位置情報
+            VECTOR _rotation{ 0.0f, 0.0f, 0.0f };        //!< 角度
+            VECTOR _scale{ 1.0f, 1.0f, 1.0f };            //!< 拡大率
 
             float _radius{ 0.0f };    //!< コリジョン用半径
             bool _hitFlag{ false };   //!< コリジョン用フラグ

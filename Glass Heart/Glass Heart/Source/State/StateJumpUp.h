@@ -36,7 +36,7 @@ namespace GlassHeart {
              * 
              * @param input
              */
-            void Input(AppFrame::InputManager& input) override;
+            void Input(AppFrame::Input::InputManager& input) override;
             /**
              * @brief XVˆ—
              * 

@@ -3,7 +3,7 @@
  * @brief  ステージクラスの宣言
  * 
  * @author Hayato Imai
- * @date   January 2022
+ * @date    December 2021
  *********************************************************************/
 #pragma once
 #include "../Object/ObjectBase.h"
@@ -42,7 +42,7 @@ namespace GlassHeart {
 
             inline ObjectType GetObjectType() const override { return ObjectType::Stage; }
         private:
-            std::unique_ptr<Model::ModelManager> _stage;        //!< ステージ用ユニークポインタ
+            std::unique_ptr<Model::ModelManager> _stage;          //!< ステージ用ユニークポインタ
             std::unique_ptr<Model::ModelManager> _backGround;   //!< スカイスフィア用ユニークポインタ
         };
     } // namespace Stage

@@ -36,7 +36,7 @@ namespace GlassHeart {
              *
              * @param[in] input インプットマネージャークラスの参照
              */
-            void Input(AppFrame::InputManager& input) override;
+            void Input(AppFrame::Input::InputManager& input) override;
             /**
              * @brief 更新処理
              *

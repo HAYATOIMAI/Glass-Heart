@@ -9,6 +9,12 @@
 #include <AppFrame.h>
 #include <memory>
 
+namespace {
+    std::string AppWindowName = "Glass Heart";
+    constexpr auto AppWindowWidthSize = 1920;
+    constexpr auto AppWindowHeightSize = 1080;
+}
+
 namespace GlassHeart {
 
     namespace Object {
@@ -23,9 +29,9 @@ namespace GlassHeart {
     } // namespace
     namespace Application {
         /**
-     * @class GameMain
-     * @brief このプロジェクトのメイン処理
-     */
+         * @class GameMain
+         * @brief このプロジェクトのメイン処理
+         */
         class GameMain : public AppFrame::GameBase {
             using base = AppFrame::GameBase;
         public:
@@ -66,20 +72,21 @@ namespace GlassHeart {
              */
             void Run() override;
 
-            inline std::string SetWindowName() override { return "Glass Heart"; }
+            inline std::string SetWindowName() override { return AppWindowName; }
+
+            inline int SetWindowWidthSize() override { return AppWindowWidthSize; }
+
+            inline int SetWindowHeightSize() override { return AppWindowHeightSize; }
 
             inline Object::ObjectServer& GetObjectServer() const { return *_objServer; }
 
             inline Object::ObjectFactory& GetObjectFactory() const { return *_objFactory; }
 
             inline UI::UI& GetUI() const { return *_ui; }
-
-            inline Effect::EffectServer& GetEffectServer() const { return *_effectServer; }
         private:
             std::unique_ptr<Object::ObjectServer> _objServer;                 //!< オブジェクトサーバーのユニークポインタ
             std::unique_ptr<Object::ObjectFactory> _objFactory;	              //!< オブジェクトファクトリーのユニークポインタ
-            std::unique_ptr<GlassHeart::UI::UI> _ui;                          //!< UIのユニークポインタ
-            std::unique_ptr<GlassHeart::Effect::EffectServer> _effectServer;  //!< エフェクトサーバーのユニークポインタ
+            std::unique_ptr<GlassHeart::UI::UI> _ui;                                //!< UIのユニークポインタ
         };
-    }
-} //GlassHeart
+    } // namespace Application
+} // namespace GlassHeart

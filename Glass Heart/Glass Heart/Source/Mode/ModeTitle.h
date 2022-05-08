@@ -46,7 +46,7 @@ namespace GlassHeart {
              *
              * @param input インプットマネージャークラスへの参照
              */
-            void Input(AppFrame::InputManager& input) override;
+            void Input(AppFrame::Input::InputManager& input) override;
             /**
              * @brief 更新処理
              *
@@ -63,16 +63,16 @@ namespace GlassHeart {
              */
             void Exit() override;
         private:
-            int _title{ -1 };        //!< タイトル画像
-            int _titlePlate{ -1 };   //!< 操作説明画像
-            int _titlePlate2{ -1 };  //!< 操作説明画像
-            int _titleButton{ -1 };  //!< タイトルボタン画像
-            int _titleLogo{ -1 };    //!< タイトルロゴ
-            int _titleBg{ -1 };      //!< タイトル背景
-            int _titleExit{ -1 };    //!< Exitボタン画像
-            int _alpha{ 0 };         //!< アルファ値
-            int _x{ 0 };             //!< 
-            int _x2{ 0 };            //!< 
+            int _title{ -1 };            //!< タイトル画像
+            int _titlePlate{ -1 };    //!< 操作説明画像
+            int _titlePlate2{ -1 };   //!< 操作説明画像
+            int _titleButton{ -1 };   //!< タイトルボタン画像
+            int _titleLogo{ -1 };      //!< タイトルロゴ
+            int _titleBg{ -1 };         //!< タイトル背景
+            int _titleExit{ -1 };      //!< Exitボタン画像
+            int _alpha{ 0 };             //!< アルファ値
+            int _x{ 0 };                   //!< 
+            int _x2{ 0 };                  //!< 
         };
-    } // Mode
-} // GlassHeart
+    } // namespace Mode
+} // namespace GlassHeart

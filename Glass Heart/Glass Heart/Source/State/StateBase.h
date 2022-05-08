@@ -18,7 +18,7 @@ namespace GlassHeart {
          * @class StateBase
          * @brief プレイヤーの状態基底クラス
          */
-        class StateBase : public AppFrame::StateBaseRoot {
+        class StateBase : public AppFrame::State::StateBaseRoot {
         public:
             /**
              * @brief コンストラクタ

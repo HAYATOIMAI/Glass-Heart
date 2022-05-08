@@ -10,18 +10,18 @@
 
 using namespace GlassHeart;
 
-Mode::ModeLoading::ModeLoading(Application::GameMain& game) : ModeMain(game){}
+GlassHeart::Mode::ModeLoading::ModeLoading(Application::GameMain& game) : ModeMain(game){}
 
-void Mode::ModeLoading::Init() {
+void GlassHeart::Mode::ModeLoading::Init() {
     _loadHandle = LoadGraph("resource/Loading/LoadGraphHeart.gif");
     _cnt = 30;
 }
 /** 入り口処理 */
-void Mode::ModeLoading::Enter() {}
+void GlassHeart::Mode::ModeLoading::Enter() {}
 
-void Mode::ModeLoading::Input(AppFrame::InputManager& input) {}
+void GlassHeart::Mode::ModeLoading::Input(AppFrame::Input::InputManager& input) {}
 /** 更新処理 */
-void Mode::ModeLoading::Process() {
+void GlassHeart::Mode::ModeLoading::Process() {
     // ロードのためのカウンタを減少
     if (_cnt > 0) {
         --_cnt;
@@ -43,7 +43,7 @@ void Mode::ModeLoading::Process() {
     }
 }
 /** 描画処理 */
-void Mode::ModeLoading::Render() {
+void GlassHeart::Mode::ModeLoading::Render() {
     PlayMovieToGraph(_loadHandle);
     DrawGraph(1700, 900, _loadHandle, FALSE);
 }

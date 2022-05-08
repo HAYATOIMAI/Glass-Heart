@@ -79,14 +79,14 @@ namespace GlassHeart {
 			 */
 			int GetDigit(int value);
 
-			Application::GameMain& GetGame() { return _game; }
+			inline Application::GameMain& GetGame() { return _game; }
 		private:
-			Application::GameMain& _game;                //!< プロジェクト
-			int _timerhandle{ 0 };          //!< タイマーの画像ハンドル
+			Application::GameMain& _game;  //!< プロジェクト
+			int _timerhandle{ 0 };            //!< タイマーの画像ハンドル
 			int _numberhandle[3]{ 0,0,0 };  //!< 数字の画像ハンドル
-			int digit{ -1 };                //!< 位
-			int _interval{ 100 };           //!< 数字同士の間隔
-			int _second{ 0 };               //!< 残り秒数
+			int digit{ -1 };                     //!< 位
+			int _interval{ 100 };             //!< 数字同士の間隔
+			int _second{ 0 };                  //!< 残り秒数
 		};
 	}
 }

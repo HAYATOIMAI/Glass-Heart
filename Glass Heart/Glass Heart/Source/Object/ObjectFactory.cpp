@@ -6,7 +6,6 @@
  * @date   December 2021
  *********************************************************************/
 #include "ObjectFactory.h"
-#include "../Object/ObjectServer.h"
 #include "ObjectServer.h"
 #include "../Application/GameMain.h"
 #include "ObjectBase.h"
@@ -28,12 +27,8 @@
 #include "../Camera/FollowCamera.h"
 #include <AppFrame.h>
 
-namespace {
-    constexpr auto FOLLOWSPEED = 5.0f;
-}
 /** コンストラクタ */
-GlassHeart::Object::ObjectFactory::ObjectFactory(Application::GameMain& game) : _game{ game } {
-}
+GlassHeart::Object::ObjectFactory::ObjectFactory(Application::GameMain& game) : _game{ game } {}
 /** クリエイターの登録 */
 bool GlassHeart::Object::ObjectFactory::Register(std::string_view type, std::unique_ptr<CreateBase> creator) {
     if (_creatorMap.contains(type.data())) {
@@ -90,11 +85,6 @@ std::unique_ptr<GlassHeart::Object::ObjectBase> GlassHeart::Object::GirlCreate::
 
     return girl;
 }
-/** チェックポイントを生成 */
-std::unique_ptr<GlassHeart::Object::ObjectBase> GlassHeart::Object::CheckPointCreate::Create(Application::GameMain& game) {
-    auto checkPoint = std::make_unique<CheckPoint::CheckPoint>(game);
-    return checkPoint;
-}
 /** ステージを生成 */
 std::unique_ptr<GlassHeart::Object::ObjectBase> GlassHeart::Object::StageCreate::Create(Application::GameMain& game) {
     auto stage = std::make_unique<Stage::Stage>(game);
@@ -118,4 +108,9 @@ std::unique_ptr<GlassHeart::Object::ObjectBase> GlassHeart::Object::FollowCamera
 std::unique_ptr<GlassHeart::Object::ObjectBase> GlassHeart::Object::GoalPointCreate::Create(Application::GameMain& game) {
     auto goalPoint = std::make_unique<GlassHeart::CheckPoint::GoalPoint>(game);
     return goalPoint;
+}
+/** チェックポイントを生成 */
+std::unique_ptr<GlassHeart::Object::ObjectBase> GlassHeart::Object::CheckPointCreate::Create(Application::GameMain& game) {
+    auto checkPoint = std::make_unique<CheckPoint::CheckPoint>(game);
+    return checkPoint;
 }

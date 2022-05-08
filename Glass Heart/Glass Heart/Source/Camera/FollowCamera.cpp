@@ -12,9 +12,9 @@
 #include <numbers>
 
 namespace {
-    constexpr auto StartPositionX = -150.0f;     //!< 初期位置X
-    constexpr auto StartPositionY = 35.0f;    //!< 初期位置Y
-    constexpr auto StartPositionZ = -55.0f;  //!< 初期位置Z
+    constexpr auto StartPosX = -150.0f;     //!< 初期位置X
+    constexpr auto StartPosY = 35.0f;    //!< 初期位置Y
+    constexpr auto StartPosZ = -55.0f;  //!< 初期位置Z
 }
 
 using namespace GlassHeart::Camera;
@@ -22,7 +22,7 @@ using namespace GlassHeart::Camera;
 /** コンストラクタ */
 FollowCamera::FollowCamera(Application::GameMain& game) : ObjectBase{ game } {
     _rotation = VGet(0.0f, 270.0f * (std::numbers::pi_v<float> / 180.0f), 0.0f);
-    _position = VGet(StartPositionX, StartPositionY, StartPositionZ);
+    _position = VGet(StartPosX, StartPosY, StartPosZ);
 }
 /** 更新処理 */
 void FollowCamera::Process() {

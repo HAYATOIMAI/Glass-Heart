@@ -35,14 +35,14 @@ namespace GlassHeart {
              * 
              * @param[in] input インプットマネージャークラスの参照
              */
-            void Input(AppFrame::InputManager& input) override;
+            void Input(AppFrame::Input::InputManager& input) override;
             /**
              * @brief　更新処理
              * 
              */
             void Update() override;
         private:
-            int _cnt{ 0 };             //!< リキャスト用カウンター
+            int _cnt{ 0 };                   //!< リキャスト用カウンター
             bool _resetFlag{ false };  //!< 色をリセットするかのフラグ
         };
     } // namespace State

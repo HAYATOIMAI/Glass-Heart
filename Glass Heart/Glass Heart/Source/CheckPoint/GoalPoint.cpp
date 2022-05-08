@@ -11,8 +11,8 @@
 #include "../Player/Player.h"
 
 namespace {
-    constexpr auto GoalPositionX = 25830.0f;    //!< ƒS[ƒ‹‚ÌˆÊ’uX
-    constexpr auto GoalPositionY = 12420.0f;     //!< ƒS[ƒ‹‚ÌˆÊ’uY
+    constexpr auto GoalPositionX = 25830.0f;  //!< ƒS[ƒ‹‚ÌˆÊ’uX
+    constexpr auto GoalPositionY = 12420.0f;  //!< ƒS[ƒ‹‚ÌˆÊ’uY
     constexpr auto GoalPositionZ = 30.0f;      //!< ƒS[ƒ‹‚ÌˆÊ’uZ
 }
 

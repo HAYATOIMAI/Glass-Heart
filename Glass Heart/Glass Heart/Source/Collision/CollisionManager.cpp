@@ -13,12 +13,10 @@
 #include "../Player/Player.h"
 #include <AppFrame.h>
 
-using namespace GlassHeart;
-
 /** コンストラクタ */
-Collision::CollisionManager::CollisionManager(Object::ObjectBase& owner) : _owner{ owner } {}
+GlassHeart::Collision::CollisionManager::CollisionManager(Object::ObjectBase& owner) : _owner{ owner } {}
 /** 床との当たり判定 */
-VECTOR Collision::CollisionManager::CheckHitFloor(const VECTOR& pos, const VECTOR& forward, int state) {
+VECTOR GlassHeart::Collision::CollisionManager::CheckHitFloor(const VECTOR& pos, const VECTOR& forward, int state) {
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
     auto start = VAdd(pos, { 0.f, 1.f, 0.f });
@@ -53,7 +51,7 @@ VECTOR Collision::CollisionManager::CheckHitFloor(const VECTOR& pos, const VECTO
     return  pos;
 }
 // 空中の足場との当たり判定
-VECTOR Collision::CollisionManager::CheckJumpStand(const VECTOR& pos, const VECTOR& forward, int state) {
+VECTOR GlassHeart::Collision::CollisionManager::CheckJumpStand(const VECTOR& pos, const VECTOR& forward, int state) {
 
     auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
     auto newPos = VAdd(pos, forward);
@@ -98,7 +96,7 @@ VECTOR Collision::CollisionManager::CheckJumpStand(const VECTOR& pos, const VECT
     return  newPos;
 }
 /**  底面や側面との当たり判定 */
-VECTOR Collision::CollisionManager::CheckHitSideAndBottom(const VECTOR& pos, const VECTOR& forward, int state) {
+VECTOR GlassHeart::Collision::CollisionManager::CheckHitSideAndBottom(const VECTOR& pos, const VECTOR& forward, int state) {
 
     auto round = 20.0f;
 
@@ -134,7 +132,7 @@ VECTOR Collision::CollisionManager::CheckHitSideAndBottom(const VECTOR& pos, con
     return pos;
 }
 /** 白いデスメッシュとの当たり判定 */
-VECTOR Collision::CollisionManager::CheckHitWDeathMesh(const VECTOR& pos, const VECTOR& forward) {
+VECTOR GlassHeart::Collision::CollisionManager::CheckHitWDeathMesh(const VECTOR& pos, const VECTOR& forward) {
 
     auto round = 20.0f;
 
@@ -155,7 +153,7 @@ VECTOR Collision::CollisionManager::CheckHitWDeathMesh(const VECTOR& pos, const 
     return  newPos;
 }
 /** 黒いデスメッシュとの当たり判定 */
-VECTOR Collision::CollisionManager::CheckHitBDeathMesh(const VECTOR& pos, const VECTOR& forward) {
+VECTOR GlassHeart::Collision::CollisionManager::CheckHitBDeathMesh(const VECTOR& pos, const VECTOR& forward) {
 
     auto round = 20.0f;
 
@@ -187,11 +185,10 @@ void GlassHeart::Collision::CollisionManager::RenderCircle(const VECTOR circlePo
 
         VECTOR newPos = VAdd(circlePos, move);
         DrawPixel3D(newPos, color);
-
     }
 }
 /** チェックポイントとプレイヤーの当たり判定 */
-bool Collision::CollisionManager::CheckCircleToCircle(const GlassHeart::Object::ObjectBase& owner, const GlassHeart::Object::ObjectBase& target)  {
+bool GlassHeart::Collision::CollisionManager::CheckCircleToCircle(const GlassHeart::Object::ObjectBase& owner, const GlassHeart::Object::ObjectBase& target)  {
     _radius1 = owner.GetRadius();
     _radius2 = target.GetRadius();
 
@@ -200,9 +197,7 @@ bool Collision::CollisionManager::CheckCircleToCircle(const GlassHeart::Object::
     auto length = sqrt(differVec.x * differVec.x + differVec.z * differVec.z);
 
     if (length < _radius1 + _radius2) {
-
         return true;
-
     }
 
     return false;

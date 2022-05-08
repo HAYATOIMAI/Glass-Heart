@@ -7,21 +7,20 @@
  *********************************************************************/
 #include "StateManager.h"
 
-using namespace GlassHeart;
 /** コンストラクタ */
-State::StateManager::StateManager(std::string_view key, std::shared_ptr<AppFrame::StateBaseRoot> state) {
+GlassHeart::State::StateManager::StateManager(std::string_view key, std::shared_ptr<AppFrame::State::StateBaseRoot> state) {
     Register(key, state);
     PushBack(key);
 }
 /** ステートの登録 */
-void State::StateManager::Register(std::string_view key, std::shared_ptr<AppFrame::StateBaseRoot> state) {
+void GlassHeart::State::StateManager::Register(std::string_view key, std::shared_ptr<AppFrame::State::StateBaseRoot> state) {
     if (_registry.contains(key.data())) {
         _registry.erase(key.data());
     }
     _registry.emplace(key, state);
 }
 /** ステートのプッシュバック */
-void State::StateManager::PushBack(std::string_view key) {
+void GlassHeart::State::StateManager::PushBack(std::string_view key) {
     if (!_registry.contains(key.data())) {
         return;   // キーが未登録
     }
@@ -32,7 +31,7 @@ void State::StateManager::PushBack(std::string_view key) {
     _states.push_back(pushState);
 }
 /** ステートのポップバック */
-void State::StateManager::PopBack() {
+void GlassHeart::State::StateManager::PopBack() {
     if (_states.empty()) {
         return;
     }
@@ -43,14 +42,14 @@ void State::StateManager::PopBack() {
     _states.back()->Enter();
 }
 /** ステートの遷移 */
-void State::StateManager::GoToState(std::string_view key) {
+void GlassHeart::State::StateManager::GoToState(std::string_view key) {
     // ステートの真下に挿入する
     InsertBelowBack(key.data());
     // 最前面のステートを除外
     PopBack();
 }
 /** リストの一番後ろ(最前面)のステートの真下に挿入する */
-void State::StateManager::InsertBelowBack(std::string_view key) {
+void GlassHeart::State::StateManager::InsertBelowBack(std::string_view key) {
     if (!_registry.contains(key.data())) {
         return;   // キーが未登録
     }
@@ -59,21 +58,21 @@ void State::StateManager::InsertBelowBack(std::string_view key) {
     _states.insert(std::prev(_states.end()),insertState);
 }
 /** 入力処理 */
-void State::StateManager::Input(AppFrame::InputManager& input) {
+void GlassHeart::State::StateManager::Input(AppFrame::Input::InputManager& input) {
     if (_states.empty()) {
         return;
     }
     _states.back()->Input(input);
 }
 /** 更新処理 */
-void State::StateManager::Update() {
+void GlassHeart::State::StateManager::Update() {
     if (_states.empty()) {
         return;
     }
     _states.back()->Update();
 }
 /** 描画処理 */
-void State::StateManager::Draw() const {
+void GlassHeart::State::StateManager::Draw() const {
     if (_states.empty()) {
         return;
     }

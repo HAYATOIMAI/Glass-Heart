@@ -11,12 +11,11 @@
 #include "../Mode/ModeServer.h"
 #include "../Sound/SoundManager.h"
 #include "../Mode/ModeFade.h"
-#include "../Resource/LoadJson.h"
+#include "../Utility/Utility.h"
+#include <DxLib.h>
 
 namespace {
-    constexpr auto SCREENWIDTH  = 1920;  //!< 画面の横幅
-    constexpr auto SCREENHEIGHT = 1080;  //!< 画面の縦幅
-    constexpr auto SCREENDEPTH  = 32;    //!< カラービット数
+    constexpr auto ScreenDepth  = 32;    //!< カラービット数
 }
 
 namespace AppFrame {
@@ -39,11 +38,14 @@ namespace AppFrame {
         auto windowName = SetWindowName();
         SetMainWindowText(windowName.c_str());
 
+#ifdef _DEBUG
+#endif // _DEBUG
+
         // 画面モードのを設定
-        SetGraphMode(SCREENWIDTH, SCREENHEIGHT, SCREENDEPTH);
+        SetGraphMode(SetWindowWidthSize(), SetWindowHeightSize(), ScreenDepth);
 
 #ifndef _DEBUG
-        ChangeWindowMode(true);
+        ChangeWindowMode(false);
 #endif // _DEBUG
 #ifdef _DEBUG
         //! Debugビルド時にウィンドウモードに指定する
@@ -65,15 +67,13 @@ namespace AppFrame {
         SetWriteZBuffer3D(TRUE);
 
         // インプットマネージャーの生成
-        _inputManage = std::make_unique<InputManager>();
+        _inputManage = std::make_unique<Input::InputManager>();
 
         // リソースサーバーの生成
-        _resServer = std::make_unique<ResourceServer>(*this);
+        _resServer = std::make_unique<Resource::ResourceServer>(*this);
 
         // サウンドマネージャーの生成
-        _soundManage = std::make_unique<SoundManager>(*this);
-
-        _loadJson = std::make_unique<LoadJson>();
+        _soundManage = std::make_unique<Sound::SoundManager>(*this);
 
         return true;
     }

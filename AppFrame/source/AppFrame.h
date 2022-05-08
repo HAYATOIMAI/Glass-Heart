@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   AppFrame.h
  * @brief  ライブラリファイルの指定
@@ -7,15 +6,15 @@
  * @date   December 2021
  *********************************************************************/
 #pragma once
-
 #pragma comment (lib,"AppFrame.lib")
 
 #include <DxLib.h>
 #include "Application/GameBase.h"
 #include "Input/InputManager.h"
 #include "Resource/ResourceServer.h"
-#include "Resource/LoadJson.h"
 #include "Sound/SoundManager.h"
 #include "State/StateBaseRoot.h"
 #include "Mode/ModeBase.h"
 #include "Mode/ModeServer.h"
+#include "Utility/Utility.h"
+#include "Utility/Singleton.h"

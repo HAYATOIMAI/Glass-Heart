@@ -11,8 +11,12 @@
 #include <AppFrame.h>
 
 namespace AppFrame {
-    class InputManager;
-    class SoundManager;
+    namespace Input {
+        class InputManager;
+    }
+    namespace Sound {
+        class SoundManager;
+    }
 }
 
 namespace GlassHeart {
@@ -55,7 +59,7 @@ namespace GlassHeart {
              *
              * @param[in] input  インプットマネージャークラスの参照
              */
-            virtual void Input(AppFrame::InputManager& input) override;
+            virtual void Input(AppFrame::Input::InputManager& input) override;
             /**
              * @brief 更新処理
              *
@@ -85,7 +89,7 @@ namespace GlassHeart {
              * @brief 色判定処理
              * 
              */
-            void ColorCollisionDetectionSystem();
+            void ColorChange();
 
             void SetWhite();
             void SetBlack();
@@ -108,13 +112,13 @@ namespace GlassHeart {
             inline bool GetCheckPointFlag() { return _checkPointFlag; }
             inline void SetCheckPointFlag(bool flag) { _checkPointFlag = flag; }
         protected:
-            ColourState _crState{ ColourState::White };  //!< 色状態を管理する変数
-            float _forwardSpeed{ 0.0f };                 //!< 移動速度
-            std::string _stateName{ "White" };           //!< デバッグ用状態名変数
-            int _recastCount{ 0 };                       //!< 色変更クールタイム用カウンタ
-            int _deathCoolCount{ 0 };                    //!< 死亡した時の復活までのクールタイム
-            bool _checkPointFlag{ false };               //!< チェックポイントフラグ
-            VECTOR _jumpVelocity{ 0.f, 0.f, 0.f };       //!< ジャンプ速度
+            ColourState _crState{ ColourState::White };   //!< 色状態を管理する変数
+            float _forwardSpeed{ 0.0f };                         //!< 移動速度
+            std::string _stateName{ "White" };                 //!< デバッグ用状態名変数
+            int _recastCount{ 0 };                                 //!< 色変更クールタイム用カウンタ
+            int _deathCoolCount{ 0 };                             //!< 死亡した時の復活までのクールタイム
+            bool _checkPointFlag{ false };                     //!< チェックポイントフラグ
+            VECTOR _jumpVelocity{ 0.f, 0.f, 0.f };             //!< ジャンプ速度
         };
     } // namespace Player
 } // namespace GlassHeart

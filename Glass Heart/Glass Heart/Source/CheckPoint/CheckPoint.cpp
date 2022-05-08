@@ -12,9 +12,9 @@
 #include "../Player/Player.h"
 
 namespace {
-    constexpr auto CheckPositionX = 8220.0f;    //!< ゴールの位置X
-    constexpr auto CheckPositionY = 5705.0f;     //!< ゴールの位置Y
-    constexpr auto CheckPositionZ = 30.0f;      //!< ゴールの位置Z
+    constexpr auto CheckPositionX = 8220.0f;    //!< チェックポイントの位置X
+    constexpr auto CheckPositionY = 5705.0f;    //!< チェックポイントの位置Y
+    constexpr auto CheckPositionZ = 30.0f;       //!< チェックポイントの位置Z
 }
 
 using namespace GlassHeart::CheckPoint;
@@ -24,6 +24,9 @@ CheckPoint::CheckPoint(Application::GameMain& game) : ObjectBase{ game } {
     _position = VGet(CheckPositionX, CheckPositionY, CheckPositionZ);
     _radius = 100.0f;
     _hitFlag = false;
+    _checkPoints.clear();
+    Register("1", _checkPos);
+    Register("2", _position);
 }
 
 void CheckPoint::Process() {
@@ -39,7 +42,6 @@ void CheckPoint::Process() {
                 _hitFlag = true;
             }
             else {
-
                 _hitFlag = false;
             }
         }
@@ -51,7 +53,6 @@ void CheckPoint::Render() {
 
     DrawBillboard3D(_checkDrawPos, 0.5f, 0.5f, 120.0f, 0.0f, _checkPoint, TRUE);
 #ifdef _DEBUG
-
     auto red = GetColor(255, 0, 0);
     auto green = GetColor(0, 255, 0);
 
@@ -62,4 +63,11 @@ void CheckPoint::Render() {
         _collsionManage->RenderCircle(_position, _radius, green);
     }
 #endif // _DEBUG
+}
+
+void GlassHeart::CheckPoint::CheckPoint::Register(std::string_view key, VECTOR vec) {
+    if (_checkPoints.contains(key.data())) {
+        _checkPoints.erase(key.data());
+    }
+    _checkPoints.emplace(key, vec);
 }

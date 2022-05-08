@@ -1,4 +1,3 @@
-
 /*****************************************************************//**
  * @file   ModeTitle.cpp
  * @brief  タイトル画面クラスの処理
@@ -9,14 +8,12 @@
 #include "ModeTitle.h"
 #include "../Application/GameMain.h"
 
-using namespace GlassHeart;
-
 /** コンストラクタ */
-Mode::ModeTitle::ModeTitle(Application::GameMain& game) : ModeMain{ game } {}
+GlassHeart::Mode::ModeTitle::ModeTitle(Application::GameMain& game) : ModeMain{ game } {}
 /** 入り口処理 */
-void Mode::ModeTitle::Init() {
+void GlassHeart::Mode::ModeTitle::Init() {
     // 使用する画像のテーブル
-    const AppFrame::ResourceServer::GraphMap useGraph{
+    const AppFrame::Resource::ResourceServer::GraphMap useGraph{
          {"TitleButton",   {"Title/TitleButton.png", 1, 1, 1920, 1080}},
          {"TitleExit",     {"Title/TitleExit.png",   1, 1, 1920, 1080}},
          {"TitleLogo",     {"Title/TitleLogo.png",   1, 1, 1920, 1080}},
@@ -36,16 +33,14 @@ void Mode::ModeTitle::Init() {
     _titlePlate2 = res.GetGraph("TitlePlate2");
 }
 // 入り口処理
-void Mode::ModeTitle::Enter() {
+void GlassHeart::Mode::ModeTitle::Enter() {
     _alpha = 0;
     _x = -1920;
     auto& sm = GetSoundManager();
     sm.PlayLoop("titleBgm");
 }
 /** 入力処理 */
-void Mode::ModeTitle::Input(AppFrame::InputManager& input) {
-
-    auto [handle, no] = GetGame().GetResourceServer().GetModles("Stage");
+void GlassHeart::Mode::ModeTitle::Input(AppFrame::Input::InputManager& input) {
 
     if (input.GetJoyPad().GetXinputButtonB()) {
         auto& sm = GetSoundManager();
@@ -75,11 +70,11 @@ void Mode::ModeTitle::Input(AppFrame::InputManager& input) {
     }
 }
 /** 更新処理 */
-void Mode::ModeTitle::Process() {
+void GlassHeart::Mode::ModeTitle::Process() {
     _alpha = (_alpha + 2) % 255;
 }
 /** 描画処理 */
-void Mode::ModeTitle::Render() {
+void GlassHeart::Mode::ModeTitle::Render() {
 
     DrawGraph(0, 0, _titleBg, TRUE);
     DrawGraph(0, 0, _titleLogo, TRUE);
@@ -93,7 +88,7 @@ void Mode::ModeTitle::Render() {
     SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 }
 /** 出口処理 */
-void Mode::ModeTitle::Exit() {
+void GlassHeart::Mode::ModeTitle::Exit() {
     auto& sm = GetSoundManager();
     sm.StopSound("titleBgm");
 }

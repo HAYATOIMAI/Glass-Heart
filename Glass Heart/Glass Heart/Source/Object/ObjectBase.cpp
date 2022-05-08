@@ -12,16 +12,16 @@
 #include "../Collision/CollisionManager.h"
 #include "../Camera/CameraManager.h"
 #include "../State/StateManager.h"
-#include "../Effect/EffectManager.h"
 #include "../Application/GameMain.h"
 #include <AppFrame.h>
-//! コンストラクタ
+
+/** コンストラクタ */
 GlassHeart::Object::ObjectBase::ObjectBase(Application::GameMain& game) : _game{ game } {
     _collsionManage = std::make_unique<Collision::CollisionManager>(*this);
 }
-//! デストラクタ
+/** デストラクタ */
 GlassHeart::Object::ObjectBase::~ObjectBase() {}
-//! ワールド座標変換
+/** ワールド座標変換 */
 void GlassHeart::Object::ObjectBase::ComputeWorldTransform() {
     auto world = MGetScale(_scale);
     world = MMult(world, MGetRotZ(_rotation.z));
@@ -40,10 +40,6 @@ void GlassHeart::Object::ObjectBase::SetModelManage(std::unique_ptr<GlassHeart::
 
 void GlassHeart::Object::ObjectBase::SetCameraManage(std::shared_ptr<GlassHeart::Camera::CameraManager> camera) {
     _cameraManage = std::move(camera);
-}
-
-void GlassHeart::Object::ObjectBase::SetEffectManage(std::unique_ptr<GlassHeart::Effect::EffectManager> effect) {
-    _effectManage = std::move(effect);
 }
 
 GlassHeart::Object::ObjectServer& GlassHeart::Object::ObjectBase::GetObjectServer() {

@@ -12,7 +12,9 @@
 #include <DxLib.h>
 
 namespace AppFrame {
-    class InputManager;
+    namespace Input {
+        class InputManager;
+    }
 }
 
 namespace GlassHeart {
@@ -38,7 +40,7 @@ namespace GlassHeart {
              * 
              * @param[in] input インプットマネージャークラスの参照
              */
-            void Input(AppFrame::InputManager& input) {};
+            void Input(AppFrame::Input::InputManager& input) {};
             /**
              * @brief 更新処理
              *
@@ -71,11 +73,10 @@ namespace GlassHeart {
              */
             inline VECTOR GetForward() const { return VNorm(VSub(_target, _position)); }
         protected:
-            VECTOR _position{ 0, 0, 0 };         //!< カメラの位置ベクトル
-            VECTOR _target{ 0, 0, 0 };           //!< 目標の位置ベクトル
-            VECTOR _forwardOfTarget{ 0, 0, 0 };  //!< 目標の向きベクトル
-            float _targetDist{ 100.0f };         //!< 目標との距離
-            float _vertDist{ 100.0f };           //!< 垂直方向の距離
+            VECTOR _position{ 0.f, 0.f, 0.f };             //!< カメラの位置ベクトル
+            VECTOR _target{ 0.f, 0.f, 0.f };               //!< 目標の位置ベクトル
+            VECTOR _forwardOfTarget{ 0.f, 0.f, 0.f};  //!< 目標の向きベクトル
+            float _targetDist{ 100.0f };                 //!< 目標との距離
         };
     } // namespace Camera
 } // namespace GlassHeart

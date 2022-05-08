@@ -1,4 +1,3 @@
-
 /*********************************************************************
  * @file   StateJumpUp.cpp
  * @brief  上昇状態の宣言
@@ -14,18 +13,16 @@
 #include <numbers>
 
 namespace {
-    constexpr auto StraifVector = 6.5f;                                          //!< 空中移動用のX軸移動量
-    constexpr auto JumpVecY = 24.5f;                                             //!< 上昇量
-    constexpr auto Gravity = -0.8f;                                              //!< 重力加速度
-    constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f); //!< 右方向の角度
-    constexpr auto LeftRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f); //!< 左方向の角度
+    constexpr auto StraifVector = 6.5f;                                                         //!< 空中移動用のX軸移動量
+    constexpr auto JumpVecY = 24.5f;                                                             //!< 上昇量
+    constexpr auto Gravity = -0.8f;                                                               //!< 重力加速度
+    constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 右方向の角度
+    constexpr auto LeftRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 左方向の角度
 }
 
-using namespace GlassHeart;
-
-State::StateJumpUp::StateJumpUp(Player::Player& owner) : State::StateBase{ owner } {}
+GlassHeart::State::StateJumpUp::StateJumpUp(Player::Player& owner) : State::StateBase{ owner } {}
 /** 入り口処理 */
-void State::StateJumpUp::Enter() {
+void GlassHeart::State::StateJumpUp::Enter() {
     // ジャンプ速度設定
     VECTOR jumpbase = VGet(0.0f, JumpVecY, 0.0f);
     _owner.SetJumpVelocity(jumpbase);
@@ -33,7 +30,7 @@ void State::StateJumpUp::Enter() {
     _owner.GetModelAnime().ChangeAnime("Jump_Loop", true);
 }
 /** 入力処理 */
-void State::StateJumpUp::Input(AppFrame::InputManager& input) {
+void GlassHeart::State::StateJumpUp::Input(AppFrame::Input::InputManager& input) {
    
     _owner.SetForwardSpeed(0.f);
     if (input.GetJoyPad().GetAnalogStickLX() >= 5000 && input.GetJoyPad().GetAnalogStickLX() > 1) {
@@ -48,7 +45,7 @@ void State::StateJumpUp::Input(AppFrame::InputManager& input) {
     }
 }
 /** 更新処理 */
-void State::StateJumpUp::Update() {
+void GlassHeart::State::StateJumpUp::Update() {
 
     auto pos = _owner.GetPosition();
     // 移動量ベクトルを取得
@@ -90,7 +87,6 @@ void State::StateJumpUp::Update() {
         }
         if (_owner.GetColourState() == Player::Player::ColourState::Black) {
             _owner.ResetPos();
-           // _owner.GetStateManage().PushBack("Dead");
         }
     }
     // プレイヤーの色が異なっていたらリスポーン処理
@@ -110,7 +106,7 @@ void State::StateJumpUp::Update() {
 
     //移動ベクトルがマイナスになったら下降状態に移行
     if (jumpVelocity.y <= 0) {
-        _owner.GetStateManage().PushBack("JumpFall");
+        _owner.GetStateManage().GoToState("JumpFall");
     }
 
     _owner.SetJumpVelocity(jumpVelocity);

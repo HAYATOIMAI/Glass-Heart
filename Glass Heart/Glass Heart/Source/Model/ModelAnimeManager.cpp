@@ -10,24 +10,23 @@
 #include "../Object/ObjectBase.h"
 #include "../Application/GameMain.h"
 
-using namespace GlassHeart;
 /** コンストラクタ */
-Model::ModelAnimeManager::ModelAnimeManager(Object::ObjectBase& owner) : ModelManager{ owner }{}
+GlassHeart::Model::ModelAnimeManager::ModelAnimeManager(Object::ObjectBase& owner) : ModelManager{ owner }{}
 /** デストラクタ */
-Model::ModelAnimeManager::~ModelAnimeManager() {
+GlassHeart::Model::ModelAnimeManager::~ModelAnimeManager() {
     MV1DetachAnim(_handle, _attachIndex);
 }
 /** 初期化処理 */
-void Model::ModelAnimeManager::Init() {}
+void GlassHeart::Model::ModelAnimeManager::Init() {}
 
-void Model::ModelAnimeManager::Register(std::string_view key, int animIndex) {
+void GlassHeart::Model::ModelAnimeManager::Register(std::string_view key, int animIndex) {
     if (_registry.contains(key.data())) {
         _registry.erase(key.data());
     }
     _registry.emplace(key, animIndex);
 }
 
-void Model::ModelAnimeManager::Update(){
+void GlassHeart::Model::ModelAnimeManager::Update(){
     //AnimeBlend();
     MV1SetAttachAnimTime(_handle, _attachIndex, _playTime);
 
@@ -52,11 +51,11 @@ void Model::ModelAnimeManager::Update(){
     }
 }
 
-void Model::ModelAnimeManager::Draw() {
+void GlassHeart::Model::ModelAnimeManager::Draw() {
     MV1DrawModel(_handle);
 }
 
-void Model::ModelAnimeManager::ChangeAnime(std::string_view key, bool repeate) {
+void GlassHeart::Model::ModelAnimeManager::ChangeAnime(std::string_view key, bool repeate) {
     auto newAnimIndex = _owner.GetGame().GetResourceServer().GetModelAnimIndex(_key, key);
     if (_animIndex == newAnimIndex) {
         return;
@@ -79,7 +78,7 @@ void Model::ModelAnimeManager::ChangeAnime(std::string_view key, bool repeate) {
     _repeate = repeate;
 }
 
-void Model::ModelAnimeManager::AnimeBlend() {
+void GlassHeart::Model::ModelAnimeManager::AnimeBlend() {
     if (_animrate >= 1.0f)  {
         MV1SetAttachAnimTime(_handle, _attachIndex, _playTime);
         _animrate = 1.0f;

@@ -13,7 +13,6 @@ namespace GlassHeart {
     namespace Camera {
         class CameraManager;
     }
-
     namespace Camera {
         /**
         * @class FollowCamera

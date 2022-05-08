@@ -2,7 +2,7 @@
  * @file   ModeGame.cpp
  * @brief  ゲーム内クラスの処理
  * 
- * @author Hayato Imai
+ * @author Hayato Imai, Yoshihiro Takahashi, Haruki Ikeda
  * @date   December 2021
  *********************************************************************/
 #include "ModeGame.h"
@@ -10,16 +10,19 @@
 #include "../Camera/CameraManager.h"
 #include "../Object/ObjectFactory.h"
 #include "../Object/ObjectServer.h"
-#include "../Player/Player.h"
+//#include "../Object/PlayerCreate.h"
+//#include "../Object/GirlCreate.h"
+//#include "../Object/StageCreate.h"
+//#include "../Object/GoalPointCreate.h"
+//#include "../Object/CheckPointCreate.h"
+//#include "../Object/FollowCameraCreate.h"
 #include "../UI/UI.h"
 #include <AppFrame.h>
 
-using namespace GlassHeart;
-
 /** コンストラクタ */
-Mode::ModeGame::ModeGame(Application::GameMain& game) : ModeMain{ game } {}
+GlassHeart::Mode::ModeGame::ModeGame(Application::GameMain& game) : ModeMain{ game } {}
 /** 初期化処理 */
-void Mode::ModeGame::Init() {
+void GlassHeart::Mode::ModeGame::Init() {
     // リソースサーバーを取得
     auto& res = GetResourceServer();
     // 画像のハンドルの取得
@@ -27,17 +30,17 @@ void Mode::ModeGame::Init() {
     _titleLogo = res.GetGraph("TitleLogo");
 }
 /** 入り口処理 */
-void Mode::ModeGame::Enter() {
-    // ファクトリーの生成とクリエイターの登録
+void GlassHeart::Mode::ModeGame::Enter() {
+    // ファクトリーの生成
     auto& of = GetObjectFactory();
     auto& os = GetObjectServer();
-    
-    of.Register("Player", std::make_unique<Object::PlayerCreate>());
-    of.Register("Girl", std::make_unique<Object::GirlCreate>());
-    of.Register("FollowCamera", std::make_unique<Object::FollowCameraCreate>());
-    of.Register("Stage", std::make_unique<Object::StageCreate>());
-    of.Register("CheckPoint", std::make_unique<Object::CheckPointCreate>());
-    of.Register("GoalPoint", std::make_unique<Object::GoalPointCreate>());
+    // クリエイターの登録
+    of.Register("Player", std::make_unique<GlassHeart::Object::PlayerCreate>());
+    of.Register("Girl", std::make_unique<GlassHeart::Object::GirlCreate>());
+    of.Register("FollowCamera", std::make_unique<GlassHeart::Object::FollowCameraCreate>());
+    of.Register("Stage", std::make_unique<GlassHeart::Object::StageCreate>());
+    of.Register("CheckPoint", std::make_unique<GlassHeart::Object::CheckPointCreate>());
+    of.Register("GoalPoint", std::make_unique<GlassHeart::Object::GoalPointCreate>());
 
     auto player = of.Create("Player");
     // オブジェクトサーバーに登録
@@ -75,33 +78,40 @@ void Mode::ModeGame::Enter() {
     Process();
 }
 /** 入力処理 */
-void Mode::ModeGame::Input(AppFrame::InputManager& input) {
+void GlassHeart::Mode::ModeGame::Input(AppFrame::Input::InputManager& input) {
     // オブジェクトの入力処理
     GetObjectServer().Input(input);
 }
 /** 更新処理 */
-void Mode::ModeGame::Process() {
+void GlassHeart::Mode::ModeGame::Process() {
     // オブジェクトの更新処理
     GetObjectServer().Process();
-   // タイマー処理
-    if (_count <= 60) {
-        --_count;
+    // プレイヤーの死亡フラグがfalseのみタイマーを回す
+    for (auto& itr : GetObjectServer().GetObjectLists()) {
+        if (itr->GetObjectType() == Object::ObjectBase::ObjectType::Player) {
+            if (itr->GetDeadFlag() == false) {
+                // タイマー処理
+                if (_count <= 60) {
+                    --_count;
+                }
+                if (_count == 0) {
+                    _count = 60;
+                    --_countSeconds;
+                }
+                if (_countSeconds < 0) {
+                    _countSeconds = 0;
+                }
+                // タイマーがゼロになったらクリアモードへ
+                if (_countSeconds == 0) {
+                    GetModeServer().GoToMode("GameClear");
+                }
+                GetUI().Process(_countSeconds);
+            }
+        }
     }
-    if (_count == 0) {
-        _count = 60;
-        --_countSeconds;
-    }
-    if (_countSeconds < 0) {
-        _countSeconds = 0;
-    }
-    // タイマーがゼロになったらクリアモードへ
-    if (_countSeconds == 0) {
-        GetModeServer().GoToMode("GameClear");
-    }
-    GetUI().Process(_countSeconds);
 }
 /** 描画処理 */
-void Mode::ModeGame::Render() {
+void GlassHeart::Mode::ModeGame::Render() {
     // オブジェクトを描画
     GetObjectServer().Render();
     // UIを描画
@@ -128,7 +138,7 @@ void Mode::ModeGame::Render() {
 #endif // DEBUG
 }
 /** 終了処理 */
-void Mode::ModeGame::Exit() {
+void GlassHeart::Mode::ModeGame::Exit() {
     // BGMとSEを停止
     auto& sm = GetSoundManager();
     sm.StopSound("bgm");

@@ -12,9 +12,8 @@
 #include "../Model/ModelAnimeManager.h"
 #include "../Collision/CollisionManager.h"
 
-using namespace GlassHeart;
 /** 入り口処理 */
-void State::StateIdle::Enter() {
+void GlassHeart::State::StateIdle::Enter() {
     // ゲーム開始時プレイヤーの色を白にする
     if (_resetFlag == false) {
         _owner.SetWhite();
@@ -26,7 +25,7 @@ void State::StateIdle::Enter() {
     _owner.GetModelAnime().ChangeAnime("idle", true);
 }
 /** 入力処理 */
-void State::StateIdle::Input(AppFrame::InputManager& input) {
+void GlassHeart::State::StateIdle::Input(AppFrame::Input::InputManager& input) {
     auto& game = _owner.GetGame();
     // スティック入力があれば移動
     if (input.GetJoyPad().GetXinputThumbLX()) {
@@ -47,7 +46,7 @@ void State::StateIdle::Input(AppFrame::InputManager& input) {
     }
 }
 /** 更新処理 */
-void State::StateIdle::Update() {
+void GlassHeart::State::StateIdle::Update() {
     // 入力制限の為カウンタを減少
     if (_cnt > 0) {
         --_cnt;

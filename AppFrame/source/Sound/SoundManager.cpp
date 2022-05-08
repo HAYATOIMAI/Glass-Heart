@@ -13,59 +13,62 @@
 
 namespace AppFrame {
 
-    SoundManager::~SoundManager(){}
-    /** 再生(ループ無し) */
-    void SoundManager::Play(std::string_view key) {
-        Play(key, DX_PLAYTYPE_BACK);
-    }
-    /** ループ再生 */
-    void SoundManager::PlayLoop(std::string_view key) {
-        Play(key, DX_PLAYTYPE_LOOP);
-    }
-    /** 音量を設定 */
-    void SoundManager::SetVolume(std::string_view key, int volume) {
-        auto res = _game.GetResourceServer();
-        auto&& [filename, handle] = res.GetSoundInfo(key);
+    namespace Sound {
+        /** コンストラクタ */
+        SoundManager::~SoundManager() {}
+        /** 再生(ループ無し) */
+        void SoundManager::Play(std::string_view key) {
+            Play(key, DX_PLAYTYPE_BACK);
+        }
+        /** ループ再生 */
+        void SoundManager::PlayLoop(std::string_view key) {
+            Play(key, DX_PLAYTYPE_LOOP);
+        }
+        /** 音量を設定 */
+        void SoundManager::SetVolume(std::string_view key, int volume) {
+            auto res = _game.GetResourceServer();
+            auto&& [filename, handle] = res.GetSoundInfo(key);
 
-        if (handle != -1) {
-            // 読み込み有り
-            ChangeVolumeSoundMem(volume, handle);
+            if (handle != -1) {
+                // 読み込み有り
+                ChangeVolumeSoundMem(volume, handle);
+            }
+            else {
+                // 読み込み無し
+                SetVolumeMusic(volume);
+            }
         }
-        else {
-            // 読み込み無し
-            SetVolumeMusic(volume);
-        }
-    }
-    /** 停止 */
-    void SoundManager::StopSound(std::string_view key) {
-        auto res = _game.GetResourceServer();
-        auto&& [filename, handle] = res.GetSoundInfo(key);
+        /** 停止 */
+        void SoundManager::StopSound(std::string_view key) {
+            auto res = _game.GetResourceServer();
+            auto&& [filename, handle] = res.GetSoundInfo(key);
 
-        if (handle != -1) {
-            // 読み込み有り
-            StopSoundMem(handle);
+            if (handle != -1) {
+                // 読み込み有り
+                StopSoundMem(handle);
+            }
+            else {
+                // 読み込み無し
+                StopMusic();
+            }
         }
-        else {
-            // 読み込み無し
-            StopMusic();
-        }
-    }
-    /** 再生 */
-    void SoundManager::Play(std::string_view key, int playType) {
-        if (_isMute) {
-            return;
-        }
+        /** 再生 */
+        void SoundManager::Play(std::string_view key, int playType) {
+            if (_isMute) {
+                return;
+            }
 
-        auto res = _game.GetResourceServer();
-        auto&& [filename, handle] = res.GetSoundInfo(key);
+            auto res = _game.GetResourceServer();
+            auto&& [filename, handle] = res.GetSoundInfo(key);
 
-        if (handle != -1) {
-            // 読み込み有り
-            PlaySoundMem(handle, playType, TRUE);
+            if (handle != -1) {
+                // 読み込み有り
+                PlaySoundMem(handle, playType, TRUE);
+            }
+            else {
+                // 読み込み無し
+                PlayMusic(filename.c_str(), playType);
+            }
         }
-        else {
-            // 読み込み無し
-            PlayMusic(filename.c_str(), playType);
-        }
-    }
-}// AppFrame
+    } // namspace Sound
+}// namespace AppFrame

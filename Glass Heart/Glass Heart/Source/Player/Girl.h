@@ -14,8 +14,12 @@
 
 
 namespace AppFrame {
-    class InputManager;
-    class SoundManager;
+    namespace Input {
+        class InputManager;
+    }
+    namespace Sound {
+        class SoundManager;
+    }
 }
 
 namespace GlassHeart {
@@ -23,11 +27,9 @@ namespace GlassHeart {
     namespace Application {
         class GameMain;
     }
-
     namespace Model {
         class ModelAnimeManager;
     }
-
     namespace Player {
         /**
          * @class Girl
@@ -51,7 +53,7 @@ namespace GlassHeart {
              *
              * @param[in] input  インプットマネージャークラスの参照
              */
-            void Input(AppFrame::InputManager& input) override;
+            void Input(AppFrame::Input::InputManager& input) override;
             /**
              * @brief 更新処理
              *
@@ -78,7 +80,7 @@ namespace GlassHeart {
             * @class StateBase
             * @brief ガールの状態基底クラス
             */
-            class StateBase : public AppFrame::StateBaseRoot {
+            class StateBase : public AppFrame::State::StateBaseRoot {
             public:
                 StateBase(Girl& owner) :_owner{ owner } {};
                 void Draw() override;

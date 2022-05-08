@@ -10,13 +10,11 @@
 #include "../Object/ObjectServer.h"
 #include <numbers>
 
-using namespace GlassHeart;
-
 namespace {
     constexpr auto RightRotation = 0.0f * (std::numbers::pi_v<float> / 180.0f); //!< 右方向の角度
 }
 /** コンストラクタ */
-Stage::Stage::Stage(Application::GameMain& game) : Object::ObjectBase{ game } {
+GlassHeart::Stage::Stage::Stage(Application::GameMain& game) : Object::ObjectBase{ game } {
     // スカイスフィアのモデル
     _backGround = std::make_unique<Model::ModelManager>(*this);
     _backGround->handle("BackGround");
@@ -52,13 +50,13 @@ Stage::Stage::Stage(Application::GameMain& game) : Object::ObjectBase{ game } {
     SetFogStartEnd(50.0f, 15000.0f);
 }
 /** 更新処理 */
-void Stage::Stage::Process() {
+void GlassHeart::Stage::Stage::Process() {
     // スカイスフィアをカメラと同じ位置にする
     _backGround->SetPosition(GetObjectServer().GetPosition("Camera"));
 }
 /** 描画処理 */
-void Stage::Stage::Render() {
-    _backGround->Draw();
+void GlassHeart::Stage::Stage::Render() {
+    //_backGround->Draw();
     _stage->Draw();
 #ifdef _DEBUG
     auto linelength = 10000.f;
