@@ -1,20 +1,26 @@
 /*********************************************************************
  * @file   StateBaseRoot.h
  * @brief  状態の基底クラスの宣言
- * 
+ *
  * @author Hayato Imai
  * @date   April 2022
  *********************************************************************/
 #pragma once
 #include "../Input/InputManager.h"
-
+ /**
+	* @namespace AppFrame
+	* @brief  アプリケーションフレーム
+	*/
 namespace AppFrame {
-
+	/**
+	 * @namespace State
+	 * @brief プレイヤーステート関係
+	 */
 	namespace State {
 		/**
-	     * @class StateBaseRoot
-	     * @brief 状態の基底クラス
-	     */
+			 * @class StateBaseRoot
+			 * @brief 状態の基底クラス
+			 */
 		class StateBaseRoot {
 		public:
 			/**

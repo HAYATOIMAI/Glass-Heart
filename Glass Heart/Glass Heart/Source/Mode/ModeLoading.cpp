@@ -8,17 +8,16 @@
 #include "ModeLoading.h"
 #include <AppFrame.h>
 
-using namespace GlassHeart;
-
+/** コンストラクタ */
 GlassHeart::Mode::ModeLoading::ModeLoading(Application::GameMain& game) : ModeMain(game){}
-
+/** 初期化処理 */
 void GlassHeart::Mode::ModeLoading::Init() {
     _loadHandle = LoadGraph("resource/Loading/LoadGraphHeart.gif");
     _cnt = 30;
 }
 /** 入り口処理 */
 void GlassHeart::Mode::ModeLoading::Enter() {}
-
+/**  入力処理 */
 void GlassHeart::Mode::ModeLoading::Input(AppFrame::Input::InputManager& input) {}
 /** 更新処理 */
 void GlassHeart::Mode::ModeLoading::Process() {

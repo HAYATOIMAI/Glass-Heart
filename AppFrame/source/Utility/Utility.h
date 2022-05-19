@@ -1,7 +1,7 @@
 /*********************************************************************
  * @file   Utility.h
  * @brief 便利な関数群
- * 
+ *
  * @author Hayato Imai
  * @date   April 2022
  *********************************************************************/
@@ -19,39 +19,45 @@
 #else
 #define NEW new
 #endif
-
+/**
+ * @namespace AppFrame
+ * @brief  アプリケーションフレーム
+ */
 namespace AppFrame {
-
-    namespace Utility {
-        /**
-         * @class Utility
-         * @brief 便利な関数群
-         */
-        class Utility : public Singleton<Utility> {
-        private:
-            /**
-             * @brief コンストラクタ
-             */
-            Utility();
-            /**
-             * @brief デストラクタ
-             */
-            ~Utility() override {};
-        public:
-            friend class Singleton<Utility>;  // インスタンス生成を許可
-            /**
-             * @brief 一様整数分布の乱数を生成
-             *
-             * @param[in] min 最小値
-             * @param[in] max 最大値
-             * @return 生成された乱数
-             */
-            static  int  GetRandom(int min, int max);
-            /**
-             * @brief メモリリーク検出
-             *
-             */
-            void CheckMemoryLeak();
-        };
-    } // namespace Utility
+	/**
+	 * @namespace  Utility
+	 * @brief 便利な関数関係
+	 */
+	namespace Utility {
+		/**
+		 * @class Utility
+		 * @brief 便利な関数群
+		 */
+		class Utility : public Singleton<Utility> {
+		private:
+			/**
+			 * @brief コンストラクタ
+			 */
+			Utility();
+			/**
+			 * @brief デストラクタ
+			 */
+			~Utility() override {};
+		public:
+			friend class Singleton<Utility>;  // インスタンス生成を許可
+			/**
+			 * @brief 一様整数分布の乱数を生成
+			 *
+			 * @param[in] min 最小値
+			 * @param[in] max 最大値
+			 * @return 生成された乱数
+			 */
+			static  int  GetRandom(int min, int max);
+			/**
+			 * @brief メモリリーク検出
+			 *
+			 */
+			static void CheckMemoryLeak();
+		};
+	} // namespace Utility
 } // namespace AppFrame

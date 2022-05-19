@@ -1,7 +1,7 @@
 /*********************************************************************
  * @file   ModeFadeOut.cpp
  * @brief  フェードアウトクラスの処理
- * 
+ *
  * @author Hayato Imai
  * @date   May 2022
  *********************************************************************/
@@ -17,8 +17,7 @@ namespace {
 }
 
 namespace AppFrame {
-
-    namespace Mode {
+	namespace Mode {
 		/** コンストラクタ */
 		ModeFadeOut::ModeFadeOut(GameBase& game) : ModeFade{ game } {}
 		/** デストラクタ */
@@ -37,5 +36,5 @@ namespace AppFrame {
 				GetModeServer().PopBack(); // FadeOut下のシーンも一緒にポップバック
 			}
 		}
-    } // namespace Mode
+	} // namespace Mode
 } // namespace AppFrame 

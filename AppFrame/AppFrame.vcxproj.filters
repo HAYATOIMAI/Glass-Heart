@@ -81,9 +81,6 @@
     <ClInclude Include="source\Sound\SoundManager.h">
       <Filter>ヘッダー ファイル\Sound</Filter>
     </ClInclude>
-    <ClInclude Include="source\Resource\LoadJson.h">
-      <Filter>ヘッダー ファイル\Resource</Filter>
-    </ClInclude>
     <ClInclude Include="source\State\StateBaseRoot.h">
       <Filter>ヘッダー ファイル\State</Filter>
     </ClInclude>
@@ -127,9 +124,6 @@
     </ClCompile>
     <ClCompile Include="source\Application\GameBase.cpp">
       <Filter>ソース ファイル\Application</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Resource\LoadJson.cpp">
-      <Filter>ソース ファイル\Resource</Filter>
     </ClCompile>
     <ClCompile Include="source\Utility\Utility.cpp">
       <Filter>ソース ファイル\Utility</Filter>

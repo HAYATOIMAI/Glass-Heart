@@ -10,7 +10,6 @@
 #include <DxLib.h>
 
 namespace AppFrame {
-
 	namespace Mode {
 		/** コンストラクタ */
 		ModeFade::ModeFade(GameBase& game) : ModeBase{ game }, _color{ GetColor(0, 0, 0) }{}

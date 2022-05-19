@@ -1,7 +1,7 @@
 /*********************************************************************
  * @file   Utility.cpp
  * @brief 便利な関数群
- * 
+ *
  * @author Hayato Imai
  * @date   April 2022
  *********************************************************************/
@@ -13,7 +13,6 @@ namespace {
 }
 
 namespace AppFrame {
-
 	namespace Utility {
 		/** コンストラクタ */
 		Utility::Utility() {

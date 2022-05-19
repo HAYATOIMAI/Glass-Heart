@@ -165,8 +165,6 @@
     <ClInclude Include="Source\CheckPoint\CheckPoint.h" />
     <ClInclude Include="Source\CheckPoint\GoalPoint.h" />
     <ClInclude Include="Source\Collision\CollisionManager.h" />
-    <ClInclude Include="Source\Effect\EffectManager.h" />
-    <ClInclude Include="Source\Effect\EffectServer.h" />
     <ClInclude Include="Source\Model\ModelAnimeManager.h" />
     <ClInclude Include="Source\Model\ModelManager.h" />
     <ClInclude Include="Source\Mode\ModeAmg.h" />
@@ -199,8 +197,6 @@
     <ClCompile Include="Source\CheckPoint\CheckPoint.cpp" />
     <ClCompile Include="Source\CheckPoint\GoalPoint.cpp" />
     <ClCompile Include="Source\Collision\CollisionManager.cpp" />
-    <ClCompile Include="Source\Effect\EffectManager.cpp" />
-    <ClCompile Include="Source\Effect\EffectServer.cpp" />
     <ClCompile Include="Source\Model\ModelAnimeManager.cpp" />
     <ClCompile Include="Source\Model\ModelManager.cpp" />
     <ClCompile Include="Source\Mode\ModeAmg.cpp" />

@@ -9,7 +9,6 @@
 #include "../Application/GameBase.h"
 
 namespace AppFrame {
-
 	namespace Mode {
 		/** コンストラクタ */
 		ModeBase::ModeBase(GameBase& game) : _game{ game } {}

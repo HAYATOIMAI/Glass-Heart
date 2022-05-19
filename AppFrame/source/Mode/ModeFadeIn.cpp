@@ -1,7 +1,7 @@
 /*********************************************************************
  * @file   ModeFadeIn.cpp
  * @brief  フェードインクラスの処理
- * 
+ *
  * @author Hayato Imai
  * @date    May 2022
  *********************************************************************/
@@ -17,8 +17,7 @@ namespace {
 }
 
 namespace AppFrame {
-
-    namespace Mode {
+	namespace Mode {
 		/** コンストラクタ */
 		ModeFadeIn::ModeFadeIn(GameBase& game) : ModeFade{ game } {}
 		/** デストラクタ */
@@ -36,5 +35,5 @@ namespace AppFrame {
 				GetModeServer().PopBack(); // FadeIn自身をポップバック
 			}
 		}
-    } // namespace Mode
+	} // namespace Mode
 } // namespace AppFrame 

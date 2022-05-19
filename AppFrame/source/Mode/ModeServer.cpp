@@ -14,7 +14,6 @@
 #include "../Application/GameBase.h"
 
 namespace AppFrame {
-
 	namespace Mode {
 		/** コンストラクタ */
 		ModeServer::ModeServer(std::string_view key, std::shared_ptr<ModeBase> mode) {

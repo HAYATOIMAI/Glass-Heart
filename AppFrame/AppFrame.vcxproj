@@ -176,7 +176,6 @@
     <ClInclude Include="source\Mode\ModeFadeIn.h" />
     <ClInclude Include="source\Mode\ModeFadeOut.h" />
     <ClInclude Include="source\Mode\ModeServer.h" />
-    <ClInclude Include="source\Resource\LoadJson.h" />
     <ClInclude Include="source\Resource\ResourceServer.h" />
     <ClInclude Include="source\Sound\SoundManager.h" />
     <ClInclude Include="source\State\StateBaseRoot.h" />
@@ -193,7 +192,6 @@
     <ClCompile Include="source\Mode\ModeFadeIn.cpp" />
     <ClCompile Include="source\Mode\ModeFadeOut.cpp" />
     <ClCompile Include="source\Mode\ModeServer.cpp" />
-    <ClCompile Include="source\Resource\LoadJson.cpp" />
     <ClCompile Include="source\Resource\ResourceServer.cpp" />
     <ClCompile Include="source\Sound\SoundManager.cpp" />
     <ClCompile Include="source\Utility\Utility.cpp" />
