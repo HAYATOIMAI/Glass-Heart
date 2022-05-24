@@ -11,7 +11,7 @@
 
 using namespace GlassHeart;
 
-UI::UI::UI(GameMain& game) : _game(game) {}
+UI::UI::UI(Application::GameMain& game) : _game(game) {}
 
 UI::UI::~UI() {}
 /*‰Šú‰»*/

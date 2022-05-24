@@ -9,9 +9,15 @@
 #include "../Application/GameMain.h"
 #include <unordered_map>
 #include <vector>
-
+ /**
+	* @namespace GlassHeart
+	* @brief プロジェクト名
+	*/
 namespace GlassHeart {
-
+	/**
+	 * @namespace UI
+	 * @brief UI関係
+	 */
 	namespace UI {
 		/**
 		 * @class UI
@@ -23,7 +29,7 @@ namespace GlassHeart {
 			 * @brief コンストラクタ
 			 *
 			 */
-			UI(GameMain& game);
+			UI(Application::GameMain& game);
 			/**
 			 * @brief デストラクタ
 			 *
@@ -50,16 +56,16 @@ namespace GlassHeart {
 			/**
 			 * @brief 描画処理
 			 *
-			 * @param x
-			 * @param y
+			 * @param x X座標描画位置
+			 * @param y Y座標描画位置
 			 * @param interval 間隔
 			 */
 			virtual void Render(int x, int y, double exrate);
 			/**
 			 * @brief 残り時間用描画処理
 			 *
-			 * @param x
-			 * @param y
+			 * @param x X座標描画位置
+			 * @param y Y座標描画位置
 			 * @param interval 間隔
 			 * @param exrate   拡大率
 			 */
@@ -79,14 +85,14 @@ namespace GlassHeart {
 			 */
 			int GetDigit(int value);
 
-			GameMain& GetGame() { return _game; }
+			inline Application::GameMain& GetGame() { return _game; }
 		private:
-			GameMain& _game;                //!< プロジェクト
-			int _timerhandle{ 0 };          //!< タイマーの画像ハンドル
+			Application::GameMain& _game;  //!< プロジェクト
+			int _interval{ 100 };             //!< 数字同士の間隔
 			int _numberhandle[3]{ 0,0,0 };  //!< 数字の画像ハンドル
-			int digit{ -1 };                //!< 位
-			int _interval{ 100 };           //!< 数字同士の間隔
-			int _second{ 0 };               //!< 残り秒数
+			int _second{ 0 };                   //!< 残り秒数
+			int _timerhandle{ 0 };            //!< タイマーの画像ハンドル
+			int digit{ -1 };                     //!< 位
 		};
-	}
-}
+	} // namespace UI
+} // namespace GlassHeart

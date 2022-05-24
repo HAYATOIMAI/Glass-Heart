@@ -9,7 +9,7 @@
 
 using namespace GlassHeart;
 
-Effect::EffectServer::EffectServer(GameMain& game) : _game(game) {
+Effect::EffectServer::EffectServer(Application::GameMain& game) : _game(game) {
 	Initialize();
 }
 

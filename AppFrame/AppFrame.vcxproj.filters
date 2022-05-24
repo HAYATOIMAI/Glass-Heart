@@ -43,6 +43,15 @@
     <Filter Include="ソース ファイル\Resource">
       <UniqueIdentifier>{224a1f7a-ffa7-442b-9b07-ea7279e03371}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\State">
+      <UniqueIdentifier>{82f1f558-381d-49ad-9c67-e5ef856942ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Utility">
+      <UniqueIdentifier>{e02cf9dc-fd7d-4728-bdc3-2168375a5ae7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Utility">
+      <UniqueIdentifier>{3feeb8e9-242f-46ed-9d03-17bde8396055}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\AppFrame.h">
@@ -71,6 +80,21 @@
     </ClInclude>
     <ClInclude Include="source\Sound\SoundManager.h">
       <Filter>ヘッダー ファイル\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="source\State\StateBaseRoot.h">
+      <Filter>ヘッダー ファイル\State</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Utility\Singleton.h">
+      <Filter>ヘッダー ファイル\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Utility\Utility.h">
+      <Filter>ヘッダー ファイル\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Mode\ModeFadeIn.h">
+      <Filter>ヘッダー ファイル\Mode</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Mode\ModeFadeOut.h">
+      <Filter>ヘッダー ファイル\Mode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -101,5 +125,17 @@
     <ClCompile Include="source\Application\GameBase.cpp">
       <Filter>ソース ファイル\Application</Filter>
     </ClCompile>
+    <ClCompile Include="source\Utility\Utility.cpp">
+      <Filter>ソース ファイル\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Mode\ModeFadeIn.cpp">
+      <Filter>ソース ファイル\Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Mode\ModeFadeOut.cpp">
+      <Filter>ソース ファイル\Mode</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

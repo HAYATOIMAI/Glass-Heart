@@ -20,7 +20,7 @@ namespace GlassHeart {
 
 			using EffectMap = std::unordered_map<std::string, std::pair<std::string, float>>;
 
-			EffectServer(GameMain& game);
+			EffectServer(Application::GameMain& game);
 			~EffectServer();
 			/**
 			 * @brief ‰Šú‰»
@@ -67,7 +67,7 @@ namespace GlassHeart {
 			 */
 			bool GetEffectResContein(std::string_view key);
 		private:
-			GameMain& _game;
+			Application::GameMain& _game;
 			std::filesystem::path _currentdirectory;
 			std::unordered_map<std::string, int> _effects;
 		};
