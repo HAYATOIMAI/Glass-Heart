@@ -28,9 +28,6 @@
     <Filter Include="ソース ファイル\Mode">
       <UniqueIdentifier>{73bad608-7d8c-4e1e-8f69-8df1a2b963b3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Camera">
-      <UniqueIdentifier>{a7866374-8037-4802-ad38-eb204ea66831}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Collision">
       <UniqueIdentifier>{6d9f9e13-26b6-4678-8e3a-e03a14071e0c}</UniqueIdentifier>
     </Filter>
@@ -84,6 +81,9 @@
     </Filter>
     <Filter Include="ヘッダー ファイル\UI">
       <UniqueIdentifier>{0be92ad8-78f9-4299-a21c-74c951f6defb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Camera">
+      <UniqueIdentifier>{a7866374-8037-4802-ad38-eb204ea66831}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -15,12 +15,12 @@
 #include <numbers>
 
 namespace {
-	constexpr auto StartPosX = -150.0f;   //!< プレイヤーの初期位置X
-	constexpr auto StartPosY = 40.0f;      //!< プレイヤーの初期位置Y
-	constexpr auto StartPosZ = -55.0f;    //!< プレイヤーの初期位置Z
-	constexpr auto Recast = 20;              //!< 色変更リキャストタイム
-	constexpr auto Radius = 20.f;            //!< チェックポイントとの当たり判定用半径
-	constexpr auto DeathCoolTime = 120;  //!< 死亡した時の復活までのクールタイム
+	constexpr std::int_fast16_t Recast = 20;          //!< 色変更リキャストタイム
+	constexpr std::int_fast16_t DeathCoolTime = 120;  //!< 死亡した時の復活までのクールタイム
+	constexpr auto StartPosX = -150.0f;               //!< プレイヤーの初期位置X
+	constexpr auto StartPosY = 60.0f;                 //!< プレイヤーの初期位置Y
+	constexpr auto StartPosZ = -55.0f;                //!< プレイヤーの初期位置Z
+	constexpr auto Radius = 20.f;                     //!< チェックポイントとの当たり判定用半径
 	constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 右方向の角度
 	constexpr auto LeftRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 左方向の角度
 }
@@ -49,7 +49,7 @@ void GlassHeart::Player::Player::Input(AppFrame::Input::InputManager& input) {
 	// デバッグ用LBボタンを押すとプレイヤーの位置を初期化
 	if (input.GetJoyPad().GetXinputRightShoulder()) {
 		_rotation = VGet(0.0f, RightRotation, 0.0f);
-		_position = VGet(StartPosX, StartPosY + 20.f, StartPosZ);
+		_position = VGet(StartPosX, StartPosY, StartPosZ);
 	}
 #endif // _DEBUG
 }
@@ -155,7 +155,7 @@ void GlassHeart::Player::Player::ComputeWorldTransform() {
 void GlassHeart::Player::Player::Move(const VECTOR& forward) {
 	auto pos = _position;
 	// プレイヤーの色を取得
-	int state = static_cast<int> (_crState);
+	auto state = static_cast<int> (_crState);
 	// 空中の足場の底面と側面判定処理
 	pos = _collsionManage->CheckHitSideAndBottom(pos, { forward.x, 0.f, 0.f }, state);
 	// 床との当たり判定
@@ -223,7 +223,7 @@ void GlassHeart::Player::Player::ResetPos() {
 		else {
 			// チェックポイントと当たっていなかったら初期位置に戻す
 			if (_deadFlag == true && _deathCoolCount == 0) {
-				_position = VGet(StartPosX, StartPosY + 20.f, StartPosZ);
+				_position = VGet(StartPosX, StartPosY, StartPosZ);
 				_deadFlag = false;
 			}
 		}
@@ -249,7 +249,7 @@ void GlassHeart::Player::Player::ResetPos() {
 		else {
 			// チェックポイントと当たっていなかったら初期位置に戻す
 			if (_deadFlag == true && _deathCoolCount == 0) {
-				_position = VGet(StartPosX, StartPosY + 20.f, StartPosZ);
+				_position = VGet(StartPosX, StartPosY, StartPosZ);
 				_deadFlag = false;
 			}
 		}

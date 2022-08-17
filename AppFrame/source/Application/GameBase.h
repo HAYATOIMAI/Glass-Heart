@@ -8,12 +8,18 @@
 #pragma once
 #include <memory>
 #include <string>
+#include <cstdint>
 #include <DxLib.h>
+#ifdef _DEBUG
+#include <Windows.h>
+#include <stdexcept>
+#endif // _DEBUG
+
 
 namespace {
 	std::string WindowName = "";
-	constexpr auto WindowWidth = 1920;
-	constexpr auto WindowHeight = 1080;
+	constexpr std::int_fast16_t WindowWidth = 1920;
+	constexpr std::int_fast16_t WindowHeight = 1080;
 }
 /**
  * @namespace AppFrame
@@ -94,9 +100,9 @@ namespace AppFrame {
 
 		inline virtual std::string SetWindowName() { return WindowName; }
 
-		inline virtual int SetWindowWidthSize() { return WindowWidth; }
+		inline virtual std::int_fast16_t SetWindowWidthSize() { return WindowWidth; }
 
-		inline virtual int SetWindowHeightSize() { return WindowHeight; }
+		inline virtual std::int_fast16_t SetWindowHeightSize() { return WindowHeight; }
 
 		inline Mode::ModeServer& GetModeServer() const { return *_modeServer; }
 
@@ -107,11 +113,11 @@ namespace AppFrame {
 		inline static GameBase* GameInstance() { return _gameInstance; }
 
 	protected:
-		static GameBase* _gameInstance;                                 //!< ゲームベースクラスのインスタンス
-		GameState _gameState{ GameState::Active };                  //!< ゲームの状態
-		std::unique_ptr<Mode::ModeServer> _modeServer;            //!< モードサーバーのユニークポインタ
-		std::unique_ptr<Resource::ResourceServer> _resServer;  //!< リソースサーバーのユニークポインタ
-		std::unique_ptr<Input::InputManager> _inputManage;       //!< インプットマネージャーのユニークポインタ
-		std::unique_ptr<Sound::SoundManager> _soundManage;      //!< サウンドマネージャーのユニークポインタ
+		static GameBase* _gameInstance;                                   //!< ゲームベースクラスのインスタンス
+		GameState _gameState{ GameState::Active };                        //!< ゲームの状態
+		std::unique_ptr<Mode::ModeServer> _modeServer{ nullptr };         //!< モードサーバーのユニークポインタ
+		std::unique_ptr<Resource::ResourceServer> _resServer{ nullptr };  //!< リソースサーバーのユニークポインタ
+		std::unique_ptr<Input::InputManager> _inputManage{ nullptr };     //!< インプットマネージャーのユニークポインタ
+		std::unique_ptr<Sound::SoundManager> _soundManage{ nullptr };     //!< サウンドマネージャーのユニークポインタ
 	};
 } // namespace AppFrame

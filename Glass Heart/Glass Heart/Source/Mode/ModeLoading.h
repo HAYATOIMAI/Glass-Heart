@@ -64,8 +64,8 @@ namespace GlassHeart {
 			 */
 			void Render() override;
 		private:
-			int _cnt{ 0 };              //!< ローディング時間
-			int _loadHandle{ -1 };  //!< ローディングGIF画像用ハンドル
+			std::uint16_t _cnt{ 0 };              //!< ローディング時間
+			std::int_fast32_t _loadHandle{ -1 };  //!< ローディングGIF画像用ハンドル
 		};
 	} // namespace Mode
 } // namespace GlassHeart

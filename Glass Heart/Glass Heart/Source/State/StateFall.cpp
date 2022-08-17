@@ -17,8 +17,8 @@
 
 namespace {
 	constexpr auto StraifVector = 6.5f;  //!< 空中移動用のX軸移動量
-	constexpr auto JumpVecY = 5.5f;        //!< ジャンプ用Y軸移動量
-	constexpr auto Gravity = -1.0f;        //!< 重力加速度
+	constexpr auto JumpVecY = 5.5f;      //!< ジャンプ用Y軸移動量
+	constexpr auto Gravity = -1.0f;      //!< 重力加速度
 	constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f); //!< 右方向の角度
 	constexpr auto LeftRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 左方向の角度
 }

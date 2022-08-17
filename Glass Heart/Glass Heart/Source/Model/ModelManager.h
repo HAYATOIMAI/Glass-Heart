@@ -100,9 +100,9 @@ namespace GlassHeart {
 		protected:
 			//!< オブジェクトベースクラスへの参照
 			GlassHeart::Object::ObjectBase& _owner;
-			int _handle{ -1 };             //!< モデル用ハンドル
-			std::string _key;              //!< 文字列
-			bool _isLighting{ true };  //!< ライティング処理をするかのフラグ
+			std::int_fast32_t _handle{ -1 };  //!< モデル用ハンドル
+			std::string _key;                 //!< 文字列
+			bool _isLighting{ true };         //!< ライティング処理をするかのフラグ
 		};
 	} //  namespace Model
 } // namespace GlassHeart

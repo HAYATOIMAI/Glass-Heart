@@ -12,6 +12,11 @@
 
 namespace {
 	constexpr auto RightRotation = 0.0f * (std::numbers::pi_v<float> / 180.0f); //!< 右方向の角度
+	constexpr auto FogStart = 50.0f;
+	constexpr auto FogEnd = 15000.0f;
+	constexpr std::uint_fast8_t FogColorR = 247;
+	constexpr std::uint_fast8_t FogColorG = 188;
+	constexpr std::uint_fast8_t FogColorB = 101;
 }
 /** コンストラクタ */
 GlassHeart::Stage::Stage::Stage(Application::GameMain& game) : Object::ObjectBase{ game } {
@@ -46,8 +51,8 @@ GlassHeart::Stage::Stage::Stage(Application::GameMain& game) : Object::ObjectBas
 	MV1SetupCollInfo(_stage->GetHandle(), 9, 8, 8, 8);
 	// フォグの設定
 	SetFogEnable(TRUE);
-	SetFogColor(247, 188, 101);
-	SetFogStartEnd(50.0f, 15000.0f);
+	SetFogColor(FogColorR, FogColorG, FogColorB);
+	SetFogStartEnd(FogStart, FogEnd);
 }
 /** 更新処理 */
 void GlassHeart::Stage::Stage::Process() {

@@ -11,8 +11,8 @@
 
 namespace {
 	std::string AppWindowName = "Glass Heart";
-	constexpr auto AppWindowWidthSize = 1920;
-	constexpr auto AppWindowHeightSize = 1080;
+	constexpr std::int_fast16_t AppWindowWidthSize = 1920;
+	constexpr std::int_fast16_t AppWindowHeightSize = 1080;
 }
 /**
  * @namespace GlassHeart
@@ -80,9 +80,9 @@ namespace GlassHeart {
 
 			inline std::string SetWindowName() override { return AppWindowName; }
 
-			inline int SetWindowWidthSize() override { return AppWindowWidthSize; }
+			inline std::int_fast16_t SetWindowWidthSize() override { return AppWindowWidthSize; }
 
-			inline int SetWindowHeightSize() override { return AppWindowHeightSize; }
+			inline std::int_fast16_t SetWindowHeightSize() override { return AppWindowHeightSize; }
 
 			inline Object::ObjectServer& GetObjectServer() const { return *_objServer; }
 
@@ -90,9 +90,9 @@ namespace GlassHeart {
 
 			inline UI::UI& GetUI() const { return *_ui; }
 		private:
-			std::unique_ptr<Object::ObjectServer> _objServer;     //!< オブジェクトサーバーのユニークポインタ
-			std::unique_ptr<Object::ObjectFactory> _objFactory;	  //!< オブジェクトファクトリーのユニークポインタ
-			std::unique_ptr<GlassHeart::UI::UI> _ui;                    //!< UIのユニークポインタ
+			std::unique_ptr<Object::ObjectServer> _objServer{ nullptr };    //!< オブジェクトサーバーのユニークポインタ
+			std::unique_ptr<Object::ObjectFactory> _objFactory{ nullptr };	//!< オブジェクトファクトリーのユニークポインタ
+			std::unique_ptr<GlassHeart::UI::UI> _ui{ nullptr };             //!< UIのユニークポインタ
 		};
 	} // namespace Application
 } // namespace GlassHeart

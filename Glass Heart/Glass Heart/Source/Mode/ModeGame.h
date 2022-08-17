@@ -81,9 +81,9 @@ namespace GlassHeart {
 			 */
 			void Exit() override;
 		private:
-			int _deathDrawHundle{ -1 };  //!< 死亡時に表示する画像用ハンドル
-			int _teamLogo{ -1 };            //!< チームロゴ画像用ハンドル
-			int _titleLogo{ -1 };           //!< タイトル画像用ハンドル
+			std::int_fast32_t _deathDrawHundle{ -1 };  //!< 死亡時に表示する画像用ハンドル
+			std::int_fast32_t _teamLogo{ -1 };         //!< チームロゴ画像用ハンドル
+			std::int_fast32_t _titleLogo{ -1 };        //!< タイトル画像用ハンドル
 		};
 	} // namespace Mode
 } // namespace GlassHeart

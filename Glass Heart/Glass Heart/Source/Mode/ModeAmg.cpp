@@ -33,7 +33,7 @@ void GlassHeart::Mode::ModeAmg::Init() {
 	// 画像の読み込み
 	res.LoadGraphics(useGraph);
 	// リソースマネージャーから登録した画像を取得
-	_titleBgHandle = res.GetGraph("AMGBg");
+	_amgLogoHandle = res.GetGraph("AMGBg");
 
 	// 使用するモデルのテーブル
 	AppFrame::Resource::ResourceServer::ModelMap useMap{
@@ -64,5 +64,5 @@ void GlassHeart::Mode::ModeAmg::Process() {
 }
 /** 描画処理 */
 void GlassHeart::Mode::ModeAmg::Render() {
-	DrawGraph(0, 0, _titleBgHandle, FALSE);
+	DrawGraph(0, 0, _amgLogoHandle, FALSE);
 }

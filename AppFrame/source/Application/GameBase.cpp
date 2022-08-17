@@ -15,7 +15,8 @@
 #include <DxLib.h>
 
 namespace {
-	constexpr auto ScreenDepth = 32;    //!< カラービット数
+	constexpr auto ColorBit = 32;    //!< カラービット数
+	constexpr std::uint_fast8_t Error = -1;
 }
 
 namespace AppFrame {
@@ -41,12 +42,15 @@ namespace AppFrame {
 #endif // _DEBUG
 
 		// 画面モードのを設定
-		SetGraphMode(SetWindowWidthSize(), SetWindowHeightSize(), ScreenDepth);
+		SetGraphMode(SetWindowWidthSize(), SetWindowHeightSize(), ColorBit);
 
 		ChangeWindowMode(true);
-
+	 
 		// Dxライブラリ初期化
-		if (DxLib_Init() == -1) {
+		if (DxLib_Init() == Error) {
+#ifdef _DEBUG
+			throw std::logic_error("----------- Failed to initialize DxLib -----------\n");
+#endif // _DEBUG
 			return false;
 		}
 
@@ -72,6 +76,7 @@ namespace AppFrame {
 	}
 	/** 解放処理 */
 	void GameBase::Terminate() {
+		_resServer->AllClear();
 		// Dxライブラリ終了
 		DxLib_End();
 	}

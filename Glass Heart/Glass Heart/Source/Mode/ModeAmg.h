@@ -67,7 +67,7 @@ namespace GlassHeart {
 			void Render() override;
 
 		private:
-			int _titleBgHandle{ -1 };   //!< AMGƒƒS‰æ‘œ
+			std::int_fast32_t _amgLogoHandle{ -1 };  //!< AMGƒƒS‰æ‘œ
 		};
 	} // namespace Mode
 } // namespace GlassHeart

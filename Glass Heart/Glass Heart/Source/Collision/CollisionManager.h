@@ -102,16 +102,16 @@ namespace GlassHeart {
 			inline MV1_COLL_RESULT_POLY_DIM GetBWallThroughMesh() { return _bWallThrough; }
 			inline MV1_COLL_RESULT_POLY_DIM GetWWallThroughMesh() { return _wWallThrough; }
 		private:
-			Object::ObjectBase& _owner;                  //!< オブジェクトベースクラスへの参照
-			MV1_COLL_RESULT_POLY _floor;               //!< 床との当たり判定用変数
-			MV1_COLL_RESULT_POLY _stand;               //!< ジャンプ用床との当たり判定変数
-			MV1_COLL_RESULT_POLY _wThrough;           //!< 白い床との当たり判定用変数
-			MV1_COLL_RESULT_POLY _bThrough;           //!< 黒い床との当たり判定用変数
+			Object::ObjectBase& _owner;            //!< オブジェクトベースクラスへの参照
+			MV1_COLL_RESULT_POLY _floor;           //!< 床との当たり判定用変数
+			MV1_COLL_RESULT_POLY _stand;           //!< ジャンプ用床との当たり判定変数
+			MV1_COLL_RESULT_POLY _wThrough;        //!< 白い床との当たり判定用変数
+			MV1_COLL_RESULT_POLY _bThrough;        //!< 黒い床との当たり判定用変数
 			MV1_COLL_RESULT_POLY_DIM _sideBottom;  //!< 底面や側面との当たり判定用変数
-			MV1_COLL_RESULT_POLY_DIM _wDeath;        //!< 白いデスメッシュとの当たり判定用変数
-			MV1_COLL_RESULT_POLY_DIM _bDeath;        //!< 黒いデスメッシュとの当たり判定用変数
-			MV1_COLL_RESULT_POLY_DIM _bWallThrough;   //!< 白い底面や側面との当たり判定用変数
-			MV1_COLL_RESULT_POLY_DIM _wWallThrough;   //!< 黒い底面や側面との当たり判定用変数
+			MV1_COLL_RESULT_POLY_DIM _wDeath;      //!< 白いデスメッシュとの当たり判定用変数
+			MV1_COLL_RESULT_POLY_DIM _bDeath;      //!< 黒いデスメッシュとの当たり判定用変数
+			MV1_COLL_RESULT_POLY_DIM _bWallThrough;  //!< 白い底面や側面との当たり判定用変数
+			MV1_COLL_RESULT_POLY_DIM _wWallThrough;  //!< 黒い底面や側面との当たり判定用変数
 
 			float _radius1{ 0.0f };   //!< チェックポイントとの当たり判定用半径
 			float _radius2{ 0.0f };   //!< チェックポイントとの当たり判定用半径

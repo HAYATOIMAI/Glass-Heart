@@ -18,8 +18,8 @@ namespace AppFrame {
 		Utility::Utility() {
 		}
 		/**  一様整数分布の乱数を生成*/
-		int Utility::GetRandom(int min, int max) {
-			std::uniform_int_distribution<> distribution(min, max);
+		std::int_fast32_t Utility::GetRandom(const std::int_fast32_t min, const std::int_fast32_t max) {
+			std::uniform_int_distribution<std::int_fast32_t> distribution(min, max);
 			return distribution(engine);
 		}
 		/** メモリリークチェック */

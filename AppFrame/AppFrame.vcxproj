@@ -179,8 +179,10 @@
     <ClInclude Include="source\Resource\ResourceServer.h" />
     <ClInclude Include="source\Sound\SoundManager.h" />
     <ClInclude Include="source\State\StateBaseRoot.h" />
+    <ClInclude Include="source\Utility\LoadJson.h" />
     <ClInclude Include="source\Utility\Singleton.h" />
     <ClInclude Include="source\Utility\Utility.h" />
+    <ClInclude Include="source\Utility\WriteJson.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\GameBase.cpp" />
@@ -194,7 +196,9 @@
     <ClCompile Include="source\Mode\ModeServer.cpp" />
     <ClCompile Include="source\Resource\ResourceServer.cpp" />
     <ClCompile Include="source\Sound\SoundManager.cpp" />
+    <ClCompile Include="source\Utility\LoadJson.cpp" />
     <ClCompile Include="source\Utility\Utility.cpp" />
+    <ClCompile Include="source\Utility\WriteJson.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -52,6 +52,12 @@
     <Filter Include="ソース ファイル\Utility">
       <UniqueIdentifier>{3feeb8e9-242f-46ed-9d03-17bde8396055}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Utility\Json">
+      <UniqueIdentifier>{68fa0fe6-81e8-4f09-ae96-bc98cc7c3fc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Utility\Json">
+      <UniqueIdentifier>{e4989a0a-a4c5-4913-b463-757db9e9523b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\AppFrame.h">
@@ -96,6 +102,12 @@
     <ClInclude Include="source\Mode\ModeFadeOut.h">
       <Filter>ヘッダー ファイル\Mode</Filter>
     </ClInclude>
+    <ClInclude Include="source\Utility\LoadJson.h">
+      <Filter>ヘッダー ファイル\Utility\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Utility\WriteJson.h">
+      <Filter>ヘッダー ファイル\Utility\Json</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Input\InputJoypad.cpp">
@@ -133,6 +145,12 @@
     </ClCompile>
     <ClCompile Include="source\Mode\ModeFadeOut.cpp">
       <Filter>ソース ファイル\Mode</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Utility\LoadJson.cpp">
+      <Filter>ソース ファイル\Utility\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Utility\WriteJson.cpp">
+      <Filter>ソース ファイル\Utility\Json</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

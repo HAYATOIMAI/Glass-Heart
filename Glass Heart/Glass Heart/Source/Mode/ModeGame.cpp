@@ -13,6 +13,11 @@
 #include "../UI/UI.h"
 #include <AppFrame.h>
 
+namespace {
+	constexpr	std::int_fast8_t Timer = 60;
+	constexpr std::int_fast16_t TimeLimit = 350;
+}
+
 /** コンストラクタ */
 GlassHeart::Mode::ModeGame::ModeGame(Application::GameMain& game) : ModeMain{ game } {}
 /** 初期化処理 */
@@ -60,10 +65,10 @@ void GlassHeart::Mode::ModeGame::Enter() {
 	// BGMをループ再生
 	auto& sm = GetSoundManager();
 	sm.PlayLoop("bgm");
-	// タイマーの秒数
-	_count = 60;
-	_countSeconds = 350;
-
+	// タイマーの秒数をセット
+	_count = Timer;
+	_countSeconds = TimeLimit;
+	// UIの入り口処理実行
 	auto& ui = GetUI();
 	ui.Enter();
 	// リソースマネージャーから登録した画像を取得
@@ -80,16 +85,16 @@ void GlassHeart::Mode::ModeGame::Input(AppFrame::Input::InputManager& input) {
 void GlassHeart::Mode::ModeGame::Process() {
 	// オブジェクトの更新処理
 	GetObjectServer().Process();
-	// プレイヤーの死亡フラグがfalseのみタイマーを回す
+	// プレイヤーの死亡状態ではない時のみタイマーを回す
 	for (auto& itr : GetObjectServer().GetObjectLists()) {
 		if (itr->GetObjectType() == Object::ObjectBase::ObjectType::Player) {
 			if (itr->GetDeadFlag() == false) {
 				// タイマー処理
-				if (_count <= 60) {
+				if (_count <= Timer) {
 					--_count;
 				}
 				if (_count == 0) {
-					_count = 60;
+					_count = Timer;
 					--_countSeconds;
 				}
 				if (_countSeconds < 0) {

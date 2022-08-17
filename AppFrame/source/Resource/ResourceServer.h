@@ -11,6 +11,7 @@
 #include <unordered_map>
 #include <vector>
 #include <string>
+#include <cstdint>
  /**
 	* @namespace AppFrame
 	* @brief  アプリケーションフレーム
@@ -28,10 +29,10 @@ namespace AppFrame {
 		 */
 		struct DivGraph {
 			std::string fileName{ "" };
-			int xNum{ 0 };
-			int yNum{ 0 };
-			int xSize{ 0 };
-			int ySize{ 0 };
+			std::int_fast16_t xNum{ 0 };
+			std::int_fast16_t yNum{ 0 };
+			std::int_fast16_t xSize{ 0 };
+			std::int_fast16_t ySize{ 0 };
 		};
 		/**
 		 * @class ResourceServer

@@ -106,15 +106,15 @@ namespace GlassHeart {
 			 */
 			float GetTimeRate() { return _timeRate; }
 		private:
-			bool _repeate{ false };      //!< アニメーションのループ可否
-			float _animrate{ 1.f };       //!< アニメーションブレンド率
-			float _playTime{ 0 };          //!< 総時間
-			float _timeRate{ 1.f };       //!< 再生時間掛率
-			float _totalTime{ 0 };        //!< アニメーションの総時間
-			int _animIndex{ -1 };          //!< アニメーション番号
-			int _attachIndex{ -1 };       //!< アタッチする番号
-			int _oldattachIndex{ -1 };  //!< 前のアタッチ番号
-			int _repeatedCount{ 0 };     //!< アニメーションを繰り返した回数
+			bool _repeate{ false };     //!< アニメーションのループ可否
+			float _animrate{ 1.f };     //!< アニメーションブレンド率
+			float _playTime{ 0 };       //!< 総時間
+			float _timeRate{ 1.f };     //!< 再生時間掛率
+			float _totalTime{ 0 };      //!< アニメーションの総時間
+			std::int_fast16_t _animIndex{ -1 };       //!< アニメーション番号
+			std::int_fast16_t _attachIndex{ -1 };     //!< アタッチする番号
+			std::int_fast16_t _oldattachIndex{ -1 };  //!< 前のアタッチ番号
+			std::int_fast16_t _repeatedCount{ 0 };    //!< アニメーションを繰り返した回数
 			//!< レジストリ
 			std::unordered_map<std::string, int> _registry;
 		};

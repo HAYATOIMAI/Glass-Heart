@@ -66,7 +66,7 @@ namespace GlassHeart {
 			 */
 			void Render() override;
 		private:
-			int _teamLogo{ -1 };   //!< ”wŒi‰æ‘œ—pƒnƒ“ƒhƒ‹
+			std::int_fast32_t _teamLogo{ -1 };   //!< ”wŒi‰æ‘œ—pƒnƒ“ƒhƒ‹
 		};
 	} // namespace Mode
 } // namespace GlassHeart

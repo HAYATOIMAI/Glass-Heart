@@ -77,7 +77,7 @@ VECTOR GlassHeart::Object::ObjectServer::GetPosition(std::string_view key) {
 		return _registry[key.data()];
 	}
 	// –¢“o˜^
-	return { 0, 0, 0 };
+	return { 0.f, 0.f, 0.f };
 }
 /** ‘O•ûƒxƒNƒgƒ‹‚ðŽæ“¾ */
 VECTOR GlassHeart::Object::ObjectServer::GetForward(std::string_view key) {
@@ -85,5 +85,5 @@ VECTOR GlassHeart::Object::ObjectServer::GetForward(std::string_view key) {
 		return _registry[key.data()];
 	}
 	// –¢“o˜^
-	return { 0, 0, 0 };
+	return { 0.f, 0.f, 0.f };
 }

@@ -100,10 +100,10 @@ namespace AppFrame {
 			bool GetXTriggerButtonY() { return _xTrigger.Buttons[XINPUT_BUTTON_Y]; }
 
 		private:
-			int _inputInfo{ 0 };              //!< 入力情報
-			int _trgInfo{ 0 };                 //!< トリガー入力情報
-			XINPUT_STATE _xInput{ 0 };     //!< XInput用入力情報
-			XINPUT_STATE _xTrigger{ 0 };  //!< XInput用トリガー入力情報
+			int _inputInfo{ 0 };             //!< 入力情報
+			int _trgInfo{ 0 };               //!< トリガー入力情報
+			XINPUT_STATE _xInput{ NULL };    //!< XInput用入力情報
+			XINPUT_STATE _xTrigger{ NULL };  //!< XInput用トリガー入力情報
 		};
 	}
 } // namespace AppFrame

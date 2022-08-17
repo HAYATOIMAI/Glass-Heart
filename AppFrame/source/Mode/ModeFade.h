@@ -53,11 +53,11 @@ namespace AppFrame {
 			 */
 			virtual void Render() override;
 		protected:
-			int _width{ 1920 };          //!< 縦幅
-			int _height{ 1080 };         //!< 横幅
-			unsigned int _color{ 0 };  //!< 色情報
-			float _alpha{ 0.f };         //!< アルファ値
-			float _deltaAlpha{ 0.f };  //!< アルファ値との差分
+			std::int_fast16_t _width{ 1920 };   //!< 縦幅
+			std::int_fast16_t _height{ 1080 };  //!< 横幅
+			std::uint_fast32_t _color{ 0 };     //!< 色情報
+			float _alpha{ 0.f };                //!< アルファ値
+			float _deltaAlpha{ 0.f };           //!< アルファ値との差分
 		};
 	} // namespace Mode
 } // namespace AppFrame
