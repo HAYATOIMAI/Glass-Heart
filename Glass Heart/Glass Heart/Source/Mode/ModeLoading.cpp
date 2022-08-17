@@ -1,7 +1,6 @@
-
 /*********************************************************************
  * @file   ModeLoading.cpp
- * @brief  
+ * @brief  ローディング画面クラスの処理
  * 
  * @author Hayato Imai
  * @date   March 2022
@@ -9,32 +8,19 @@
 #include "ModeLoading.h"
 #include <AppFrame.h>
 
-using namespace GlassHeart;
-
-Mode::ModeLoading::ModeLoading(GameMain& game) : ModeMain(game){}
-
-void Mode::ModeLoading::Init() {
-    // 使用する画像のテーブル
-    const AppFrame::ResourceServer::GraphMap useMap{
-    {"NowLoading",   {"Loading/Loading.png", 1, 1, 2150, 186}},
-    };
-    // リソースサーバーを取得
-    auto& res = GetResourceServer();
-    // 画像の読み込み
-    res.LoadGraphics(useMap);
-
-    _nowLoading = res.GetGraph("NowLoading");
-    //_loadHandle = res.GetGraph("LoadGif");
-
+/** コンストラクタ */
+GlassHeart::Mode::ModeLoading::ModeLoading(Application::GameMain& game) : ModeMain(game){}
+/** 初期化処理 */
+void GlassHeart::Mode::ModeLoading::Init() {
     _loadHandle = LoadGraph("resource/Loading/LoadGraphHeart.gif");
-    _cnt = 80;
+    _cnt = 30;
 }
-
-void Mode::ModeLoading::Enter() {}
-
-void Mode::ModeLoading::Input(AppFrame::InputManager& input) {}
-
-void Mode::ModeLoading::Process() {
+/** 入り口処理 */
+void GlassHeart::Mode::ModeLoading::Enter() {}
+/**  入力処理 */
+void GlassHeart::Mode::ModeLoading::Input(AppFrame::Input::InputManager& input) {}
+/** 更新処理 */
+void GlassHeart::Mode::ModeLoading::Process() {
     // ロードのためのカウンタを減少
     if (_cnt > 0) {
         --_cnt;
@@ -55,9 +41,8 @@ void Mode::ModeLoading::Process() {
         }
     }
 }
-
-void Mode::ModeLoading::Render() {
+/** 描画処理 */
+void GlassHeart::Mode::ModeLoading::Render() {
     PlayMovieToGraph(_loadHandle);
-    DrawGraph(0, 850, _nowLoading, FALSE);
     DrawGraph(1700, 900, _loadHandle, FALSE);
 }

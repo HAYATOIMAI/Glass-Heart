@@ -1,13 +1,11 @@
-
 /*****************************************************************//**
  * @file   AppFrame.h
  * @brief  ライブラリファイルの指定
- * 
+ *
  * @author Hayato Imai
  * @date   December 2021
  *********************************************************************/
 #pragma once
-
 #pragma comment (lib,"AppFrame.lib")
 
 #include <DxLib.h>
@@ -15,5 +13,8 @@
 #include "Input/InputManager.h"
 #include "Resource/ResourceServer.h"
 #include "Sound/SoundManager.h"
+#include "State/StateBaseRoot.h"
 #include "Mode/ModeBase.h"
 #include "Mode/ModeServer.h"
+#include "Utility/Utility.h"
+#include "Utility/Singleton.h"
