@@ -31,4 +31,8 @@
 *.out
 *.app
 
+#DxLibフォルダ内のファイルを全て無視
 DxLib/
+
+#Log.txtを無視
+/Glass Heart/Glass Heart/Log.txt
