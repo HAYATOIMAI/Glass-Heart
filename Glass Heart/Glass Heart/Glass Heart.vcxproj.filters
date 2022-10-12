@@ -177,6 +177,15 @@
     <ClInclude Include="Source\Player\Girl.h">
       <Filter>ヘッダー ファイル\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Collision\IsHitFloor.h">
+      <Filter>ヘッダー ファイル\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision\IsJumpStand.h">
+      <Filter>ヘッダー ファイル\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision\IsHitSideAndBottom.h">
+      <Filter>ヘッダー ファイル\Collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Camera\CameraManager.cpp">
@@ -269,8 +278,18 @@
     <ClCompile Include="Source\Player\Girl.cpp">
       <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Collision\IsHitFloor.cpp">
+      <Filter>ソース ファイル\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collision\IsJumpStand.cpp">
+      <Filter>ソース ファイル\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collision\IsHitSideAndBottom.cpp">
+      <Filter>ソース ファイル\Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

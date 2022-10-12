@@ -36,7 +36,7 @@ namespace AppFrame {
 			 * @brief      コンストラクタ
 			 *
 			 * @param[in] key   最初のモードに関連付ける任意の文字列
-			 * @param[in] mode 最初のモードの
+			 * @param[in] mode  最初のモードの
 			 */
 			ModeServer(std::string_view key, std::shared_ptr<ModeBase> mode);
 			/**
@@ -48,28 +48,28 @@ namespace AppFrame {
 			void Register(std::string_view key, std::shared_ptr<ModeBase> mode);
 			/**
 			 * @brief   モードのプッシュバック
-			 *             リストの一番後ろ(最前面)にモードをプッシュ追加する
-			 *             ModeBaseの入口処理Enterを実行する
+			 *          リストの一番後ろ(最前面)にモードをプッシュ追加する
+			 *          ModeBaseの入口処理Enterを実行する
 			 *
 			 * @param[in] key  登録済みのモードに関連付けた文字列
 			 */
 			void PushBack(std::string_view key);
 			/**
 			 * @brief モードのポップバック
-			 *           リストの一番後ろ(最前面)のモードをポップ除外する
-			 *           ModeBaseの出口処理Exitを実行する
+			 *        リストの一番後ろ(最前面)のモードをポップ除外する
+			 *        ModeBaseの出口処理Exitを実行する
 			 */
 			void PopBack();
 			/**
 			 * @brief   モードの遷移
-			 *             keyで指定されたモードへ移行する
+			 *          keyで指定されたモードへ移行する
 			 *
 			 * @param[in] key  登録済みのモードに関連付けた文字列
 			 */
 			void GoToMode(std::string_view key);
 			/**
 			 * @brief   リストの一番後ろ(最前面)のモードの真下に挿入する
-			 *             ModeBaseの入口処理Enterを実行する
+			 *          ModeBaseの入口処理Enterを実行する
 			 *
 			 * @param[in] key  登録済みのモードに関連付けた文字列
 			 */

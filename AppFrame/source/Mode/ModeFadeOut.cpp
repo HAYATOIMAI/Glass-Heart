@@ -13,7 +13,7 @@ namespace {
 	constexpr float AlphaMin = 0.f;        //!< アルファ値最低値
 	constexpr float AlphaMax = 255.f;      //!< アルファ値最大値
 	constexpr float FadeTime = 75.555f;    //!< 暗転時間
-	constexpr float AlphaDelta = (AlphaMax / FADE_TIME);  //!< アルファ値の差分
+	constexpr float AlphaDelta = (AlphaMax / FadeTime);  //!< アルファ値の差分
 }
 
 namespace AppFrame {

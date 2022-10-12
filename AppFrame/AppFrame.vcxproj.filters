@@ -58,6 +58,12 @@
     <Filter Include="ソース ファイル\Utility\Json">
       <UniqueIdentifier>{e4989a0a-a4c5-4913-b463-757db9e9523b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Math">
+      <UniqueIdentifier>{84721d07-0824-4067-b9a4-a226f2eb62a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Math">
+      <UniqueIdentifier>{b57eb9db-d304-44dc-8294-a8fbcd109aee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\AppFrame.h">
@@ -108,6 +114,15 @@
     <ClInclude Include="source\Utility\WriteJson.h">
       <Filter>ヘッダー ファイル\Utility\Json</Filter>
     </ClInclude>
+    <ClInclude Include="source\Math\Matrix44.h">
+      <Filter>ヘッダー ファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Math\Vector4.h">
+      <Filter>ヘッダー ファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Utility\UtilityToDxLib.h">
+      <Filter>ヘッダー ファイル\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Input\InputJoypad.cpp">
@@ -152,8 +167,18 @@
     <ClCompile Include="source\Utility\WriteJson.cpp">
       <Filter>ソース ファイル\Utility\Json</Filter>
     </ClCompile>
+    <ClCompile Include="source\Math\Matrix44.cpp">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Math\Vector4.cpp">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Utility\UtilityToDxLib.cpp">
+      <Filter>ソース ファイル\Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

@@ -5,7 +5,8 @@
 #endif // _DEBUG
 
 namespace {
-	constexpr	auto json = ".json";
+	constexpr	auto Json = ".json";
+	constexpr auto ErrorMessage = "Failed to open this file.";
 }
 
 namespace AppFrame {
@@ -15,12 +16,8 @@ namespace AppFrame {
 
 		std::unordered_map<std::string, nlohmann::json> LoadJson::GetParameter(std::filesystem::path path, std::vector<std::string_view> fileName) {
 
-			// ファイルの拡張子が.jsonでない場合はreturnを返す
-			if (path.extension() != json) {
-				return;
-			}
 			// データを格納しているフォルダへのパスを取得
-			auto jsonPath = (GetFilePath() / path).generic_string() + json;
+			auto jsonPath = (GetFilePath() / path).generic_string() + Json;
 
 			// ファイルを読み取り専用で開く
 			std::ifstream reading(jsonPath, std::ios::in);
@@ -28,7 +25,7 @@ namespace AppFrame {
 #ifdef _DEBUG
 			try {
 				if (reading.fail()) {
-					auto error = "-----------" + jsonPath + "Failed to open this file." + "-----------\n";
+					auto error = "-----------" + jsonPath + ErrorMessage + "-----------\n";
 					throw std::logic_error(error);
 				}
 			}
@@ -36,11 +33,6 @@ namespace AppFrame {
 				OutputDebugString(e.what());
 			}
 #endif // _DEBUG
-
-			// ファイルが存在しない場合はreturnを返す
-			if (reading.fail()) {
-				return;
-			}
 
 			nJson value;
 			// ファイルの中身を取り出す
@@ -51,8 +43,6 @@ namespace AppFrame {
 			auto paramArray = value[path.generic_string()];
 
 			std::unordered_map<std::string, nJson> paramMap;
-
-			paramMap.clear();
 
 			for (auto i = 0; i < fileName.size(); ++i) {
 				for (auto&& paramData : paramArray) {

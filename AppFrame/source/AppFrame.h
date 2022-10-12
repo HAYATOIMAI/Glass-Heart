@@ -18,3 +18,6 @@
 #include "Mode/ModeServer.h"
 #include "Utility/Utility.h"
 #include "Utility/Singleton.h"
+#include "Math/Matrix44.h"
+#include "Math/Vector4.h"
+#include "Utility/UtilityToDxLib.h"

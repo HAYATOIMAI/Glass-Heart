@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GlassHeart::Application::GameMain" Collapsed="true">
+    <Position X="5.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YAAAAAAAACABAQIAAoAAABAAEABAQAAAABAEAAAARAI=</HashCode>
+      <FileName>Source\Application\GameMain.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Camera::CameraManager" Collapsed="true">
+    <Position X="7.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAACAAAAAgAAAAAIAAAUAAAAgAAABACgAAAAAI=</HashCode>
+      <FileName>Source\Camera\CameraManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Collision::CollisionManager" Collapsed="true">
+    <Position X="9" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAgAADKIAABgIAAAwCIQAoAAAABECAACQRAACQCIA=</HashCode>
+      <FileName>Source\Collision\CollisionManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Player::Player" Collapsed="true">
+    <Position X="5.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABCAAEAAIAIAEEAIgAAgIAIEIADAAABAJIAQUBEEBA=</HashCode>
+      <FileName>Source\Player\Player.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Player::Girl" Collapsed="true">
+    <Position X="7.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIACAAAAAAAAAAAAAgAAAIAAEAAAAAAAABQAAAAAAAA=</HashCode>
+      <FileName>Source\Player\Girl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Object::ObjectBase" Collapsed="true">
+    <Position X="7.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CoACCBQJAiKgAAAQEwCgMIAoEACACihBIhACwgiABCQ=</HashCode>
+      <FileName>Source\Object\ObjectBase.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Object::ObjectFactory" Collapsed="true">
+    <Position X="7.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAQAAAAAAAAAAAAAAAAAABAEAAAAAAAABAAAQ=</HashCode>
+      <FileName>Source\Object\ObjectFactory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Object::ObjectServer" Collapsed="true">
+    <Position X="10.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAASAAAAAgAgAAIAAAkAAhAAACABAEAAAAAAA=</HashCode>
+      <FileName>Source\Object\ObjectServer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Object::CreateBase" Collapsed="true">
+    <Position X="15.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Source\Object\ObjectFactory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Object::FollowCameraCreate" Collapsed="true">
+    <Position X="12" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Source\Object\ObjectFactory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Object::GirlCreate" Collapsed="true">
+    <Position X="13.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Source\Object\ObjectFactory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Object::GoalPointCreate" Collapsed="true">
+    <Position X="15.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Source\Object\ObjectFactory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Object::StageCreate" Collapsed="true">
+    <Position X="17.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Source\Object\ObjectFactory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Object::PlayerCreate" Collapsed="true">
+    <Position X="19" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Source\Object\ObjectFactory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Object::CheckPointCreate" Collapsed="true">
+    <Position X="21" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Source\Object\ObjectFactory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Model::ModelManager" Collapsed="true">
+    <Position X="12.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAiAAACEAAAwAAABCAAACAAAAAAggABAgCAgAAAAA=</HashCode>
+      <FileName>Source\Model\ModelManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Model::ModelAnimeManager" Collapsed="true">
+    <Position X="12.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAIAAAAAAAApIAAAAAAAQAgAAxAIABUAQCAAiGAgA=</HashCode>
+      <FileName>Source\Model\ModelAnimeManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Stage::Stage" Collapsed="true">
+    <Position X="9.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAgABAAAAAAAAAAAAABgAAQAAAAA=</HashCode>
+      <FileName>Source\Stage\Stage.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::UI::UI" Collapsed="true">
+    <Position X="9" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACQEAAABAAAAFAgAAAAAIEAAFAAAAARACAAAAEAQ=</HashCode>
+      <FileName>Source\UI\UI.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::State::StateBase" Collapsed="true">
+    <Position X="7.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAgAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Source\State\StateBase.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::State::StateFall" Collapsed="true">
+    <Position X="5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAgAAAAAAAAAAAAEAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Source\State\StateFall.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::State::StateIdle" Collapsed="true">
+    <Position X="7" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAQAAAAAAEAAAAAAAAAAAAEAAEAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Source\State\StateIdle.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::State::StateJump" Collapsed="true">
+    <Position X="3.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAEAAEAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Source\State\StateJump.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::State::StateJumpFall" Collapsed="true">
+    <Position X="10.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAIAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Source\State\StateJumpFall.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::State::StateJumpUp" Collapsed="true">
+    <Position X="8.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Source\State\StateJumpUp.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::State::StateRun" Collapsed="true">
+    <Position X="12.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAEAIEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Source\State\StateRun.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::State::StateManager" Collapsed="true">
+    <Position X="10.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IEQAAAAAAAAAAggAAgAAAAAAEAAhAAAAAAAAAAAgCAA=</HashCode>
+      <FileName>Source\State\StateManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Mode::ModeAmg" Collapsed="true">
+    <Position X="14.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAEAAAEAAEAAAAABAKAAIAAAA=</HashCode>
+      <FileName>Source\Mode\ModeAmg.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Mode::ModeClear" Collapsed="true">
+    <Position X="21" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACCAAAACAAAgABAAAAEAAEAAAAIBACAAAAAAA=</HashCode>
+      <FileName>Source\Mode\ModeClear.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Mode::ModeGame" Collapsed="true">
+    <Position X="23.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAACAAAAAAgAAAAAAEEAkAAAAIBACBAAAAAA=</HashCode>
+      <FileName>Source\Mode\ModeGame.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Mode::ModeLoading" Collapsed="true">
+    <Position X="16.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAhAAAAAAEAAkAAAAABACIAAAAAA=</HashCode>
+      <FileName>Source\Mode\ModeLoading.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Mode::ModeMain" Collapsed="true">
+    <Position X="19.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAABAAQAAAAAgAAEBAAEAAEQAgAIBCCAACABAA=</HashCode>
+      <FileName>Source\Mode\ModeMain.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Mode::ModeTeamLogo" Collapsed="true">
+    <Position X="25.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAgAAAAAAEAAkAAABABACAAAAAAA=</HashCode>
+      <FileName>Source\Mode\ModeTeamLogo.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GlassHeart::Mode::ModeTitle" Collapsed="true">
+    <Position X="18.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIBICAQAAEAgABAAAAEAAEIAAAIBACACABAAA=</HashCode>
+      <FileName>Source\Mode\ModeTitle.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Yu Gothic UI" Size="9" />
+</ClassDiagram>

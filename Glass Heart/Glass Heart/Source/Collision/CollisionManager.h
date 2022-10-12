@@ -8,7 +8,7 @@
 #pragma once
 #include <memory>
 #include <DxLib.h>
-
+#include "IsHitFloor.h"
  /**
 	* @namespace GlassHeart
 	* @brief プロジェクト名
@@ -101,8 +101,9 @@ namespace GlassHeart {
 			inline MV1_COLL_RESULT_POLY_DIM GetBDeathMesh() { return _bDeath; }
 			inline MV1_COLL_RESULT_POLY_DIM GetBWallThroughMesh() { return _bWallThrough; }
 			inline MV1_COLL_RESULT_POLY_DIM GetWWallThroughMesh() { return _wWallThrough; }
+			//inline IsHitFloor& GeIstHitFloor() { return _isHitFloor; }
 		private:
-			Object::ObjectBase& _owner;            //!< オブジェクトベースクラスへの参照
+			Object::ObjectBase& _owner;            //!< 親クラスへの参照
 			MV1_COLL_RESULT_POLY _floor;           //!< 床との当たり判定用変数
 			MV1_COLL_RESULT_POLY _stand;           //!< ジャンプ用床との当たり判定変数
 			MV1_COLL_RESULT_POLY _wThrough;        //!< 白い床との当たり判定用変数
@@ -115,6 +116,7 @@ namespace GlassHeart {
 
 			float _radius1{ 0.0f };   //!< チェックポイントとの当たり判定用半径
 			float _radius2{ 0.0f };   //!< チェックポイントとの当たり判定用半径
+			//IsHitFloor _isHitFloor;
 		};
 	} // namespce Collision
 } // namespace GlassHeart

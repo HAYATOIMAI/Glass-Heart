@@ -16,6 +16,10 @@ namespace AppFrame {
 	namespace Input {
 		class InputManager;
 	}
+	namespace Math {
+		class Vector4;
+		class Matrix44;
+	}
 }
 /**
  * @namespace GlassHeart
@@ -139,21 +143,21 @@ namespace GlassHeart {
 			inline void SetHitFlag(const bool hitFlag) { _hitFlag = hitFlag; }
 			inline bool GetHitFlag() const { return _hitFlag; }
 			inline bool GetDeadFlag() { return _deadFlag; }
-			void SetStateManage(std::unique_ptr<State::StateManager> state);
-			void SetModelManage(std::unique_ptr<Model::ModelAnimeManager> model);
-			void SetCameraManage(std::shared_ptr<Camera::CameraManager> camera);
 			inline State::StateManager& GetStateManage() { return *_stateManage; }
 			inline Collision::CollisionManager& GetCollision() { return *_collsionManage; }
 			inline Camera::CameraManager& GetCamera() { return *_cameraManage; }
 			inline Model::ModelAnimeManager& GetModelAnime() { return *_modelAnimeManage; }
+			void SetStateManage(std::unique_ptr<State::StateManager> state);
+			void SetModelManage(std::unique_ptr<Model::ModelAnimeManager> model);
+			void SetCameraManage(std::shared_ptr<Camera::CameraManager> camera);
 			ObjectServer& GetObjectServer();
 			inline bool GetInputFlag() { return _input; }
 		protected:
 			Application::GameMain& _game;  //!< ゲームメインクラスの参照
-			bool _deadFlag{ false };  //!< 死亡したかのフラグ
-			bool _hitFlag{ false };   //!< コリジョン用フラグ
+			bool _deadFlag{ false };       //!< 死亡したかのフラグ
+			bool _hitFlag{ false };        //!< コリジョン用フラグ
 			bool _input{ false };
-			float _radius{ 0.0f };    //!< コリジョン用半径
+			float _radius{ 0.0f };                  //!< コリジョン用半径
 			MATRIX _worldTransform{ MGetIdent() };  //!< ワールド座標変換
 			VECTOR _position{ 0.0f, 0.0f, 0.0f };   //!< 位置情報
 			VECTOR _rotation{ 0.0f, 0.0f, 0.0f };   //!< 角度

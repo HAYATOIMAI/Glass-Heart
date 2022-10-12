@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AppFrame::GameBase" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAABADAQACAoAAkAAAEAhIAACIgBAEIAAAAAI=</HashCode>
+      <FileName>source\Application\GameBase.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppFrame::Singleton&lt;T&gt;" Collapsed="true">
+    <Position X="3" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAABAAAAAEAAAAgAAAAAAA=</HashCode>
+      <FileName>source\Utility\Singleton.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppFrame::Input::InputManager" Collapsed="true">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>source\Input\InputManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppFrame::Input::InputJoypad" Collapsed="true">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQgA2QAAAKMCkAbCgACACAABAAgBgASAgAQAAIAAIA=</HashCode>
+      <FileName>source\Input\InputJoypad.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppFrame::Resource::ResourceServer" Collapsed="true">
+    <Position X="11.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIQAwAAQAQQAAAA4AABIAAiBAAACRBAgAAQAABQ=</HashCode>
+      <FileName>source\Resource\ResourceServer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppFrame::Sound::SoundManager" Collapsed="true">
+    <Position X="7.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAIIAQAAAAAAAAACAAACAgAAAAAAQAAQ=</HashCode>
+      <FileName>source\Sound\SoundManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppFrame::Mode::ModeServer" Collapsed="true">
+    <Position X="9.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAgAAAAAAGAAhAAAAABEAAAAgCAA=</HashCode>
+      <FileName>source\Mode\ModeServer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppFrame::Mode::ModeBase" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAACAAAAAAAAAAAAgAAAAAQEAAEAAAIoBACAAIAAAQ=</HashCode>
+      <FileName>source\Mode\ModeBase.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppFrame::Mode::ModeFade" Collapsed="true">
+    <Position X="1.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAIAACIAAAEAgAAAAAAABAEAAAAABCCAAAAAAA=</HashCode>
+      <FileName>source\Mode\ModeFade.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppFrame::Mode::ModeFadeIn" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAgAAAAAAAAAEABAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\Mode\ModeFadeIn.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppFrame::Mode::ModeFadeOut" Collapsed="true">
+    <Position X="2.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAMIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\Mode\ModeFadeOut.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppFrame::Math::Vector4" Collapsed="true">
+    <Position X="11.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAEIAEQABAAAEAAAAARACAAAAIAAYAmwAAAAIAA=</HashCode>
+      <FileName>source\Math\Vector4.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppFrame::Math::Matrix44" Collapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAWAAIIAIAAhEAIAIQAAAAAQAAACAACAAgAAADAAA=</HashCode>
+      <FileName>source\Math\Matrix44.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppFrame::State::StateBaseRoot" Collapsed="true">
+    <Position X="9.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAIAAAAEAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\State\StateBaseRoot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppFrame::Utility::LoadJson" Collapsed="true">
+    <Position X="0.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAABAAAAAAAAQAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\Utility\LoadJson.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppFrame::Utility::WriteJson" Collapsed="true">
+    <Position X="3" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\Utility\WriteJson.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppFrame::Utility::Utility" Collapsed="true">
+    <Position X="5.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAABCAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>source\Utility\Utility.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="AppFrame::Resource::DivGraph" Collapsed="true">
+    <Position X="7.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAEgEAAAAABAAA=</HashCode>
+      <FileName>source\Resource\ResourceServer.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Yu Gothic UI" Size="9" />
+</ClassDiagram>

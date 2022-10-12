@@ -14,7 +14,9 @@
 #include <AppFrame.h>
 
  /** コンストラクタ */
-GlassHeart::Collision::CollisionManager::CollisionManager(Object::ObjectBase& owner) : _owner{ owner } {}
+GlassHeart::Collision::CollisionManager::CollisionManager(Object::ObjectBase& owner) : _owner{ owner } {
+
+}
 /** 床との当たり判定 */
 VECTOR GlassHeart::Collision::CollisionManager::CheckHitFloor(const VECTOR& pos, const VECTOR& forward, int state) {
 	auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles("Stage");
