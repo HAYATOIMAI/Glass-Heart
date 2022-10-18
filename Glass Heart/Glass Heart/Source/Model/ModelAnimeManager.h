@@ -9,7 +9,6 @@
 #include "ModelManager.h"
 #include <string_view>
 #include <unordered_map>
-
  /**
   * @namespace GlassHeart
   * @brief プロジェクト名

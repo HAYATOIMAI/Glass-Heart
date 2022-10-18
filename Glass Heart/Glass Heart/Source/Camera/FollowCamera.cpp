@@ -28,14 +28,14 @@ void GlassHeart::Camera::FollowCamera::Process() {
   // プレイヤーに向かうベクトル
   auto forwoard = VSub(player, _position);
 
-  if (player.y - 2.5 < _position.y && _position.y < player.y + 2.5
-    && player.x - 2.5 < _position.x && _position.x < player.x + 2.5) {
+  if (player.y - 2.5f < _position.y && _position.y < player.y + 2.5f
+    && player.x - 2.5f < _position.x && _position.x < player.x + 2.5f) {
   }
   else {
     // 距離（長さ）
     auto dist = VSize(forwoard);
 
-    VECTOR delta = { 0,0,0 };
+    VECTOR delta = { 0.f,0.f,0.f };
     // プレイヤーに向かう単位ベクトル
     forwoard = VNorm(forwoard);
 

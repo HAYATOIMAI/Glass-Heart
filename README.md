@@ -9,15 +9,22 @@ OS : Windows10
 開発言語 : C++ 
 使用ライブラリ : DXライブラリ(https://dxlib.xsrv.jp/) ライセンスは下記にて記載
 
-■ プログラムファイル(cpp / h)の文字コードについて DXライブラリ が Shift_JIS で作成されており ヘッダーを include する都合上 自身のプログラムファイルを UTF-8 にしてしまうと Visual Studio の方がインテリセンス機能などが誤動作を起こすので Shift_JIS に統一しております。
+■ プログラムファイル(cpp / h)の文字コードについて DXライブラリ が Shift_JIS で作成されており 
+ヘッダーを include する都合上 自身のプログラムファイルを UTF-8 にしてしまうと 
+Visual Studio の方がインテリセンス機能などが誤動作を起こすので Shift_JIS に統一しております。
 
-■ プログラムについて 本プログラムは、自作した AppFrame というフレームワーク部分と その AppFrame を使ってゲームロジック部分を組んだ Game の 2つの Visual Studio プロジェクトに分かれています。
+■ プログラムについて 本プログラムは、自作した AppFrame というフレームワーク部分と 
+その AppFrame を使ってゲームロジック部分を組んだ Game の 2つの Visual Studio プロジェクトに分かれています。
 
 WinMain は AppFrame.vcxproj の AppFrame\source\WinMain.cpp にて実装しています。
 
-■ AppFrame フレームワークの設計について ・ModeServer と ModeBase プログラムの動作の基幹となっております。 ModeBase を継承したクラスを作成する設計になっており その各 Mode の class を ModeServer に登録して Mode を切り替えながらプログラムが実行される設計になっております。
+■ AppFrame フレームワークの設計について ・ModeServer と ModeBase プログラムの動作の基幹となっております。
+ ModeBase を継承したクラスを作成する設計になっており その各 Mode の class を ModeServer に登録して
+ Mode を切り替えながらプログラムが実行される設計になっております。
 
-・ObjectBase と ObjectServer プログラムはオブジェクト指向で組まれております。 そのオブジェクトを管理するために ObjectServer class を用意 更に全てのオブジェクトの 基底 class となる ObjectBase class を定義して それを継承する設計となっております。
+・ObjectBase と ObjectServer プログラムはオブジェクト指向で組まれております。 
+そのオブジェクトを管理するために ObjectServer class を用意 更に全てのオブジェクトの 基底 class となる
+ ObjectBase class を定義して それを継承する設計となっております。
 
 ・ResourceServer プログラムで扱うリソースを管理する class で 重複したリソースのロードが起こらない様になっています。
 

@@ -10,36 +10,36 @@
 #include <AppFrame.h>
 
  /**
-	* @namespace GlassHeart
-	* @brief プロジェクト名
-	*/
+  * @namespace GlassHeart
+  * @brief プロジェクト名
+  */
 namespace GlassHeart {
-	namespace Player {
-		class Player;
-	}
-	/**
+  namespace Player {
+    class Player;
+  }
+  /**
    * @namespace State
    * @brief  プレイヤーのステート関係
    */
-	namespace State {
-		/**
-		 * @class StateBase
-		 * @brief プレイヤーの状態基底クラス
-		 */
-		class StateBase : public AppFrame::State::StateBaseRoot {
-		public:
-			/**
-			 * @brief コンストラクタ
-			 *
-			 * @param[in] owner プレイヤークラスへの参照
-			 */
-			StateBase(Player::Player& owner) : _owner{ owner } {};
-			/**
-			 * @brief 描画処理
-			 */
-			void Draw() override;
-		protected:
-			Player::Player& _owner;  //!< プレイヤークラスの参照
-		};
-	} // namespace State
+  namespace State {
+    /**
+     * @class StateBase
+     * @brief プレイヤーの状態基底クラス
+     */
+    class StateBase : public AppFrame::State::StateBaseRoot {
+    public:
+      /**
+       * @brief コンストラクタ
+       *
+       * @param[in] owner プレイヤークラスへの参照
+       */
+      StateBase(Player::Player& owner) : _owner{ owner } {};
+      /**
+       * @brief 描画処理
+       */
+      void Draw() override;
+    protected:
+      Player::Player& _owner;  //!< プレイヤークラスの参照
+    };
+  } // namespace State
 } // namespace GlassHeart

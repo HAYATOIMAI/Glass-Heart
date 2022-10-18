@@ -12,22 +12,22 @@
 #include "../Model/ModelAnimeManager.h"
 #include "../State/StateManager.h"
 #include "../Application/GameMain.h"
-#include <numbers>
 
 namespace {
-  constexpr std::int_fast16_t Recast = 20;                                      //!< 色変更リキャストタイム
-  constexpr std::int_fast16_t DeathCoolTime = 120;                              //!< 死亡した時の復活までのクールタイム
-  constexpr auto StartPosX = -150.0f;                                           //!< プレイヤーの初期位置X
-  constexpr auto StartPosY = 60.0f;                                             //!< プレイヤーの初期位置Y
-  constexpr auto StartPosZ = -55.0f;                                            //!< プレイヤーの初期位置Z
-  constexpr auto Radius = 20.f;                                                 //!< チェックポイントとの当たり判定用半径
-  constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 右方向の角度
-  constexpr auto LeftRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 左方向の角度
+  constexpr std::int_fast16_t Recast = 20;          //!< 色変更リキャストタイム
+  constexpr std::int_fast16_t DeathCoolTime = 120;  //!< 死亡した時の復活までのクールタイム
+  constexpr auto Hit = 1;                           //!< ヒットしたかのフラグ
+  constexpr auto StartPosX = -150.0f;               //!< プレイヤーの初期位置X
+  constexpr auto StartPosY = 60.0f;                 //!< プレイヤーの初期位置Y
+  constexpr auto StartPosZ = -55.0f;                //!< プレイヤーの初期位置Z
+  constexpr auto Radius = 20.f;                     //!< チェックポイントとの当たり判定用半径
+  constexpr auto LineY = -10.0f;                    //!< 線分の長さ
 }
 
 /** コンストラクタ */
 GlassHeart::Player::Player::Player(Application::GameMain& game) : GlassHeart::Object::ObjectBase{ game } {
-  _rotation = VGet(0.0f, RightRotation, 0.0f);
+  auto right = RightRotation();
+  _rotation = VGet(0.0f, right, 0.0f);
   _position = VGet(StartPosX, StartPosY, StartPosZ);
   _radius = Radius;  // チェックポイントとの当たり判定用半径をセット
 }
@@ -48,7 +48,8 @@ void GlassHeart::Player::Player::Input(AppFrame::Input::InputManager& input) {
 #ifdef _DEBUG
   // デバッグ用LBボタンを押すとプレイヤーの位置を初期化
   if (input.GetJoyPad().GetXinputRightShoulder()) {
-    _rotation = VGet(0.0f, RightRotation, 0.0f);
+    auto right = RightRotation();
+    _rotation = VGet(0.0f, right, 0.0f);
     _position = VGet(StartPosX, StartPosY, StartPosZ);
   }
 #endif // _DEBUG
@@ -59,12 +60,11 @@ void GlassHeart::Player::Player::Process() {
   if (_recastCount > 0) {
     --_recastCount;
   }
-
   if (_deathCoolCount > 0) {
     --_deathCoolCount;
   }
   // 白いデスメッシュと当たっていたら
-  if (GetCollision().GetIsHitWDeathMesh().GetWDeathMesh().HitNum >= 1) {
+  if (GetCollision().GetIsHitWDeathMesh().GetWDeathMesh().HitNum >= Hit) {
     // 同じ色ならば位置はそのままにする
     if (GetColourState() == Player::Player::ColourState::White) {
       SetPosition(_position);
@@ -75,7 +75,7 @@ void GlassHeart::Player::Player::Process() {
     }
   }
   // 黒いデスメッシュと当たっていたら
-  if (GetCollision().GetIsHitBDeathMesh().GetBDeathMesh().HitNum >= 1) {
+  if (GetCollision().GetIsHitBDeathMesh().GetBDeathMesh().HitNum >= Hit) {
     // 違う色ならば位置をリセットする
     if (GetColourState() == Player::Player::ColourState::White) {
       ResetPos();
@@ -159,7 +159,7 @@ void GlassHeart::Player::Player::Move(const VECTOR& forward) {
   // 空中の足場の底面と側面判定処理
   pos = _collsionManage->GetIsHitSideBottom().CheckHitSideAndBottom(pos, { forward.x, 0.f, 0.f }, state);
   // 床との当たり判定
-  pos = _collsionManage->GetIsHitFloor().CheckHitFloor(pos, { 0.f, -10.f, 0.f }, state);
+  pos = _collsionManage->GetIsHitFloor().CheckHitFloor(pos, { 0.f, LineY, 0.f }, state);
   // 死亡判定を取るメッシュと当たり判定
   pos = _collsionManage->GetIsHitBDeathMesh().CheckHitBDeathMesh(pos, { 0.f, forward.y, 0.f });
   // 死亡判定を取るメッシュと当たり判定
@@ -204,7 +204,7 @@ void GlassHeart::Player::Player::SetBlack() {
 /** リスポーンシステム */
 void GlassHeart::Player::Player::ResetPos() {
   // 白いデスメッシュと当たっていたら
-  if (_collsionManage->GetIsHitWDeathMesh().GetWDeathMesh().HitNum >= 1) {
+  if (_collsionManage->GetIsHitWDeathMesh().GetWDeathMesh().HitNum >= Hit) {
     if (_deadFlag == false) {
       // 死亡時の効果音を再生
       GetGame().GetSoundManager().Play("death");
@@ -230,7 +230,7 @@ void GlassHeart::Player::Player::ResetPos() {
     }
   }
   // 黒いデスメッシュと当たっていたら
-  if (_collsionManage->GetIsHitBDeathMesh().GetBDeathMesh().HitNum >= 1) {
+  if (_collsionManage->GetIsHitBDeathMesh().GetBDeathMesh().HitNum >= Hit) {
     if (_deadFlag == false) {
       // 死亡時の効果音を再生
       GetGame().GetSoundManager().Play("death");

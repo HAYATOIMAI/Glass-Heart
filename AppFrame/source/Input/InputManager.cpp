@@ -8,9 +8,9 @@
 #include "InputManager.h"
 
 namespace AppFrame {
-	namespace Input {
-		void InputManager::Process() {
-			_inputjoy.Process();
-		}
-	}
+  namespace Input {
+    void InputManager::Process() {
+      _inputjoy.Process();
+    }
+  }
 }

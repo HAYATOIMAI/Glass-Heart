@@ -9,66 +9,66 @@
 #include "ModeMain.h"
 #include <cstdint>
  /**
-	* @namespace GlassHeart
-	* @brief プロジェクト名
-	*/
+  * @namespace GlassHeart
+  * @brief プロジェクト名
+  */
 namespace GlassHeart {
-	namespace Application {
-		class GameMain;
-	}
-	/**
-	 * @namespace Mode
-	 * @brief モード関係
-	 */
-	namespace Mode {
-		/**
-		 * @class ModeLoading
-		 * @brief ローディング画面クラスの宣言
-		 */
-		class ModeLoading : public ModeMain {
-		public:
-			/**
-			 * @brief コンストラクタ
-			 *
-			 * @param[in] game
-			 */
-			ModeLoading(Application::GameMain& game);
-			/**
-			 * @brief デストラクタ
-			 *
-			 */
-			~ModeLoading() = default;
-			/**
-			 * @brief 初期化処理
-			 *
-			 */
-			void Init() override;
-			/**
-			 * @brief 入り口処理
-			 *
-			 */
-			virtual void Enter() override;
-			/**
-			 * @brief 入力処理
-			 *
-			 * @param[in] input インプットマネージャークラスへの参照
-			 */
-			void Input(AppFrame::Input::InputManager& input) override;
-			/**
-			 * @brief 更新処理
-			 *
-			 */
-			void Process() override;
-			/**
-			 * @brief 描画処理
-			 *
-			 */
-			void Render() override;
+  namespace Application {
+    class GameMain;
+  }
+  /**
+   * @namespace Mode
+   * @brief モード関係
+   */
+  namespace Mode {
+    /**
+     * @class ModeLoading
+     * @brief ローディング画面クラスの宣言
+     */
+    class ModeLoading : public ModeMain {
+    public:
+      /**
+       * @brief コンストラクタ
+       *
+       * @param[in] game
+       */
+      ModeLoading(Application::GameMain& game);
+      /**
+       * @brief デストラクタ
+       *
+       */
+      ~ModeLoading() = default;
+      /**
+       * @brief 初期化処理
+       *
+       */
+      void Init() override;
+      /**
+       * @brief 入り口処理
+       *
+       */
+      virtual void Enter() override;
+      /**
+       * @brief 入力処理
+       *
+       * @param[in] input インプットマネージャークラスへの参照
+       */
+      void Input(AppFrame::Input::InputManager& input) override;
+      /**
+       * @brief 更新処理
+       *
+       */
+      void Process() override;
+      /**
+       * @brief 描画処理
+       *
+       */
+      void Render() override;
 
-			void Exit() override;
-		private:
-			std::uint_fast16_t _cnt{ 0 };         //!< ローディング時間
-			std::int_fast32_t _loadHandle{ -1 };  //!< ローディングGIF画像用ハンドル
-		};
-	} // namespace Mode
+      void Exit() override;
+    private:
+      std::uint_fast16_t _cnt{ 0 };         //!< ローディング時間
+      std::int_fast32_t _loadHandle{ -1 };  //!< ローディングGIF画像用ハンドル
+    };
+  } // namespace Mode
 } // namespace GlassHeart

@@ -1,6 +1,6 @@
 /*****************************************************************//**
  * @file   IsHitFloor.h
- * @brief  床との当たり判定クラス
+ * @brief  床との当たり判定クラスの宣言
  * 
  * @author HAYATO IMAI
  * @date   October 2022
@@ -18,11 +18,16 @@ namespace GlassHeart {
   namespace Collision {
     class IsHitFloor {
     public:
+      /**
+       * @ コンストラクタ
+       *
+       * @param[in] owner 親クラスへの参照
+       */
       IsHitFloor(Object::ObjectBase& owner);
       /**
        * @brief  床との当たり判定
        *
-       * @param[in] pos 位置ベクトル
+       * @param[in] pos     位置ベクトル
        * @param[in] forward 移動量ベクトル
        * @return 位置ベクトル
        */

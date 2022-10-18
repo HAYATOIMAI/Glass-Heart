@@ -13,32 +13,36 @@
 #include <numbers>
 
 namespace {
-  constexpr auto StraifVector = 6.5f;                                           //!< 空中移動用のX軸移動量
-  constexpr auto Gravity = -0.6f;                                               //!< 重力加速度
-  constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 右方向の角度
-  constexpr auto LeftRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 左方向の角度
-  constexpr auto Idle = "Idle";
-
+  constexpr auto StraifVector = 6.5f;    //!< 空中移動用のX軸移動量
+  constexpr auto Gravity = -0.6f;        //!< 重力加速度
+  constexpr auto InputThreshold = 5000;  //!< 入力閾値
+  constexpr auto InputThresholdMin = 1;  //!< 入力最低値
+  constexpr auto Hit = 1;                //!< ヒットしたかのフラグ
+  constexpr auto Idle = "Idle";          //!< 遷移させるステートの文字列
+  constexpr auto JumpEnd = "Jump_End";   //!< 遷移させるステートの文字列
+  constexpr auto Run = "run";            //!< 遷移させるステートの文字列
 }
 /** 入り口処理 */
 void GlassHeart::State::StateJumpFall::Enter() {
   // 落下中のアニメーションを再生
-  _owner.GetModelAnime().ChangeAnime("Jump_End", true);
+  _owner.GetModelAnime().ChangeAnime(JumpEnd, true);
   // SEの再生を停止
   auto& game = _owner.GetGame();
-  game.GetSoundManager().StopSound("run");
+  game.GetSoundManager().StopSound(Run);
 }
 /** 入力処理 */
 void GlassHeart::State::StateJumpFall::Input(AppFrame::Input::InputManager& input) {
+  auto right = _owner.RightRotation();
+  auto left = _owner.LeftRotation();
   _owner.SetForwardSpeed(0.f);
-  if (input.GetJoyPad().GetAnalogStickLX() >= 5000 && input.GetJoyPad().GetAnalogStickLX() > 1) {
+  if (input.GetJoyPad().GetAnalogStickLX() >= InputThreshold && input.GetJoyPad().GetAnalogStickLX() > InputThresholdMin) {
     // 右方向に向きを変更
-    _owner.SetRotation(VGet(0.0f, RightRotation, 0.0f));
+    _owner.SetRotation(VGet(0.0f, right, 0.0f));
     _owner.SetForwardSpeed(StraifVector);
   }
-  if (input.GetJoyPad().GetAnalogStickLX() <= -5000 && input.GetJoyPad().GetAnalogStickLX() < 1) {
+  if (input.GetJoyPad().GetAnalogStickLX() <= -InputThreshold && input.GetJoyPad().GetAnalogStickLX() < InputThresholdMin) {
     // 左方向に向きを変更
-    _owner.SetRotation(VGet(0.0f, LeftRotation, 0.0f));
+    _owner.SetRotation(VGet(0.0f, left, 0.0f));
     _owner.SetForwardSpeed(StraifVector);
   }
 }
@@ -60,16 +64,16 @@ void GlassHeart::State::StateJumpFall::Update() {
   // 床との当たり判定
   pos = _owner.GetCollision().GetIsHitJumpStand().CheckJumpStand(pos, { 0.f, forward.y, 0.f }, state);
   // 当たっていたら待機状態へ移行
-  if (_owner.GetCollision().GetIsHitJumpStand().GetStand().HitFlag == 1) {
+  if (_owner.GetCollision().GetIsHitJumpStand().GetStand().HitFlag == Hit) {
     _owner.GetStateManage().GoToState(Idle);
   }
   if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-    if (_owner.GetCollision().GetIsHitJumpStand().GetWThrough().HitFlag == 1) {
+    if (_owner.GetCollision().GetIsHitJumpStand().GetWThrough().HitFlag == Hit) {
       _owner.GetStateManage().GoToState(Idle);
     }
   }
   if (_owner.GetColourState() == Player::Player::ColourState::White) {
-    if (_owner.GetCollision().GetIsHitJumpStand().GetBThrough().HitFlag == 1) {
+    if (_owner.GetCollision().GetIsHitJumpStand().GetBThrough().HitFlag == Hit) {
       _owner.GetStateManage().GoToState(Idle);
     }
   }
@@ -78,7 +82,7 @@ void GlassHeart::State::StateJumpFall::Update() {
     pos = _owner.GetCollision().GetIsHitWDeathMesh().CheckHitWDeathMesh(pos, { 0.f, forward.y, 0.f });
   }
   // プレイヤーの色が異なっていたらリスポーン処理
-  if (_owner.GetCollision().GetIsHitWDeathMesh().GetWDeathMesh().HitNum >= 1) {
+  if (_owner.GetCollision().GetIsHitWDeathMesh().GetWDeathMesh().HitNum >= Hit) {
     if (_owner.GetColourState() == Player::Player::ColourState::White) {
     }
     if (_owner.GetColourState() == Player::Player::ColourState::Black) {
@@ -90,7 +94,7 @@ void GlassHeart::State::StateJumpFall::Update() {
     pos = _owner.GetCollision().GetIsHitBDeathMesh().CheckHitBDeathMesh(pos, { 0.f, forward.y, 0.f });
   }
   // プレイヤーの色が異なっていたらリスポーン処理
-  if (_owner.GetCollision().GetIsHitBDeathMesh().GetBDeathMesh().HitNum >= 1) {
+  if (_owner.GetCollision().GetIsHitBDeathMesh().GetBDeathMesh().HitNum >= Hit) {
     if (_owner.GetColourState() == Player::Player::ColourState::White) {
       _owner.ResetPos();
     }
