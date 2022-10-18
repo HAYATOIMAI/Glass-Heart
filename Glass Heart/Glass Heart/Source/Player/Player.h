@@ -77,9 +77,9 @@ namespace GlassHeart {
        */
       void Render() override;
       /**
-       * @brief オブラートタイプ
+       * @brief オブジェクトタイプ
        */
-      ObjectType GetObjectType() const  override { return ObjectType::Player; };
+      ObjectType GetObjectType() const override { return ObjectType::Player; };
       /**
        * @brief ワールド座標変換
        *
@@ -111,15 +111,54 @@ namespace GlassHeart {
        *
        */
       void ResetPos();
-
-      inline float GetForwardSpeed()                  { return _forwardSpeed; }
+      /**
+       * @ プレイヤーの移動速度の移動速度のゲッター
+       * 
+       * @return プレイヤーの移動速度
+       */
+      inline float GetForwardSpeed() { return _forwardSpeed; }
+      /**
+       * @ プレイヤーの移動速度のセッター
+       * 
+       * @param[in] forwardSpeed プレイヤーの移動速度にセットする値
+       */
       inline void SetForwardSpeed(float forwardSpeed) { _forwardSpeed = forwardSpeed; }
-      inline std::string& GetCrName()                 { return _stateName; }
-      inline ColourState& GetColourState()            { return _crState; }
-      inline VECTOR GetJumpVelocity()                 { return _jumpVelocity; }
-      inline void SetJumpVelocity(VECTOR jump)        { _jumpVelocity = jump; }
-      inline bool GetCheckPointFlag()                 { return _checkPointFlag; }
-      inline void SetCheckPointFlag(bool flag)        { _checkPointFlag = flag; }
+      /**
+       * @ デバッグ用ステート名変数のゲッター
+       * 
+       * @return ステート名
+       */
+      inline std::string& GetCrName() { return _stateName; }
+      /**
+       * @ 色状態を取得するゲッター
+       * 
+       * @return プレイヤーの色
+       */
+      inline ColourState& GetColourState() { return _crState; }
+      /**
+       * @ ジャンプ速度を取得するゲッター
+       * 
+       * @return ジャンプ速度
+       */
+      inline VECTOR GetJumpVelocity() { return _jumpVelocity; }
+      /**
+       * @ ジャンプ速度をセットする
+       * 
+       * @param[in] jump セットするジャンプ速度
+       */
+      inline void SetJumpVelocity(VECTOR jump) { _jumpVelocity = jump; }
+      /**
+       * @ チェックポイントを通過したかのフラグのゲッター
+       * 
+       * @return 通過したかのフラグ
+       */
+      inline bool GetCheckPointFlag() { return _checkPointFlag; }
+      /**
+       * @ チェックポイントを通過したかのフラグのセッター
+       * 
+       * @param[in] flag
+       */
+      inline void SetCheckPointFlag(bool flag) { _checkPointFlag = flag; }
     protected:
       bool _checkPointFlag{ false };               //!< チェックポイントフラグ
       ColourState _crState{ ColourState::White };  //!< 色状態を管理する変数
