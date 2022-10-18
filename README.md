@@ -217,7 +217,7 @@ OS : Windows10
 
 ■ プログラムについて 本プログラムは、自作した AppFrame というフレームワーク部分と その AppFrame を使ってゲームロジック部分を組んだ Game の 2つの Visual Studio プロジェクトに分かれています。
 
-WinMain は GlassHeart.vcxproj の GlassHeart\ソースファイル\WinMain.cpp にて実装しています。
+WinMain は AppFrame.vcxproj の AppFrame\source\WinMain.cpp にて実装しています。
 
 ■ AppFrame フレームワークの設計について ・ModeServer と ModeBase プログラムの動作の基幹となっております。 ModeBase を継承したクラスを作成する設計になっており その各 Mode の class を ModeServer に登録して Mode を切り替えながらプログラムが実行される設計になっております。
 

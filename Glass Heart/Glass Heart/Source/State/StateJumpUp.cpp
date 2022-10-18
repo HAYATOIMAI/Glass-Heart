@@ -13,9 +13,9 @@
 #include <numbers>
 
 namespace {
-	constexpr auto StraifVector = 6.5f;                                                         //!< 空中移動用のX軸移動量
-	constexpr auto JumpVecY = 24.5f;                                                             //!< 上昇量
-	constexpr auto Gravity = -0.8f;                                                               //!< 重力加速度
+	constexpr auto StraifVector = 6.5f;                                           //!< 空中移動用のX軸移動量
+	constexpr auto JumpVecY = 24.5f;                                              //!< 上昇量
+	constexpr auto Gravity = -0.8f;                                               //!< 重力加速度
 	constexpr auto RightRotation = 90.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 右方向の角度
 	constexpr auto LeftRotation = 270.0f * (std::numbers::pi_v<float> / 180.0f);  //!< 左方向の角度
 }
@@ -56,30 +56,30 @@ void GlassHeart::State::StateJumpUp::Update() {
 	// プレイヤーの色を取得
 	int state = static_cast<int> (_owner.GetColourState());
 	// 空中の足場の底面と側面判定処理
-	pos = _owner.GetCollision().CheckHitSideAndBottom(pos, { forward.x, 0.f, 0.f }, state);
-	pos = _owner.GetCollision().CheckHitSideAndBottom(pos, { 0.f, forward.y, 0.f }, state);
+	pos = _owner.GetCollision().GetIsHitSideBottom().CheckHitSideAndBottom(pos, { forward.x, 0.f, 0.f }, state);
+	pos = _owner.GetCollision().GetIsHitSideBottom().CheckHitSideAndBottom(pos, { 0.f, forward.y, 0.f }, state);
 	//　当たっていたら落下
-	if (_owner.GetCollision().GetSideAndBottom().HitNum > 0) {
+	if (_owner.GetCollision().GetIsHitSideBottom().GetSideAndBottom().HitNum > 0) {
 		jumpVelocity.y = 0;
 	}
 	if (_owner.GetColourState() == Player::Player::ColourState::Black) {
 		// 空中の足場とプレイヤーの色が異なっていたら落下
-		if (_owner.GetCollision().GetWWallThroughMesh().HitNum > 0) {
+		if (_owner.GetCollision().GetIsHitSideBottom().GetWWallThroughMesh().HitNum > 0) {
 			jumpVelocity.y = 0;
 		}
 	}
 	// 空中の足場とプレイヤーの色が異なっていたら落下
 	if (_owner.GetColourState() == Player::Player::ColourState::White) {
-		if (_owner.GetCollision().GetBWallThroughMesh().HitNum > 0) {
+		if (_owner.GetCollision().GetIsHitSideBottom().GetBWallThroughMesh().HitNum > 0) {
 			jumpVelocity.y = 0;
 		}
 	}
 	// 死亡判定を取るメッシュと当たり判定
 	if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-		pos = _owner.GetCollision().CheckHitWDeathMesh(pos, { 0.f, forward.y, 0.f });
+		pos = _owner.GetCollision().GetIsHitWDeathMesh().CheckHitWDeathMesh(pos, { 0.f, forward.y, 0.f });
 	}
 	// プレイヤーの色が異なっていたらリスポーン処理
-	if (_owner.GetCollision().GetWDeathMesh().HitNum >= 1) {
+	if (_owner.GetCollision().GetIsHitWDeathMesh().GetWDeathMesh().HitNum >= 1) {
 		if (_owner.GetColourState() == Player::Player::ColourState::White) {
 		}
 		if (_owner.GetColourState() == Player::Player::ColourState::Black) {
@@ -88,10 +88,10 @@ void GlassHeart::State::StateJumpUp::Update() {
 	}
 	// プレイヤーの色が異なっていたらリスポーン処理
 	if (_owner.GetColourState() == Player::Player::ColourState::White) {
-		pos = _owner.GetCollision().CheckHitBDeathMesh(pos, { 0.f, forward.y, 0.f });
+		pos = _owner.GetCollision().GetIsHitBDeathMesh().CheckHitBDeathMesh(pos, { 0.f, forward.y, 0.f });
 	}
 	// プレイヤーの色が異なっていたらリスポーン処理
-	if (_owner.GetCollision().GetBDeathMesh().HitNum >= 1) {
+	if (_owner.GetCollision().GetIsHitBDeathMesh().GetBDeathMesh().HitNum >= 1) {
 		if (_owner.GetColourState() == Player::Player::ColourState::White) {
 			_owner.ResetPos();
 		}

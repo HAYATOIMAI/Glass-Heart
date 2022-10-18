@@ -28,9 +28,6 @@
     <Filter Include="ソース ファイル\Mode">
       <UniqueIdentifier>{73bad608-7d8c-4e1e-8f69-8df1a2b963b3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Camera">
-      <UniqueIdentifier>{a7866374-8037-4802-ad38-eb204ea66831}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Collision">
       <UniqueIdentifier>{6d9f9e13-26b6-4678-8e3a-e03a14071e0c}</UniqueIdentifier>
     </Filter>
@@ -84,6 +81,9 @@
     </Filter>
     <Filter Include="ヘッダー ファイル\UI">
       <UniqueIdentifier>{0be92ad8-78f9-4299-a21c-74c951f6defb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Camera">
+      <UniqueIdentifier>{a7866374-8037-4802-ad38-eb204ea66831}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +177,24 @@
     <ClInclude Include="Source\Player\Girl.h">
       <Filter>ヘッダー ファイル\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Collision\IsHitFloor.h">
+      <Filter>ヘッダー ファイル\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision\IsHitJumpStand.h">
+      <Filter>ヘッダー ファイル\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision\IsHitSideAndBottom.h">
+      <Filter>ヘッダー ファイル\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision\IsHitBDeathMesh.h">
+      <Filter>ヘッダー ファイル\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision\IsHitWDeathMesh.h">
+      <Filter>ヘッダー ファイル\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision\IsHitCircleToCircle.h">
+      <Filter>ヘッダー ファイル\Collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Camera\CameraManager.cpp">
@@ -269,8 +287,27 @@
     <ClCompile Include="Source\Player\Girl.cpp">
       <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Collision\IsHitFloor.cpp">
+      <Filter>ソース ファイル\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collision\IsHitJumpStand.cpp">
+      <Filter>ソース ファイル\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collision\IsHitSideAndBottom.cpp">
+      <Filter>ソース ファイル\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collision\IsHitBDeathMesh.cpp">
+      <Filter>ソース ファイル\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collision\IsHitWDeathMesh.cpp">
+      <Filter>ソース ファイル\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collision\IsHitCircleToCircle.cpp">
+      <Filter>ソース ファイル\Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

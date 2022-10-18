@@ -38,7 +38,7 @@ void GlassHeart::Model::ModelAnimeManager::Update() {
 	_animrate += 0.3f;
 
 	if (_playTime >= _totalTime) {
-		if (_repeate) {
+		if (_isRepeate) {
 			// ƒŠƒs[ƒgÄ¶‚ ‚è
 			_playTime = 0.0f;
 			++_repeatedCount;
@@ -74,18 +74,18 @@ void GlassHeart::Model::ModelAnimeManager::ChangeAnime(std::string_view key, boo
 	_playTime = 0.0f;
 	_animrate = 1.0f;
 	_repeatedCount = 0;
-	_repeate = repeate;
+	_isRepeate = repeate;
 }
 
 void GlassHeart::Model::ModelAnimeManager::AnimeBlend() {
 	if (_animrate >= 1.0f) {
 		MV1SetAttachAnimTime(_handle, _attachIndex, _playTime);
 		_animrate = 1.0f;
-		MV1DetachAnim(_handle, _oldattachIndex);
-		_oldattachIndex = -1;
+		MV1DetachAnim(_handle, _oldAttachIndex);
+		_oldAttachIndex = -1;
 	}
 	else {
-		MV1SetAttachAnimBlendRate(_handle, _oldattachIndex, 1.0f - _animrate);
+		MV1SetAttachAnimBlendRate(_handle, _oldAttachIndex, 1.0f - _animrate);
 		MV1SetAttachAnimBlendRate(_handle, _attachIndex, _animrate);
 	}
 }

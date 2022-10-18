@@ -50,8 +50,8 @@ namespace GlassHeart {
 
 			inline ObjectType GetObjectType() const override { return ObjectType::Stage; }
 		private:
-			std::unique_ptr<Model::ModelManager> _backGround;   //!< スカイスフィア用ユニークポインタ
-			std::unique_ptr<Model::ModelManager> _stage;          //!< ステージ用ユニークポインタ
+			std::unique_ptr<Model::ModelManager> _backGround;  //!< スカイスフィア用ユニークポインタ
+			std::unique_ptr<Model::ModelManager> _stage;       //!< ステージ用ユニークポインタ
 		};
 	} // namespace Stage
 } // namespace GlassHeart

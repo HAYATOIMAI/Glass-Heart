@@ -9,9 +9,14 @@
 #include "../Player/Player.h"
 #include "../Model/ModelAnimeManager.h"
 
+namespace {
+	constexpr std::uint_fast8_t InvisibleFrame = 4;
+	constexpr std::uint_fast8_t CollisionMesh = 5;
+}
+
  /** ï`âÊèàóù */
 void GlassHeart::State::StateBase::Draw() {
-	MV1SetFrameVisible(_owner.GetModelAnime().GetHandle(), 4, FALSE);
-	MV1SetFrameVisible(_owner.GetModelAnime().GetHandle(), 5, FALSE);
+	MV1SetFrameVisible(_owner.GetModelAnime().GetHandle(), InvisibleFrame, FALSE);
+	MV1SetFrameVisible(_owner.GetModelAnime().GetHandle(), CollisionMesh, FALSE);
 	_owner.GetModelAnime().Draw();
 }

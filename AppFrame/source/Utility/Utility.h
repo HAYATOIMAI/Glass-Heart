@@ -8,13 +8,13 @@
 #pragma once
 #include "Singleton.h"
 #include <random>
+#include <cstdint>
 
+#ifdef _DEBUG
  // メモリリーク検出用
 #define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
 #include <crtdbg.h>
-
-#ifdef _DEBUG
 #define NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
 #else
 #define NEW new
@@ -52,7 +52,7 @@ namespace AppFrame {
 			 * @param[in] max 最大値
 			 * @return 生成された乱数
 			 */
-			static  int  GetRandom(int min, int max);
+			static std::int_fast32_t GetRandom(const std::int_fast32_t min, const std::int_fast32_t max);
 			/**
 			 * @brief メモリリーク検出
 			 *

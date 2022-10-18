@@ -46,3 +46,7 @@ void GlassHeart::Mode::ModeLoading::Render() {
     PlayMovieToGraph(_loadHandle);
     DrawGraph(1700, 900, _loadHandle, FALSE);
 }
+
+void GlassHeart::Mode::ModeLoading::Exit() {
+  DeleteGraph(_loadHandle);
+}

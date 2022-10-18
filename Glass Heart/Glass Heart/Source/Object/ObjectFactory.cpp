@@ -79,7 +79,6 @@ std::unique_ptr<GlassHeart::Object::ObjectBase> GlassHeart::Object::GirlCreate::
 	girl->SetModelManage(std::move(model));
 	// ó‘Ô‚ğ“o˜^
 	auto state = std::make_unique<State::StateManager>("wait", std::make_shared<Player::Girl::StateWait>(*girl));
-	//state->Register("wait", std::make_shared<Player::Girl::StateWait>(*girl));
 	girl->SetStateManage(std::move(state));
 
 	return girl;

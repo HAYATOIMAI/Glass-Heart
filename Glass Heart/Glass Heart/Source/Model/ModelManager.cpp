@@ -27,14 +27,14 @@ void GlassHeart::Model::ModelManager::Draw() {
 	MV1DrawModel(_handle);
 }
 /** ƒ‚ƒfƒ‹‚Ìæ“¾ */
-int  GlassHeart::Model::ModelManager::handle(std::string_view key, int no) {
+std::int_fast32_t  GlassHeart::Model::ModelManager::handle(std::string_view key, int no) {
 	auto&& [handle, actualNo] = _owner.GetGame().GetResourceServer().GetModles(key, no);
 	_handle = handle;
 	_key = key;
 	return 0;
 }
 /** ƒ‚ƒfƒ‹‚Ìİ’è */
-int  GlassHeart::Model::ModelManager::SetModel(std::string_view key, int no) {
+std::int_fast32_t  GlassHeart::Model::ModelManager::SetModel(std::string_view key, int no) {
 	auto [handle, actualNo] = _owner.GetGame().GetResourceServer().GetModles(key, no);
 	_handle = handle;
 	return actualNo;
@@ -56,6 +56,6 @@ void  GlassHeart::Model::ModelManager::SetMatrix(MATRIX& world) {
 	MV1SetMatrix(_handle, world);
 }
 /** F‚ğİ’è */
-void  GlassHeart::Model::ModelManager::SetColor(int index, float r, float g, float b) {
+void  GlassHeart::Model::ModelManager::SetColor(std::int_fast32_t index, float r, float g, float b) {
 	MV1SetMaterialEmiColor(_handle, index, GetColorF(r, g, b, 0.f));
 }

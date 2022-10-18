@@ -8,7 +8,6 @@
 #pragma once
 #include "ModeMain.h"
 #include <AppFrame.h>
-
  /**
 	* @namespace GlassHeart
 	* @brief プロジェクト名
@@ -71,15 +70,15 @@ namespace GlassHeart {
 			 */
 			void Exit() override;
 		private:
-			int _alpha{ 0 };             //!< アルファ値
-			int _title{ -1 };            //!< タイトル画像
-			int _titleBg{ -1 };         //!< タイトル背景
-			int _titleButton{ -1 };   //!< タイトルボタン画像
-			int _titleExit{ -1 };      //!< Exitボタン画像
-			int _titleLogo{ -1 };      //!< タイトルロゴ
-			int _titlePlate{ -1 };    //!< 操作説明画像
-			int _titlePlate2{ -1 };   //!< 操作説明画像
-			int _x{ 0 };                   //!< 操作説明画像位置
+			std::int_fast16_t _alpha{ 0 };          //!< アルファ値
+			std::int_fast32_t _title{ -1 };         //!< タイトル画像
+			std::int_fast32_t _titleBg{ -1 };       //!< タイトル背景
+			std::int_fast32_t _titleButton{ -1 };   //!< タイトルボタン画像
+			std::int_fast32_t _titleExit{ -1 };     //!< Exitボタン画像
+			std::int_fast32_t _titleLogo{ -1 };     //!< タイトルロゴ
+			std::int_fast32_t _titlePlate{ -1 };    //!< 操作説明画像
+			std::int_fast32_t _titlePlate2{ -1 };   //!< 操作説明画像
+			std::int_fast16_t _x{ 0 };              //!< 操作説明画像位置
 		};
 	} // namespace Mode
 } // namespace GlassHeart

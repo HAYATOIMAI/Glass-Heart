@@ -171,6 +171,8 @@
     <ClInclude Include="source\Application\GameBase.h" />
     <ClInclude Include="source\Input\InputJoypad.h" />
     <ClInclude Include="source\Input\InputManager.h" />
+    <ClInclude Include="source\Math\Matrix44.h" />
+    <ClInclude Include="source\Math\Vector4.h" />
     <ClInclude Include="source\Mode\ModeBase.h" />
     <ClInclude Include="source\Mode\ModeFade.h" />
     <ClInclude Include="source\Mode\ModeFadeIn.h" />
@@ -179,14 +181,19 @@
     <ClInclude Include="source\Resource\ResourceServer.h" />
     <ClInclude Include="source\Sound\SoundManager.h" />
     <ClInclude Include="source\State\StateBaseRoot.h" />
+    <ClInclude Include="source\Utility\LoadJson.h" />
     <ClInclude Include="source\Utility\Singleton.h" />
     <ClInclude Include="source\Utility\Utility.h" />
+    <ClInclude Include="source\Utility\UtilityToDxLib.h" />
+    <ClInclude Include="source\Utility\WriteJson.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Application\GameBase.cpp" />
     <ClCompile Include="source\Application\WinMain.cpp" />
     <ClCompile Include="source\Input\InputJoypad.cpp" />
     <ClCompile Include="source\Input\InputManager.cpp" />
+    <ClCompile Include="source\Math\Matrix44.cpp" />
+    <ClCompile Include="source\Math\Vector4.cpp" />
     <ClCompile Include="source\Mode\ModeBase.cpp" />
     <ClCompile Include="source\Mode\ModeFade.cpp" />
     <ClCompile Include="source\Mode\ModeFadeIn.cpp" />
@@ -194,9 +201,13 @@
     <ClCompile Include="source\Mode\ModeServer.cpp" />
     <ClCompile Include="source\Resource\ResourceServer.cpp" />
     <ClCompile Include="source\Sound\SoundManager.cpp" />
+    <ClCompile Include="source\Utility\LoadJson.cpp" />
     <ClCompile Include="source\Utility\Utility.cpp" />
+    <ClCompile Include="source\Utility\UtilityToDxLib.cpp" />
+    <ClCompile Include="source\Utility\WriteJson.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
