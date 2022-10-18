@@ -10,18 +10,18 @@
 #include <memory>
 
 int CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow) {
-	auto gamebase = AppFrame::GameBase::GameInstance();
+  auto gamebase = AppFrame::GameBase::GameInstance();
 
-	if (!gamebase) { return 0; }
+  if (!gamebase) { return 0; }
 
-	auto succeess = gamebase->Initialize(hInstance);
+  auto succeess = gamebase->Initialize(hInstance);
 
-	if (succeess) {
-		// ゲームを実行する※初期化に成功
-		gamebase->Run();
-	}
-	// 解放処理を実行
-	gamebase->Terminate();
+  if (succeess) {
+    // ゲームを実行する※初期化に成功
+    gamebase->Run();
+  }
+  // 解放処理を実行
+  gamebase->Terminate();
 
-	return 0;
+  return 0;
 }

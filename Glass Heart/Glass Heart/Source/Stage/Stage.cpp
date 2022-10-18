@@ -28,7 +28,7 @@ GlassHeart::Stage::Stage::Stage(Application::GameMain& game) : Object::ObjectBas
   _stage = std::make_unique<Model::ModelManager>(*this);
   _stage->handle("Stage");
   _stage->SetPosition(VGet(0.0f, 0.0f, 10.0f));
-  _stage->SetRotation(VGet(0.0f, RightRotation, 0.0f));
+  _stage->SetRotation(VGet(0.0f, 0.f, 0.0f));
   _stage->SetScale({ 1.f, 1.f, 1.f });
   // ナビメッシュを非表示
   MV1SetFrameVisible(_stage->GetHandle(), 2, FALSE);

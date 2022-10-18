@@ -71,7 +71,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="AppFrame::Mode::ModeFadeOut" Collapsed="true">
-    <Position X="4.25" Y="3.25" Width="1.5" />
+    <Position X="4.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAMIAAAAAAAAAAAAAA=</HashCode>
       <FileName>source\Mode\ModeFadeOut.h</FileName>
@@ -80,14 +80,14 @@
   <Class Name="AppFrame::Math::Vector4" Collapsed="true">
     <Position X="11.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIAAAEIAEQABAAAEAAAAARACAAAAIAAYAmwAAAAIAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>source\Math\Vector4.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AppFrame::Math::Matrix44" Collapsed="true">
     <Position X="7.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAWAAIIAIAAhEAIAIQAAAAAQAAACAACAAgAAADAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>source\Math\Matrix44.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -98,22 +98,8 @@
       <FileName>source\State\StateBaseRoot.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="AppFrame::Utility::LoadJson" Collapsed="true">
-    <Position X="0.75" Y="5.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAQAAAAAAAABAAAAAAAAQAACAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>source\Utility\LoadJson.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="AppFrame::Utility::WriteJson" Collapsed="true">
-    <Position X="3" Y="5.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAIAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>source\Utility\WriteJson.h</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="AppFrame::Utility::Utility" Collapsed="true">
-    <Position X="5.25" Y="5.75" Width="1.5" />
+    <Position X="3" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABAAAAAAABCAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>source\Utility\Utility.h</FileName>

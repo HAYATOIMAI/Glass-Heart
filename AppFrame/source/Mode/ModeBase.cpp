@@ -9,22 +9,22 @@
 #include "../Application/GameBase.h"
 
 namespace AppFrame {
-	namespace Mode {
-		/** コンストラクタ */
-		ModeBase::ModeBase(GameBase& game) : _game{ game } {}
-		/** デストラクタ */
-		ModeBase::~ModeBase() {}
+  namespace Mode {
+    /** コンストラクタ */
+    ModeBase::ModeBase(GameBase& game) : _game{ game } {}
+    /** デストラクタ */
+    ModeBase::~ModeBase() {}
 
-		Resource::ResourceServer& ModeBase::GetResourceServer() {
-			return _game.GetResourceServer();
-		}
+    Resource::ResourceServer& ModeBase::GetResourceServer() {
+      return _game.GetResourceServer();
+    }
 
-		Sound::SoundManager& ModeBase::GetSoundManager() {
-			return _game.GetSoundManager();
-		}
+    Sound::SoundManager& ModeBase::GetSoundManager() {
+      return _game.GetSoundManager();
+    }
 
-		ModeServer& ModeBase::GetModeServer() {
-			return _game.GetModeServer();
-		}
-	} // namespace Mode
+    ModeServer& ModeBase::GetModeServer() {
+      return _game.GetModeServer();
+    }
+  } // namespace Mode
 } // namespace AppFrame 
