@@ -28,7 +28,7 @@ namespace AppFrame {
 		/**
 		 * @class ModeServer
 		 * @brief モードサーバークラスの宣言
-		 *          モードクラスを管理する
+		 *        モードクラスを管理する
 		 */
 		class ModeServer {
 		public:

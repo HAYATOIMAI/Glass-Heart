@@ -61,29 +61,29 @@ void GlassHeart::State::StateFall::Update() {
 	// プレイヤーの色を取得
 	int state = static_cast<int> (_owner.GetColourState());
 	// 空中の足場の底面と側面判定処理
-	pos = _owner.GetCollision().CheckHitSideAndBottom(pos, { forward.x, 0.f, 0.f }, state);
+	pos = _owner.GetCollision().GetIsHitSideBottom().CheckHitSideAndBottom(pos, { forward.x, 0.f, 0.f }, state);
 	// 床との当たり判定
-	pos = _owner.GetCollision().CheckJumpStand(pos, { 0.f, forward.y, 0.f }, state);
+	pos = _owner.GetCollision().GetIsHitJumpStand().CheckJumpStand(pos, { 0.f, forward.y, 0.f }, state);
 	// 当たっていたら待機状態へ移行
-	if (_owner.GetCollision().GetStand().HitFlag == 1) {
+	if (_owner.GetCollision().GetIsHitJumpStand().GetStand().HitFlag == 1) {
 		_owner.GetStateManage().GoToState("Idle");
 	}
 	if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-		if (_owner.GetCollision().GetWThrough().HitFlag == 1) {
+		if (_owner.GetCollision().GetIsHitJumpStand().GetWThrough().HitFlag == 1) {
 			_owner.GetStateManage().GoToState("Idle");
 		}
 	}
 	if (_owner.GetColourState() == Player::Player::ColourState::White) {
-		if (_owner.GetCollision().GetBThrough().HitFlag == 1) {
+		if (_owner.GetCollision().GetIsHitJumpStand().GetBThrough().HitFlag == 1) {
 			_owner.GetStateManage().GoToState("Idle");
 		}
 	}
 	// 死亡判定を取るメッシュと当たり判定
 	if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-		pos = _owner.GetCollision().CheckHitWDeathMesh(pos, { 0.f, forward.y, 0.f });
+		pos = _owner.GetCollision().GetIsHitWDeathMesh().CheckHitWDeathMesh(pos, { 0.f, forward.y, 0.f });
 	}
 	// プレイヤーの色が異なっていたらリスポーン処理
-	if (_owner.GetCollision().GetWDeathMesh().HitNum >= 1) {
+	if (_owner.GetCollision().GetIsHitWDeathMesh().GetWDeathMesh().HitNum >= 1) {
 		if (_owner.GetColourState() == Player::Player::ColourState::White) {
 		}
 		if (_owner.GetColourState() == Player::Player::ColourState::Black) {
@@ -92,10 +92,10 @@ void GlassHeart::State::StateFall::Update() {
 	}
 	// 死亡判定を取るメッシュと当たり判定
 	if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-		pos = _owner.GetCollision().CheckHitWDeathMesh(pos, { 0.f, forward.y, 0.f });
+		pos = _owner.GetCollision().GetIsHitWDeathMesh().CheckHitWDeathMesh(pos, { 0.f, forward.y, 0.f });
 	}
 	// プレイヤーの色が異なっていたらリスポーン処理
-	if (_owner.GetCollision().GetBDeathMesh().HitNum >= 1) {
+	if (_owner.GetCollision().GetIsHitBDeathMesh().GetBDeathMesh().HitNum >= 1) {
 		if (_owner.GetColourState() == Player::Player::ColourState::White) {
 			_owner.ResetPos();
 		}

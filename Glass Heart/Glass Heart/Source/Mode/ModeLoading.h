@@ -7,6 +7,7 @@
  *********************************************************************/
 #pragma once
 #include "ModeMain.h"
+#include <cstdint>
  /**
 	* @namespace GlassHeart
 	* @brief プロジェクト名
@@ -63,8 +64,10 @@ namespace GlassHeart {
 			 *
 			 */
 			void Render() override;
+
+			void Exit() override;
 		private:
-			std::uint16_t _cnt{ 0 };              //!< ローディング時間
+			std::uint_fast16_t _cnt{ 0 };         //!< ローディング時間
 			std::int_fast32_t _loadHandle{ -1 };  //!< ローディングGIF画像用ハンドル
 		};
 	} // namespace Mode

@@ -7,8 +7,8 @@
  *********************************************************************/
 #pragma once
 #include "ModeMain.h"
+#include <cstdint>
 #include <AppFrame.h>
-
  /**
 	* @namespace GlassHeart
 	* @brief プロジェクト名
@@ -66,7 +66,7 @@ namespace GlassHeart {
 			 */
 			void Render() override;
 		private:
-			std::int_fast32_t _teamLogo{ -1 };   //!< 背景画像用ハンドル
+			std::int_fast32_t _teamLogo{ -1 };  //!< 背景画像用ハンドル
 		};
 	} // namespace Mode
 } // namespace GlassHeart

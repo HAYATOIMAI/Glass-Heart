@@ -55,17 +55,17 @@ void GlassHeart::State::StateIdle::Update() {
 	auto pos = _owner.GetPosition();
 	// 床メッシュと線分での当たり判定
 	int state = static_cast<int>(_owner.GetColourState());
-	pos = _owner.GetCollision().CheckHitFloor(pos, { 0.f, -10.f, 0.f }, state);
+	pos = _owner.GetCollision().GetIsHitFloor().CheckHitFloor(pos, { 0.f, -10.f, 0.f }, state);
 	// 色に関係なく当たるブロックと当たっていなかったら
-	if (_owner.GetCollision().GetHitFloor().HitFlag == 0) {
+	if (_owner.GetCollision().GetIsHitFloor().GetHitFloor().HitFlag == 0) {
 		//
 		if (_owner.GetColourState() == Player::Player::ColourState::Black) {
-			if (_owner.GetCollision().GetBThrough().HitFlag == 1) {
+			if (_owner.GetCollision().GetIsHitFloor().GetBThrough().HitFlag == 1) {
 				_owner.GetStateManage().GoToState("Fall");
 			}
 		}
 		if (_owner.GetColourState() == Player::Player::ColourState::White) {
-			if (_owner.GetCollision().GetWThrough().HitFlag == 1) {
+			if (_owner.GetCollision().GetIsHitFloor().GetWThrough().HitFlag == 1) {
 				_owner.GetStateManage().GoToState("Fall");
 			}
 		}

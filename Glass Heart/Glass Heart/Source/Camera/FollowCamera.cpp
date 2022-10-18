@@ -13,8 +13,8 @@
 
 namespace {
   constexpr auto StartPosX = -150.0f;  //!< 初期位置X
-  constexpr auto StartPosY = 35.0f;     //!< 初期位置Y
-  constexpr auto StartPosZ = -55.0f;    //!< 初期位置Z
+  constexpr auto StartPosY = 35.0f;    //!< 初期位置Y
+  constexpr auto StartPosZ = -55.0f;   //!< 初期位置Z
 }
 /** コンストラクタ */
 GlassHeart::Camera::FollowCamera::FollowCamera(Application::GameMain& game) : ObjectBase{ game } {

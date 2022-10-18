@@ -180,10 +180,19 @@
     <ClInclude Include="Source\Collision\IsHitFloor.h">
       <Filter>ヘッダー ファイル\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Collision\IsJumpStand.h">
+    <ClInclude Include="Source\Collision\IsHitJumpStand.h">
       <Filter>ヘッダー ファイル\Collision</Filter>
     </ClInclude>
     <ClInclude Include="Source\Collision\IsHitSideAndBottom.h">
+      <Filter>ヘッダー ファイル\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision\IsHitBDeathMesh.h">
+      <Filter>ヘッダー ファイル\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision\IsHitWDeathMesh.h">
+      <Filter>ヘッダー ファイル\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision\IsHitCircleToCircle.h">
       <Filter>ヘッダー ファイル\Collision</Filter>
     </ClInclude>
   </ItemGroup>
@@ -281,10 +290,19 @@
     <ClCompile Include="Source\Collision\IsHitFloor.cpp">
       <Filter>ソース ファイル\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Collision\IsJumpStand.cpp">
+    <ClCompile Include="Source\Collision\IsHitJumpStand.cpp">
       <Filter>ソース ファイル\Collision</Filter>
     </ClCompile>
     <ClCompile Include="Source\Collision\IsHitSideAndBottom.cpp">
+      <Filter>ソース ファイル\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collision\IsHitBDeathMesh.cpp">
+      <Filter>ソース ファイル\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collision\IsHitWDeathMesh.cpp">
+      <Filter>ソース ファイル\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collision\IsHitCircleToCircle.cpp">
       <Filter>ソース ファイル\Collision</Filter>
     </ClCompile>
   </ItemGroup>
