@@ -24,7 +24,7 @@ GlassHeart::Mode::ModeGame::ModeGame(Application::GameMain& game) : ModeMain{ ga
 void GlassHeart::Mode::ModeGame::Init() {
   // リソースサーバーを取得
   auto& res = GetResourceServer();
-  // 画像のハンドルの取得
+  //リソースマネージャーから登録した画像を取得
   _teamLogo = res.GetGraph("TeamLogo");
   _titleLogo = res.GetGraph("TitleLogo");
 }

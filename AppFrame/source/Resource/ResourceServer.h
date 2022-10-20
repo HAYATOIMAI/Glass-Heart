@@ -25,7 +25,7 @@ namespace AppFrame {
   namespace Resource {
     /**
      * @struct DivGraph
-     * @brief   画像ファイル用構造体
+     * @brief  画像ファイル用構造体
      */
     struct DivGraph {
       std::string fileName{ "" };
@@ -70,14 +70,14 @@ namespace AppFrame {
       virtual void Initialize();
       /**
        * @brief 全リソース削除
-       *           画像、モデル、音の全てを削除する
+       *        画像、モデル、音の全てを削除する
        *
        */
       virtual void AllClear();
       /**
        * @brief 画像の読み込み
        *
-       * @param[in] key        キーとなる任意の文字列
+       * @param[in] key      キーとなる任意の文字列
        * @param[in] divgraph 画像ファイル用構造体への参照
        */
       virtual void LoadGraphic(std::string_view key, const DivGraph& divgraph);
@@ -89,7 +89,7 @@ namespace AppFrame {
       virtual void LoadGraphics(const GraphMap& graphmap);
       /**
        * @brief 読み込み時のカレントフォルダの変更
-       *          カレントフォルダ直下のファイルを読み込む
+       *        カレントフォルダ直下のファイルを読み込む
        *
        * @param[in] path カレントフォルダ
        */
@@ -112,7 +112,7 @@ namespace AppFrame {
       /**
        * @brief 画像情報の取得
        *
-       * @param[in] key    登録済みのキー
+       * @param[in] key   登録済みのキー
        * @return DivGraph 画像情報
        */
       virtual DivGraph GetGraphInfo(std::string_view& key);
@@ -184,7 +184,7 @@ namespace AppFrame {
       virtual std::pair<std::string, int> GetSoundInfo(std::string_view key);
     private:
       //!< ゲームベースクラスへの参照
-      GameBase& _game;  
+      GameBase& _game;
       //!< 格納フォルダへのパス
       std::filesystem::path _currntPath;
       //!< 任意の文字列をキーにしてDivGraphと画像ハンドルのペアを管理

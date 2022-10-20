@@ -29,6 +29,9 @@ void GlassHeart::Mode::ModeAmg::Init() {
   {"Death",  {"BackGround/break.png", 1, 1, 1920, 1080}}
   };
 
+  // 非同期読み込み開始
+  SetUseASyncLoadFlag(TRUE);
+
   auto& res = GetResourceServer();
   // 画像の読み込み
   res.LoadGraphics(useGraph);
@@ -44,8 +47,6 @@ void GlassHeart::Mode::ModeAmg::Init() {
   };
   // モデルの読み込み
   GetResourceServer().LoadModels(useMap);
-  // 非同期読み込み開始
-  SetUseASyncLoadFlag(TRUE);
   _fadeCount = 30;
 }
 /** 入り口処理 */
