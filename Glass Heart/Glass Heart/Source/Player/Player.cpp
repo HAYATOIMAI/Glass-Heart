@@ -14,21 +14,19 @@
 #include "../Application/GameMain.h"
 
 namespace {
-  constexpr std::int_fast16_t Recast = 20;          //!< 色変更リキャストタイム
-  constexpr std::int_fast16_t DeathCoolTime = 120;  //!< 死亡した時の復活までのクールタイム
-  constexpr auto Hit = 1;                           //!< ヒットしたかのフラグ
-  constexpr auto StartPosX = -150.0f;               //!< プレイヤーの初期位置X
-  constexpr auto StartPosY = 60.0f;                 //!< プレイヤーの初期位置Y
-  constexpr auto StartPosZ = -55.0f;                //!< プレイヤーの初期位置Z
-  constexpr auto Radius = 20.f;                     //!< チェックポイントとの当たり判定用半径
-  constexpr auto LineY = -10.0f;                    //!< 線分の長さ
+  constexpr std::int_fast16_t Recast = 20;                 //!< 色変更リキャストタイム
+  constexpr std::int_fast16_t DeathCoolTime = 120;         //!< 死亡した時の復活までのクールタイム
+  constexpr auto Hit = 1;                                  //!< ヒットしたかのフラグ
+  constexpr auto Radius = 20.f;                            //!< チェックポイントとの当たり判定用半径
+  constexpr auto LineY = -10.0f;                           //!< 線分の長さ
+  constexpr VECTOR Position = { -150.0f, 60.0f, -55.0f };  //!< プレイヤーの位置座標
 }
 
 /** コンストラクタ */
 GlassHeart::Player::Player::Player(Application::GameMain& game) : GlassHeart::Object::ObjectBase{ game } {
   auto right = RightRotation();
   _rotation = VGet(0.0f, right, 0.0f);
-  _position = VGet(StartPosX, StartPosY, StartPosZ);
+  _position = Position;
   _radius = Radius;  // チェックポイントとの当たり判定用半径をセット
 }
 /** 入力処理 */
@@ -36,7 +34,7 @@ void GlassHeart::Player::Player::Input(AppFrame::Input::InputManager& input) {
   if (_deadFlag == false) {
     // カメラの更新
     _cameraManage->Input(input);
-    // 状態の更新
+    // ステートの更新
     _stateManage->Input(input);
   }
   //LBボタンを押すと色変更
@@ -50,7 +48,7 @@ void GlassHeart::Player::Player::Input(AppFrame::Input::InputManager& input) {
   if (input.GetJoyPad().GetXinputRightShoulder()) {
     auto right = RightRotation();
     _rotation = VGet(0.0f, right, 0.0f);
-    _position = VGet(StartPosX, StartPosY, StartPosZ);
+    _position = Position;
   }
 #endif // _DEBUG
 }
@@ -120,7 +118,7 @@ void GlassHeart::Player::Player::Process() {
       _position = checkPos;
     }
     else {
-      _position = VGet(StartPosX, StartPosY, StartPosZ);
+      _position = Position;
     }
   }
 #endif // DEBUG
@@ -224,7 +222,7 @@ void GlassHeart::Player::Player::ResetPos() {
     else {
       // チェックポイントと当たっていなかったら初期位置に戻す
       if (_deadFlag == true && _deathCoolCount == 0) {
-        _position = VGet(StartPosX, StartPosY, StartPosZ);
+        _position = Position;
         _deadFlag = false;
       }
     }
@@ -250,7 +248,7 @@ void GlassHeart::Player::Player::ResetPos() {
     else {
       // チェックポイントと当たっていなかったら初期位置に戻す
       if (_deadFlag == true && _deathCoolCount == 0) {
-        _position = VGet(StartPosX, StartPosY, StartPosZ);
+        _position = Position;
         _deadFlag = false;
       }
     }

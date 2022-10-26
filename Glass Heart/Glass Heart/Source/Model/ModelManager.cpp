@@ -55,7 +55,7 @@ void  GlassHeart::Model::ModelManager::SetScale(VECTOR scale) {
 void  GlassHeart::Model::ModelManager::SetMatrix(MATRIX& world) {
   MV1SetMatrix(_handle, world);
 }
-/** F‚ğİ’è */
+/** ƒ‚ƒfƒ‹‚ÌF‚ğİ’è */
 void  GlassHeart::Model::ModelManager::SetColor(std::int_fast32_t index, float r, float g, float b) {
   MV1SetMaterialEmiColor(_handle, index, GetColorF(r, g, b, 0.f));
 }

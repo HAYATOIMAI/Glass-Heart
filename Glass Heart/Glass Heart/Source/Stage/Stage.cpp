@@ -10,29 +10,31 @@
 #include "../Object/ObjectServer.h"
 
 namespace {
-  constexpr auto FogStart = 50.0f;              //!<
-  constexpr auto FogEnd = 15000.0f;             //!<
-  constexpr auto Scale = 1.0f;
-  constexpr auto StagePosZ = 10.0f;
-  constexpr auto BackGround = "BackGround";
-  constexpr auto Target = "Camera";
-  constexpr std::int_fast16_t FogColorR = 247;  //!<
-  constexpr std::int_fast16_t FogColorG = 188;  //!<
-  constexpr std::int_fast16_t FogColorB = 101;  //!< 
-  constexpr std::uint_fast8_t DivisionNum = 8;  //!< 
+  constexpr auto FogStart = 50.0f;                 //!< フォグが始まる距離
+  constexpr auto FogEnd = 15000.0f;                //!< フォグが終了地点
+  constexpr auto BackGround = "BackGround";        //!< 引数に持たせる文字列
+  constexpr auto Target = "Camera";                //!< 引数に持たせる文字列
+  constexpr auto StageHandle = "Stage";            //!< 引数に持たせる文字列
+  constexpr std::int_fast16_t FogColorR = 247;     //!< フォグの色情報
+  constexpr std::int_fast16_t FogColorG = 188;     //!< フォグの色情報
+  constexpr std::int_fast16_t FogColorB = 101;     //!< フォグの色情報
+  constexpr std::int_fast8_t DivNum = 8;           //!< コリジョン情報の空間分割数
+  constexpr VECTOR Scale = { 1.0f, 1.0f, 1.0f };   //!< 拡大率
+  constexpr VECTOR Pos = { 0.0f, 0.0f, 10.0f };    //!< 位置座標
+  constexpr VECTOR Rotate = { 0.0f, 0.0f, 0.0f };  //!< 角度
 }
 /** コンストラクタ */
 GlassHeart::Stage::Stage::Stage(Application::GameMain& game) : Object::ObjectBase{ game } {
   // スカイスフィアのモデル
   _backGround = std::make_unique<Model::ModelManager>(*this);
   _backGround->handle(BackGround);
-  _backGround->SetScale({ Scale, Scale, Scale });
+  _backGround->SetScale(Scale);
   // ステージのモデル
   _stage = std::make_unique<Model::ModelManager>(*this);
-  _stage->handle("Stage");
-  _stage->SetPosition(VGet(0.0f, 0.0f, StagePosZ));
-  _stage->SetRotation(VGet(0.0f, 0.0f, 0.0f));
-  _stage->SetScale({ Scale, Scale, Scale });
+  _stage->handle(StageHandle);
+  _stage->SetPosition(Pos);
+  _stage->SetRotation(Rotate);
+  _stage->SetScale(Scale);
   // ナビメッシュを非表示
   MV1SetFrameVisible(_stage->GetHandle(), 2, FALSE);
   MV1SetFrameVisible(_stage->GetHandle(), 3, FALSE);
@@ -44,14 +46,14 @@ GlassHeart::Stage::Stage::Stage(Application::GameMain& game) : Object::ObjectBas
   MV1SetFrameVisible(_stage->GetHandle(), 9, FALSE);
   MV1SetFrameVisible(_stage->GetHandle(), 10, FALSE);
   //以下のフレームをナビメッシュとして使用
-  MV1SetupCollInfo(_stage->GetHandle(), 2, DivisionNum, DivisionNum, DivisionNum);
-  MV1SetupCollInfo(_stage->GetHandle(), 3, DivisionNum, DivisionNum, DivisionNum);
-  MV1SetupCollInfo(_stage->GetHandle(), 4, DivisionNum, DivisionNum, DivisionNum);
-  MV1SetupCollInfo(_stage->GetHandle(), 5, DivisionNum, DivisionNum, DivisionNum);
-  MV1SetupCollInfo(_stage->GetHandle(), 6, DivisionNum, DivisionNum, DivisionNum);
-  MV1SetupCollInfo(_stage->GetHandle(), 7, DivisionNum, DivisionNum, DivisionNum);
-  MV1SetupCollInfo(_stage->GetHandle(), 8, DivisionNum, DivisionNum, DivisionNum);
-  MV1SetupCollInfo(_stage->GetHandle(), 9, DivisionNum, DivisionNum, DivisionNum);
+  MV1SetupCollInfo(_stage->GetHandle(), 2, DivNum, DivNum, DivNum);
+  MV1SetupCollInfo(_stage->GetHandle(), 3, DivNum, DivNum, DivNum);
+  MV1SetupCollInfo(_stage->GetHandle(), 4, DivNum, DivNum, DivNum);
+  MV1SetupCollInfo(_stage->GetHandle(), 5, DivNum, DivNum, DivNum);
+  MV1SetupCollInfo(_stage->GetHandle(), 6, DivNum, DivNum, DivNum);
+  MV1SetupCollInfo(_stage->GetHandle(), 7, DivNum, DivNum, DivNum);
+  MV1SetupCollInfo(_stage->GetHandle(), 8, DivNum, DivNum, DivNum);
+  MV1SetupCollInfo(_stage->GetHandle(), 9, DivNum, DivNum, DivNum);
   // フォグの設定
   SetFogEnable(TRUE);
   SetFogColor(FogColorR, FogColorG, FogColorB);

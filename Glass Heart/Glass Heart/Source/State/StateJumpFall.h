@@ -27,25 +27,23 @@ namespace GlassHeart {
     class StateJumpFall : public StateBase {
     public:
       /**
-       * @brief コンストラクタ
+       * @brief           コンストラクタ
        *
        * @param[in] owner プレイヤークラスへの参照
        */
       StateJumpFall(Player::Player& owner) : StateBase{ owner } {};
       /**
-       * @brief 入り口処理
-       *
+       * @brief           入り口処理
        */
       void Enter() override;
       /**
-      * @brief 入力処理
+      * @brief            入力処理
       *
-      * @param input インプットマネージャークラスの参照
+      * @param[in] input インプットマネージャークラスの参照
       */
       void Input(AppFrame::Input::InputManager& input) override;
       /**
-       * @brief 更新処理
-       *
+       * @brief          更新処理
        */
       void Update() override;
     };

@@ -15,8 +15,8 @@
 #include <DxLib.h>
 
 namespace {
-  constexpr auto ColorBit = 32;    //!< カラービット数
-  constexpr std::uint_fast8_t Error = -1;
+  constexpr std::uint_fast8_t ColorBit = 32;  //!< カラービット数
+  constexpr std::int_fast8_t Error = -1;      //!< 初期化失敗
 }
 
 namespace AppFrame {
@@ -38,44 +38,39 @@ namespace AppFrame {
     SetMainWindowText(windowName.c_str());
 
 #ifdef _DEBUG
+    // メモリリークしているかをを監視
     Utility::Utility::CheckMemoryLeak();
 #endif // _DEBUG
 
-    // 画面モードのを設定
-    SetGraphMode(SetWindowWidthSize(), SetWindowHeightSize(), ColorBit);
+    // 画面モードを設定
+    SetGraphMode(SetWindowWidthSize(), SetWindowHeightSize(), ColorBit, GetRefreshRate());
 
     ChangeWindowMode(true);
    
-    // Dxライブラリ初期化
+    // Dxライブラリ初期化(0が正常：-1がエラー)
     if (DxLib_Init() == Error) {
 #ifdef _DEBUG
       throw std::logic_error("----------- Failed to initialize DxLib -----------\n");
 #endif // _DEBUG
       return false;
     }
-
     // 描画先画面を裏にする
     SetDrawScreen(DX_SCREEN_BACK);
-
     // Ｚバッファを有効にする
     SetUseZBuffer3D(TRUE);
-
     // Ｚバッファへの書き込みを有効にする
     SetWriteZBuffer3D(TRUE);
-
     // インプットマネージャーの生成
     _inputManage = std::make_unique<Input::InputManager>();
-
     // リソースサーバーの生成
     _resServer = std::make_unique<Resource::ResourceServer>(*this);
-
     // サウンドマネージャーの生成
     _soundManage = std::make_unique<Sound::SoundManager>(*this);
-
     return true;
   }
   /** 解放処理 */
   void GameBase::Terminate() {
+    // リソースマネージャーに登録されているデータを解放
     _resServer->AllClear();
     // Dxライブラリ終了
     DxLib_End();
@@ -92,15 +87,16 @@ namespace AppFrame {
   }
   /** 入力処理 */
   void GameBase::Input() {
-    if (ProcessMessage() == -1) {
+    // -1が返ってきたらゲームを終了(0が正常：-1がエラー)
+    if (ProcessMessage() == Error) {
       _gameState = GameState::End;
     }
     _inputManage->Process();
     // BackボタンかESCキーが押されたらゲーム終了
-    if (_inputManage->GetJoyPad().GetXinputBack() || 1 == CheckHitKey(KEY_INPUT_ESCAPE)) {
+    if (_inputManage->GetJoyPad().GetXinputBack() 
+      || 1 == CheckHitKey(KEY_INPUT_ESCAPE)) {
       _gameState = GameState::End;
     }
-
     _modeServer->Input(*_inputManage);
   }
   /** メインループ */

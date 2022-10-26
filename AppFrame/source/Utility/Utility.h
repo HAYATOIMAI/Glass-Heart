@@ -9,7 +9,6 @@
 #include "Singleton.h"
 #include <random>
 #include <cstdint>
-
 #ifdef _DEBUG
  // メモリリーク検出用
 #define _CRTDBG_MAP_ALLOC
@@ -21,12 +20,12 @@
 #endif
 /**
  * @namespace AppFrame
- * @brief  アプリケーションフレーム
+ * @brief     アプリケーションフレーム
  */
 namespace AppFrame {
   /**
    * @namespace  Utility
-   * @brief 便利な関数関係
+   * @brief      便利な関数関係
    */
   namespace Utility {
     /**
@@ -36,26 +35,25 @@ namespace AppFrame {
     class Utility : public Singleton<Utility> {
     private:
       /**
-       * @brief コンストラクタ
+       * @brief         コンストラクタ
        */
       Utility();
       /**
-       * @brief デストラクタ
+       * @brief         デストラクタ
        */
       ~Utility() override {};
     public:
       friend class Singleton<Utility>;  // インスタンス生成を許可
       /**
-       * @brief 一様整数分布の乱数を生成
+       * @brief         一様整数分布の乱数を生成
        *
        * @param[in] min 最小値
        * @param[in] max 最大値
-       * @return 生成された乱数
+       * @return        生成された乱数
        */
       static std::int_fast32_t GetRandom(const std::int_fast32_t min, const std::int_fast32_t max);
       /**
-       * @brief メモリリーク検出
-       *
+       * @brief         メモリリーク検出
        */
       static void CheckMemoryLeak();
     };

@@ -1,7 +1,7 @@
 /*****************************************************************//**
  * @file   ModeFade.h
  * @brief  モードのフェードクラス宣言
- *            画面の最前面にフルスクリーンサイズの画像を重ねてアルファ値によるフェードを行う
+ *         画面の最前面にフルスクリーンサイズの画像を重ねてアルファ値によるフェードを行う
  *
  * @author Hayato Imai
  * @date   December 2021
@@ -9,10 +9,11 @@
 #pragma once
 #include "ModeBase.h"
  /**
-   * @namespace AppFrame
-   * @brief  アプリケーションフレーム
-   */
+  * @namespace AppFrame
+  * @brief  アプリケーションフレーム
+  */
 namespace AppFrame {
+  class GameBase;
   /**
    * @namespace Mode
    * @brief モード関係

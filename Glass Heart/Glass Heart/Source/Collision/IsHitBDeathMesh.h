@@ -7,12 +7,18 @@
  *********************************************************************/
 #pragma once
 #include <DxLib.h>
-
+ /**
+  * @namespace GlassHeart
+  * @brief プロジェクト名
+  */
 namespace GlassHeart {
   namespace Object {
     class ObjectBase;
   }
-
+  /**
+   * @namespace Collision
+   * @brif 衝突判定関係
+   */
   namespace Collision {
     class IsHitBDeathMesh {
     public:

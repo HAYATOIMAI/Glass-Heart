@@ -8,10 +8,11 @@
 #pragma once
 #include "ModeFade.h"
  /**
-    * @namespace AppFrame
-    * @brief  アプリケーションフレーム
-    */
+  * @namespace AppFrame
+  * @brief  アプリケーションフレーム
+  */
 namespace AppFrame {
+  class GameBase;
   /**
    * @namespace Mode
    * @brief モード関係
@@ -24,7 +25,7 @@ namespace AppFrame {
     class ModeFadeIn : public ModeFade {
     public:
       /**
-       * @brief コンストラクタ
+       * @brief           コンストラクタ
        *
        * @param[in] game　ゲームベースクラス
        */

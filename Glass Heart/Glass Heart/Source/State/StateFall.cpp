@@ -12,7 +12,6 @@
 #include "../State/StateManager.h"
 #include "../Application/GameMain.h"
 #include "../Object/ObjectServer.h"
-#include <numbers>
 #include <AppFrame.h>
 
 namespace {
@@ -25,6 +24,8 @@ namespace {
   constexpr auto Idle = "Idle";          //!< 遷移させるステートの文字列
   constexpr auto Fall = "fall";          //!< 遷移させるステートの文字列
   constexpr auto Run = "run";            //!< 遷移させるステートの文字列
+  constexpr auto CheckPoint = "CheckPoint";
+  constexpr VECTOR Position = { -150.f, 40.f, -55.f };
 }
 
 /** 入り口処理 */
@@ -111,12 +112,12 @@ void GlassHeart::State::StateFall::Update() {
   if (pos.y < -300.0f) {
     if (_owner.GetCheckPointFlag() == true) {
       // オブジェクトサーバーからチェックポイントの座標を取得
-      auto checkPos = _owner.GetObjectServer().GetPosition("CheckPoint");
+      auto checkPos = _owner.GetObjectServer().GetPosition(CheckPoint);
       // プレイヤーの座標をチェックポイントにする
       pos = checkPos;
     }
     else {
-      pos = VGet(-150.f, 40.f, -55.f);
+      pos = Position;
     }
   }
   // 座標更新

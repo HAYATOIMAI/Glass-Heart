@@ -7,6 +7,10 @@
  *********************************************************************/
 #include "InputJoypad.h"
 
+namespace {
+  constexpr auto Zone = 0.25;
+}
+
 namespace AppFrame {
   namespace Input {
     void InputJoypad::Process() {
@@ -14,8 +18,8 @@ namespace AppFrame {
 
       // ジョイパッド状態更新
       GetJoypadXInputState(DX_INPUT_PAD1, &_xInput);
-
-      SetJoypadDeadZone(DX_INPUT_PAD1, 0.25);
+      // デッドゾーンを設定
+      SetJoypadDeadZone(DX_INPUT_PAD1, Zone);
 
       for (auto i = 0; i < 16; ++i) {
         // キーのトリガ情報生成(押した瞬間しか反応しないキー情報)

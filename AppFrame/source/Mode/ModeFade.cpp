@@ -7,6 +7,7 @@
  *********************************************************************/
 #include "ModeFade.h"
 #include "ModeServer.h"
+#include "../Application/GameBase.h"
 #include <DxLib.h>
 
 namespace AppFrame {

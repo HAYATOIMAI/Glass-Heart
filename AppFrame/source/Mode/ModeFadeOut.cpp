@@ -7,13 +7,14 @@
  *********************************************************************/
 #include "ModeFadeOut.h"
 #include "ModeServer.h"
+#include "../Application/GameBase.h"
 #include <DxLib.h>
 
 namespace {
-  constexpr float AlphaMin = 0.f;        //!< アルファ値最低値
-  constexpr float AlphaMax = 255.f;      //!< アルファ値最大値
-  constexpr float FadeTime = 75.555f;    //!< 暗転時間
-  constexpr float AlphaDelta = (AlphaMax / FadeTime);  //!< アルファ値の差分
+  constexpr auto AlphaMin = 0.f;                      //!< アルファ値最低値
+  constexpr auto AlphaMax = 255.f;                    //!< アルファ値最大値
+  constexpr auto FadeTime = 75.555f;                  //!< 暗転時間
+  constexpr auto AlphaDelta = (AlphaMax / FadeTime);  //!< アルファ値の差分
 }
 
 namespace AppFrame {

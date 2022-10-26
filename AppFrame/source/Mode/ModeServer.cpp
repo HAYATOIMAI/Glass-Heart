@@ -13,15 +13,20 @@
 #include "../Input/InputManager.h"
 #include "../Application/GameBase.h"
 
+namespace {
+  constexpr auto FadeIn = "FadeIn";
+  constexpr auto FadeOut = "FadeOut";
+}
+
 namespace AppFrame {
   namespace Mode {
     /** コンストラクタ */
     ModeServer::ModeServer(std::string_view key, std::shared_ptr<ModeBase> mode) {
-      Register("FadeIn", std::make_shared<Mode::ModeFadeIn>(mode->GetGame()));
-      Register("FadeOut", std::make_shared<Mode::ModeFadeOut>(mode->GetGame()));
+      Register(FadeIn, std::make_shared<Mode::ModeFadeIn>(mode->GetGame()));
+      Register(FadeOut, std::make_shared<Mode::ModeFadeOut>(mode->GetGame()));
       Register(key, mode);
       PushBack(key);
-      PushBack("FadeIn");
+      PushBack(FadeIn);
     }
     /** モードの登録 */
     void ModeServer::Register(std::string_view key, std::shared_ptr<ModeBase> mode) {
@@ -55,8 +60,8 @@ namespace AppFrame {
      ↑フェードアウト：最前面 */
     void ModeServer::GoToMode(std::string_view key) {
       InsertBelowBack(key.data());  // 次のモードを挿入
-      InsertBelowBack("FadeIn");    // フェードインを挿入
-      PushBack("FadeOut");            // フェードアウトをプッシュバック
+      InsertBelowBack(FadeIn);      // フェードインを挿入
+      PushBack(FadeOut);            // フェードアウトをプッシュバック
     }
     /** リストの一番後ろ(最前面)のモードの真下に挿入 */
     void ModeServer::InsertBelowBack(std::string_view key) {

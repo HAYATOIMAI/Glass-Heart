@@ -33,12 +33,12 @@ namespace GlassHeart {
   }
   /**
    * @namespace Player 
-   * @brief プレイヤー関係
+   * @brief     プレイヤー関係
    */
   namespace Player {
     /**
      * @class Player
-     * @brief プレイヤークラスの宣言
+     * @brief プレイヤークラス
      */
     class Player : public Object::ObjectBase {
     public:
@@ -50,115 +50,107 @@ namespace GlassHeart {
         Black,
       };
       /**
-       * @brief コンストラクタ
+       * @brief                  コンストラクタ
        *
-       * @param[in] game ゲームメインクラスへの参照
+       * @param[in] game         ゲームメインクラスへの参照
        */
       Player(Application::GameMain& game);
       /**
-       * @brief デストラクタ
-       *
+       * @brief                  デストラクタ
        */
       virtual~Player() override = default;
       /**
-       * @brief 入力処理
-       *
-       * @param[in] input  インプットマネージャークラスの参照
+       * @brief                  入力処理
+       *                         
+       * @param[in] input        インプットマネージャークラスの参照
        */
       virtual void Input(AppFrame::Input::InputManager& input) override;
       /**
-       * @brief 更新処理
-       *
+       * @brief                  更新処理
        */
       virtual void Process() override;
       /**
-       * @brief 描画処理
-       *
+       * @brief                  描画処理
        */
       void Render() override;
       /**
-       * @brief オブジェクトタイプ
+       * @brief                  オブジェクトタイプ
        */
       ObjectType GetObjectType() const override { return ObjectType::Player; };
       /**
-       * @brief ワールド座標変換
-       *
+       * @brief                  ワールド座標変換
        */
       void ComputeWorldTransform() override;
       /**
-       * @brief 移動処理
-       *
-       * @param[in] forward 向きベクトル
+       * @brief                  移動処理
+       *                         
+       * @param[in] forward      向きベクトル
        */
       virtual void Move(const VECTOR& forward);
       /**
-       * @brief 色判定処理
-       *
+       * @brief                  色判定処理
        */
       void ColorChange();
       /**
-       * @brief プレイヤーの色を白に変更
-       *
+       * @brief                  プレイヤーの色を白に変更
        */
       void SetWhite();
       /**
-       * @brief プレイヤーの色を黒に変更
-       *
+       * @brief                  プレイヤーの色を黒に変更
        */
       void SetBlack();
       /**
-       * @brief 
-       *
+       * @brief                  プレイヤーの位置を初期化
        */
       void ResetPos();
       /**
-       * @ プレイヤーの移動速度の移動速度のゲッター
-       * 
-       * @return プレイヤーの移動速度
+       * @brief                  プレイヤーの移動速度の移動速度を取得
+       *                         
+       * @return                 プレイヤーの移動速度
        */
-      inline float GetForwardSpeed() { return _forwardSpeed; }
+      inline float GetForwardSpeed() const { return _forwardSpeed; }
       /**
-       * @ プレイヤーの移動速度のセッター
+       * @brief                  プレイヤーの移動速度をセットする
        * 
        * @param[in] forwardSpeed プレイヤーの移動速度にセットする値
        */
-      inline void SetForwardSpeed(float forwardSpeed) { _forwardSpeed = forwardSpeed; }
+      inline void SetForwardSpeed(const float forwardSpeed) { _forwardSpeed = forwardSpeed; }
       /**
-       * @ デバッグ用ステート名変数のゲッター
-       * 
-       * @return ステート名
+       * @brief                  デバッグ用ステート名変数を取得
+       *                         
+       * @return                 ステート名の参照
        */
       inline std::string& GetCrName() { return _stateName; }
       /**
-       * @ 色状態を取得するゲッター
-       * 
-       * @return プレイヤーの色
+       * @brief                  プレイヤーの色状態を取得
+       *                         
+       * @return                 プレイヤーの色の参照
        */
       inline ColourState& GetColourState() { return _crState; }
       /**
-       * @ ジャンプ速度を取得するゲッター
-       * 
-       * @return ジャンプ速度
+       * @brief                  ジャンプ速度を取得する
+       *                         
+       * @return                 ジャンプ速度
        */
-      inline VECTOR GetJumpVelocity() { return _jumpVelocity; }
+      inline VECTOR GetJumpVelocity() const { return _jumpVelocity; }
       /**
-       * @ ジャンプ速度をセットする
-       * 
-       * @param[in] jump セットするジャンプ速度
+       * @brief                  ジャンプ速度をセットする
+       *                        
+       * @param[in] jump         セットするジャンプ速度
        */
-      inline void SetJumpVelocity(VECTOR jump) { _jumpVelocity = jump; }
+      inline void SetJumpVelocity(const VECTOR jump) { _jumpVelocity = jump; }
       /**
-       * @ チェックポイントを通過したかのフラグのゲッター
-       * 
-       * @return 通過したかのフラグ
+       * @brief                  チェックポイントを通過したかのフラグを取得
+       *                         
+       * @return                 通過したかのフラグ
        */
-      inline bool GetCheckPointFlag() { return _checkPointFlag; }
+      inline bool GetCheckPointFlag() const { return _checkPointFlag; }
       /**
-       * @ チェックポイントを通過したかのフラグのセッター
-       * 
-       * @param[in] flag
+       * @brief                  チェックポイントを通過したかのフラグを取得
+       *                        
+       * @param[in] flag         通過したかのフラグ
        */
-      inline void SetCheckPointFlag(bool flag) { _checkPointFlag = flag; }
+      inline void SetCheckPointFlag(const bool flag) { _checkPointFlag = flag; }
     protected:
       bool _checkPointFlag{ false };               //!< チェックポイントフラグ
       ColourState _crState{ ColourState::White };  //!< 色状態を管理する変数

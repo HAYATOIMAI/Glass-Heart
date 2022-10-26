@@ -29,6 +29,8 @@ void GlassHeart::Mode::ModeAmg::Init() {
   {"Death",  {"BackGround/break.png", 1, 1, 1920, 1080}}
   };
 
+  SetASyncLoadThreadNum(32);
+
   // ”ñ“¯Šú“Ç‚İ‚İŠJn
   SetUseASyncLoadFlag(TRUE);
 
@@ -50,7 +52,8 @@ void GlassHeart::Mode::ModeAmg::Init() {
   _fadeCount = 30;
 }
 /** “ü‚èŒûˆ— */
-void GlassHeart::Mode::ModeAmg::Enter() {}
+void GlassHeart::Mode::ModeAmg::Enter() {
+}
 /** “ü—Íˆ— */
 void GlassHeart::Mode::ModeAmg::Input(AppFrame::Input::InputManager& input) {
   if (input.GetJoyPad().GetXinputButtonB() || _fadeCount == 0) {

@@ -17,7 +17,7 @@ namespace GlassHeart {
   }
   /**
    * @namespace State
-   * @brief  プレイヤーのステート関係
+   * @brief     プレイヤーのステート関係
    */
   namespace State {
     /**
@@ -27,25 +27,23 @@ namespace GlassHeart {
     class StateRun : public StateBase {
     public:
       /**
-      * @brief コンストラクタ
+      * @brief            コンストラクタ
       *
-      * @param[in] owner プレイヤークラスへの参照
+      * @param[in] owner  プレイヤークラスへの参照
       */
       StateRun(Player::Player& owner) : StateBase{ owner } {};
       /**
-       * @brief 入り口処理
-       *
+       * @brief           入り口処理
        */
       void Enter() override;
       /**
-       * @brief　入力処理
+       * @brief　         入力処理
        *
        * @param[in] input インプットマネージャークラスの参照
        */
       void Input(AppFrame::Input::InputManager& input) override;
       /**
-      * @brief　更新処理
-      *
+      * @brief　          更新処理
       */
       void Update() override;
     };

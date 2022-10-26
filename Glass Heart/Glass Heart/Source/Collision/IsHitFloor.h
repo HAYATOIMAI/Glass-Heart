@@ -16,6 +16,9 @@ namespace GlassHeart {
   }
 
   namespace Collision {
+    /**
+     * @class 
+     */
     class IsHitFloor {
     public:
       /**

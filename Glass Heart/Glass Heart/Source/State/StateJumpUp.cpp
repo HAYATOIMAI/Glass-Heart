@@ -12,20 +12,21 @@
 #include "../Model/ModelAnimeManager.h"
 
 namespace {
-  constexpr auto StraifVector = 6.5f;    //!< 空中移動用のX軸移動量
-  constexpr auto JumpVecY = 24.5f;       //!< 上昇量
-  constexpr auto Gravity = -0.8f;        //!< 重力加速度
-  constexpr auto InputThreshold = 5000;  //!< 入力閾値
-  constexpr auto InputThresholdMin = 1;  //!< 入力最低値
-  constexpr auto Hit = 1;                //!< ヒットしたかのフラグ
-  constexpr auto JumpLoop = "Jump_Loop"; //!< 遷移させるステートの文字列
+  constexpr auto StraifVector = 6.5f;                      //!< 空中移動用のX軸移動量 
+  constexpr auto Gravity = -0.8f;                          //!< 重力加速度
+  constexpr auto InputThreshold = 5000;                    //!< 入力閾値
+  constexpr auto InputThresholdMin = 1;                    //!< 入力最低値
+  constexpr auto Hit = 1;                                  //!< ヒットしたかのフラグ
+  constexpr auto JumpLoop = "Jump_Loop";                   //!< 遷移させるステートの文字列
+  constexpr auto JumpFall = "JumpFall";                    //!< 遷移させるステートの文字列
+  constexpr VECTOR JumpVeclosity = { 0.0f, 24.5f, 0.0f };  //!< 上昇量
 }
 
 GlassHeart::State::StateJumpUp::StateJumpUp(Player::Player& owner) : State::StateBase{ owner } {}
 /** 入り口処理 */
 void GlassHeart::State::StateJumpUp::Enter() {
   // ジャンプ速度設定
-  VECTOR jumpbase = VGet(0.0f, JumpVecY, 0.0f);
+  VECTOR jumpbase = JumpVeclosity;
   _owner.SetJumpVelocity(jumpbase);
   // ジャンプ中のアニメーションを再生
   _owner.GetModelAnime().ChangeAnime(JumpLoop, true);
@@ -54,7 +55,6 @@ void GlassHeart::State::StateJumpUp::Update() {
   // ジャンプ上昇処理
   auto jumpVelocity = _owner.GetJumpVelocity();
   jumpVelocity.y += Gravity;
-
   forward.y = jumpVelocity.y;
   // プレイヤーの色を取得
   int state = static_cast<int> (_owner.GetColourState());
@@ -63,18 +63,18 @@ void GlassHeart::State::StateJumpUp::Update() {
   pos = _owner.GetCollision().GetIsHitSideBottom().CheckHitSideAndBottom(pos, { 0.f, forward.y, 0.f }, state);
   //　当たっていたら落下
   if (_owner.GetCollision().GetIsHitSideBottom().GetSideAndBottom().HitNum > 0) {
-    jumpVelocity.y = 0;
+    jumpVelocity.y = 0.0f;
   }
   if (_owner.GetColourState() == Player::Player::ColourState::Black) {
     // 空中の足場とプレイヤーの色が異なっていたら落下
     if (_owner.GetCollision().GetIsHitSideBottom().GetWWallThroughMesh().HitNum > 0) {
-      jumpVelocity.y = 0;
+      jumpVelocity.y = 0.0f;
     }
   }
   // 空中の足場とプレイヤーの色が異なっていたら落下
   if (_owner.GetColourState() == Player::Player::ColourState::White) {
     if (_owner.GetCollision().GetIsHitSideBottom().GetBWallThroughMesh().HitNum > 0) {
-      jumpVelocity.y = 0;
+      jumpVelocity.y = 0.0f;
     }
   }
   // 死亡判定を取るメッシュと当たり判定
@@ -106,7 +106,7 @@ void GlassHeart::State::StateJumpUp::Update() {
 
   //移動ベクトルがマイナスになったら下降状態に移行
   if (jumpVelocity.y <= 0.0f) {
-    _owner.GetStateManage().GoToState("JumpFall");
+    _owner.GetStateManage().GoToState(JumpFall);
   }
   _owner.SetJumpVelocity(jumpVelocity);
 }
