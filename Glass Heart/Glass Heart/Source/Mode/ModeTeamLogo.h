@@ -29,40 +29,39 @@ namespace GlassHeart {
 		class ModeTeamLogo : public ModeMain {
 		public:
 			/**
-			 * @brief コンストラクタ
+			 * @brief           コンストラクタ
 			 *
-			 * @param game　ゲームベースクラス
+			 * @param[in] game　ゲームメインクラスの参照
 			 */
 			ModeTeamLogo(Application::GameMain& game);
 			/**
-			 * @brief デストラクタ
+			 * @brief           デストラクタ
 			 *
 			 */
 			~ModeTeamLogo() = default;
 			/**
-			 * @brief 初期化処理
+			 * @brief           初期化処理
 			 *
 			 */
 			void Init() override;
 			/**
-			 * @brief 入り口処理
+			 * @brief           入り口処理
 			 *
 			 */
 			virtual void Enter() override;
 			/**
-			 * @brief 入力処理
+			 * @brief           入力処理
 			 *
 			 * @param[in] input インプットマネージャークラスへの参照
 			 */
 			void Input(AppFrame::Input::InputManager& input) override;
 			/**
-			 * @brief 更新処理
+			 * @brief           更新処理
 			 *
 			 */
 			void Process() override;
 			/**
-			 * @brief 描画処理
-			 *
+			 * @brief           描画処理
 			 */
 			void Render() override;
 		private:

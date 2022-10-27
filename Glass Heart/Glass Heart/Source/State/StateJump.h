@@ -8,10 +8,9 @@
 #pragma once
 #include "StateBase.h"
 #include <AppFrame.h>
-
  /**
   * @namespace GlassHeart
-  * @brief プロジェクト名
+  * @brief     プロジェクト名
   */
 namespace GlassHeart {
   namespace Player {
@@ -19,7 +18,7 @@ namespace GlassHeart {
   }
   /**
    * @namespace State
-   * @brief  プレイヤーのステート関係
+   * @brief     プレイヤーのステート関係
    */
   namespace State {
     /**
@@ -29,25 +28,23 @@ namespace GlassHeart {
     class StateJump : public StateBase {
     public:
       /**
-      * @brief コンストラクタ
+      * @brief           コンストラクタ
       *
-      * @param owner プレイヤークラスへの参照
+      * @param[in] owner プレイヤークラスへの参照
       */
       StateJump(Player::Player& owner);
       /**
-       * @brief 入り口処理
-       *
+       * @brief           入り口処理
        */
       void Enter() override;
       /**
-       * @brief 入力処理
+       * @brief           入力処理
        *
        * @param[in] input インプットマネージャークラスの参照
        */
       void Input(AppFrame::Input::InputManager& input) override;
       /**
-       * @brief 更新処理
-       *
+       * @brief           更新処理
        */
       void Update() override;
     };

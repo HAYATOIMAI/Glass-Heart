@@ -3,7 +3,7 @@
  * @brief  ステージクラスの宣言
  *
  * @author Hayato Imai
- * @date    December 2021
+ * @date   December 2021
  *********************************************************************/
 #pragma once
 #include "../Object/ObjectBase.h"
@@ -21,7 +21,7 @@ namespace GlassHeart {
   }
   /**
    * @namespace Stage
-   * @brief  ステージ関係
+   * @brief     ステージ関係
    */
   namespace Stage {
     /**
@@ -31,24 +31,30 @@ namespace GlassHeart {
     class Stage : public Object::ObjectBase {
     public:
       /**
-       * @brief コンストラクタ
+       * @brief          コンストラクタ
        *
-       * @param game ゲームメインクラスへの参照
+       * @param[in] game ゲームメインクラスへの参照
        */
       Stage(Application::GameMain& game);
       /**
-       * @brief 更新処理
+       * @brief          更新処理
        */
       virtual void Process() override;
       /**
-       * @brief 描画処理
+       * @brief          描画処理
        */
       void Render() override;
-
+      /**
+       * @brief          オブジェクトの種類を取得する
+       * 
+       * @return         オブジェクトの種類
+       */
       inline ObjectType GetObjectType() const override { return ObjectType::Stage; }
     private:
-      std::unique_ptr<Model::ModelManager> _backGround{ nullptr };  //!< スカイスフィア用ユニークポインタ
-      std::unique_ptr<Model::ModelManager> _stage{ nullptr };       //!< ステージ用ユニークポインタ
+      /** スカイスフィア用ユニークポインタ */
+      std::unique_ptr<Model::ModelManager> _backGround{ nullptr }; 
+      /** ステージ用ユニークポインタ */
+      std::unique_ptr<Model::ModelManager> _stage{ nullptr };
     };
   } // namespace Stage
 } // namespace GlassHeart

@@ -85,6 +85,12 @@
     <Filter Include="ソース ファイル\Camera">
       <UniqueIdentifier>{a7866374-8037-4802-ad38-eb204ea66831}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Object\Create">
+      <UniqueIdentifier>{2d4ef14b-370c-499d-8fcc-393a36d2b794}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Object\Create">
+      <UniqueIdentifier>{f030b2ba-9d7f-43de-9c03-2437662e6b45}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Camera\CameraManager.h">
@@ -194,6 +200,27 @@
     </ClInclude>
     <ClInclude Include="Source\Collision\IsHitCircleToCircle.h">
       <Filter>ヘッダー ファイル\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\CreateBase.h">
+      <Filter>ヘッダー ファイル\Object\Create</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\GirlCreate.h">
+      <Filter>ヘッダー ファイル\Object\Create</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\PlayerCreate.h">
+      <Filter>ヘッダー ファイル\Object\Create</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\StageCreate.h">
+      <Filter>ヘッダー ファイル\Object\Create</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\FollowCameraCreate.h">
+      <Filter>ヘッダー ファイル\Object\Create</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\GoalPointCreate.h">
+      <Filter>ヘッダー ファイル\Object\Create</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\CheckPointCreate.h">
+      <Filter>ヘッダー ファイル\Object\Create</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -305,9 +332,27 @@
     <ClCompile Include="Source\Collision\IsHitCircleToCircle.cpp">
       <Filter>ソース ファイル\Collision</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Object\PlayerCreate.cpp">
+      <Filter>ソース ファイル\Object\Create</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\StageCreate.cpp">
+      <Filter>ソース ファイル\Object\Create</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\GirlCreate.cpp">
+      <Filter>ソース ファイル\Object\Create</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\FollowCameraCreate.cpp">
+      <Filter>ソース ファイル\Object\Create</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\CheckPointCreate.cpp">
+      <Filter>ソース ファイル\Object\Create</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\GoalPointCreate.cpp">
+      <Filter>ソース ファイル\Object\Create</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="ClassDiagram.cd" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

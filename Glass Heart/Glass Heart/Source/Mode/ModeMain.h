@@ -10,7 +10,7 @@
 #include <cstdint>
  /**
   * @namespace GlassHeart
-  * @brief プロジェクト名
+  * @brief     プロジェクト名
   */
 namespace GlassHeart {
   namespace Application {
@@ -25,7 +25,7 @@ namespace GlassHeart {
   } // namespace
   /**
    * @namespace Mode
-   * @brief モード関係
+   * @brief     モード関係
    */
   namespace Mode {
     /**
@@ -35,53 +35,64 @@ namespace GlassHeart {
     class ModeMain : public AppFrame::Mode::ModeBase {
     public:
       /**
-       * @brief コンストラクタ
+       * @brief           コンストラクタ
        *
-       * @param game　ゲームメインクラス
+       * @param[in] game　ゲームメインクラスの参照
        */
       ModeMain(Application::GameMain& game);
       /**
-       * @brief デストラクタ
-       *
+       * @brief           デストラクタ
        */
       ~ModeMain() = default;
       /**
-       * @brief 初期化処理
-       *
+       * @brief           初期化処理
        */
-      void Init() override {};
+      virtual void Init() override {};
       /**
-       * @brief 入り口処理
-       *
+       * @brief           入り口処理
        */
-      void Enter() override {};
+      virtual void Enter() override {};
       /**
-       * @brief 入力処理
+       * @brief           入力処理
        *
        * @param[in] input インプットマネージャークラスへの参照
        */
-      void Input(AppFrame::Input::InputManager& input) override {};
+      virtual void Input(AppFrame::Input::InputManager& input) override {};
       /**
-       * @brief 更新処理
-       *
+       * @brief           更新処理
        */
-      void Process()override {};
+      virtual void Process()override {};
       /**
-       * @brief　描画処理
-       *
+       * @brief　         描画処理
        */
-      void Render() override {};
+      virtual void Render() override {};
       /**
-       * @brief 終了処理
+       * @brief           終了処理
        */
-      void Exit() override {};
-
+      virtual void Exit() override {};
+      /**
+       * @brief           ゲームメインクラスを取得する
+       * 
+       * @return          ゲームメインクラスの参照
+       */
       inline Application::GameMain& GetGameMain() const { return _gameMain; }
-
+      /**
+       * @brief           オブジェクトファクトリーを取得する
+       * 
+       * @return          オブジェクトファクトリーの参照
+       */
       Object::ObjectFactory& GetObjectFactory();
-
+      /**
+       * @brief           オブジェクトサーバーを取得する
+       * 
+       * @return          オブジェクトサーバーの参照
+       */
       Object::ObjectServer& GetObjectServer();
-
+      /**
+       * @brief           UIを取得する
+       * 
+       * @return          UIの参照
+       */
       UI::UI& GetUI();
     protected:
       Application::GameMain& _gameMain;        //!< ゲームメインクラスへの参照

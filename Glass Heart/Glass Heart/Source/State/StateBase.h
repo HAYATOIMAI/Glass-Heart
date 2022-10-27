@@ -8,7 +8,6 @@
 #pragma once
 #include "StateManager.h"
 #include <AppFrame.h>
-
  /**
   * @namespace GlassHeart
   * @brief プロジェクト名
@@ -19,7 +18,7 @@ namespace GlassHeart {
   }
   /**
    * @namespace State
-   * @brief  プレイヤーのステート関係
+   * @brief     プレイヤーのステート関係
    */
   namespace State {
     /**
@@ -29,13 +28,13 @@ namespace GlassHeart {
     class StateBase : public AppFrame::State::StateBaseRoot {
     public:
       /**
-       * @brief コンストラクタ
+       * @brief           コンストラクタ
        *
        * @param[in] owner プレイヤークラスへの参照
        */
       StateBase(Player::Player& owner) : _owner{ owner } {};
       /**
-       * @brief 描画処理
+       * @brief           描画処理
        */
       void Draw() override;
     protected:
