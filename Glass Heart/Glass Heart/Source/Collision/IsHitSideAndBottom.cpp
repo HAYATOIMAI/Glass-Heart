@@ -26,7 +26,7 @@ GlassHeart::Collision::IsHitSideAndBottom::IsHitSideAndBottom(Object::ObjectBase
 }
 /** ‹ó’†‚É‘¶İ‚µ‚Ä‚¢‚é‘«ê‚Ì’ê–Ê‚Æ‘¤–Ê‚Ì“–‚½‚è”»’è */
 VECTOR GlassHeart::Collision::IsHitSideAndBottom::CheckHitSideAndBottom(const VECTOR& pos, const VECTOR& forward, 
-  const std::uint_fast8_t state) {
+  const std::int_fast8_t state) {
   auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles(Stage);
   auto newPos = VAdd(pos, forward);
   auto c1 = VAdd(newPos, { 0.f, CapsuleStart, 0.f });

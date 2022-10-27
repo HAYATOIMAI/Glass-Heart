@@ -18,9 +18,9 @@ namespace AppFrame {
    */
   namespace State {
     /**
-       * @class StateBaseRoot
-       * @brief 状態の基底クラス
-       */
+     * @class StateBaseRoot
+     * @brief 状態の基底クラス
+     */
     class StateBaseRoot {
     public:
       /**

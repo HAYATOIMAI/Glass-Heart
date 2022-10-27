@@ -10,6 +10,10 @@
 #include "../Application/GameBase.h"
 #include <DxLib.h>
 
+namespace {
+  constexpr std::int_fast8_t None = -1;
+}
+
 namespace AppFrame {
   namespace Sound {
     /** コンストラクタ */

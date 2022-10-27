@@ -11,7 +11,7 @@
 #include <unordered_map>
  /**
   * @namespace GlassHeart
-  * @brief プロジェクト名
+  * @brief     プロジェクト名
   */
 namespace GlassHeart {
   namespace Object {
@@ -19,7 +19,7 @@ namespace GlassHeart {
   }
   /**
    * @namespace Model
-   * @brief モデル関係
+   * @brief     モデル関係
    */
   namespace Model {
     /**
@@ -29,81 +29,76 @@ namespace GlassHeart {
     class ModelAnimeManager : public ModelManager {
     public:
       /**
-       * @brief　コンストラクタ
-       *
-       * @param[in] owner オブジェクトベースクラスへの参照
+       * @brief　                コンストラクタ
+       *                         
+       * @param[in] owner        オブジェクトベースクラスへの参照
        */
       ModelAnimeManager(GlassHeart::Object::ObjectBase& owner);
       /**
-       * @brief　デストラクタ
-       *
+       * @brief　                デストラクタ
        */
       virtual ~ModelAnimeManager() override;
       /**
-       * @brief 初期化
-       *
+       * @brief                  初期化
        */
       void Init() override;
       /**
-       * @brief アニメーションの登録
-       *
-       * @param[in] key 任意の文字列キー
-       * @param[in] animIndex 関連付けるアニメインデックス
+       * @brief                  アニメーションの登録
+       *                         
+       * @param[in] key          任意の文字列キー
+       * @param[in] animIndex    関連付けるアニメインデックス
        */
       void Register(std::string_view key, int animIndex);
       /**
-       * @brief 更新
-       *
+       * @brief                  更新処理
        */
       void Update() override;
       /**
-       * @brief 描画
-       *
+       * @brief                  描画処理
        */
       void Draw() override;
       /**
-       * @brief アニメーションの変更
+       * @brief                  アニメーションの変更
        *
-       * @param key     任意の文字列キー
-       * @param repeate アニメーションのループ可否
+       * @param[in] key          任意の文字列キー
+       * @param[in] repeate      アニメーションのループ可否
        * @param[in] newAnimIndex アニメインデックス
        */
       void ChangeAnime(std::string_view key, bool repeate = false);
       /**
-       * @brief アニメーションブレンド
-       *
+       * @brief                  アニメーションブレンド
        */
       void AnimeBlend();
       /**
-       * @brief アニメーションを繰り返した回数の取得
-       *
-       * @return 繰り返した回数
+       * @brief                  アニメーションを繰り返した回数の取得
+       *                         
+       * @return                 繰り返した回数
        */
       int GetRepeatedCount() const { return _repeatedCount; }
       /**
-       * @brief アニメーションの総時間を取得
-       *
-       * @return 総時間
+       * @brief                  アニメーションの総時間を取得
+       *                         
+       * @return                 総時間
        */
       float GetPlayTime() const { return _playTime; }
       /**
-       * @brief アニメーションの総時間を取得
-       *
-       * @return 総時間
+       * @brief                  アニメーションの総時間を取得
+       *                         
+       * @return                 総時間
        */
       float GetPlayProgress() const { return _playTime / _totalTime; }
       /**
-       * @brief 再生時間の掛率設定
-       *
-       * @param[in] timeRate 再生時間の掛率
+       * @brief                  再生時間の掛率設定
+       *                         
+       * @param[in] timeRate     再生時間の掛率
        */
-      void SetTimeRate(float timeRate) { _timeRate = timeRate; }
+      void SetTimeRate(const float timeRate) { _timeRate = timeRate; }
       /**
-       * @brief 再生時間掛率の取得
-       *
-       * @return 再生時間掛率
+       * @brief                  再生時間掛率の取得
+       *                         
+       * @return                 再生時間掛率
        */
-      float GetTimeRate() { return _timeRate; }
+      float GetTimeRate() const { return _timeRate; }
     private:
       bool _isRepeate{ false };                 //!< アニメーションのループ可否
       float _animrate{ 1.f };                   //!< アニメーションブレンド率
@@ -114,8 +109,8 @@ namespace GlassHeart {
       std::int_fast16_t _attachIndex{ -1 };     //!< アタッチする番号
       std::int_fast16_t _oldAttachIndex{ -1 };  //!< 前のアタッチ番号
       std::int_fast16_t _repeatedCount{ 0 };    //!< アニメーションを繰り返した回数
-      //!< レジストリ
-      std::unordered_map<std::string, int> _registry;
+      /** レジストリ */
+      std::unordered_map<std::string, std::int_fast32_t> _registry;
     };
   } //  namespace Model
 } //  namespace GlassHeart

@@ -7,7 +7,6 @@
  *********************************************************************/
 #pragma once
 #include <memory>
-
 /**
  * @namespace AppFrame
  * @brief  アプリケーションフレーム
@@ -73,13 +72,27 @@ namespace AppFrame {
        * @brief 出口処理
        */
       virtual void Exit() {};
-
+      /**
+       * @brief ゲームベースクラスの参照
+       */
       inline GameBase& GetGame() const { return _game; };
-
+      /**
+       * @brief リソースサーバーの取得
+       * 
+       * @return リソースサーバーの参照
+       */
       Resource::ResourceServer& GetResourceServer();
-
+      /**
+       * @brief サウンドマネージャーの取得
+       * 
+       * @return サウンドマネージャーの参照
+       */
       Sound::SoundManager& GetSoundManager();
-
+      /**
+       * @brief モードサーバーの取得
+       * 
+       * @return モードサーバーの参照
+       */
       ModeServer& GetModeServer();
     protected:
       GameBase& _game;  //!< ゲームベースクラスへの参照

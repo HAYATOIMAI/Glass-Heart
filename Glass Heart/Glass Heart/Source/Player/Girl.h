@@ -32,7 +32,7 @@ namespace GlassHeart {
   }
   /**
    * @namespace Player
-   * @brief プレイヤー関係
+   * @brief     プレイヤー関係
    */
   namespace Player {
     /**
@@ -42,43 +42,38 @@ namespace GlassHeart {
     class Girl : public  Object::ObjectBase {
     public:
       /**
-       * @brief コンストラクタ
+       * @brief            コンストラクタ
        *
-       * @param game ゲームメインクラスへの参照
+       * @param[in] game   ゲームメインクラスへの参照
        */
       Girl(Application::GameMain& game);
       /**
-       * @brief デストラクタ
-       *
+       * @brief            デストラクタ
        */
       virtual~Girl() override = default;
       /**
-       * @brief 入力処理
+       * @brief            入力処理
        *
        * @param[in] input  インプットマネージャークラスの参照
        */
       void Input(AppFrame::Input::InputManager& input) override;
       /**
-       * @brief 更新処理
-       *
+       * @brief            更新処理
        */
       void Process() override;
       /**
-       * @brief 描画処理
-       *
+       * @brief            描画処理
        */
       void Render() override;
       /**
-       * @brief ワールド座標変換
-       *
+       * @brief            ワールド座標変換
        */
       void ComputeWorldTransform() override;
       /**
-       * @brief タイプの取得
-       * @return タイプID
+       * @brief            タイプの取得
+       * @return           タイプID
        */
-      ObjectType GetObjectType() const  override { return ObjectType::Girl; };
-
+      ObjectType GetObjectType() const override { return ObjectType::Girl; };
     public:
       /**
        * @class StateBase

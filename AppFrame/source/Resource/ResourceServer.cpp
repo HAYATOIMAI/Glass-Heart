@@ -8,6 +8,10 @@
 #include "ResourceServer.h"
 #include <DxLib.h>
 
+namespace {
+  constexpr auto None = -1;
+}
+
 namespace AppFrame {
   namespace Resource {
     /** コンストラクタ */
@@ -36,7 +40,8 @@ namespace AppFrame {
         _graphs.erase(key.data());
       }
       auto allnum = divgraph.xNum * divgraph.yNum;
-      std::vector<int> handles(allnum);
+      std::vector<std::int_fast32_t> handles(allnum);
+      // 画像を分割読み込み
       LoadDivGraph(divgraph.fileName.c_str(), allnum,
         divgraph.xNum, divgraph.yNum,
         divgraph.xSize, divgraph.ySize, handles.data());
@@ -52,25 +57,28 @@ namespace AppFrame {
         LoadGraphic(key, gra);
       }
     }
+    /** カレントディレクトリを設定 */
     void ResourceServer::ChangeCurrentFile(std::string_view path) {
       _currntPath = path;
     }
     /** 画像ハンドルの取得 */
-    int ResourceServer::GetGraph(std::string_view key, int no) {
+    std::int_fast32_t ResourceServer::GetGraph(std::string_view key, std::int_fast16_t no) {
+      // 該当する画像ハンドルがなければ-1を返す
       if (!_graphs.contains(key.data())) {
-        return -1;
+        return None;
       }
       auto&& [divgraph, handles] = _graphs[key.data()];
       auto handle = handles.at(no);
       return handle;
     }
     /** 画像ハンドルの分割数の取得 */
-    int ResourceServer::GetGraphCount(std::string_view& key) {
+    std::int_fast32_t ResourceServer::GetGraphCount(std::string_view& key) {
+      // 該当する画像ハンドルがなければ-1を返す
       if (!_graphs.contains(key.data())) {
-        return -1;
+        return None;
       }
       auto&& [divgraph, handles] = _graphs[key.data()];
-      int allnum = static_cast<int> (handles.size());
+      auto allnum = static_cast<std::int_fast32_t> (handles.size());
       return allnum;
     }
     /**  画像情報の取得 */
@@ -79,7 +87,6 @@ namespace AppFrame {
         return DivGraph();
       }
       auto&& [divgraph, handles] = _graphs[key.data()];
-
       return divgraph;
     }
     /** 画像の消去 */
@@ -94,7 +101,8 @@ namespace AppFrame {
       _graphs.clear();
     }
     /** モデルの読み込み */
-    int ResourceServer::LoadModel(std::string_view key, const std::string_view filename) {
+    std::int_fast32_t ResourceServer::LoadModel(std::string_view key, 
+      const std::string_view filename) {
       if (_models.contains(key.data())) {
         auto& [filename, handles, animes] = _models[key.data()];
         // 登録済みの場合はモデルを削除
@@ -106,15 +114,15 @@ namespace AppFrame {
         _models.erase(key.data());
       }
       auto handle = MV1LoadModel(filename.data());
-      std::vector<int> handles{ handle };
-
+      std::vector<std::int_fast32_t> handles{ handle };
+      // アニメーションの数を取得する
       auto animNum = MV1GetAnimNum(handle);
-      std::unordered_map<std::string, int> animes;
+      std::unordered_map<std::string, std::int_fast32_t> animes;
       for (auto i = 0; i < animNum; ++i) {
         auto animName = MV1GetAnimName(handle, i);
         animes.emplace(animName, i);
       }
-
+      // キーとデータを連想配列に登録
       _models.emplace(key, std::make_tuple(filename.data(), handles, animes));
       return handle;
     }
@@ -126,10 +134,10 @@ namespace AppFrame {
       }
     }
     /** モデルのハンドルの取得 */
-    std::pair<int, int> ResourceServer::GetModles(std::string_view key, int no) {
+    std::pair<std::int_fast32_t, std::int_fast32_t> ResourceServer::GetModles(std::string_view key, std::int_fast16_t no) {
       if (!_models.contains(key.data())) {
         // キーが未登録
-        return std::make_pair(-1, no);
+        return std::make_pair(None, no);
       }
       auto& [filename, handles, animes] = _models[key.data()];
       if (no < handles.size()) {
@@ -153,15 +161,15 @@ namespace AppFrame {
       _models.clear();
     }
     /** モデルのアニメーション番号を取得 */
-    int ResourceServer::GetModelAnimIndex(std::string_view key, std::string_view animName) {
+    std::int_fast32_t ResourceServer::GetModelAnimIndex(std::string_view key, std::string_view animName) {
       if (!_models.contains(key.data())) {
         // キーが未登録
-        return -1;
+        return None;
       }
       auto& [filename, handles, animes] = _models[key.data()];
       if (!animes.contains(animName.data())) {
         // アニメの名前が未登録
-        return -1;
+        return None;
       }
       return animes[animName.data()];
       return 0;
@@ -177,7 +185,7 @@ namespace AppFrame {
             return true;
           }
           return false;
-          });
+        });
       }
     }
     /** 音ファイルの読み込み */
@@ -188,11 +196,11 @@ namespace AppFrame {
       }
       // キーが無かった
       auto&& [filename, isLoad] = filename_isLoad;
-      auto handle = -1;
+      auto handle = None;
       if (isLoad) {
         handle = LoadSoundMem(filename.c_str());
       }
-      // キーとデータをmapに登録
+      // キーとデータを連想配列に登録
       _sounds.emplace(key, std::make_pair(filename, handle));
     }
     /** 音ファイルの一括読み込み */
@@ -205,10 +213,10 @@ namespace AppFrame {
       }
     }
     /** 音ファイル情報の取得 */
-    std::pair<std::string, int> ResourceServer::GetSoundInfo(std::string_view key) {
+    std::pair<std::string, std::int_fast32_t> ResourceServer::GetSoundInfo(std::string_view key) {
       if (!_sounds.contains(key.data())) {
         // キーが未登録
-        return std::make_pair("", -1);
+        return std::make_pair("", None);
       }
       return _sounds[key.data()];
     }

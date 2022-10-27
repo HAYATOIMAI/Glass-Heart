@@ -15,7 +15,7 @@ namespace AppFrame {
   class GameBase;
   /**
    * @namespace Sound 
-   * @brief サウンド関係
+   * @brief     サウンド関係
    */
   namespace Sound {
     /**
@@ -25,52 +25,54 @@ namespace AppFrame {
     class SoundManager {
     public:
       /**
-       * @brief コンストラクタ
-       *
-       * @param[in] game ゲームベースクラスへの参照
+       * @brief               コンストラクタ
+       *                      
+       * @param[in] game      ゲームベースクラスへの参照
        */
       SoundManager(GameBase& game) : _game{ game } {};
       /**
-       * @brief デストラクタ
-       *
+       * @brief               デストラクタ
        */
       virtual ~SoundManager();
       /**
-       * @brief 再生(ループ無し)
-       *
-       * @param[in] key 登録済みの文字列
+       * @brief               再生(ループ無し)
+       *                      
+       * @param[in] key       登録済みの文字列
        */
       void Play(std::string_view key);
       /**
-       * @brief ループ再生
-       *
-       * @param[in] key 登録済みの文字列
+       * @brief               ループ再生
+       *                      
+       * @param[in] key       登録済みの文字列
        */
       void PlayLoop(std::string_view key);
       /**
-       * @brief 音量を設定
-       *
-       * @param[in] key 登録済みの文字列
-       * @param volume  音量
+       * @brief               音量を設定
+       *                      
+       * @param[in] key       登録済みの文字列
+       * @param volume        音量
        */
       void SetVolume(std::string_view key, int volume);
       /**
-       * @brief　停止
-       *
-       * @param[in] key 登録済みの文字列
+       * @brief　             再生を停止
+       *                      
+       * @param[in] key       登録済みの文字列
        */
       void StopSound(std::string_view key);
-
-      inline void SetMute(bool isMute) { _isMute = isMute; }
+      /**
+       * @brief               ミュートするかのフラグをセットする
+       * 
+       * @param[in] isMute    ミュートにするかのフラグ
+       */
+      inline void SetMute(const bool isMute) { _isMute = isMute; }
     private:
       /**
-       * @brief　再生
+       * @brief　             音楽を再生
        *
        * @param[in] key       登録済みの文字列
        * @param[in] playType  再生の種類
        */
       void Play(std::string_view key, int playType);
-
       GameBase& _game;        //!< ゲームベースクラスへの参照
       bool _isMute{ false };  //!< ミュートにするかのフラグ
     };

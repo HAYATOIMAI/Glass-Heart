@@ -15,6 +15,17 @@
 #include "../Object/ObjectFactory.h"
 #include "../Object/ObjectServer.h"
 #include "../UI/UI.h"
+
+namespace {
+  constexpr std::int_fast16_t Volume = 128;
+  constexpr auto Amg = "Amg";
+  constexpr auto TeamLogo = "TeamLogo";
+  constexpr auto Title = "Title";
+  constexpr auto Loading = "Loading";
+  constexpr auto InGame = "InGame";
+  constexpr auto GameClear = "GameClear";
+  constexpr auto Resource = "resource";
+}
  /** 実体 */
 GlassHeart::Application::GameMain _gameMain;
 /** コンストラクタ */
@@ -27,7 +38,7 @@ bool GlassHeart::Application::GameMain::Initialize(HINSTANCE hInstance) {
 
   auto& res = GetResourceServer();
   /** リソースのカレントフォルダ設定 */
-  res.ChangeCurrentFile("resource");
+  res.ChangeCurrentFile(Resource);
 #ifdef _DEBUG
   /** マテリアルの自己発光色を暗い青色にする */
   MATERIALPARAM material;
@@ -39,29 +50,29 @@ bool GlassHeart::Application::GameMain::Initialize(HINSTANCE hInstance) {
   SetMaterialParam(material);
 #endif
   /** 使用する音のテーブル */
-  const AppFrame::Resource::ResourceServer::SoundMap useSound{
+  const AppFrame::Resource::ResourceServer::SoundMap useSound {
     // BGM
     {"bgm",      {"Sound/BGM/BGM01_Ver2.mp3",false}},
     {"titleBgm", {"Sound/BGM/titleBGM.mp3",false}},
     // SE
-    {"walk",    {"Sound/SE/SE_Walk.wav",true}},
-    {"run",     {"Sound/SE/SE_Run.wav",true}},
-    {"jump",    {"Sound/SE/SE_Jump.wav",true}},
-    {"landing", {"Sound/SE/SE_Landing.wav",true}},
-    {"death",   {"Sound/SE/SE_Death.wav",true}},
-    {"select",  {"Sound/SE/SE_Select.wav",true}}
+    {"walk",     {"Sound/SE/SE_Walk.wav",true}},
+    {"run",      {"Sound/SE/SE_Run.wav",true}},
+    {"jump",     {"Sound/SE/SE_Jump.wav",true}},
+    {"landing",  {"Sound/SE/SE_Landing.wav",true}},
+    {"death",    {"Sound/SE/SE_Death.wav",true}},
+    {"select",   {"Sound/SE/SE_Select.wav",true}}
   };
   /** 音を読み込み */
   res.LoadSounds(useSound);
   // サウンドマネージャーの取得
   auto& sm = GetSoundManager();
-  sm.SetVolume("bgm", 128);
-  sm.SetVolume("titleBgm", 128);
-  sm.SetVolume("walk", 128);
+  sm.SetVolume("bgm", Volume);
+  sm.SetVolume("titleBgm", Volume);
+  sm.SetVolume("walk", Volume);
   sm.SetVolume("run", 255);
   sm.SetVolume("jump", 255);
   sm.SetVolume("landing", 255);
-  sm.SetVolume("death", 128);
+  sm.SetVolume("death", Volume);
   sm.SetVolume("select", 255);
 #ifndef _DEBUG
   sm.SetMute(false);
@@ -76,17 +87,17 @@ bool GlassHeart::Application::GameMain::Initialize(HINSTANCE hInstance) {
   // ユーザーインターフェース生成
   _ui = std::make_unique<GlassHeart::UI::UI>(*this);
   // モードサーバーを生成し、AMGモードを登録
-  _modeServer = std::make_unique<AppFrame::Mode::ModeServer>("Amg", std::make_shared<Mode::ModeAmg>(*this));
+  _modeServer = std::make_unique<AppFrame::Mode::ModeServer>(Amg, std::make_shared<Mode::ModeAmg>(*this));
   // チームロゴモードを登録
-  _modeServer->Register("TeamLogo", std::make_shared<Mode::ModeTeamLogo>(*this));
+  _modeServer->Register(TeamLogo, std::make_shared<Mode::ModeTeamLogo>(*this));
   // タイトルモードを登録
-  _modeServer->Register("Title", std::make_shared<Mode::ModeTitle>(*this));
+  _modeServer->Register(Title, std::make_shared<Mode::ModeTitle>(*this));
   //　ローディングモードを登録
-  _modeServer->Register("Loading", std::make_shared<Mode::ModeLoading>(*this));
+  _modeServer->Register(Loading, std::make_shared<Mode::ModeLoading>(*this));
   // インゲームモードを登録
-  _modeServer->Register("InGame", std::make_shared<Mode::ModeGame>(*this));
+  _modeServer->Register(InGame, std::make_shared<Mode::ModeGame>(*this));
   // ゲームクリアモードを登録
-  _modeServer->Register("GameClear", std::make_shared<Mode::ModeClear>(*this));
+  _modeServer->Register(GameClear, std::make_shared<Mode::ModeClear>(*this));
   return true;
 }
 /** 解放処理 */

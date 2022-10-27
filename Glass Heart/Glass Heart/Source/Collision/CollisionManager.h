@@ -15,7 +15,7 @@
 #include "IsHitCircleToCircle.h"
  /**
   * @namespace GlassHeart
-  * @brief プロジェクト名
+  * @brief     プロジェクト名
   */
 namespace GlassHeart {
   namespace Object {
@@ -23,7 +23,7 @@ namespace GlassHeart {
   }
   /**
    * @namespace Collision
-   * @brief 衝突判定
+   * @brief     衝突判定関係
    */
   namespace Collision {
     /**
@@ -33,45 +33,45 @@ namespace GlassHeart {
     class CollisionManager {
     public:
       /**
-       * @brief　コンストラクタ
+       * @brief　          コンストラクタ
        *
        * @param[in] owner　オブジェクトベースクラスへの参照
        */
       CollisionManager(GlassHeart::Object::ObjectBase& owner);
       /**
-       * @ 床との当たり判定のゲッター
-       * 
-       * @return 床との当たり判定の参照
+       * @brief            床との当たり判定を取得
+       *                   
+       * @return           床との当たり判定の参照
        */
       inline IsHitFloor& GetIsHitFloor() { return _isHitFloor; }
       /**
-       * @ ジャンプした際の床との当たり判定のゲッター
-       * 
-       * @return ジャンプした際の床との当たり判定の参照
+       * @brief            ジャンプした際の床との当たり判定を取得
+       *                   
+       * @return           ジャンプした際の床との当たり判定の参照
        */
       inline IsHitJumpStand& GetIsHitJumpStand() { return _isHitJumpStand; }
       /**
-       * @ 空中に存在している足場の底面と側面の当たり判定のゲッター
-       * 
-       * @return 底面と側面の当たり判定の参照
+       * @brief            空中に存在している足場の底面と側面の当たり判定を取得
+       *                   
+       * @return           底面と側面の当たり判定の参照
        */
       inline IsHitSideAndBottom& GetIsHitSideBottom() { return _isHitSideBottom; }
       /**
-       * @ 死亡判定をとる白いメッシュのゲッター
-       * 
-       * @return 死亡判定をとる白いメッシュの参照
+       * @brief            死亡判定をとる白いメッシュを取得
+       *                   
+       * @return           死亡判定をとる白いメッシュの参照
        */
       inline IsHitWDeathMesh& GetIsHitWDeathMesh() { return _isHitWDeathMesh; }
       /**
-       * @ 死亡判定をとる黒いメッシュのゲッター
-       * 
-       * @return 死亡判定をとる黒いメッシュのの参照
+       * @brief            死亡判定をとる黒いメッシュを取得
+       *                   
+       * @return           死亡判定をとる黒いメッシュのの参照
        */
       inline IsHitBDeathMesh& GetIsHitBDeathMesh() { return _isHitBDeathMesh; }
       /**
-       * @ 円と円の衝突判定クラスのゲッター
-       * 
-       * @return 円と円の衝突判定 の参照
+       * @brief            円と円の衝突判定クラスを取得
+       *                   
+       * @return           円と円の衝突判定の参照
        */
       inline IsHitCircleToCircle& GetIsHitCircle() { return _isHitCircle; }
     private:
