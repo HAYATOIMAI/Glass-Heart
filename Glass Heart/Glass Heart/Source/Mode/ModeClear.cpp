@@ -13,17 +13,16 @@
 
 std::int_fast16_t GlassHeart::Mode::ModeMain::_count;
 std::int_fast16_t GlassHeart::Mode::ModeMain::_countSeconds;
-
 /** コンストラクタ */
 GlassHeart::Mode::ModeClear::ModeClear(Application::GameMain& game) : ModeMain{ game } {}
 /** 初期化処理 */
 void GlassHeart::Mode::ModeClear::Init() {
   // 使用する画像のテーブル
   const AppFrame::Resource::ResourceServer::GraphMap useGraph{
- {"TitleBG",       {"Title/TitleBG.png",     1, 1, 1920, 1080}},
- {"Result",        {"Result/result4.png",    1, 1, 1920, 1080}},
- {"GameClear",     {"Result/GameClear.png",  1, 1, 1920, 1080}},
- {"GameOver",      {"Result/GameOver.png",   1, 1, 1920, 1080}},
+ {"TitleBG",    {"Title/TitleBG.png",     1, 1, 1920, 1080}},
+ {"Result",     {"Result/result4.png",    1, 1, 1920, 1080}},
+ {"GameClear",  {"Result/GameClear.png",  1, 1, 1920, 1080}},
+ {"GameOver",   {"Result/GameOver.png",   1, 1, 1920, 1080}},
   };
 
   // リソースサーバーを取得
@@ -43,8 +42,7 @@ void GlassHeart::Mode::ModeClear::Input(AppFrame::Input::InputManager& input) {
   }
 }
 /** 更新処理 */
-void GlassHeart::Mode::ModeClear::Process() {
-}
+void GlassHeart::Mode::ModeClear::Process() {}
 /** 描画処理 */
 void GlassHeart::Mode::ModeClear::Render() {
   if (_countSeconds == 0) {

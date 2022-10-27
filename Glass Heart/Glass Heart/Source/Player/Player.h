@@ -19,7 +19,7 @@ namespace AppFrame {
 }
 /**
  * @namespace GlassHeart
- * @brief プロジェクト名
+ * @brief     プロジェクト名
  */
 namespace GlassHeart {
   namespace Application {
@@ -126,7 +126,7 @@ namespace GlassHeart {
        *                         
        * @return                 プレイヤーの色の参照
        */
-      inline ColourState& GetColourState() { return _crState; }
+      inline ColourState& GetColourState() { return _colorState; }
       /**
        * @brief                  ジャンプ速度を取得する
        *                         
@@ -152,13 +152,23 @@ namespace GlassHeart {
        */
       inline void SetCheckPointFlag(const bool flag) { _checkPointFlag = flag; }
     protected:
-      bool _checkPointFlag{ false };               //!< チェックポイントフラグ
-      ColourState _crState{ ColourState::White };  //!< 色状態を管理する変数
-      float _forwardSpeed{ 0.0f };                 //!< 移動速度
-      std::int_fast16_t _deathCoolCount{ 0 };      //!< 死亡した時の復活までのクールタイム
-      std::int_fast8_t _recastCount{ 0 };          //!< 色変更クールタイム用カウンタ
-      std::string _stateName{ "White" };           //!< デバッグ用状態名変数
-      VECTOR _jumpVelocity{ 0.0f, 0.0f, 0.0f };    //!< ジャンプ速度
+      /**
+       * @brief 
+       * 
+       */
+      void CollisionDetectionByColor();
+      /**
+       * @brief 
+       * 
+       */
+      void IsHitCheckPoint();
+      bool _checkPointFlag{ false };                  //!< チェックポイントフラグ
+      ColourState _colorState{ ColourState::White };  //!< 色状態を管理する変数
+      float _forwardSpeed{ 0.0f };                    //!< 移動速度
+      std::int_fast16_t _deathCoolCount{ 0 };         //!< 死亡した時の復活までのクールタイム
+      std::int_fast8_t _recastCount{ 0 };             //!< 色変更クールタイム用カウンタ
+      std::string _stateName{ "White" };              //!< デバッグ用状態名変数
+      VECTOR _jumpVelocity{ 0.0f, 0.0f, 0.0f };       //!< ジャンプ速度
     };
   } // namespace Player
 } // namespace GlassHeart

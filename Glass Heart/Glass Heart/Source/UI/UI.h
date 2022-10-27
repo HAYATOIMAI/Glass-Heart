@@ -56,7 +56,7 @@ namespace GlassHeart {
        *                         
        * @param[in] x            XÀ•W•`‰æˆÊ’u
        * @param[in] y            YÀ•W•`‰æˆÊ’u
-       * @param[in] interval     ŠÔŠu
+       * @param[in] exrate       ŠÔŠu
        */
       virtual void Render(int x, int y, double exrate);
       /**

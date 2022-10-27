@@ -17,7 +17,7 @@ namespace GlassHeart {
     class IsHitWDeathMesh {
     public:
       /**
-       * @ コンストラクタ
+       * @brief           コンストラクタ
        * 
        * @param[in] owner 親クラスへの参照
        */
@@ -25,13 +25,13 @@ namespace GlassHeart {
       /**
        * @brief 死亡判定をとる白いメッシュとの当たり判定
        *
-       * @param[in] pos 位置ベクトル
+       * @param[in] pos     位置ベクトル
        * @param[in] forward 移動量ベクトル
-       * @return 位置ベクトル
+       * @return            位置ベクトル
        */
       VECTOR CheckHitWDeathMesh(const VECTOR& pos, const VECTOR& forward);
 
-      inline MV1_COLL_RESULT_POLY_DIM GetWDeathMesh() { return _wDeath; }
+      inline MV1_COLL_RESULT_POLY_DIM GetWDeathMesh() const { return _wDeath; }
     private:
       Object::ObjectBase& _owner;        //!< 親クラスへの参照
       MV1_COLL_RESULT_POLY_DIM _wDeath;  //!< 死亡判定をとる白いメッシュとの当たり判定用変数

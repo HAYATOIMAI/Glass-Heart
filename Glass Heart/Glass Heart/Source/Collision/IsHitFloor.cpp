@@ -14,6 +14,7 @@ namespace {
   constexpr auto NavMesh_B = "BThroughFloor_NavMesh";
   constexpr auto NavMesh_W = "WThroughFloor_NavMesh";
   constexpr auto FloorMesh = "Floor_NavMesh";
+  constexpr auto Hit = 1;
 }
 /** コンストラクタ */
 GlassHeart::Collision::IsHitFloor::IsHitFloor(Object::ObjectBase& owner) :_owner{ owner } {
@@ -22,7 +23,8 @@ GlassHeart::Collision::IsHitFloor::IsHitFloor(Object::ObjectBase& owner) :_owner
   _wThrough.HitFlag = 0;
 }
 /** 床との当たり判定 */
-VECTOR GlassHeart::Collision::IsHitFloor::CheckHitFloor(const VECTOR& pos, const VECTOR& forward, const std::uint_fast8_t state) {
+VECTOR GlassHeart::Collision::IsHitFloor::CheckHitFloor(const VECTOR& pos, const VECTOR& forward, 
+  const std::int_fast8_t state) {
   auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles(Stage);
   auto newPos = VAdd(pos, forward);
   auto start = VAdd(pos, { 0.f, 1.f, 0.f });
@@ -31,7 +33,7 @@ VECTOR GlassHeart::Collision::IsHitFloor::CheckHitFloor(const VECTOR& pos, const
   switch (state) {
   case 0:
     _bThrough = MV1CollCheck_Line(handle, MV1SearchFrame(handle, NavMesh_B), start, end);
-    if (_bThrough.HitFlag == 1) {
+    if (_bThrough.HitFlag == Hit) {
       // 当たっていたら位置を返す
       return pos;
     }
@@ -39,7 +41,7 @@ VECTOR GlassHeart::Collision::IsHitFloor::CheckHitFloor(const VECTOR& pos, const
     break;
   case 1:
     _wThrough = MV1CollCheck_Line(handle, MV1SearchFrame(handle, NavMesh_W), start, end);
-    if (_wThrough.HitFlag == 1) {
+    if (_wThrough.HitFlag == Hit) {
       // 当たっていたら位置を返す
       return pos;
     }

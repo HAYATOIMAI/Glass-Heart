@@ -9,6 +9,13 @@
 #include <DxLib.h>
 #include <memory>
 #include <numbers>
+
+namespace {
+  constexpr VECTOR Position = { 0.0f, 0.0f, 0.0f };
+  constexpr VECTOR Rotation = { 0.0f, 0.0f, 0.0f };
+  constexpr VECTOR Scale = { 1.0f, 1.0f, 1.0f };
+
+}
 /**
  * @namespace AppFrame
  * @brief     フレームワーク
@@ -298,9 +305,9 @@ namespace GlassHeart {
       bool _hitFlag{ false };                           //!< コリジョン用フラグ
       float _radius{ 0.0f };                            //!< コリジョン用半径
       MATRIX _worldTransform{ MGetIdent() };            //!< ワールド座標変換
-      VECTOR _position{ 0.0f, 0.0f, 0.0f };             //!< 位置情報
-      VECTOR _rotation{ 0.0f, 0.0f, 0.0f };             //!< 角度
-      VECTOR _scale{ 1.0f, 1.0f, 1.0f };                //!< 拡大率
+      VECTOR _position{ Position };                     //!< 位置情報
+      VECTOR _rotation{ Rotation };                     //!< 角度
+      VECTOR _scale{ Scale };                           //!< 拡大率
       ObjectState _objectState{ ObjectState::Active };  //!< オブジェクトのステート
     };
   } // namespace Object

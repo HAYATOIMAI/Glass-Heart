@@ -37,7 +37,7 @@ namespace GlassHeart {
        */
       VECTOR CheckHitBDeathMesh(const VECTOR& pos, const VECTOR& forward);
 
-      inline MV1_COLL_RESULT_POLY_DIM GetBDeathMesh() { return _bDeath; }
+      inline MV1_COLL_RESULT_POLY_DIM GetBDeathMesh() const { return _bDeath; }
     private:
       Object::ObjectBase& _owner;        //!< 親クラスへの参照
       MV1_COLL_RESULT_POLY_DIM _bDeath;  //!< 黒いデスメッシュとの当たり判定用変数

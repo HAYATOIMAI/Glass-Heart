@@ -52,12 +52,12 @@ namespace GlassHeart {
       virtual void Draw();
       /**
        * @brief              モデルの取得
-       *                                 
+       *
        * @param[in] key      ResourceServerに登録済みのキー
        * @param[in] no       同一モデルの通し番号
        * @return             モデルの情報
        */
-      virtual std::int_fast32_t handle(std::string_view key, int no = 0);
+      virtual std::int_fast32_t handle(std::string_view key, std::int_fast16_t no = 0);
       /**
        * @brief              モデルの設定
        *                                
@@ -65,7 +65,7 @@ namespace GlassHeart {
        * @param[in] no       同一モデルの通し番号
        * @return             実際に登録した通し番号
        */
-      virtual std::int_fast32_t SetModel(std::string_view key, int no = 0);
+      virtual std::int_fast32_t SetModel(std::string_view key, int_fast16_t no = 0);
       /**
        * @brief              座標の設定
        *                               

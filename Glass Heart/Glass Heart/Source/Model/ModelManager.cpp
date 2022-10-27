@@ -27,14 +27,14 @@ void GlassHeart::Model::ModelManager::Draw() {
   MV1DrawModel(_handle);
 }
 /** モデルの取得 */
-std::int_fast32_t  GlassHeart::Model::ModelManager::handle(std::string_view key, int no) {
+std::int_fast32_t  GlassHeart::Model::ModelManager::handle(std::string_view key, int_fast16_t no) {
   auto&& [handle, actualNo] = _owner.GetGame().GetResourceServer().GetModles(key, no);
   _handle = handle;
   _key = key;
   return 0;
 }
 /** モデルの設定 */
-std::int_fast32_t  GlassHeart::Model::ModelManager::SetModel(std::string_view key, int no) {
+std::int_fast32_t  GlassHeart::Model::ModelManager::SetModel(std::string_view key, int_fast16_t no) {
   auto [handle, actualNo] = _owner.GetGame().GetResourceServer().GetModles(key, no);
   _handle = handle;
   return actualNo;
@@ -57,5 +57,5 @@ void  GlassHeart::Model::ModelManager::SetMatrix(MATRIX& world) {
 }
 /** モデルの色を設定 */
 void  GlassHeart::Model::ModelManager::SetColor(std::int_fast32_t index, float r, float g, float b) {
-  MV1SetMaterialEmiColor(_handle, index, GetColorF(r, g, b, 0.f));
+  MV1SetMaterialEmiColor(_handle, index, GetColorF(r, g, b, 0.0f));
 }

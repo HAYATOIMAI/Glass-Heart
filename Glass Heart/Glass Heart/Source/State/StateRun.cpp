@@ -14,7 +14,7 @@
 
 namespace {
   constexpr auto DefaultSpeed = 5.6f;    //!< 歩行スピード
-  constexpr auto InputThreshold = 3000;  //!< 入力閾値
+  constexpr auto InputThresholdMax = 3000;  //!< 入力閾値
   constexpr auto Dash = "dash";          //!< 遷移させるステートの文字列
   constexpr auto Jump = "jump";          //!< 遷移させるステートの文字列
 }
@@ -35,11 +35,11 @@ void GlassHeart::State::StateRun::Input(AppFrame::Input::InputManager& input) {
     _owner.GetStateManage().PushBack(Jump);
   }
   // スティック入力があれば移動
-  if (input.GetJoyPad().GetAnalogStickLX() >= InputThreshold) {
+  if (input.GetJoyPad().GetAnalogStickLX() >= InputThresholdMax) {
     // 右方向に向きを変更
     _owner.SetRotation(VGet(0.0f, right, 0.0f));
   }
-  else if (input.GetJoyPad().GetAnalogStickLX() <= -InputThreshold) {
+  else if (input.GetJoyPad().GetAnalogStickLX() <= -InputThresholdMax) {
     // 左方向に向きを変更
     _owner.SetRotation(VGet(0.0f, left, 0.0f));
   }
