@@ -11,8 +11,8 @@
 #include "../UI/UI.h"
 #include "../Application/GameMain.h"
 
-std::int_fast16_t GlassHeart::Mode::ModeMain::_count;
-std::int_fast16_t GlassHeart::Mode::ModeMain::_countSeconds;
+int_fast16_t GlassHeart::Mode::ModeMain::_count;
+int_fast16_t GlassHeart::Mode::ModeMain::_countSeconds;
 /** コンストラクタ */
 GlassHeart::Mode::ModeClear::ModeClear(Application::GameMain& game) : ModeMain{ game } {}
 /** 初期化処理 */

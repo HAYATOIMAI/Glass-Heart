@@ -7,19 +7,29 @@
  *********************************************************************/
 #pragma once
 #include <DxLib.h>
-
+ /**
+  * @namespace GlassHeart
+  * @brief     プロジェクト名
+  */
 namespace GlassHeart {
   namespace Object {
     class ObjectBase;
   }
-
+  /**
+   * @namespace Collision
+   * @brif      衝突判定関係
+   */
   namespace Collision {
+    /**
+     * @class IsHitCircleToCircle
+     * @brief 円と円の衝突判定クラス
+     */
     class IsHitCircleToCircle {
     public:
       /**
-       * @brief           コンストラクタ
-       *
-       * @param[in] owner 親クラスへの参照
+       * @brief               コンストラクタ
+       *                      
+       * @param[in] owner     親クラスへの参照
        */
       IsHitCircleToCircle(Object::ObjectBase& owner);
       /**
@@ -31,11 +41,11 @@ namespace GlassHeart {
        */
       void RenderCircle(const VECTOR circlePos, float range, unsigned int color);
       /**
-       * @brief            円の当たり判定
-       *
-       * @param[in] owner  チェックポイント
-       * @param[in] target プレイヤー
-       * @return           接触しているか
+       * @brief               円の当たり判定
+       *                      
+       * @param[in] owner     チェックポイント
+       * @param[in] target    プレイヤー
+       * @return              接触しているか
        */
       bool CheckCircleToCircle(const GlassHeart::Object::ObjectBase& owner, const GlassHeart::Object::ObjectBase& target);
     private:

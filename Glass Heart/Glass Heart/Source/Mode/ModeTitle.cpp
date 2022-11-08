@@ -31,6 +31,15 @@ void GlassHeart::Mode::ModeTitle::Init() {
   _titleBg = res.GetGraph("TitleBg");
   _titlePlate = res.GetGraph("TitlePlate");
   _titlePlate2 = res.GetGraph("TitlePlate2");
+
+  AppFrame::Resource::ResourceServer::ModelMap useMap{
+ {"Stage",      "Stage/Stage04.mv1" },
+ {"BackGround", "BackGround/bg.mv1" },
+ {"Player",     "Boy/PC2_motion.mv1"},
+ {"Girl",       "Girl/Girl.mv1"     },
+ };
+
+  GetResourceServer().LoadModels(useMap);
 }
 // “ü‚èŒûˆ—
 void GlassHeart::Mode::ModeTitle::Enter() {

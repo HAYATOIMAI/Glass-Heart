@@ -22,9 +22,9 @@ namespace GlassHeart {
     class IsHitFloor {
     public:
       /**
-       * @ コンストラクタ
-       *
-       * @param[in] owner 親クラスへの参照
+       * @                  コンストラクタ
+       *                    
+       * @param[in] owner   親クラスへの参照
        */
       IsHitFloor(Object::ObjectBase& owner);
       /**
@@ -34,7 +34,7 @@ namespace GlassHeart {
        * @param[in] forward 移動量ベクトル
        * @return            位置ベクトル
        */
-      VECTOR CheckHitFloor(const VECTOR& pos, const VECTOR& forward, const std::int_fast8_t state);
+      VECTOR CheckHitFloor(const VECTOR& pos, const VECTOR& forward, const int_fast16_t state);
 
       inline MV1_COLL_RESULT_POLY GetHitFloor() const { return _floor; }
       inline MV1_COLL_RESULT_POLY GetWThrough() const { return _wThrough; }

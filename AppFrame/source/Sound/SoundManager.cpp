@@ -11,7 +11,7 @@
 #include <DxLib.h>
 
 namespace {
-  constexpr std::int_fast8_t None = -1;
+  constexpr int_fast16_t None = -1;
 }
 
 namespace AppFrame {

@@ -62,7 +62,7 @@ namespace AppFrame {
       _currntPath = path;
     }
     /** 画像ハンドルの取得 */
-    std::int_fast32_t ResourceServer::GetGraph(std::string_view key, std::int_fast16_t no) {
+    std::int_fast32_t ResourceServer::GetGraph(std::string_view key, int_fast16_t no) {
       // 該当する画像ハンドルがなければ-1を返す
       if (!_graphs.contains(key.data())) {
         return None;
@@ -134,7 +134,7 @@ namespace AppFrame {
       }
     }
     /** モデルのハンドルの取得 */
-    std::pair<std::int_fast32_t, std::int_fast32_t> ResourceServer::GetModles(std::string_view key, std::int_fast16_t no) {
+    std::pair<std::int_fast32_t, std::int_fast32_t> ResourceServer::GetModles(std::string_view key, int_fast16_t no) {
       if (!_models.contains(key.data())) {
         // キーが未登録
         return std::make_pair(None, no);

@@ -14,15 +14,15 @@
 #include "../Application/GameMain.h"
 
 namespace {
-  constexpr std::int_fast16_t Recast = 20;                  //!< 色変更リキャストタイム
-  constexpr std::int_fast16_t DeathCoolTime = 120;          //!< 死亡した時の復活までのクールタイム
-  constexpr VECTOR Position  = { -150.0f, 60.0f, -55.0f };  //!< プレイヤーの位置座標
+  constexpr int_fast16_t Recast = 20;                       //!< 色変更リキャストタイム
+  constexpr int_fast16_t DeathCoolTime = 120;               //!< 死亡した時の復活までのクールタイム
+  constexpr VECTOR PlayerPosition  = { -150.0f, 40.0f, -55.0f };  //!< プレイヤーの位置座標
   constexpr VECTOR LineLength = { 0.0f, -10.0f, 0.0f };     //!< 当たり判定に使用する線分の長さ
   constexpr auto Hit = 1;                                   //!< ヒットしたかのフラグ
   constexpr auto Radius = 20.f;                             //!< チェックポイントとの当たり判定用半径
   constexpr auto RespawnArea = -300.0f;                     //!< リスポーンエリア
-  constexpr auto ObjectToRegister = "Player";               //!< 
-  constexpr auto DeathSoundeffect = "death";                //!< 
+  constexpr auto ObjectToRegister = "Player";               //!< オブジェクトを管理するマネージャーに登録する文字列
+  constexpr auto DeathSoundeffect = "death";                //!< 再生するSE
   constexpr auto CheckPoint = "CheckPoint";                 //!< 
   constexpr auto Fall = "Fall";                             //!<
   constexpr auto White = "White";                           //!<
@@ -33,7 +33,7 @@ namespace {
 GlassHeart::Player::Player::Player(Application::GameMain& game) : GlassHeart::Object::ObjectBase{ game } {
   auto right = RightRotation();
   _rotation = VGet(0.0f, right, 0.0f);
-  _position = Position;
+  _position = PlayerPosition;
   _radius = Radius;  // チェックポイントとの当たり判定用半径をセット
 }
 /** 入力処理 */
@@ -92,7 +92,7 @@ void GlassHeart::Player::Player::Process() {
       _position = checkPos;
     }
     else {
-      _position = Position;
+      _position = PlayerPosition;
     }
   }
 #endif // DEBUG
@@ -112,7 +112,7 @@ void GlassHeart::Player::Player::Render() {
   DrawFormatString(x, y, GetColor(255, 255, 255), "プレイヤーY座標 =  %.3f ", _position.y); y += size;
   DrawFormatString(x, y, GetColor(255, 255, 255), "プレイヤーZ座標 =  %.3f ", _position.z); y += size;
   // 色状態を表示
-  DrawFormatString(i, o, GetColor(255, 255, 255), _stateName.c_str(), _crState); y += size;
+  DrawFormatString(i, o, GetColor(255, 255, 255), _stateName.c_str(), _colorState); y += size;
 #endif // _DEBUG
 }
 /** ワールド座標変換 */
@@ -127,7 +127,7 @@ void GlassHeart::Player::Player::ComputeWorldTransform() {
 void GlassHeart::Player::Player::Move(const VECTOR& forward) {
   auto pos = _position;
   // プレイヤーの色を取得
-  auto state = static_cast<std::int_fast8_t> (_colorState);
+  auto state = static_cast<int_fast16_t> (_colorState);
   // 空中の足場の底面と側面判定処理
   pos = _collsionManage->GetIsHitSideBottom().CheckHitSideAndBottom(pos, { forward.x, 0.f, 0.f }, state);
   // 床との当たり判定
@@ -196,7 +196,7 @@ void GlassHeart::Player::Player::ResetPos() {
     else {
       // チェックポイントと当たっていなかったら初期位置に戻す
       if (_deadFlag == true && _deathCoolCount == 0) {
-        _position = Position;
+        _position = PlayerPosition;
         _deadFlag = false;
       }
     }
@@ -222,7 +222,7 @@ void GlassHeart::Player::Player::ResetPos() {
     else {
       // チェックポイントと当たっていなかったら初期位置に戻す
       if (_deadFlag == true && _deathCoolCount == 0) {
-        _position = Position;
+        _position = PlayerPosition;
         _deadFlag = false;
       }
     }

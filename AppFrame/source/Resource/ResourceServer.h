@@ -28,11 +28,11 @@ namespace AppFrame {
      * @brief  画像ファイル用構造体
      */
     struct DivGraph {
-      std::string fileName;    //!< ファイル名
-      std::int_fast16_t xNum;  //!< 画像の縦幅の分割数
-      std::int_fast16_t yNum;  //!< 画像の横幅の分割数
-      std::int_fast16_t xSize; //!< 画像の縦幅
-      std::int_fast16_t ySize; //!< 画像の横幅
+      std::string fileName;  //!< ファイル名
+      int_fast16_t xNum;     //!< 画像の縦幅の分割数
+      int_fast16_t yNum;     //!< 画像の横幅の分割数
+      int_fast16_t xSize;    //!< 画像の縦幅
+      int_fast16_t ySize;    //!< 画像の横幅
     };
     /**
      * @class ResourceServer
@@ -98,14 +98,14 @@ namespace AppFrame {
        * @param[in] no              分割時の番号
        * @return                    画像のハンドル
        */
-      virtual std::int_fast32_t GetGraph(std::string_view key, std::int_fast16_t no = 0);
+      virtual int_fast32_t GetGraph(std::string_view key, int_fast16_t no = 0);
       /**
        * @brief                     画像ハンドルの分割数の取得
        *                            
        * @param[in] key             登録済みのキー
        * @return                    分割総数
        */
-      virtual std::int_fast32_t GetGraphCount(std::string_view& key);
+      virtual int_fast32_t GetGraphCount(std::string_view& key);
       /**
        * @brief                     画像情報の取得
        *                            
@@ -140,7 +140,7 @@ namespace AppFrame {
        * @param[in] no              同一モデルの通し番号
        * @return                    モデルのハンドルと実施の登録番号
        */
-      virtual std::pair<std::int_fast32_t, std::int_fast32_t> GetModles(std::string_view key, std::int_fast16_t no = 0);
+      virtual std::pair<std::int_fast32_t, std::int_fast32_t> GetModles(std::string_view key, int_fast16_t no = 0);
       /**
        * @brief                     全てのモデルを削除する
        */

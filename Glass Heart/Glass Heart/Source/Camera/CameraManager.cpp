@@ -11,9 +11,11 @@
 #include <cmath>
 
 namespace {
-  constexpr auto CameraPosX = 0;     //!< X軸の位置
-  constexpr auto CameraPosY = 100;   //!< Y軸の位置
-  constexpr auto CameraPosZ = -700;  //!< Z軸の位置
+  constexpr auto CameraPosX = 0;        //!< X軸の位置
+  constexpr auto CameraPosY = 100;      //!< Y軸の位置
+  constexpr auto CameraPosZ = -700;     //!< Z軸の位置
+  constexpr auto CameraNear = 50.0f;    //!< カメラのニア
+  constexpr auto CameraFar = 10000.0f;  //!< カメラのファー
 }
 /** コンストラクタ */
 GlassHeart::Camera::CameraManager::CameraManager() {
@@ -22,7 +24,7 @@ GlassHeart::Camera::CameraManager::CameraManager() {
 /** 初期化処理 */
 void GlassHeart::Camera::CameraManager::Init() {
   // カメラのニア/ファーをセット
-  SetCameraNearFar(50.0f, 10000.0f);
+  SetCameraNearFar(CameraNear, CameraFar);
 }
 /** 更新処理 */
 void GlassHeart::Camera::CameraManager::Update() {

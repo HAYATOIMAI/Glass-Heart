@@ -7,7 +7,7 @@
 #include <DxLib.h>
 
 namespace {
-  constexpr VECTOR Position = { 0.0f, 50.0f, -200.0f };
+  constexpr VECTOR CameraPosition = { 0.0f, 50.0f, -200.0f };
   constexpr VECTOR Target = { 0.0f, 50.0f, 0.0f };
   constexpr auto ForwardSpeed = 5.0f;
 }
@@ -16,7 +16,7 @@ std::unique_ptr<GlassHeart::Object::ObjectBase> GlassHeart::Object::FollowCamera
   // ÉJÉÅÉâÇÃê∂ê¨
   auto camera = std::make_shared<GlassHeart::Camera::CameraManager>();
   camera->Init();
-  camera->SetPosition(Position);
+  camera->SetPosition(CameraPosition);
   camera->SetTarget(Target);
 
   auto followCamera = std::make_unique<GlassHeart::Camera::FollowCamera>(game);

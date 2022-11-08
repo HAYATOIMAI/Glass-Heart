@@ -32,7 +32,7 @@ namespace GlassHeart {
        * @param[in] forward 移動量ベクトル
        * @return            位置ベクトル
        */
-      VECTOR CheckHitSideAndBottom(const VECTOR& pos, const VECTOR& forward, const std::int_fast8_t state);
+      VECTOR CheckHitSideAndBottom(const VECTOR& pos, const VECTOR& forward, const int_fast16_t state);
 
       inline MV1_COLL_RESULT_POLY_DIM GetSideAndBottom()    const { return _sideBottom; }
       inline MV1_COLL_RESULT_POLY_DIM GetBWallThroughMesh() const { return _bWallThrough; }

@@ -95,10 +95,10 @@ namespace GlassHeart {
        */
       UI::UI& GetUI();
     protected:
-      Application::GameMain& _gameMain;        //!< ゲームメインクラスへの参照
-      std::int_fast8_t _fadeCount;             //!< 自動フェードインアウト用カウンタ
-      static std::int_fast16_t _count;         //!< タイマー用フレームカウント
-      static std::int_fast16_t _countSeconds;  //!< タイマー用フレームカウント
+      Application::GameMain& _gameMain;   //!< ゲームメインクラスへの参照
+      int_fast16_t _fadeCount;            //!< 自動フェードインアウト用カウンタ
+      static int_fast16_t _count;         //!< タイマー用フレームカウント
+      static int_fast16_t _countSeconds;  //!< タイマー用フレームカウント
     };
   } // namespace Mode
 } // namespace GlassHeart
