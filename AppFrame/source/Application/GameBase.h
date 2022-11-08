@@ -16,8 +16,8 @@
 #endif // _DEBUG
 namespace {
   std::string WindowName = "";                     //!< ウィンドウの名前
-  constexpr std::int_fast16_t WindowWidth = 1920;  //!< ウィンドウの縦幅
-  constexpr std::int_fast16_t WindowHeight = 1080; //!< ウィンドウの横幅
+  constexpr int_fast16_t WindowWidth = 1920;  //!< ウィンドウの縦幅
+  constexpr int_fast16_t WindowHeight = 1080; //!< ウィンドウの横幅
 }
 /**
  * @namespace AppFrame
@@ -108,14 +108,14 @@ namespace AppFrame {
      * 
      * @return ウィンドウの縦幅
      */
-    inline virtual std::int_fast16_t SetWindowWidthSize() { return WindowWidth; }
+    inline virtual int_fast16_t SetWindowWidthSize() { return WindowWidth; }
     /**
      * @brief  ウィンドウの横幅を設定する
      *         GameMain側でoverrideし、ゲームごとに適切なサイズにする
      * 
      * @return ウィンドウの横幅 
      */
-    inline virtual std::int_fast16_t SetWindowHeightSize() { return WindowHeight; }
+    inline virtual int_fast16_t SetWindowHeightSize() { return WindowHeight; }
     /**
      * @brief  モードサーバーのポインタを返す
      * 

@@ -10,7 +10,7 @@
 #include "../Model/ModelAnimeManager.h"
 
 namespace {
-  constexpr auto JumpStart = "Jump_start";  //!< 遷移させるステートの文字列
+  constexpr auto JumpStart = "Jump_start";  //!< 再生するアニメーションの文字列
   constexpr auto JumpUp = "JumpUp";         //!< 遷移させるステートの文字列
 }
 

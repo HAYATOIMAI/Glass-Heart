@@ -99,9 +99,6 @@
     <ClInclude Include="Source\Application\GameMain.h">
       <Filter>ヘッダー ファイル\Application</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Mode\ModeAmg.h">
-      <Filter>ヘッダー ファイル\Mode</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Mode\ModeGame.h">
       <Filter>ヘッダー ファイル\Mode</Filter>
     </ClInclude>
@@ -222,6 +219,9 @@
     <ClInclude Include="Source\Object\CheckPointCreate.h">
       <Filter>ヘッダー ファイル\Object\Create</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Mode\ModeLogo.h">
+      <Filter>ヘッダー ファイル\Mode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Camera\CameraManager.cpp">
@@ -229,9 +229,6 @@
     </ClCompile>
     <ClCompile Include="Source\Collision\CollisionManager.cpp">
       <Filter>ソース ファイル\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Mode\ModeAmg.cpp">
-      <Filter>ソース ファイル\Mode</Filter>
     </ClCompile>
     <ClCompile Include="Source\Mode\ModeGame.cpp">
       <Filter>ソース ファイル\Mode</Filter>
@@ -349,6 +346,9 @@
     </ClCompile>
     <ClCompile Include="Source\Object\GoalPointCreate.cpp">
       <Filter>ソース ファイル\Object\Create</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mode\ModeLogo.cpp">
+      <Filter>ソース ファイル\Mode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

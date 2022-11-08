@@ -24,7 +24,7 @@ GlassHeart::Collision::IsHitJumpStand::IsHitJumpStand(Object::ObjectBase& owner)
 }
 /** ƒWƒƒƒ“ƒv‚µ‚½Û‚Ì°‚Æ‚Ì“–‚½‚è”»’è */
 VECTOR GlassHeart::Collision::IsHitJumpStand::CheckJumpStand(const VECTOR& pos, const VECTOR& forward, 
-  const std::int_fast8_t state) {
+  const int_fast16_t state) {
   auto [handle, no] = _owner.GetGame().GetResourceServer().GetModles(Stage);
   auto newPos = VAdd(pos, forward);
   auto start = VAdd(pos, { 0.f, 0.f, 0.f });
