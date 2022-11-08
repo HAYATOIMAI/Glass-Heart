@@ -48,7 +48,7 @@ namespace GlassHeart {
       void Update() override;
     private:
       bool _resetFlag{ false };           //!< 色をリセットするかのフラグ
-      std::int_fast16_t _recastCnt{ 0 };  //!< リキャスト用カウンター
+      int_fast16_t _recastCnt{ 0 };  //!< リキャスト用カウンター
     };
   } // namespace State
 } // namespace GlassHeart

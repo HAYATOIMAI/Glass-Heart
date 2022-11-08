@@ -11,8 +11,8 @@
 
 namespace {
   std::string AppWindowName = "Glass Heart";               //!< アプリケーションの名前
-  constexpr std::int_fast16_t AppWindowWidthSize = 1920;   //!< 画面の縦幅
-  constexpr std::int_fast16_t AppWindowHeightSize = 1080;  //!< 画面の横幅
+  constexpr int_fast16_t AppWindowWidthSize = 1920;   //!< 画面の縦幅
+  constexpr int_fast16_t AppWindowHeightSize = 1080;  //!< 画面の横幅
 }
 /**
  * @namespace GlassHeart
@@ -83,13 +83,13 @@ namespace GlassHeart {
        * 
        * @return 画面の縦幅を返す
        */
-      inline std::int_fast16_t SetWindowWidthSize() override { return AppWindowWidthSize; }
+      inline int_fast16_t SetWindowWidthSize() override { return AppWindowWidthSize; }
       /**
        * @brief  画面の横幅を設定する
        * 
        * @return 画面の横幅を返す
        */
-      inline std::int_fast16_t SetWindowHeightSize() override { return AppWindowHeightSize; }
+      inline int_fast16_t SetWindowHeightSize() override { return AppWindowHeightSize; }
       /**
        * @brief  オブジェクトサーバーの取得
        * 

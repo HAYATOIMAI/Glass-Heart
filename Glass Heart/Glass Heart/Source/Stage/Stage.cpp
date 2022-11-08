@@ -10,31 +10,31 @@
 #include "../Object/ObjectServer.h"
 
 namespace {
-  constexpr auto FogStart = 50.0f;                 //!< フォグが始まる距離
-  constexpr auto FogEnd = 15000.0f;                //!< フォグが終了地点
-  constexpr auto BackGround = "BackGround";        //!< 引数に持たせる文字列
-  constexpr auto Target = "Camera";                //!< 引数に持たせる文字列
-  constexpr auto StageHandle = "Stage";            //!< 引数に持たせる文字列
-  constexpr std::int_fast16_t FogColorR = 247;     //!< フォグの色情報
-  constexpr std::int_fast16_t FogColorG = 188;     //!< フォグの色情報
-  constexpr std::int_fast16_t FogColorB = 101;     //!< フォグの色情報
-  constexpr std::int_fast8_t DivNum = 8;           //!< コリジョン情報の空間分割数
-  constexpr VECTOR Scale = { 1.0f, 1.0f, 1.0f };   //!< 拡大率
-  constexpr VECTOR Pos = { 0.0f, 0.0f, 10.0f };    //!< 位置座標
-  constexpr VECTOR Rotate = { 0.0f, 0.0f, 0.0f };  //!< 角度
+  constexpr auto FogStart = 50.0f;                     //!< フォグが始まる距離
+  constexpr auto FogEnd = 15000.0f;                    //!< フォグが終了地点
+  constexpr auto BackGround = "BackGround";            //!< 引数に持たせる文字列
+  constexpr auto Target = "Camera";                    //!< 引数に持たせる文字列
+  constexpr auto StageHandle = "Stage";                //!< 引数に持たせる文字列
+  constexpr int_fast16_t FogColorR = 247;              //!< フォグの色情報
+  constexpr int_fast16_t FogColorG = 188;              //!< フォグの色情報
+  constexpr int_fast16_t FogColorB = 101;              //!< フォグの色情報
+  constexpr int_fast16_t DivNum = 8;                   //!< コリジョン情報の空間分割数
+  constexpr VECTOR StageScale = { 1.0f, 1.0f, 1.0f };  //!< 拡大率
+  constexpr VECTOR Pos = { 0.0f, 0.0f, 10.0f };        //!< 位置座標
+  constexpr VECTOR Rotate = { 0.0f, 0.0f, 0.0f };      //!< 角度
 }
 /** コンストラクタ */
 GlassHeart::Stage::Stage::Stage(Application::GameMain& game) : Object::ObjectBase{ game } {
   // スカイスフィアのモデル
   _backGround = std::make_unique<Model::ModelManager>(*this);
   _backGround->handle(BackGround);
-  _backGround->SetScale(Scale);
+  _backGround->SetScale(StageScale);
   // ステージのモデル
   _stage = std::make_unique<Model::ModelManager>(*this);
   _stage->handle(StageHandle);
   _stage->SetPosition(Pos);
   _stage->SetRotation(Rotate);
-  _stage->SetScale(Scale);
+  _stage->SetScale(StageScale);
   // ナビメッシュを非表示
   MV1SetFrameVisible(_stage->GetHandle(), 2, FALSE);
   MV1SetFrameVisible(_stage->GetHandle(), 3, FALSE);

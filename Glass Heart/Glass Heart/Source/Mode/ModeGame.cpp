@@ -19,28 +19,35 @@
 #include "../Object/GoalPointCreate.h"
 
 namespace {
-  constexpr VECTOR TeamLogoPosition      = { 22500.0f, 12600.0f, 200.0f };
-  constexpr VECTOR TitleLogoPosition     = { 25450.0f, 12400.0f, 200.0f };
-  constexpr	std::int_fast16_t Timer      = 60;
-  constexpr std::int_fast16_t TimeLimit  = 350;
-  constexpr std::int_fast32_t UiPosition = 100;
-  constexpr auto RenderingExrate         = 0.05;
-  constexpr auto MiddlePos               = 0.5f;
-  constexpr auto NotRotate               = 0.0f;
-  constexpr auto TeamLogoSize            = 800.0f;
-  constexpr auto TitleSize               = 1200.0f;
-  constexpr auto TeamLogo                = "TeamLogo";
-  constexpr auto TitleLogo               = "TitleLogo";
-  constexpr auto Bgm                     = "bgm";
-  constexpr auto Run                     = "run";
-  constexpr auto Death                   = "Death";
-  constexpr auto PlayerCreator           = "Player";
-  constexpr auto GirlCreator             = "Girl";
-  constexpr auto FollowCameraCreator     = "FollowCamera";
-  constexpr auto StageCreator            = "Stage";
-  constexpr auto CheckPointCreator       = "CheckPoint";
-  constexpr auto GoalPointCreator        = "GoalPoint";
-  constexpr auto GameClear               = "GameClear";
+  constexpr VECTOR TeamLogoPosition = { 22500.0f, 12600.0f, 200.0f };   //!< チームロゴ画像の描画位置
+  constexpr VECTOR TitleLogoPosition = { 25450.0f, 12400.0f, 200.0f };  //!< タイトルロゴ画像の描画位置
+  constexpr	int_fast16_t Timer = 60;                                    //!< 経過する時間
+  constexpr int_fast16_t TimeLimit = 350;                               //!< 制限時間
+  constexpr int_fast32_t UiPosition  = 100;                             //!< UI描画位置
+  constexpr int_fast32_t TimerNumberX = 400;                            //!< タイマー数字のX軸描画位置
+  constexpr int_fast32_t TimerNumberY = 100;                            //!< タイマー数字のY軸描画位置
+  constexpr int_fast32_t NumberInterval = 80;                           //!< タイマー数字の描画間隔
+  constexpr int_fast32_t DeathEffectPositionX = 960;                    //!< 死亡時に表示する画像X軸位置
+  constexpr int_fast32_t DeathEffectPositionY = 540;                    //!< 死亡時に表示する画像Y軸位置
+  constexpr auto EffectExrate = 1.0;                                    //!< 死亡時に表示する画像の拡大率
+  constexpr auto TimerExrate = 1.0;                                     //!< タイマー数字の拡大率
+  constexpr auto RenderingExrate = 0.05;                                //!< 描画間隔
+  constexpr auto MiddlePos = 0.5f;                                      //!< 描画する画像の中心座標
+  constexpr auto NotRotate = 0.0f;                                      //!< 描画する画像の回転させる角度
+  constexpr auto TeamLogoSize = 800.0f;                                 //!< 画像サイズ
+  constexpr auto TitleSize = 1200.0f;                                   //!< 画像サイズ
+  constexpr auto TeamLogo = "TeamLogo";                                 //!< リソースマネージャーから呼び出すファイル名
+  constexpr auto TitleLogo = "TitleLogo";                               //!< リソースマネージャーから呼び出すファイル名
+  constexpr auto Run = "run";                                           //!< 停止するサウンド
+  constexpr auto Bgm = "bgm";                                           //!< 停止するサウンド
+  constexpr auto Death = "Death";                                       //!< リソースマネージャーから呼び出すファイル名
+  constexpr auto PlayerCreator = "Player";                              //!< 生成するオブジェクトの名前
+  constexpr auto GirlCreator = "Girl";                                  //!< 生成するオブジェクトの名前
+  constexpr auto FollowCameraCreator = "FollowCamera";                  //!< 生成するオブジェクトの名前
+  constexpr auto StageCreator = "Stage";                                //!< 生成するオブジェクトの名前
+  constexpr auto CheckPointCreator = "CheckPoint";                      //!< 生成するオブジェクトの名前
+  constexpr auto GoalPointCreator = "GoalPoint";                        //!< 生成するオブジェクトの名前
+  constexpr auto GameClear = "GameClear";                               //!< 遷移するモードの文字列
 }
 
 /** コンストラクタ */
@@ -96,8 +103,6 @@ void GlassHeart::Mode::ModeGame::Render() {
 #ifdef _DEBUG
   auto x = 1000; auto y = 0; auto size = 32;
   auto white = GetColor(255, 255, 255);
-
-  //DrawFormatString(x, y, white, "現在の時間: %d ", _count); y += size;
   DrawFormatString(x, y, white, "現在の時間: %d秒 ", _countSeconds); y += size;
 #endif // DEBUG
 }
@@ -143,7 +148,7 @@ void GlassHeart::Mode::ModeGame::ObjectRegister() {
   auto goalPoint = of.Create(GoalPointCreator);
   os.Add(std::move(goalPoint));
 }
-
+/** タイマー経過処理 */
 void GlassHeart::Mode::ModeGame::TimerProcess() {
   // プレイヤーの死亡状態ではない時のみタイマーを回す
   for (auto& itr : GetObjectServer().GetObjectLists()) {
@@ -169,16 +174,16 @@ void GlassHeart::Mode::ModeGame::TimerProcess() {
     }
   }
 }
-
+/** UIを指定位置に描画 */
 void GlassHeart::Mode::ModeGame::UiRenderring() {
   // UIを描画
   GetUI().Render(UiPosition, UiPosition, RenderingExrate);
   // 秒数描画
-  GetUI().NumberRender(400, 100, 80, 1.0);
+  GetUI().NumberRender(TimerNumberX, TimerNumberY, NumberInterval, TimerExrate);
   for (auto& itr : GetObjectServer().GetObjectLists()) {
     if (itr->GetObjectType() == Object::ObjectBase::ObjectType::Player) {
       if (itr->GetDeadFlag()) {
-        DrawRotaGraph(960, 540, 1.0, 0.0, _deathDrawHundle, TRUE);
+        DrawRotaGraph(DeathEffectPositionX, DeathEffectPositionY, EffectExrate, 0.0, _deathDrawHundle, TRUE);
       }
     }
   }

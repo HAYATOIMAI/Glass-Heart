@@ -173,10 +173,10 @@
     <ClInclude Include="Source\Collision\IsHitJumpStand.h" />
     <ClInclude Include="Source\Model\ModelAnimeManager.h" />
     <ClInclude Include="Source\Model\ModelManager.h" />
-    <ClInclude Include="Source\Mode\ModeAmg.h" />
     <ClInclude Include="Source\Mode\ModeClear.h" />
     <ClInclude Include="Source\Mode\ModeGame.h" />
     <ClInclude Include="Source\Mode\ModeLoading.h" />
+    <ClInclude Include="Source\Mode\ModeLogo.h" />
     <ClInclude Include="Source\Mode\ModeMain.h" />
     <ClInclude Include="Source\Mode\ModeTeamLogo.h" />
     <ClInclude Include="Source\Mode\ModeTitle.h" />
@@ -218,10 +218,10 @@
     <ClCompile Include="Source\Collision\IsHitJumpStand.cpp" />
     <ClCompile Include="Source\Model\ModelAnimeManager.cpp" />
     <ClCompile Include="Source\Model\ModelManager.cpp" />
-    <ClCompile Include="Source\Mode\ModeAmg.cpp" />
     <ClCompile Include="Source\Mode\ModeClear.cpp" />
     <ClCompile Include="Source\Mode\ModeGame.cpp" />
     <ClCompile Include="Source\Mode\ModeLoading.cpp" />
+    <ClCompile Include="Source\Mode\ModeLogo.cpp" />
     <ClCompile Include="Source\Mode\ModeMain.cpp" />
     <ClCompile Include="Source\Mode\ModeTeamLogo.cpp" />
     <ClCompile Include="Source\Mode\ModeTitle.cpp" />

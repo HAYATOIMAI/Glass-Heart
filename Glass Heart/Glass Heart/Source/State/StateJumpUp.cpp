@@ -12,9 +12,9 @@
 #include "../Model/ModelAnimeManager.h"
 
 namespace {
-  constexpr auto AirMovementSpeed = 6.5f;                      //!< 空中移動用のX軸移動量 
+  constexpr auto AirMovementSpeed = 6.5f;                  //!< 空中移動用のX軸移動量 
   constexpr auto Gravity = -0.8f;                          //!< 重力加速度
-  constexpr auto InputThresholdMax = 5000;                    //!< 入力閾値
+  constexpr auto InputThresholdMax = 5000;                 //!< 入力閾値
   constexpr auto InputThresholdMin = 1;                    //!< 入力最低値
   constexpr auto Hit = 1;                                  //!< ヒットしたかのフラグ
   constexpr auto JumpLoop = "Jump_Loop";                   //!< 遷移させるステートの文字列
@@ -35,12 +35,14 @@ void GlassHeart::State::StateJumpUp::Input(AppFrame::Input::InputManager& input)
   auto right = _owner.RightRotation();
   auto left = _owner.LeftRotation();
   _owner.SetForwardSpeed(0.0f);
-  if (input.GetJoyPad().GetAnalogStickLX() >= InputThresholdMax && input.GetJoyPad().GetAnalogStickLX() > InputThresholdMin) {
+  if (input.GetJoyPad().GetAnalogStickLX() >= InputThresholdMax 
+    && input.GetJoyPad().GetAnalogStickLX() > InputThresholdMin) {
     // 右方向に向きを変更
     _owner.SetRotation(VGet(0.0f, right, 0.0f));
     _owner.SetForwardSpeed(AirMovementSpeed);
   }
-  if (input.GetJoyPad().GetAnalogStickLX() <= -InputThresholdMax && input.GetJoyPad().GetAnalogStickLX() < InputThresholdMin) {
+  if (input.GetJoyPad().GetAnalogStickLX() <= -InputThresholdMax 
+    && input.GetJoyPad().GetAnalogStickLX() < InputThresholdMin) {
     // 左方向に向きを変更
     _owner.SetRotation(VGet(0.0f, left, 0.0f));
     _owner.SetForwardSpeed(AirMovementSpeed);
@@ -56,7 +58,7 @@ void GlassHeart::State::StateJumpUp::Update() {
   jumpVelocity.y += Gravity;
   forward.y = jumpVelocity.y;
   // プレイヤーの色を取得
-  auto state = static_cast<std::int_fast8_t> (_owner.GetColourState());
+  auto state = static_cast<int_fast16_t> (_owner.GetColourState());
   // 空中の足場の底面と側面判定処理
   pos = _owner.GetCollision().GetIsHitSideBottom().CheckHitSideAndBottom(pos, { forward.x, 0.0f, 0.0f }, state);
   pos = _owner.GetCollision().GetIsHitSideBottom().CheckHitSideAndBottom(pos, { 0.0f, forward.y, 0.0f }, state);

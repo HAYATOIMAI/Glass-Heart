@@ -25,7 +25,7 @@ namespace {
   constexpr auto Fall = "fall";                        //!< 遷移させるステート
   constexpr auto Run = "run";                          //!< 遷移させるステート
   constexpr auto CheckPoint = "CheckPoint";            //!< オブジェクトサーバーから座標を取得する為の文字列
-  constexpr VECTOR Position = { -150.f, 60.f, -55.f }; //!< 位置座標
+  constexpr VECTOR ResetPosition = { -150.f, 60.f, -55.f }; //!< 位置座標
   constexpr VECTOR Velocity = { 0.0f, 5.5f, 0.0f };    //!< 
 }
 
@@ -44,12 +44,14 @@ void GlassHeart::State::StateFall::Input(AppFrame::Input::InputManager& input) {
   auto right = _owner.RightRotation();
   auto left = _owner.LeftRotation();
   _owner.SetForwardSpeed(0.f);
-  if (input.GetJoyPad().GetAnalogStickLX() >= InputThresholdMax && input.GetJoyPad().GetAnalogStickLX() > InputThresholdMin) {
+  if (input.GetJoyPad().GetAnalogStickLX() >= InputThresholdMax 
+    && input.GetJoyPad().GetAnalogStickLX() > InputThresholdMin) {
     // 右方向に向きを変更
     _owner.SetRotation(VGet(0.0f, right, 0.0f));
     _owner.SetForwardSpeed(AirMovementSpeed);
   }
-  if (input.GetJoyPad().GetAnalogStickLX() <= -InputThresholdMax && input.GetJoyPad().GetAnalogStickLX() < InputThresholdMin) {
+  if (input.GetJoyPad().GetAnalogStickLX() <= -InputThresholdMax 
+    && input.GetJoyPad().GetAnalogStickLX() < InputThresholdMin) {
     // 左方向に向きを変更
     _owner.SetRotation(VGet(0.0f, left, 0.0f));
     _owner.SetForwardSpeed(AirMovementSpeed);
@@ -66,7 +68,7 @@ void GlassHeart::State::StateFall::Update() {
   _owner.SetJumpVelocity(jumpVelocity);
   forward.y = jumpVelocity.y;
   // プレイヤーの色を取得
-  auto state = static_cast<std::int_fast8_t> (_owner.GetColourState());
+  auto state = static_cast<int_fast16_t> (_owner.GetColourState());
   // 空中の足場の底面と側面判定処理
   pos = _owner.GetCollision().GetIsHitSideBottom().CheckHitSideAndBottom(pos, { forward.x, 0.0f, 0.0f }, state);
   // 床との当たり判定
@@ -114,7 +116,7 @@ void GlassHeart::State::StateFall::Update() {
       pos = checkPos;
     }
     else {
-      pos = Position;
+      pos = ResetPosition;
     }
   }
   // 座標更新

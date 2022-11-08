@@ -6,7 +6,7 @@
  * @date   December 2021
  *********************************************************************/
 #include "GameMain.h"
-#include "../Mode/ModeAmg.h"
+#include "../Mode/ModeLogo.h"
 #include "../Mode/ModeGame.h"
 #include "../Mode/ModeTitle.h"
 #include "../Mode/ModeTeamLogo.h"
@@ -17,7 +17,8 @@
 #include "../UI/UI.h"
 
 namespace {
-  constexpr std::int_fast16_t Volume = 128;
+  constexpr int_fast16_t Volume = 128;   //!< 音声のボリューム
+  constexpr int_fast16_t SeVolume = 255;
   constexpr auto Amg = "Amg";
   constexpr auto TeamLogo = "TeamLogo";
   constexpr auto Title = "Title";
@@ -66,14 +67,14 @@ bool GlassHeart::Application::GameMain::Initialize(HINSTANCE hInstance) {
   res.LoadSounds(useSound);
   // サウンドマネージャーの取得
   auto& sm = GetSoundManager();
-  sm.SetVolume("bgm", Volume);
+  sm.SetVolume("bgm",      Volume);
   sm.SetVolume("titleBgm", Volume);
-  sm.SetVolume("walk", Volume);
-  sm.SetVolume("run", 255);
-  sm.SetVolume("jump", 255);
-  sm.SetVolume("landing", 255);
-  sm.SetVolume("death", Volume);
-  sm.SetVolume("select", 255);
+  sm.SetVolume("walk",     Volume);
+  sm.SetVolume("run",      SeVolume);
+  sm.SetVolume("jump",     SeVolume);
+  sm.SetVolume("landing",  SeVolume);
+  sm.SetVolume("death",    Volume);
+  sm.SetVolume("select",   SeVolume);
 #ifndef _DEBUG
   sm.SetMute(false);
 #endif // !DEBUG
@@ -87,7 +88,7 @@ bool GlassHeart::Application::GameMain::Initialize(HINSTANCE hInstance) {
   // ユーザーインターフェース生成
   _ui = std::make_unique<GlassHeart::UI::UI>(*this);
   // モードサーバーを生成し、AMGモードを登録
-  _modeServer = std::make_unique<AppFrame::Mode::ModeServer>(Amg, std::make_shared<Mode::ModeAmg>(*this));
+  _modeServer = std::make_unique<AppFrame::Mode::ModeServer>(Amg, std::make_shared<Mode::ModeLogo>(*this));
   // チームロゴモードを登録
   _modeServer->Register(TeamLogo, std::make_shared<Mode::ModeTeamLogo>(*this));
   // タイトルモードを登録

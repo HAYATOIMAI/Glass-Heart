@@ -9,7 +9,7 @@
 #include <DxLib.h>
  /**
   * @namespace GlassHeart
-  * @brief プロジェクト名
+  * @brief     プロジェクト名
   */
 namespace GlassHeart {
   namespace Object {
@@ -17,23 +17,27 @@ namespace GlassHeart {
   }
   /**
    * @namespace Collision
-   * @brif 衝突判定関係
+   * @brif      衝突判定関係
    */
   namespace Collision {
+    /**
+     * @class IsHitBDeathMesh
+     * @brief 死亡判定をとる黒いメッシュとの当たり判定クラス
+     */
     class IsHitBDeathMesh {
     public:
       /**
-       * @ コンストラクタ
+       * @                コンストラクタ
        *
        * @param[in] owner 親クラスへの参照
        */
       IsHitBDeathMesh(Object::ObjectBase& owner);
       /**
-       * @brief 死亡判定をとる黒いメッシュとの当たり判定
+       * @brief             死亡判定をとる黒いメッシュとの当たり判定
        *
        * @param[in] pos     位置ベクトル
        * @param[in] forward 移動量ベクトル
-       * @return 位置ベクトル
+       * @return            位置ベクトル
        */
       VECTOR CheckHitBDeathMesh(const VECTOR& pos, const VECTOR& forward);
 

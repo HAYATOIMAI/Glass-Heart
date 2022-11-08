@@ -39,7 +39,7 @@ void GlassHeart::Camera::FollowCamera::Process() {
     // プレイヤーに向かう単位ベクトル
     forwoard = VNorm(forwoard);
 
-    if (dist > (1080 / 4)) {
+    if (dist > (1080.0f / 4.0f)) {
       // プレイヤーに向かう移動量ベクトル
       delta = VScale(forwoard, -(1080 / 4));
       _position = VAdd(player, delta);

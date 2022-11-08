@@ -11,7 +11,9 @@
 OS : Windows10
 開発環境 : Visual Studio 2019
 開発言語 : C++
-使用ライブラリ : DXライブラリ(https://dxlib.xsrv.jp/)
+使用ライブラリ 
+DXライブラリ(https://dxlib.xsrv.jp/)
+nlohmann/json(https://json.nlohmann.me/) 
 ライセンスは下記にて記載
 
 ■ プログラムファイル(cpp / h)の文字コードについて
@@ -45,6 +47,8 @@ WinMain は AppFrame.vcxproj の AppFrame\source\Application\WinMain.cpp にて�
  重複したリソースのロードが起こらない様になっています。
 
 ■　ライセンス
+ Copyright © 2013-2022 Niels Lohmann
+
  libjpeg　Copyright (C) 1991-2013, Thomas G. Lane, Guido Vollbeding.
 　　　this software is based in part on the work of the Independent JPEG Group
 

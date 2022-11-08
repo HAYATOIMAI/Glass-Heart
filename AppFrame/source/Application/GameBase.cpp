@@ -15,8 +15,8 @@
 #include <DxLib.h>
 
 namespace {
-  constexpr std::uint_fast8_t ColorBit = 32;  //!< カラービット数
-  constexpr std::int_fast8_t Error = -1;      //!< 初期化失敗
+  constexpr int_fast16_t ColorBit = 32;  //!< カラービット数
+  constexpr int_fast16_t Error = -1;     //!< 初期化失敗
 }
 
 namespace AppFrame {
@@ -43,7 +43,7 @@ namespace AppFrame {
 #endif // _DEBUG
 
     // 画面モードを設定
-    SetGraphMode(SetWindowWidthSize(), SetWindowHeightSize(), ColorBit, GetRefreshRate());
+    SetGraphMode(SetWindowWidthSize(), SetWindowHeightSize(), ColorBit);
 
     ChangeWindowMode(true);
    
